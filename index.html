@@ -90,6 +90,8 @@ controls.target.set(0,0.6,0);
 scene.add(new THREE.HemisphereLight(0xffffff,0xd6d0c4,1.7));
 const sun=new THREE.DirectionalLight(0xffffff,0.7);sun.position.set(5,10,7);scene.add(sun);
 const grid=new THREE.GridHelper(30,60,0xe0dbd0,0xe9e5dc);grid.position.y=-0.002;scene.add(grid);
+/* car models are built with +z on the car's right hand; mirroring z puts the driver on the left */
+const ROOT=new THREE.Group();ROOT.scale.z=-1;scene.add(ROOT);
 
 /* geometry helpers. car axes: x forward, y up, z toward the left side */
 function box(w,h,d){return new THREE.BoxGeometry(w,h,d)}
@@ -121,7 +123,7 @@ const DX=0.07;
 /* BLUEPRINT OVERLAY: 1982 Accord sedan drawing, scaled to mm */
 let showBP=true;const BP=[];let carGen=0;
 const tl=new THREE.TextureLoader();
-function bp(file,w,h,setup){const gen=carGen;tl.load(file,t=>{if(gen!==carGen)return;t.colorSpace=THREE.SRGBColorSpace;const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:t,transparent:true,opacity:0.85,side:THREE.DoubleSide,depthWrite:false}));setup(m);m.visible=showBP;m.renderOrder=-1;scene.add(m);BP.push(m)})}
+function bp(file,w,h,setup){const gen=carGen;tl.load(file,t=>{if(gen!==carGen)return;t.colorSpace=THREE.SRGBColorSpace;const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:t,transparent:true,opacity:0.85,side:THREE.DoubleSide,depthWrite:false}));setup(m);m.visible=showBP;m.renderOrder=-1;ROOT.add(m);BP.push(m)})}
 /* WHEEL PARTS shared by all four corners, drawn in hub units then scaled */
 const K=0.0958;
 const TIRE=[[2.2,-0.8],[2.75,-0.95],[3.05,-0.6],[3.1,0],[3.05,0.6],[2.75,0.95],[2.2,0.8]];
@@ -845,7 +847,7 @@ const CARS={accord:{id:'accord',make:'Honda',name:'1982 ACCORD',front:2.205,buil
 let CAR=null;
 function buildAll(){ASM.forEach((a,ai)=>{
   const c=V(0,0,0);a.parts.forEach(p=>c.add(p.pos));c.divideScalar(a.parts.length);a.center=c;
-  a.group=new THREE.Group();a.group.position.copy(c);scene.add(a.group);
+  a.group=new THREE.Group();a.group.position.copy(c);ROOT.add(a.group);
   let rad=0;
   a.parts.forEach((p,i)=>{
     total++;
@@ -1123,9 +1125,9 @@ function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=i
 addEventListener('resize',resize);resize();
 function loadCar(id){
   carGen++;
-  ASM.forEach(a=>{scene.remove(a.group);a.parts.forEach(p=>{p.geo.dispose();p.mat.dispose()})});ASM.length=0;
+  ASM.forEach(a=>{ROOT.remove(a.group);a.parts.forEach(p=>{p.geo.dispose();p.mat.dispose()})});ASM.length=0;
   LBL.forEach(sp=>{scene.remove(sp);sp.material.map.dispose()});LBL.clear();
-  BP.forEach(m=>scene.remove(m));BP.length=0;
+  BP.forEach(m=>ROOT.remove(m));BP.length=0;
   total=0;focus=null;selected=null;carAmt=carTarget=0;typeKey='';
   CAR=CARS[id];CAR.build();buildAll();
   MANUAL={};const gen=carGen;fetch('ref/manual/map-'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
