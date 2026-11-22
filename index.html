@@ -13,6 +13,8 @@ button.on{background:#3d3d3d;color:#fff}
 #list{position:fixed;top:10px;right:10px;width:200px;max-height:52vh;overflow:auto;background:rgba(255,255,255,.96);border:1px solid #3d3d3d;font-size:13px;display:none}
 #list div{padding:7px 10px;border-bottom:1px solid #eee4d2}
 #list div.sel{background:#3d3d3d;color:#fff}
+.sl{flex:1;min-width:140px;display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.5px}
+.sl input{flex:1}
 </style>
 </head>
 <body>
@@ -28,7 +30,8 @@ button.on{background:#3d3d3d;color:#fff}
 <button id="bInfo" class="on">Info</button>
 <button id="bBP" class="on">Blueprint</button>
 <button id="bReset">Reset</button>
-<input id="slide" type="range" min="0" max="100" value="0" style="flex:1;min-width:110px">
+<label class="sl">EXPLODE <input id="slide" type="range" min="0" max="100" value="0"></label>
+<label class="sl">OPACITY <input id="alpha" type="range" min="5" max="100" value="100"></label>
 </div>
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
@@ -796,7 +799,7 @@ function buildPrius(){
 
 /* BUILD */
 let total=0;
-const CARS={accord:{name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'}};
+const CARS={accord:{id:'accord',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'}};
 let CAR=null;
 function buildAll(){ASM.forEach((a,ai)=>{
   const c=V(0,0,0);a.parts.forEach(p=>c.add(p.pos));c.divideScalar(a.parts.length);a.center=c;
@@ -819,7 +822,7 @@ function buildAll(){ASM.forEach((a,ai)=>{
 });}
 
 /* STATE AND UI */
-let carAmt=0,carTarget=0,focus=null,selected=null,wire=false,fly=0,labelsOn=true;
+let carAmt=0,carTarget=0,focus=null,selected=null,wire=false,labelsOn=true,alpha=1,MANUAL={},cardImg=null,cardCap='';const imgCache={};
 /* INFO CARD: lives in the scene above the selected item, so it shrinks when you zoom out */
 let typeKey='',typeText='',typeN=0,head=['',''],infoOn=true,typedAt=0,cardColor='#8db3d6';
 const card=document.createElement('canvas');card.width=512;card.height=400;const cg=card.getContext('2d');
@@ -827,7 +830,7 @@ const cardMat=new THREE.SpriteMaterial({depthTest:false,transparent:true});
 const sprite=new THREE.Sprite(cardMat);sprite.center.set(0.5,0);sprite.renderOrder=10;sprite.visible=false;scene.add(sprite);
 const leader=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(0,0,0),V(0,1,0)]),new THREE.LineBasicMaterial({color:0x3d3d3d,depthTest:false}));leader.renderOrder=10;leader.visible=false;scene.add(leader);
 function wrap(t,n=34){const out=[];t.split('\n').forEach(ln=>{if(ln.length<=n){out.push(ln);return}let cur='';ln.split(' ').forEach(w=>{if((cur+' '+w).trim().length>n){out.push(cur);cur=w}else cur=(cur+' '+w).trim()});out.push(cur)});return out}
-function sizeCard(){const n=wrap(typeText).length;const h=120+n*28;card.height=h;if(cardMat.map)cardMat.map.dispose();cardMat.map=new THREE.CanvasTexture(card);cardMat.map.colorSpace=THREE.SRGBColorSpace;cardMat.needsUpdate=true}
+function sizeCard(){const n=wrap(typeText).length;let h=120+n*28;if(cardImg)h+=50+Math.round(cardImg.height*472/cardImg.width);card.height=h;if(cardMat.map)cardMat.map.dispose();cardMat.map=new THREE.CanvasTexture(card);cardMat.map.colorSpace=THREE.SRGBColorSpace;cardMat.needsUpdate=true}
 function drawCard(){
   const w=card.width,h=card.height;cg.clearRect(0,0,w,h);
   cg.fillStyle='#ffffff';cg.fillRect(0,0,w,h);
@@ -839,6 +842,7 @@ function drawCard(){
   const lines=wrap(typeText.slice(0,typeN));let y=110;
   lines.forEach(l=>{cg.fillText(l,30,y);y+=28});
   if(typeN<typeText.length||performance.now()-typedAt<1500){if(Math.floor(performance.now()/250)%2===0){const last=lines[lines.length-1]||'';cg.fillStyle='#e9a074';cg.fillRect(30+cg.measureText(last).width+2,y-28-20,13,24)}}
+  if(cardImg){const ih=Math.round(cardImg.height*472/cardImg.width),top=card.height-ih-24;cg.fillStyle='#8a8a8a';cg.font='18px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(('MANUAL: '+cardCap).toUpperCase().slice(0,44),20,top-10);cg.drawImage(cardImg,20,top,472,ih);cg.strokeStyle='#3d3d3d';cg.lineWidth=1;cg.strokeRect(20,top,472,ih)}
   cardMat.map.needsUpdate=true;
 }
 /* CALLOUT LABELS on every part of an exploded assembly */
@@ -854,7 +858,17 @@ function label(p){
   sp.center.set(0,0.5);sp.renderOrder=9;sp.userData.aspect=w/46;sp.visible=false;scene.add(sp);LBL.set(p,sp);return sp;
 }
 const callLines=new THREE.LineSegments(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:0x3d3d3d,depthTest:false,transparent:true,opacity:0.8}));callLines.renderOrder=9;scene.add(callLines);
-function typeOut(key,text){if(key===typeKey)return;typeKey=key;typeText=text;typeN=0;sizeCard()}
+function manualFor(key){
+  const m=MANUAL[key];cardImg=null;cardCap='';
+  if(!m)return;
+  cardCap=m.caption||m.path||'';
+  const url='ref/manual/'+CAR.id+'/'+m.file;
+  if(imgCache[url]&&imgCache[url].complete){cardImg=imgCache[url];return}
+  const im=imgCache[url]||new Image();imgCache[url]=im;
+  im.onload=()=>{if(typeKey.endsWith(key)){cardImg=im;sizeCard()}};
+  if(!im.src)im.src=url;
+}
+function typeOut(key,text){if(key===typeKey)return;typeKey=key;typeText=text;typeN=0;manualFor(key.slice(1));sizeCard()}
 const row=(l,v)=>(l+' ').padEnd(14,'.')+' '+v;
 const mm=v=>Math.round(v*1000);
 function homeBox(p){p.geo.computeBoundingBox();const b=p.geo.boundingBox.clone();const c=p.asm.center.clone().add(p.local);b.min.add(c);b.max.add(c);return b}
@@ -863,18 +877,18 @@ function locTxt(b){const c=new THREE.Vector3();b.getCenter(c);return [row('FROM 
 const list=document.getElementById('list'),slide=document.getElementById('slide');
 
 function refresh(){
-  const base=wire?0.3:1;
+  const base=(wire?0.3:1)*alpha;
   ASM.forEach(a=>a.parts.forEach(p=>{
     const off=focus&&a!==focus, dim=selected&&p!==selected;
     p.mat.opacity=off?0.04:dim?0.1:base;
-    p.mat.depthWrite=!wire&&!off&&!dim;
-    p.edges.material.opacity=off?0.06:dim?0.15:wire?0.9:0.75;
+    p.mat.depthWrite=!wire&&!off&&!dim&&alpha>0.97;
+    p.edges.material.opacity=off?0.06:dim?0.15:(wire?0.9:0.75)*Math.max(alpha,0.35);
     p.wf.visible=wire&&!off&&!dim;
   }));
   if(selected){
     const b=homeBox(selected),i=focus.parts.indexOf(selected)+1;
     head=[CAR.name+' / '+focus.name.toUpperCase(),selected.name];cardColor='#'+selected.mat.color.getHexString();
-    typeOut('p'+focus.name+i,[row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
+    typeOut('p'+focus.name+'/'+selected.name,[row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
   }else if(focus){
     const b=new THREE.Box3();focus.parts.forEach(p=>b.union(homeBox(p)));
     head=[CAR.name,focus.name];cardColor='#'+focus.parts[0].mat.color.getHexString();
@@ -905,6 +919,7 @@ document.getElementById('bExplode').onclick=()=>{if(focus)focus.target=focus.tar
 document.getElementById('bWire').onclick=()=>setWire(!wire);
 document.getElementById('bParts').onclick=e=>{const s=list.style.display==='block';list.style.display=s?'none':'block';e.target.classList.toggle('on',!s)};
 document.getElementById('bReset').onclick=()=>{ASM.forEach(a=>a.target=0);carTarget=0;focus=null;selected=null;refresh()};
+document.getElementById('alpha').oninput=e=>{alpha=e.target.value/100;refresh()};
 slide.oninput=()=>{const v=slide.value/100;if(focus){focus.target=v;focus.amt=v}else{carTarget=v;carAmt=v}};
 
 const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();
@@ -939,6 +954,7 @@ function loadCar(id){
   BP.forEach(m=>scene.remove(m));BP.length=0;
   total=0;focus=null;selected=null;carAmt=carTarget=0;typeKey='';
   CAR=CARS[id];CAR.build();buildAll();
+  MANUAL={};const gen=carGen;fetch('ref/manual/map-'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
   document.getElementById('bCar').textContent=CAR.btn;
   try{history.replaceState(null,'','#'+id)}catch(e){}
   refresh();
