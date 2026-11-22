@@ -1,0 +1,4082 @@
+[
+{
+"file": "0000.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Ignition Timing/Adjustments/Ignition Timing Adjustment",
+"caption": "Ignition Timing Adjustment",
+"src": "https://charm.li/images/IMP02Q313/asian140/516680405/"
+},
+{
+"file": "0001.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Ignition Timing/Adjustments/Ignition Timing Adjustment",
+"caption": "Ignition Timing Adjustment",
+"src": "https://charm.li/images/IMP02Q313/asian140/516684619/"
+},
+{
+"file": "0002.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Ignition Timing/Adjustments/Ignition Timing Adjustment",
+"caption": "Ignition Timing Adjustment",
+"src": "https://charm.li/images/IMP02Q313/asian140/516688525/"
+},
+{
+"file": "0003.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Distributor/Diagrams/Hitachi",
+"caption": "Fig. 43 Hitachi electronic distributor view.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/519832841/"
+},
+{
+"file": "0004.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Distributor/Diagrams/Toyodenso",
+"caption": "Fig. 44 Toyo Denso electronic distributor exploded view.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/519882769/"
+},
+{
+"file": "0005.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Distributor/Specifications",
+"caption": "Fig. 48 Distributor specifications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/517558127/"
+},
+{
+"file": "0006.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Distributor/Specifications",
+"caption": "Fig. 014 Distributor Timing Advance Specifications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/517616999/"
+},
+{
+"file": "0007.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions",
+"caption": "Tune-up and Engine Performance Checks: Service Precautions",
+"src": "https://charm.li/images/IMP02Q313/asian140/522965710/"
+},
+{
+"file": "0008.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions",
+"caption": "Tune-up and Engine Performance Checks: Service Precautions",
+"src": "https://charm.li/images/IMP02Q313/asian140/522966688/"
+},
+{
+"file": "0009.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions",
+"caption": "Tune-up and Engine Performance Checks: Service Precautions",
+"src": "https://charm.li/images/IMP02Q313/asian140/522967867/"
+},
+{
+"file": "0010.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions",
+"caption": "Tune-up and Engine Performance Checks: Service Precautions",
+"src": "https://charm.li/images/IMP02Q313/asian140/522969948/"
+},
+{
+"file": "0011.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions",
+"caption": "Tune-up and Engine Performance Checks: Service Precautions",
+"src": "https://charm.li/images/IMP02Q313/asian140/522973605/"
+},
+{
+"file": "0012.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions",
+"caption": "Tune-up and Engine Performance Checks: Service Precautions",
+"src": "https://charm.li/images/IMP02Q313/asian140/522977512/"
+},
+{
+"file": "0013.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Testing and Inspection/Initial Inspection and Diagnostic Overview/Initial/Final Inspection",
+"caption": "Vacuum Indications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/522982989/"
+},
+{
+"file": "0014.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Testing and Inspection/Symptom Related Diagnostic Procedures/Engine Pings or Knocks",
+"caption": "Normal Ignition:",
+"src": "https://charm.li/images/IMP02Q313/asian140/523029497/"
+},
+{
+"file": "0015.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Testing and Inspection/Symptom Related Diagnostic Procedures/Engine Pings or Knocks",
+"caption": "Pinging, Spark Knock:",
+"src": "https://charm.li/images/IMP02Q313/asian140/523034927/"
+},
+{
+"file": "0016.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Testing and Inspection/Symptom Related Diagnostic Procedures/Poor Acceleration, Lack of Power",
+"caption": "Vacuum Indications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/523140351/"
+},
+{
+"file": "0017.png",
+"path": "Maintenance/Service Intervals/Maintenance Indicator Reset/Oil and Filter Change Reminder Reset/With Flag - Use Key Slot on Instrument Panel",
+"caption": "Fig. 1 Resetting Maintenance Indicator Lamp:",
+"src": "https://charm.li/images/IMP02Q313/asian140/553293433/"
+},
+{
+"file": "0018.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Diagrams",
+"caption": "Engine Block - Part 1:",
+"src": "https://charm.li/images/IMP02Q313/asian140/575948674/"
+},
+{
+"file": "0019.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Diagrams",
+"caption": "Engine Block - Part 2:",
+"src": "https://charm.li/images/IMP02Q313/asian140/575974852/"
+},
+{
+"file": "0020.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head/Valve Train - Part 1:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586351434/"
+},
+{
+"file": "0021.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head/Valve Train - Part 2:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586379644/"
+},
+{
+"file": "0022.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head/Valve Train - Part 3:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586404722/"
+},
+{
+"file": "0023.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head/Valve Train - Part 3:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586424992/"
+},
+{
+"file": "0024.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head/Valve Train - Part 3:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586496586/"
+},
+{
+"file": "0025.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head/Valve Train - Part 3:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586502132/"
+},
+{
+"file": "0026.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head/Valve Train - Part 3:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586428730/"
+},
+{
+"file": "0027.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head/Valve Train - Part 3:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586435035/"
+},
+{
+"file": "0028.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair",
+"caption": "Cylinder Head Installation:",
+"src": "https://charm.li/images/IMP02Q313/asian140/586438261/"
+},
+{
+"file": "0029.png",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Diagrams",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596238820/"
+},
+{
+"file": "0030.png",
+"path": "Engine, Cooling and Exhaust/Engine/Application and ID",
+"caption": "Fig. 009 Engine Identification:",
+"src": "https://charm.li/images/IMP02Q313/asian140/608498210/"
+},
+{
+"file": "0031.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/612903670/"
+},
+{
+"file": "0032.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/612907391/"
+},
+{
+"file": "0033.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/612911086/"
+},
+{
+"file": "0034.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613085068/"
+},
+{
+"file": "0035.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613261756/"
+},
+{
+"file": "0036.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613429865/"
+},
+{
+"file": "0037.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613440836/"
+},
+{
+"file": "0038.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613608140/"
+},
+{
+"file": "0039.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613730668/"
+},
+{
+"file": "0040.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613854617/"
+},
+{
+"file": "0041.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613981607/"
+},
+{
+"file": "0042.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613985686/"
+},
+{
+"file": "0043.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613989063/"
+},
+{
+"file": "0044.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/613993783/"
+},
+{
+"file": "0045.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614127850/"
+},
+{
+"file": "0046.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614265228/"
+},
+{
+"file": "0047.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614411089/"
+},
+{
+"file": "0048.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614416003/"
+},
+{
+"file": "0049.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614422207/"
+},
+{
+"file": "0050.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614525231/"
+},
+{
+"file": "0051.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614685139/"
+},
+{
+"file": "0052.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614690342/"
+},
+{
+"file": "0053.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614694008/"
+},
+{
+"file": "0054.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614697810/"
+},
+{
+"file": "0055.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614703110/"
+},
+{
+"file": "0056.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614706914/"
+},
+{
+"file": "0057.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614710660/"
+},
+{
+"file": "0058.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614714495/"
+},
+{
+"file": "0059.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614726659/"
+},
+{
+"file": "0060.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614885791/"
+},
+{
+"file": "0061.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/614992842/"
+},
+{
+"file": "0062.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/615134246/"
+},
+{
+"file": "0063.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/615288004/"
+},
+{
+"file": "0064.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/615412993/"
+},
+{
+"file": "0065.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair",
+"caption": "Engine: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/592553744/"
+},
+{
+"file": "0066.png",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Service Specifications",
+"caption": "Service Specifications",
+"src": "https://charm.li/images/IMP02Q313/asian140/625613317/"
+},
+{
+"file": "0067.png",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Service Specifications",
+"caption": "Service Specifications",
+"src": "https://charm.li/images/IMP02Q313/asian140/625643840/"
+},
+{
+"file": "0068.png",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "Manifolds:",
+"src": "https://charm.li/images/IMP02Q313/asian140/600535524/"
+},
+{
+"file": "0069.png",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "Manifold Removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/600551207/"
+},
+{
+"file": "0070.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "Manifold Assembly:",
+"src": "https://charm.li/images/IMP02Q313/asian140/600573813/"
+},
+{
+"file": "0071.png",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "Manifold Installation Tightening Sequence:",
+"src": "https://charm.li/images/IMP02Q313/asian140/628506974/"
+},
+{
+"file": "0072.png",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "Timing Belt Replacement:",
+"src": "https://charm.li/images/IMP02Q313/asian140/530945649/"
+},
+{
+"file": "0073.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "Cylinder Head Bolt Removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/628508853/"
+},
+{
+"file": "0074.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "Cam/Rocker Arm Installation:",
+"src": "https://charm.li/images/IMP02Q313/asian140/628582666/"
+},
+{
+"file": "0075.png",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "Camshaft Pulley Installation:",
+"src": "https://charm.li/images/IMP02Q313/asian140/628623287/"
+},
+{
+"file": "0076.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "M/T Flywheel Replacement:",
+"src": "https://charm.li/images/IMP02Q313/asian140/628626971/"
+},
+{
+"file": "0077.png",
+"path": "Engine, Cooling and Exhaust/Engine/Specifications/Torque Specifications",
+"caption": "A/T Drive Plate Torque:",
+"src": "https://charm.li/images/IMP02Q313/asian140/628687566/"
+},
+{
+"file": "0078.png",
+"path": "Powertrain Management/Computers and Control Systems/Adjustments/Idle Speed",
+"caption": "Fig. 30 Idle adjustment.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/510697647/"
+},
+{
+"file": "0079.png",
+"path": "Powertrain Management/Computers and Control Systems/Adjustments/Fast Idle Speed",
+"caption": "Fig. 4 Disconnecting thermowax linkage.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/511308889/"
+},
+{
+"file": "0080.png",
+"path": "Powertrain Management/Computers and Control Systems/Adjustments/Fast Idle Speed",
+"caption": "Fig. 5 Aligning fast idle lever.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/511317164/"
+},
+{
+"file": "0081.png",
+"path": "Powertrain Management/Computers and Control Systems/Adjustments/Fast Idle Speed",
+"caption": "Fig. 6 Automatic choke fast idle adjustment.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/511319536/"
+},
+{
+"file": "0082.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Circuit Schematics",
+"caption": "Circuit Schematics:",
+"src": "https://charm.li/images/IMP02Q313/asian140/129002938/"
+},
+{
+"file": "0083.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Fuse Details Schematics",
+"caption": "Fuse Details Schematics:",
+"src": "https://charm.li/images/IMP02Q313/asian140/148837991/"
+},
+{
+"file": "0084.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Ground Distribution Schematics",
+"caption": "Ground Distribution Schematics:",
+"src": "https://charm.li/images/IMP02Q313/asian140/129499207/"
+},
+{
+"file": "0085.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Power Distribution Schematics",
+"caption": "Power Distribution Schematics:",
+"src": "https://charm.li/images/IMP02Q313/asian140/130460882/"
+},
+{
+"file": "0086.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Symbol Identification",
+"caption": "Symbol Identification:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155740770/"
+},
+{
+"file": "0087.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Symbol Identification",
+"caption": "Key To Wiring Diagrams And Symbol Identification:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155748928/"
+},
+{
+"file": "0088.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Symbol Identification",
+"caption": "Key To Wiring Diagrams And Symbol Identification:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155764764/"
+},
+{
+"file": "0089.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Symbol Identification",
+"caption": "Key To Wiring Diagrams And Symbol Identification:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155780471/"
+},
+{
+"file": "0090.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagram Information and Instructions/Wires/Wire Color Code Identification",
+"caption": "Symbols And Wire Color Code Identification:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155903787/"
+},
+{
+"file": "0091.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Continuity and Resistance Check",
+"caption": "Meter Types:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155950868/"
+},
+{
+"file": "0092.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Continuity and Resistance Check",
+"caption": "Continuity And Resistance Check:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155953769/"
+},
+{
+"file": "0093.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Continuity and Resistance Check",
+"caption": "Diode Check:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155954583/"
+},
+{
+"file": "0094.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Finding Short Circuits",
+"caption": "Finding A Short Circuit:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155956979/"
+},
+{
+"file": "0095.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Five Step Troubleshooting",
+"caption": "Five-Step Troubleshooting And Test Equipment:",
+"src": "https://charm.li/images/IMP02Q313/asian140/132717279/"
+},
+{
+"file": "0096.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Five Step Troubleshooting",
+"caption": "Test Equipment:",
+"src": "https://charm.li/images/IMP02Q313/asian140/132749476/"
+},
+{
+"file": "0097.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Troubleshooting  Precautions",
+"caption": "Troubleshooting Precautions:",
+"src": "https://charm.li/images/IMP02Q313/asian140/132829354/"
+},
+{
+"file": "0098.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Troubleshooting Tests/Testing For a Short With a Short Circuit Locator (Short Finder)",
+"caption": "Troubleshooting Tests: Testing For A Short With A Short Circuit Locator (Short Finder):",
+"src": "https://charm.li/images/IMP02Q313/asian140/132910183/"
+},
+{
+"file": "0099.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Troubleshooting Tests/Testing For a Short With a Short Circuit Locator (Short Finder)",
+"caption": "Troubleshooting Tests: Testing For A Short With A Short Circuit Locator (Short Finder):",
+"src": "https://charm.li/images/IMP02Q313/asian140/132919622/"
+},
+{
+"file": "0100.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Troubleshooting Tests/Testing For Short to Ground With Self-Powered Test Light/DVOM",
+"caption": "Troubleshooting Tests: Testing For Short To Ground With A Self-Powered Test Light Or DVOM:",
+"src": "https://charm.li/images/IMP02Q313/asian140/132997655/"
+},
+{
+"file": "0101.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Troubleshooting Tests/Testing For Voltage Drop/Short to Ground With Test Light/DVOM",
+"caption": "Troubleshooting Tests: Testing For Voltage Drop And Testing For A Short To Ground With A Test Light Or DVOM:",
+"src": "https://charm.li/images/IMP02Q313/asian140/133045989/"
+},
+{
+"file": "0102.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Troubleshooting Tests/Testing For Voltage/Continuity",
+"caption": "Troubleshooting Tests: Testing For Voltage And Testing For Continuity:",
+"src": "https://charm.li/images/IMP02Q313/asian140/133065606/"
+},
+{
+"file": "0103.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Voltage Check",
+"caption": "Voltage Check:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155961697/"
+},
+{
+"file": "0104.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Circuit Protection Devices",
+"caption": "Fig. 1 Fuse Devices:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155965568/"
+},
+{
+"file": "0105.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Circuit Protection Devices",
+"caption": "Fig. 2 Fuse Rating and Color:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155967562/"
+},
+{
+"file": "0106.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Circuit Protection Devices",
+"caption": "Fig. 3  Good and Damaged Fusible Links:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155971519/"
+},
+{
+"file": "0107.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Circuit Protection Devices",
+"caption": "Fig. 6  Wire Size Conversion Table:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155973973/"
+},
+{
+"file": "0108.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Circuit Protection Devices",
+"caption": "Fig. 4  Single Wire Feed Fusible Link:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155975276/"
+},
+{
+"file": "0109.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Circuit Protection Devices",
+"caption": "Fig. 5  Double Wire Feed Fusible Link:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155977168/"
+},
+{
+"file": "0110.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Copper Wire Using Splice Clips",
+"caption": "Fig. 6  Wire Size Conversion Table:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155988755/"
+},
+{
+"file": "0111.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Copper Wire Using Splice Clips",
+"caption": "Fig. 8  Crimping the Splice Clip:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155989895/"
+},
+{
+"file": "0112.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Copper Wire Using Splice Clips",
+"caption": "Fig. 9  Completing the Crimp:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155993735/"
+},
+{
+"file": "0113.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Copper Wire Using Splice Clips",
+"caption": "Fig. 9  Completing the Crimp:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155995178/"
+},
+{
+"file": "0114.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Copper Wire Using Splice Clips",
+"caption": "Fig. 11  Proper First Taping:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155996883/"
+},
+{
+"file": "0115.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Copper Wire Using Splice Clips",
+"caption": "Fig. 12  Proper Second Taping:",
+"src": "https://charm.li/images/IMP02Q313/asian140/155998829/"
+},
+{
+"file": "0116.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Copper Wire Using Crimp and Seal Splice Sleeves",
+"caption": "Fig. 13  Hand Crimp Tool:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156003323/"
+},
+{
+"file": "0117.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Copper Wire Using Crimp and Seal Splice Sleeves",
+"caption": "Fig. 14  Seal Splice Sequence:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156004994/"
+},
+{
+"file": "0118.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Twisted/Shielded Cable",
+"caption": "Fig. 15  Twisted/Shielded Cable:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156010117/"
+},
+{
+"file": "0119.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Twisted/Shielded Cable",
+"caption": "Fig. 16  The Untwisted Conductors:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156011730/"
+},
+{
+"file": "0120.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Twisted/Shielded Cable",
+"caption": "Fig. 17  The Re-assembled Cable:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156012475/"
+},
+{
+"file": "0121.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Splicing Twisted/Shielded Cable",
+"caption": "Fig. 18  Proper Taping:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156012945/"
+},
+{
+"file": "0122.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Repairing Connectors",
+"caption": "Figure 1 - Typical Push-To-Seat Connector:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156015131/"
+},
+{
+"file": "0123.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Repairing Connectors",
+"caption": "Fig. 20  Typical Pull-to-Seat Connector and Terminal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156018602/"
+},
+{
+"file": "0124.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Repairing Connectors",
+"caption": "Fig. 21  Typical Weather Pack Connector and Terminal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156021036/"
+},
+{
+"file": "0125.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Diagnostic Aids/Wire Repair Procedures/Terminal Repair",
+"caption": "Fig. 22  Terminal Repair:",
+"src": "https://charm.li/images/IMP02Q313/asian140/156026598/"
+},
+{
+"file": "0126.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Electrical Diagrams",
+"caption": "System Diagram (1 Of 2 - 0verlapping Image):",
+"src": "https://charm.li/images/IMP02Q313/asian140/722712079/"
+},
+{
+"file": "0127.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Electrical Diagrams",
+"caption": "System Diagram (2 Of 2 - 0verlapping Image):",
+"src": "https://charm.li/images/IMP02Q313/asian140/722736799/"
+},
+{
+"file": "0128.png",
+"path": "Powertrain Management/Computers and Control Systems/Diagrams/Vacuum and Vapor Hose Diagrams",
+"caption": "Fig. 95 Emission control vacuum hose routing.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/724824939/"
+},
+{
+"file": "0129.png",
+"path": "Powertrain Management/Emission Control Systems/Evaporative Emissions System/Description and Operation",
+"caption": "Fig,30 - Evaporative Emission Control System:",
+"src": "https://charm.li/images/IMP02Q313/asian140/732408686/"
+},
+{
+"file": "0130.png",
+"path": "Powertrain Management/Emission Control Systems/Exhaust Gas Recirculation/Description and Operation",
+"caption": "Fig.144 - EGR System:",
+"src": "https://charm.li/images/IMP02Q313/asian140/745860484/"
+},
+{
+"file": "0131.png",
+"path": "Powertrain Management/Emission Control Systems/Exhaust Gas Recirculation/Testing and Inspection/Troubleshooting",
+"caption": "Fig.151 - Vacuum & Voltage Chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/744104645/"
+},
+{
+"file": "0132.png",
+"path": "Powertrain Management/Emission Control Systems/Thermostatic Air Cleaner/Description and Operation",
+"caption": "Fig.61 - Air Intake Control System:",
+"src": "https://charm.li/images/IMP02Q313/asian140/748001031/"
+},
+{
+"file": "0133.png",
+"path": "Powertrain Management/Emission Control Systems/Application and ID",
+"caption": "Fig. 94 Emission Applications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/748119831/"
+},
+{
+"file": "0134.png",
+"path": "Powertrain Management/Emission Control Systems/Description and Operation",
+"caption": "Fig.1 - Cross Sectional View Of CVCC Engine:",
+"src": "https://charm.li/images/IMP02Q313/asian140/748471347/"
+},
+{
+"file": "0135.png",
+"path": "Powertrain Management/Emission Control Systems/Description and Operation",
+"caption": "Fig.2 - Intake Stroke Of CVCC Engine:",
+"src": "https://charm.li/images/IMP02Q313/asian140/748498459/"
+},
+{
+"file": "0136.png",
+"path": "Powertrain Management/Emission Control Systems/Description and Operation",
+"caption": "Fig.3 - Compression Stroke Of CVCC Engine:",
+"src": "https://charm.li/images/IMP02Q313/asian140/748500608/"
+},
+{
+"file": "0137.png",
+"path": "Powertrain Management/Emission Control Systems/Description and Operation",
+"caption": "Fig.4 - Ignition Stroke Of CVCC Engine:",
+"src": "https://charm.li/images/IMP02Q313/asian140/748502659/"
+},
+{
+"file": "0138.png",
+"path": "Powertrain Management/Emission Control Systems/Description and Operation",
+"caption": "Fig.5 - Power Stroke Of CVCC Engine:",
+"src": "https://charm.li/images/IMP02Q313/asian140/748504414/"
+},
+{
+"file": "0139.png",
+"path": "Powertrain Management/Emission Control Systems/Description and Operation",
+"caption": "Fig.6 - Exhaust Stroke Of CVCC Engine:",
+"src": "https://charm.li/images/IMP02Q313/asian140/748506049/"
+},
+{
+"file": "0140.png",
+"path": "Powertrain Management/Emission Control Systems/Locations",
+"caption": "Fig. 105 Engine compartment reference diagram.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/750171718/"
+},
+{
+"file": "0141.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Carburetor/Locations",
+"caption": "Carburetor: Locations",
+"src": "https://charm.li/images/IMP02Q313/asian140/509564326/"
+},
+{
+"file": "0142.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Carburetor/Locations",
+"caption": "Carburetor: Locations",
+"src": "https://charm.li/images/IMP02Q313/asian140/509568414/"
+},
+{
+"file": "0143.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Pump/Testing and Inspection",
+"caption": "Jumper Wire:",
+"src": "https://charm.li/images/IMP02Q313/asian140/777966673/"
+},
+{
+"file": "0144.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Pump/Testing and Inspection",
+"caption": "Fuel Pressure Gauge:",
+"src": "https://charm.li/images/IMP02Q313/asian140/777970132/"
+},
+{
+"file": "0145.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Pump/Testing and Inspection",
+"caption": "Fuel Volume Test:",
+"src": "https://charm.li/images/IMP02Q313/asian140/777973882/"
+},
+{
+"file": "0146.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Description and Operation",
+"caption": "Fig. 43 Throttle control system.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/792752416/"
+},
+{
+"file": "0147.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Locations",
+"caption": "Fuel System Components:",
+"src": "https://charm.li/images/IMP02Q313/asian140/794731002/"
+},
+{
+"file": "0148.png",
+"path": "Starting and Charging/Charging System/Diagrams/Electrical Diagrams",
+"caption": "Charging System Circuit:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1019674211/"
+},
+{
+"file": "0149.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Service and Repair",
+"caption": "Fig. 3 Compressor Mounting:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1131908139/"
+},
+{
+"file": "0150.png",
+"path": "Heating and Air Conditioning/Description and Operation/Heater and Air Conditioning/Heater and Air Conditioning",
+"caption": "Fig. 13 System description, A/C.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1148009675/"
+},
+{
+"file": "0151.png",
+"path": "Heating and Air Conditioning/Description and Operation/Heater and Air Conditioning/Heating and Ventilation System",
+"caption": "Fig. 4 System description, heater.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1148233205/"
+},
+{
+"file": "0152.png",
+"path": "Heating and Air Conditioning/Description and Operation/Door Positions",
+"caption": "Fig. 5 Door positions.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1148639736/"
+},
+{
+"file": "0153.png",
+"path": "Heating and Air Conditioning/Testing and Inspection/Initial Inspection and Diagnostic Overview/System Performance Check",
+"caption": "Fig. 13 Performance Test Chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1149491755/"
+},
+{
+"file": "0154.png",
+"path": "Heating and Air Conditioning/Testing and Inspection/Initial Inspection and Diagnostic Overview/System Performance Check",
+"caption": "Fig. 18 Manifold Gauge Set Installation For System Testing:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1149501393/"
+},
+{
+"file": "0155.png",
+"path": "Heating and Air Conditioning/Testing and Inspection/Initial Inspection and Diagnostic Overview/System Performance Check",
+"caption": "Fig. 4 Proper positioning of thermometers for performance test:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1149505202/"
+},
+{
+"file": "0156.png",
+"path": "Heating and Air Conditioning/Testing and Inspection/Symptom Related Diagnostic Procedures/Diagnosis By Symptom/Insufficient Cooling Diagnosis",
+"caption": "Fig. 9 Insufficient Cooling Diagnosis Chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1152271560/"
+},
+{
+"file": "0157.png",
+"path": "Heating and Air Conditioning/Testing and Inspection/Symptom Related Diagnostic Procedures/Diagnosis By Symptom/Insufficient Heat",
+"caption": "Fig. 11 Insufficient Heating Diagnosis Chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1152290748/"
+},
+{
+"file": "0158.png",
+"path": "Heating and Air Conditioning/Testing and Inspection/Symptom Related Diagnostic Procedures/Pressure Test Chart",
+"caption": "Fig. 5 Compressor troubleshooting chart.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1153817155/"
+},
+{
+"file": "0159.png",
+"path": "Heating and Air Conditioning/Service and Repair/A/C Repair Procedures/Refrigerant Recovery",
+"caption": "Refrigerant Recovery",
+"src": "https://charm.li/images/IMP02Q313/asian140/1158757135/"
+},
+{
+"file": "0160.png",
+"path": "Heating and Air Conditioning/Service and Repair/A/C Repair Procedures/Charging the Refrigerant System",
+"caption": "Fig. 3 Charging C.C.O.T. A/C system:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1158877370/"
+},
+{
+"file": "0161.png",
+"path": "Heating and Air Conditioning/Service and Repair/Heater Assembly",
+"caption": "Fig. 17 Component & Bolt Locations For Heater Assembly Removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1159021626/"
+},
+{
+"file": "0162.png",
+"path": "Heating and Air Conditioning/Service and Repair/Heater Assembly",
+"caption": "Fig. 18 Dashboard Removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1159028103/"
+},
+{
+"file": "0163.png",
+"path": "Heating and Air Conditioning/Service and Repair/Heater Assembly",
+"caption": "Fig. 19 Heater Assembly Removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1159043864/"
+},
+{
+"file": "0164.png",
+"path": "Heating and Air Conditioning/Diagrams/Electrical Diagrams/Air Conditioning System",
+"caption": "Fig. 5 Wiring diagram, A/C.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1137933750/"
+},
+{
+"file": "0165.png",
+"path": "Heating and Air Conditioning/Diagrams/Electrical Diagrams/Heating System",
+"caption": "Fig. 4 Wiring diagram, Heater.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1143306252/"
+},
+{
+"file": "0166.png",
+"path": "Heating and Air Conditioning/Specifications",
+"caption": "Fig. 1 Specifications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1165356847/"
+},
+{
+"file": "0167.png",
+"path": "Specifications/Electrical Specifications/Ignition Coil",
+"caption": "Fig. 004 Ignition Coil Specifications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/799844860/"
+},
+{
+"file": "0168.png",
+"path": "Specifications/Electrical Specifications/Pick-Up Coil, Ignition",
+"caption": "Fig. 006 Distributor Pickup Specifications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/799891377/"
+},
+{
+"file": "0169.png",
+"path": "Specifications/Mechanical Specifications/Alignment/Spring Height",
+"caption": "Spring Height",
+"src": "https://charm.li/images/IMP02Q313/asian140/507659783/"
+},
+{
+"file": "0170.png",
+"path": "Specifications/Mechanical Specifications/Engine/Drive Belt/Air Injection",
+"caption": "Fig. 009 Belt Tension:",
+"src": "https://charm.li/images/IMP02Q313/asian140/533784651/"
+},
+{
+"file": "0171.png",
+"path": "Specifications/Mechanical Specifications/Firing Order",
+"caption": "Firing Order",
+"src": "https://charm.li/images/IMP02Q313/asian140/515630951/"
+},
+{
+"file": "0172.png",
+"path": "Specifications/Mechanical Specifications/Firing Order",
+"caption": "Firing Order",
+"src": "https://charm.li/images/IMP02Q313/asian140/515633824/"
+},
+{
+"file": "0173.png",
+"path": "Specifications/Mechanical Specifications/Firing Order",
+"caption": "Fig. 001 Firing Order (Hitachi):",
+"src": "https://charm.li/images/IMP02Q313/asian140/514730641/"
+},
+{
+"file": "0174.png",
+"path": "Specifications/Pressure, Vacuum and Temperature Specifications/Compression Check",
+"caption": "Fig. 006 Compression Pressure Specifications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/521313801/"
+},
+{
+"file": "0175.png",
+"path": "Specifications/Pressure, Vacuum and Temperature Specifications/Fuel Pressure",
+"caption": "Fig. 001 Fuel Pump Specifications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/509516376/"
+},
+{
+"file": "0176.png",
+"path": "Relays and Modules/Relays and Modules - HVAC/Compressor Clutch Relay/Testing and Inspection",
+"caption": "Fig. 32 Typical clutch & fan relay:",
+"src": "https://charm.li/images/IMP02Q313/asian140/190156906/"
+},
+{
+"file": "0177.png",
+"path": "Relays and Modules/Relays and Modules - HVAC/Control Module HVAC/Testing and Inspection",
+"caption": "Fig. 1 Blower Motor Controller Location (Typical):",
+"src": "https://charm.li/images/IMP02Q313/asian140/193482860/"
+},
+{
+"file": "0178.png",
+"path": "Relays and Modules/Relays and Modules - HVAC/Control Module HVAC/Testing and Inspection",
+"caption": "Fig. 2 Blower motor controller test connections.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/193486315/"
+},
+{
+"file": "0179.png",
+"path": "Relays and Modules/Relays and Modules - Powertrain Management/Relays and Modules - Fuel Delivery and Air Induction/Fuel Pump Relay/Testing and Inspection",
+"caption": "Fuel Cut-Off Relay:",
+"src": "https://charm.li/images/IMP02Q313/asian140/269436115/"
+},
+{
+"file": "0180.png",
+"path": "Relays and Modules/Relays and Modules - Powertrain Management/Relays and Modules - Fuel Delivery and Air Induction/Fuel Pump Relay/Testing and Inspection",
+"caption": "Voltage Check:",
+"src": "https://charm.li/images/IMP02Q313/asian140/269440155/"
+},
+{
+"file": "0181.png",
+"path": "Relays and Modules/Relays and Modules - Powertrain Management/Relays and Modules - Fuel Delivery and Air Induction/Fuel Pump Relay/Testing and Inspection",
+"caption": "Jumper Wire:",
+"src": "https://charm.li/images/IMP02Q313/asian140/269411021/"
+},
+{
+"file": "0182.png",
+"path": "Relays and Modules/Relays and Modules - Powertrain Management/Relays and Modules - Fuel Delivery and Air Induction/Fuel Pump Relay/Testing and Inspection",
+"caption": "Checking Voltage At Pump:",
+"src": "https://charm.li/images/IMP02Q313/asian140/269443352/"
+},
+{
+"file": "0183.png",
+"path": "Relays and Modules/Relays and Modules - Powertrain Management/Relays and Modules - Ignition System/Ignition Control Module/Testing and Inspection",
+"caption": "Fig. 1 Igniter Unit Voltage Test Connections.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/271056723/"
+},
+{
+"file": "0184.png",
+"path": "Relays and Modules/Relays and Modules - Powertrain Management/Relays and Modules - Ignition System/Ignition Control Module/Testing and Inspection",
+"caption": "Fig. 2 Igniter Unit Continuity Test Connections.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/271065175/"
+},
+{
+"file": "0185.png",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations",
+"caption": "Cooling System Components.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/344220414/"
+},
+{
+"file": "0186.png",
+"path": "Sensors and Switches/Sensors and Switches - HVAC/Evaporator Temperature Sensor / Switch/Service and Repair",
+"caption": "Fig. 33 A/C thermostat test:",
+"src": "https://charm.li/images/IMP02Q313/asian140/362727978/"
+},
+{
+"file": "0187.png",
+"path": "Sensors and Switches/Sensors and Switches - Instrument Panel/Fuel Gauge Sender/Locations",
+"caption": "Fuel System Components.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/381516001/"
+},
+{
+"file": "0188.png",
+"path": "Sensors and Switches/Sensors and Switches - Powertrain Management/Sensors and Switches - Computers and Control Systems/Air Temperature Sensor ( Ambient / Intake )/Locations",
+"caption": "Carburetor & Air Cleaner Mounted Components.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/428417298/"
+},
+{
+"file": "0189.png",
+"path": "Sensors and Switches/Sensors and Switches - Powertrain Management/Sensors and Switches - Computers and Control Systems/Vehicle Speed Sensor/Description and Operation",
+"caption": "Fig. 75 Speed sensor.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/458987086/"
+},
+{
+"file": "0190.png",
+"path": "Maintenance/Alignment/Description and Operation/General Description",
+"caption": "General Description",
+"src": "https://charm.li/images/IMP02Q313/asian140/506775213/"
+},
+{
+"file": "0191.png",
+"path": "Maintenance/Alignment/Description and Operation/General Description",
+"caption": "General Description",
+"src": "https://charm.li/images/IMP02Q313/asian140/506776074/"
+},
+{
+"file": "0192.png",
+"path": "Maintenance/Alignment/Description and Operation/General Description",
+"caption": "General Description",
+"src": "https://charm.li/images/IMP02Q313/asian140/506778008/"
+},
+{
+"file": "0193.png",
+"path": "Maintenance/Alignment/Description and Operation/Camber",
+"caption": "Camber",
+"src": "https://charm.li/images/IMP02Q313/asian140/506782979/"
+},
+{
+"file": "0194.png",
+"path": "Maintenance/Alignment/Description and Operation/Caster",
+"caption": "Caster",
+"src": "https://charm.li/images/IMP02Q313/asian140/506785105/"
+},
+{
+"file": "0195.png",
+"path": "Maintenance/Alignment/Description and Operation/Toe-In",
+"caption": "Toe-In",
+"src": "https://charm.li/images/IMP02Q313/asian140/506787670/"
+},
+{
+"file": "0196.png",
+"path": "Maintenance/Alignment/Testing and Inspection",
+"caption": "Alignment: Testing and Inspection",
+"src": "https://charm.li/images/IMP02Q313/asian140/506797056/"
+},
+{
+"file": "0197.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Pressure/Testing and Inspection",
+"caption": "Fuel Pressure: Testing and Inspection",
+"src": "https://charm.li/images/IMP02Q313/asian140/508926830/"
+},
+{
+"file": "0198.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Pressure/Testing and Inspection",
+"caption": "Fuel Pressure: Testing and Inspection",
+"src": "https://charm.li/images/IMP02Q313/asian140/508916937/"
+},
+{
+"file": "0199.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Pressure/Testing and Inspection",
+"caption": "Fuel Pressure: Testing and Inspection",
+"src": "https://charm.li/images/IMP02Q313/asian140/508920763/"
+},
+{
+"file": "0200.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Air/Fuel Mixture/Adjustments",
+"caption": "Fig. 1 Idle speed and enrichment specifications:",
+"src": "https://charm.li/images/IMP02Q313/asian140/509751494/"
+},
+{
+"file": "0201.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Idle Speed/Adjustments/Fast Idle Speed",
+"caption": "Fast Idle Unloader Vacuum Hose:",
+"src": "https://charm.li/images/IMP02Q313/asian140/511367707/"
+},
+{
+"file": "0202.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Idle Speed/Adjustments/Fast Idle Speed",
+"caption": "Fast Idle Adjusting Screw:",
+"src": "https://charm.li/images/IMP02Q313/asian140/511371371/"
+},
+{
+"file": "0203.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Filter/Locations",
+"caption": "Fuel Filter: Locations",
+"src": "https://charm.li/images/IMP02Q313/asian140/513544082/"
+},
+{
+"file": "0204.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Filter/Service and Repair",
+"caption": "Fuel Filter: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/514443298/"
+},
+{
+"file": "0205.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Filter/Service and Repair",
+"caption": "Fuel Filter: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/514444870/"
+},
+{
+"file": "0206.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Ignition Timing/Timing Marks and Indicators/Locations/With Automatic Transmission",
+"caption": "Fig. 015 Timing Mark:",
+"src": "https://charm.li/images/IMP02Q313/asian140/516181026/"
+},
+{
+"file": "0207.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Ignition Timing/Timing Marks and Indicators/Locations/With Manual Transmission/Except California",
+"caption": "Fig. 013 Timing Mark:",
+"src": "https://charm.li/images/IMP02Q313/asian140/516188078/"
+},
+{
+"file": "0208.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Ignition Timing/Timing Marks and Indicators/Locations/With Manual Transmission/California",
+"caption": "Fig. 014 Timing Mark:",
+"src": "https://charm.li/images/IMP02Q313/asian140/516189041/"
+},
+{
+"file": "0209.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Valve Clearance/Adjustments",
+"caption": "Valve Clearance: Adjustments",
+"src": "https://charm.li/images/IMP02Q313/asian140/522013036/"
+},
+{
+"file": "0210.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Valve Clearance/Adjustments",
+"caption": "Valve Clearance: Adjustments",
+"src": "https://charm.li/images/IMP02Q313/asian140/522029478/"
+},
+{
+"file": "0211.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Valve Clearance/Adjustments",
+"caption": "Valve Clearance: Adjustments",
+"src": "https://charm.li/images/IMP02Q313/asian140/522038672/"
+},
+{
+"file": "0212.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Valve Clearance/Adjustments",
+"caption": "Valve Clearance: Adjustments",
+"src": "https://charm.li/images/IMP02Q313/asian140/522046237/"
+},
+{
+"file": "0213.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Valve Clearance/Adjustments",
+"caption": "Valve Clearance: Adjustments",
+"src": "https://charm.li/images/IMP02Q313/asian140/522049154/"
+},
+{
+"file": "0214.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Valve Clearance/Adjustments",
+"caption": "Valve Clearance: Adjustments",
+"src": "https://charm.li/images/IMP02Q313/asian140/522051794/"
+},
+{
+"file": "0215.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Valve Clearance/Adjustments",
+"caption": "Valve Clearance: Adjustments",
+"src": "https://charm.li/images/IMP02Q313/asian140/522054771/"
+},
+{
+"file": "0216.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/Overview",
+"caption": "Engine - Hot Start Driveability: Overview",
+"src": "https://charm.li/images/IMP02Q313/asian140/523429666/"
+},
+{
+"file": "0217.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/Overview",
+"caption": "Engine - Hot Start Driveability: Overview",
+"src": "https://charm.li/images/IMP02Q313/asian140/523436468/"
+},
+{
+"file": "0218.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"caption": "80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/523440719/"
+},
+{
+"file": "0219.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"caption": "80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/523443977/"
+},
+{
+"file": "0220.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"caption": "80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/523449172/"
+},
+{
+"file": "0221.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"caption": "80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/523456962/"
+},
+{
+"file": "0222.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"caption": "80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/523463663/"
+},
+{
+"file": "0223.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"caption": "80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/523471558/"
+},
+{
+"file": "0224.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"caption": "80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/523478359/"
+},
+{
+"file": "0225.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"caption": "80-81 Accord/Prelude/82 Prelude Cooling Fan Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/523486490/"
+},
+{
+"file": "0226.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/82 Accord Cooling Fan Kit Installation Instructions",
+"caption": "82 Accord Cooling Fan Kit Installation Instructions",
+"src": "https://charm.li/images/IMP02Q313/asian140/523494891/"
+},
+{
+"file": "0227.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/82 Accord Cooling Fan Kit Installation Instructions",
+"caption": "82 Accord Cooling Fan Kit Installation Instructions",
+"src": "https://charm.li/images/IMP02Q313/asian140/523501554/"
+},
+{
+"file": "0228.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/82 Civic - Cooling Fan Kit Installation Instructions",
+"caption": "82 Civic - Cooling Fan Kit Installation Instructions",
+"src": "https://charm.li/images/IMP02Q313/asian140/523506894/"
+},
+{
+"file": "0229.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/82 Civic - Cooling Fan Kit Installation Instructions",
+"caption": "82 Civic - Cooling Fan Kit Installation Instructions",
+"src": "https://charm.li/images/IMP02Q313/asian140/523511765/"
+},
+{
+"file": "0230.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/82 Civic - Cooling Fan Kit Installation Instructions",
+"caption": "82 Civic - Cooling Fan Kit Installation Instructions",
+"src": "https://charm.li/images/IMP02Q313/asian140/523515030/"
+},
+{
+"file": "0231.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/Customer Interest/Engine - Hot Start Driveability/82 Civic - Cooling Fan Kit Installation Instructions",
+"caption": "82 Civic - Cooling Fan Kit Installation Instructions",
+"src": "https://charm.li/images/IMP02Q313/asian140/523522170/"
+},
+{
+"file": "0232.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/All Technical Service Bulletins/Emissions - Underhood Label Replacement Information",
+"caption": "Emissions - Underhood Label Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/523581837/"
+},
+{
+"file": "0233.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/All Technical Service Bulletins/Vehicle - Engine/Chassis Serial Numbers",
+"caption": "Vehicle - Engine/Chassis Serial Numbers",
+"src": "https://charm.li/images/IMP02Q313/asian140/523716506/"
+},
+{
+"file": "0234.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/All Technical Service Bulletins/Vehicle - Engine/Chassis Serial Numbers",
+"caption": "Vehicle - Engine/Chassis Serial Numbers",
+"src": "https://charm.li/images/IMP02Q313/asian140/523732695/"
+},
+{
+"file": "0235.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/All Technical Service Bulletins/Tools - New Fuel Pressure Gauge and Replacement Parts",
+"caption": "Tools - New Fuel Pressure Gauge and Replacement Parts",
+"src": "https://charm.li/images/IMP02Q313/asian140/509544186/"
+},
+{
+"file": "0236.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Technical Service Bulletins/All Technical Service Bulletins/Tools - New Fuel Pressure Gauge and Replacement Parts",
+"caption": "Tools - New Fuel Pressure Gauge and Replacement Parts",
+"src": "https://charm.li/images/IMP02Q313/asian140/509548062/"
+},
+{
+"file": "0237.png",
+"path": "Maintenance/Timing Belt/Service and Repair",
+"caption": "Timing Belt Replacement:",
+"src": "https://charm.li/images/IMP02Q313/asian140/527844011/"
+},
+{
+"file": "0238.png",
+"path": "Maintenance/Timing Belt/Service and Repair",
+"caption": "Timing Marks:",
+"src": "https://charm.li/images/IMP02Q313/asian140/527867629/"
+},
+{
+"file": "0239.png",
+"path": "Maintenance/Brake Bleeding/Service and Repair",
+"caption": "Brake Bleeding: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/542583160/"
+},
+{
+"file": "0240.png",
+"path": "Maintenance/Fuses and Circuit Breakers/Fuse Block/Locations/Hatchback",
+"caption": "Body Mounted Electrical Components.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/552643918/"
+},
+{
+"file": "0241.png",
+"path": "Maintenance/Fuses and Circuit Breakers/Fuse Block/Locations/Sedan",
+"caption": "Body Mounted Electrical Components.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/552702645/"
+},
+{
+"file": "0242.png",
+"path": "Maintenance/Wheels and Tires/Tires/Description and Operation",
+"caption": "Tires: Description and Operation",
+"src": "https://charm.li/images/IMP02Q313/asian140/556249454/"
+},
+{
+"file": "0243.png",
+"path": "Maintenance/Wheels and Tires/Tires/Description and Operation",
+"caption": "Tires: Description and Operation",
+"src": "https://charm.li/images/IMP02Q313/asian140/556254053/"
+},
+{
+"file": "0244.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Abnormal Tire Ahead Wear and Major Causes",
+"caption": "Abnormal Tire Ahead Wear and Major Causes",
+"src": "https://charm.li/images/IMP02Q313/asian140/556260226/"
+},
+{
+"file": "0245.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Abnormal Tire Ahead Wear and Major Causes",
+"caption": "Abnormal Tire Ahead Wear and Major Causes",
+"src": "https://charm.li/images/IMP02Q313/asian140/556261619/"
+},
+{
+"file": "0246.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Abnormal Tire Ahead Wear and Major Causes",
+"caption": "Abnormal Tire Ahead Wear and Major Causes",
+"src": "https://charm.li/images/IMP02Q313/asian140/556262670/"
+},
+{
+"file": "0247.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Abnormal Tire Ahead Wear and Major Causes",
+"caption": "Abnormal Tire Ahead Wear and Major Causes",
+"src": "https://charm.li/images/IMP02Q313/asian140/556263442/"
+},
+{
+"file": "0248.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Abnormal Tire Ahead Wear and Major Causes",
+"caption": "Abnormal Tire Ahead Wear and Major Causes",
+"src": "https://charm.li/images/IMP02Q313/asian140/556263933/"
+},
+{
+"file": "0249.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Abnormal Tire Ahead Wear and Major Causes",
+"caption": "Abnormal Tire Ahead Wear and Major Causes",
+"src": "https://charm.li/images/IMP02Q313/asian140/556264453/"
+},
+{
+"file": "0250.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Abnormal Tire Ahead Wear and Major Causes",
+"caption": "Abnormal Tire Ahead Wear and Major Causes",
+"src": "https://charm.li/images/IMP02Q313/asian140/556265055/"
+},
+{
+"file": "0251.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Diagnosis By Symptom",
+"caption": "Part 1 Of 2:",
+"src": "https://charm.li/images/IMP02Q313/asian140/556267922/"
+},
+{
+"file": "0252.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Diagnosis By Symptom",
+"caption": "Part 2 Of 2:",
+"src": "https://charm.li/images/IMP02Q313/asian140/556273848/"
+},
+{
+"file": "0253.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Irregular and Premature Wear",
+"caption": "Irregular and Premature Wear",
+"src": "https://charm.li/images/IMP02Q313/asian140/556281891/"
+},
+{
+"file": "0254.png",
+"path": "Maintenance/Wheels and Tires/Tires/Testing and Inspection/Radial Tire Waddle",
+"caption": "Radial Tire Waddle",
+"src": "https://charm.li/images/IMP02Q313/asian140/556300339/"
+},
+{
+"file": "0255.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Mounting the Tire on the Wheel",
+"caption": "Mounting the Tire on the Wheel",
+"src": "https://charm.li/images/IMP02Q313/asian140/556406727/"
+},
+{
+"file": "0256.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Mounting the Tire on the Wheel",
+"caption": "Mounting the Tire on the Wheel",
+"src": "https://charm.li/images/IMP02Q313/asian140/556408413/"
+},
+{
+"file": "0257.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Mounting the Tire on the Wheel",
+"caption": "Mounting the Tire on the Wheel",
+"src": "https://charm.li/images/IMP02Q313/asian140/556409507/"
+},
+{
+"file": "0258.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Balancing",
+"caption": "Balancing",
+"src": "https://charm.li/images/IMP02Q313/asian140/556412846/"
+},
+{
+"file": "0259.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Balancing",
+"caption": "Balancing",
+"src": "https://charm.li/images/IMP02Q313/asian140/556414460/"
+},
+{
+"file": "0260.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Balancing",
+"caption": "Balancing",
+"src": "https://charm.li/images/IMP02Q313/asian140/556416009/"
+},
+{
+"file": "0261.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Tire Rotation",
+"caption": "Tire Rotation",
+"src": "https://charm.li/images/IMP02Q313/asian140/556351621/"
+},
+{
+"file": "0262.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Inflation of Tires",
+"caption": "Inflation of Tires",
+"src": "https://charm.li/images/IMP02Q313/asian140/556353818/"
+},
+{
+"file": "0263.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Tire Replacement",
+"caption": "Tire Replacement",
+"src": "https://charm.li/images/IMP02Q313/asian140/556364839/"
+},
+{
+"file": "0264.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/Tire Replacement",
+"caption": "Tire Replacement",
+"src": "https://charm.li/images/IMP02Q313/asian140/556361718/"
+},
+{
+"file": "0265.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/General Balance Procedure",
+"caption": "General Balance Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/556378260/"
+},
+{
+"file": "0266.png",
+"path": "Maintenance/Wheels and Tires/Tires/Service and Repair/General Balance Procedure",
+"caption": "General Balance Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/556379665/"
+},
+{
+"file": "0267.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/507730745/"
+},
+{
+"file": "0268.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/507792978/"
+},
+{
+"file": "0269.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/507915173/"
+},
+{
+"file": "0270.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/507991812/"
+},
+{
+"file": "0271.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508078930/"
+},
+{
+"file": "0272.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508200265/"
+},
+{
+"file": "0273.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508296931/"
+},
+{
+"file": "0274.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508325541/"
+},
+{
+"file": "0275.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508429840/"
+},
+{
+"file": "0276.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508433250/"
+},
+{
+"file": "0277.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508436575/"
+},
+{
+"file": "0278.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508439528/"
+},
+{
+"file": "0279.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508442738/"
+},
+{
+"file": "0280.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508520480/"
+},
+{
+"file": "0281.jpg",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering/Suspension - Vehicle Pulls Left/Right",
+"caption": "Steering/Suspension - Vehicle Pulls Left/Right",
+"src": "https://charm.li/images/IMP02Q313/asian140/508526793/"
+},
+{
+"file": "0282.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering - Wheel Oscillates or Has a Shimmy",
+"caption": "Steering - Wheel Oscillates or Has a Shimmy",
+"src": "https://charm.li/images/IMP02Q313/asian140/556442333/"
+},
+{
+"file": "0283.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering - Wheel Oscillates or Has a Shimmy",
+"caption": "Steering - Wheel Oscillates or Has a Shimmy",
+"src": "https://charm.li/images/IMP02Q313/asian140/556446516/"
+},
+{
+"file": "0284.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/Customer Interest/Steering - Wheel Oscillates or Has a Shimmy",
+"caption": "Steering - Wheel Oscillates or Has a Shimmy",
+"src": "https://charm.li/images/IMP02Q313/asian140/556450984/"
+},
+{
+"file": "0285.png",
+"path": "Maintenance/Wheels and Tires/Technical Service Bulletins/All Technical Service Bulletins/Tires - Tubless Tire Repair Information",
+"caption": "Tires - Tubless Tire Repair Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/134601483/"
+},
+{
+"file": "0286.png",
+"path": "Maintenance/Technical Service Bulletins/Customer Interest/Electrical - Fuse Box Door Replacement",
+"caption": "Fuse Box Door Assembly:",
+"src": "https://charm.li/images/IMP02Q313/asian140/553225664/"
+},
+{
+"file": "0287.png",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/Engine - Oil Consumption Test",
+"caption": "TEXT OF OWNER'S COPY OF OIL CONSUMPTION TEST:",
+"src": "https://charm.li/images/IMP02Q313/asian140/540792979/"
+},
+{
+"file": "0288.png",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/Engine - Oil Consumption Test",
+"caption": "TEXT OF DEALER'S COPY OF OIL CONSUMPTION TEST:",
+"src": "https://charm.li/images/IMP02Q313/asian140/540802090/"
+},
+{
+"file": "0289.png",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/Tools - Belt Tension Gauge Calibration and Repair",
+"caption": "Tools - Belt Tension Gauge Calibration and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/533846971/"
+},
+{
+"file": "0290.png",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/Tools - Belt Tension Gauge Calibration and Repair",
+"caption": "Tools - Belt Tension Gauge Calibration and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/533850496/"
+},
+{
+"file": "0291.png",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/R12 Refrigerant - Recovery/Recycling Update",
+"caption": "R12 Refrigerant - Recovery/Recycling Update",
+"src": "https://charm.li/images/IMP02Q313/asian140/542238578/"
+},
+{
+"file": "0292.png",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/Recycled R12 - Storage Tips",
+"caption": "Recycled R12 - Storage Tips",
+"src": "https://charm.li/images/IMP02Q313/asian140/542233132/"
+},
+{
+"file": "0293.jpg",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/A/C - Refrigerant Leak Detection",
+"caption": "A/C - Refrigerant Leak Detection",
+"src": "https://charm.li/images/IMP02Q313/asian140/542070658/"
+},
+{
+"file": "0294.jpg",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/A/C - Refrigerant Leak Detection",
+"caption": "A/C - Refrigerant Leak Detection",
+"src": "https://charm.li/images/IMP02Q313/asian140/542137508/"
+},
+{
+"file": "0295.jpg",
+"path": "Maintenance/Technical Service Bulletins/All Technical Service Bulletins/A/T - New ATF DW-1 Available",
+"caption": "A/T - New ATF DW-1 Available",
+"src": "https://charm.li/images/IMP02Q313/asian140/539941255/"
+},
+{
+"file": "0296.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Connecting Rod Bearing/Application and ID",
+"caption": "Crank Bearing Code Location:",
+"src": "https://charm.li/images/IMP02Q313/asian140/568497689/"
+},
+{
+"file": "0297.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Connecting Rod Bearing/Application and ID",
+"caption": "Crank Bearing Identification:",
+"src": "https://charm.li/images/IMP02Q313/asian140/568505199/"
+},
+{
+"file": "0298.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Connecting Rod Bearing/Application and ID",
+"caption": "Rod Bearing Code Location:",
+"src": "https://charm.li/images/IMP02Q313/asian140/568507481/"
+},
+{
+"file": "0299.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Connecting Rod Bearing/Application and ID",
+"caption": "Rod Bearing Identification:",
+"src": "https://charm.li/images/IMP02Q313/asian140/568511620/"
+},
+{
+"file": "0300.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Piston/Service and Repair",
+"caption": "Piston: Service and Repair",
+"src": "https://charm.li/images/IMP02Q313/asian140/572309066/"
+},
+{
+"file": "0301.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Technical Service Bulletins/Engine - Connecting Rod Damage Information",
+"caption": "Engine - Connecting Rod Damage Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/569597424/"
+},
+{
+"file": "0302.png",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Pump/Service and Repair",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596263417/"
+},
+{
+"file": "0303.png",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Pump/Service and Repair",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596272579/"
+},
+{
+"file": "0304.png",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Pump/Service and Repair",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596285763/"
+},
+{
+"file": "0305.png",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Pump/Service and Repair",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596288733/"
+},
+{
+"file": "0306.png",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Pump/Service and Repair",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596291385/"
+},
+{
+"file": "0307.png",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Pump/Service and Repair",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596293903/"
+},
+{
+"file": "0308.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Pump/Service and Repair",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596297548/"
+},
+{
+"file": "0309.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Pump/Service and Repair",
+"caption": "Engine Lubrication:",
+"src": "https://charm.li/images/IMP02Q313/asian140/596408404/"
+},
+{
+"file": "0310.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Seals and Gaskets/Technical Service Bulletins/Vehicle - Recommended Service Materials/Sealers/Lubricants",
+"caption": "Vehicle - Recommended Service Materials/Sealers/Lubricants",
+"src": "https://charm.li/images/IMP02Q313/asian140/602781537/"
+},
+{
+"file": "0311.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Seals and Gaskets/Technical Service Bulletins/Vehicle - Recommended Service Materials/Sealers/Lubricants",
+"caption": "Vehicle - Recommended Service Materials/Sealers/Lubricants",
+"src": "https://charm.li/images/IMP02Q313/asian140/605637344/"
+},
+{
+"file": "0312.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Seals and Gaskets/Technical Service Bulletins/Vehicle - Recommended Service Materials/Sealers/Lubricants",
+"caption": "Vehicle - Recommended Service Materials/Sealers/Lubricants",
+"src": "https://charm.li/images/IMP02Q313/asian140/605924281/"
+},
+{
+"file": "0313.png",
+"path": "Engine, Cooling and Exhaust/Engine/Seals and Gaskets/Technical Service Bulletins/Tool - Crankshaft (Flywheel End) Seal Installation",
+"caption": "Tool - Crankshaft (Flywheel End) Seal Installation",
+"src": "https://charm.li/images/IMP02Q313/asian140/602485328/"
+},
+{
+"file": "0314.png",
+"path": "Engine, Cooling and Exhaust/Engine/Seals and Gaskets/Technical Service Bulletins/Tool - Crankshaft (Flywheel End) Seal Installation",
+"caption": "Tool - Crankshaft (Flywheel End) Seal Installation",
+"src": "https://charm.li/images/IMP02Q313/asian140/602487234/"
+},
+{
+"file": "0315.png",
+"path": "Engine, Cooling and Exhaust/Engine/Technical Service Bulletins/All Technical Service Bulletins/Engine/Transmission - Hydraulic Lift Truck usage",
+"caption": "Engine/Transmission - Hydraulic Lift Truck usage",
+"src": "https://charm.li/images/IMP02Q313/asian140/636490802/"
+},
+{
+"file": "0316.jpg",
+"path": "Engine, Cooling and Exhaust/Cooling System/Heater Control Valve/Technical Service Bulletins/A/C - Heater Blows Cold Air/A/C Blows Hot Air",
+"caption": "A/C - Heater Blows Cold Air/A/C Blows Hot Air",
+"src": "https://charm.li/images/IMP02Q313/asian140/644712679/"
+},
+{
+"file": "0317.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cap/Testing and Inspection",
+"caption": "Radiator Cap Pressure Testing:",
+"src": "https://charm.li/images/IMP02Q313/asian140/647373088/"
+},
+{
+"file": "0318.png",
+"path": "Engine, Cooling and Exhaust/Exhaust System/Catalytic Converter/Description and Operation",
+"caption": "Fig.154 - Cutaway View Of Catalytic Converter:",
+"src": "https://charm.li/images/IMP02Q313/asian140/651202544/"
+},
+{
+"file": "0319.png",
+"path": "Powertrain Management/Computers and Control Systems/Idle Up Control Valve/Service and Repair",
+"caption": "Fig. 29 Idle boost assembly/disassembly.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/677566224/"
+},
+{
+"file": "0320.png",
+"path": "Powertrain Management/Emission Control Systems/Air Injection/Pulsed Secondary Air Injection/Description and Operation",
+"caption": "Fig.160 - Secondary Air Supply System:",
+"src": "https://charm.li/images/IMP02Q313/asian140/731142945/"
+},
+{
+"file": "0321.png",
+"path": "Powertrain Management/Emission Control Systems/Air Injection/Vacuum Delay Valve/Locations",
+"caption": "Evaporative Control System Components.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/731193984/"
+},
+{
+"file": "0322.png",
+"path": "Powertrain Management/Emission Control Systems/Deceleration Valve/Description and Operation",
+"caption": "Fig.159 - Anti-afterburn Valve:",
+"src": "https://charm.li/images/IMP02Q313/asian140/731757332/"
+},
+{
+"file": "0323.png",
+"path": "Powertrain Management/Emission Control Systems/Evaporative Emissions System/Bowl Vent Valve/Testing and Inspection",
+"caption": "Fig.46 - Checking For Vacuum To Air Vent Cut-off Diaphragm:",
+"src": "https://charm.li/images/IMP02Q313/asian140/732240599/"
+},
+{
+"file": "0324.png",
+"path": "Powertrain Management/Emission Control Systems/Evaporative Emissions System/Bowl Vent Valve/Testing and Inspection",
+"caption": "Fig.47 - Checking Air Vent Cut-off Diaphragm:",
+"src": "https://charm.li/images/IMP02Q313/asian140/732244637/"
+},
+{
+"file": "0325.png",
+"path": "Powertrain Management/Emission Control Systems/Evaporative Emissions System/Canister Purge Control Valve/Testing and Inspection",
+"caption": "Fig.45 - Purge Control Diaphragm Valve Check:",
+"src": "https://charm.li/images/IMP02Q313/asian140/732388671/"
+},
+{
+"file": "0326.png",
+"path": "Powertrain Management/Emission Control Systems/Evaporative Emissions System/Canister Purge Control Valve/Testing and Inspection",
+"caption": "Fig.29 - Evaporative Emission Control System:",
+"src": "https://charm.li/images/IMP02Q313/asian140/732392571/"
+},
+{
+"file": "0327.png",
+"path": "Powertrain Management/Emission Control Systems/Evaporative Emissions System/Canister Purge Solenoid/Testing and Inspection",
+"caption": "Fig. 23 Purge control diaphragm valve check.  Typical:",
+"src": "https://charm.li/images/IMP02Q313/asian140/732378929/"
+},
+{
+"file": "0328.png",
+"path": "Powertrain Management/Emission Control Systems/Exhaust Gas Recirculation/EGR Valve/Testing and Inspection",
+"caption": "Fig.153 - Proper Voltmeter Connection:",
+"src": "https://charm.li/images/IMP02Q313/asian140/744109381/"
+},
+{
+"file": "0329.png",
+"path": "Powertrain Management/Emission Control Systems/Exhaust Gas Recirculation/Technical Service Bulletins/Emissions - EGR Diagnosis",
+"caption": "Emissions - EGR Diagnosis",
+"src": "https://charm.li/images/IMP02Q313/asian140/746987595/"
+},
+{
+"file": "0330.png",
+"path": "Powertrain Management/Emission Control Systems/Exhaust Gas Recirculation/Technical Service Bulletins/Emissions - EGR Diagnosis",
+"caption": "Emissions - EGR Diagnosis",
+"src": "https://charm.li/images/IMP02Q313/asian140/746989592/"
+},
+{
+"file": "0331.png",
+"path": "Powertrain Management/Emission Control Systems/Exhaust Gas Recirculation/Technical Service Bulletins/Emissions - EGR Diagnosis",
+"caption": "Emissions - EGR Diagnosis",
+"src": "https://charm.li/images/IMP02Q313/asian140/746991843/"
+},
+{
+"file": "0332.png",
+"path": "Powertrain Management/Emission Control Systems/Hot Idle Compensator (Non Comp. Controlled)/Locations",
+"caption": "Intake Air Control System Components.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/747005454/"
+},
+{
+"file": "0333.png",
+"path": "Powertrain Management/Emission Control Systems/Positive Crankcase Ventilation/Description and Operation",
+"caption": "Fig.14 - Dual Return Passage Crankcase Ventilation System:",
+"src": "https://charm.li/images/IMP02Q313/asian140/747636180/"
+},
+{
+"file": "0334.png",
+"path": "Powertrain Management/Emission Control Systems/Technical Service Bulletins/Customer Interest/Emissions - Excessive Emissions During State Inspection",
+"caption": "Emission Control Box Modification Procedure:",
+"src": "https://charm.li/images/IMP02Q313/asian140/759942887/"
+},
+{
+"file": "0335.png",
+"path": "Powertrain Management/Emission Control Systems/Technical Service Bulletins/By Symptom/High emissions/Emission Control - Information Labels Available",
+"caption": "Emission Control - Information Labels Available",
+"src": "https://charm.li/images/IMP02Q313/asian140/759975953/"
+},
+{
+"file": "0336.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Altitude Compensator/Description and Operation",
+"caption": "Fig.158 - Air Jet Controller:",
+"src": "https://charm.li/images/IMP02Q313/asian140/760322163/"
+},
+{
+"file": "0337.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Carburetor/Accelerator Pump/Adjustments",
+"caption": "Fig. 7 Accelerator pump linkage adjustment. Typical:",
+"src": "https://charm.li/images/IMP02Q313/asian140/760405075/"
+},
+{
+"file": "0338.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Carburetor/Technical Service Bulletins/Engine - Preliminary Diagnosis Before Carburetor Repairs/Warranty Claim Information",
+"caption": "Warranty Claim Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/762529954/"
+},
+{
+"file": "0339.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Dashpot/Description and Operation",
+"caption": "Fig.131 - Throttle Control System:",
+"src": "https://charm.li/images/IMP02Q313/asian140/762554736/"
+},
+{
+"file": "0340.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Dashpot/Description and Operation",
+"caption": "Fig.138 - Speed Sensor:",
+"src": "https://charm.li/images/IMP02Q313/asian140/762565724/"
+},
+{
+"file": "0341.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Overview",
+"caption": "Recall - Fuel Filler Pipe: Overview",
+"src": "https://charm.li/images/IMP02Q313/asian140/782825122/"
+},
+{
+"file": "0342.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Corrective Action B",
+"caption": "Corrective Action B",
+"src": "https://charm.li/images/IMP02Q313/asian140/782830557/"
+},
+{
+"file": "0343.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Corrective Action B",
+"caption": "Corrective Action B",
+"src": "https://charm.li/images/IMP02Q313/asian140/782832388/"
+},
+{
+"file": "0344.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Corrective Action B",
+"caption": "Corrective Action B",
+"src": "https://charm.li/images/IMP02Q313/asian140/782835049/"
+},
+{
+"file": "0345.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Corrective Action B",
+"caption": "Corrective Action B",
+"src": "https://charm.li/images/IMP02Q313/asian140/782837277/"
+},
+{
+"file": "0346.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Corrective Action B",
+"caption": "Corrective Action B",
+"src": "https://charm.li/images/IMP02Q313/asian140/782838953/"
+},
+{
+"file": "0347.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Corrective Action B",
+"caption": "Corrective Action B",
+"src": "https://charm.li/images/IMP02Q313/asian140/782840355/"
+},
+{
+"file": "0348.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Corrective Action B",
+"caption": "Corrective Action B",
+"src": "https://charm.li/images/IMP02Q313/asian140/782841548/"
+},
+{
+"file": "0349.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Completion Procedure - Parts and Warranty Information",
+"caption": "Completion Procedure - Parts and Warranty Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/782846019/"
+},
+{
+"file": "0350.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Completion Procedure - Parts and Warranty Information",
+"caption": "Completion Procedure - Parts and Warranty Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/782847675/"
+},
+{
+"file": "0351.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Tank/Technical Service Bulletins/Recalls/Recall - Fuel Filler Pipe/Inspection/Repair Procedure",
+"caption": "Inspection/Repair Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/782860135/"
+},
+{
+"file": "0352.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Throttle Cable/Linkage/Adjustments",
+"caption": "Fig. 6 Throttle cable adjustment:",
+"src": "https://charm.li/images/IMP02Q313/asian140/790209396/"
+},
+{
+"file": "0353.png",
+"path": "Powertrain Management/Ignition System/Ignition Coil/Testing and Inspection",
+"caption": "Fig. 6 Ignition Coil Primary Winding Test.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/796877671/"
+},
+{
+"file": "0354.png",
+"path": "Powertrain Management/Ignition System/Ignition Coil/Testing and Inspection",
+"caption": "Fig. 5 Ignition Coil Secondary Test:",
+"src": "https://charm.li/images/IMP02Q313/asian140/796880101/"
+},
+{
+"file": "0355.png",
+"path": "Powertrain Management/Ignition System/Ignition Coil/Testing and Inspection",
+"caption": "Fig. 42 Ignition coil resistance specifications chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/796882600/"
+},
+{
+"file": "0356.png",
+"path": "Powertrain Management/Ignition System/Vacuum Advance Control Solenoid/Description and Operation",
+"caption": "Fig.106 - Ignition Timing Control System:",
+"src": "https://charm.li/images/IMP02Q313/asian140/801860702/"
+},
+{
+"file": "0357.jpg",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Cooler Flushing Equipment Information",
+"caption": "A/T - Cooler Flushing Equipment Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/863974036/"
+},
+{
+"file": "0358.jpg",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Cooler Flushing Equipment Information",
+"caption": "A/T - Cooler Flushing Equipment Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/864288075/"
+},
+{
+"file": "0359.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Harsh Engagement/Gear Clashing Noise",
+"caption": "A/T - Harsh Engagement/Gear Clashing Noise",
+"src": "https://charm.li/images/IMP02Q313/asian140/909252281/"
+},
+{
+"file": "0360.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Choosing the Right ATF",
+"caption": "A/T - Choosing the Right ATF",
+"src": "https://charm.li/images/IMP02Q313/asian140/908280584/"
+},
+{
+"file": "0361.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Choosing the Right ATF",
+"caption": "A/T - Choosing the Right ATF",
+"src": "https://charm.li/images/IMP02Q313/asian140/908309503/"
+},
+{
+"file": "0362.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Choosing the Right ATF",
+"caption": "A/T - Choosing the Right ATF",
+"src": "https://charm.li/images/IMP02Q313/asian140/908325144/"
+},
+{
+"file": "0363.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Math Part II",
+"caption": "A/T - Math Part II",
+"src": "https://charm.li/images/IMP02Q313/asian140/908346016/"
+},
+{
+"file": "0364.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Math Part II",
+"caption": "A/T - Math Part II",
+"src": "https://charm.li/images/IMP02Q313/asian140/908352477/"
+},
+{
+"file": "0365.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Math Part II",
+"caption": "A/T - Math Part II",
+"src": "https://charm.li/images/IMP02Q313/asian140/908354786/"
+},
+{
+"file": "0366.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Math Part II",
+"caption": "A/T - Math Part II",
+"src": "https://charm.li/images/IMP02Q313/asian140/908357030/"
+},
+{
+"file": "0367.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Math Part II",
+"caption": "A/T - Math Part II",
+"src": "https://charm.li/images/IMP02Q313/asian140/908359258/"
+},
+{
+"file": "0368.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Math Part II",
+"caption": "A/T - Math Part II",
+"src": "https://charm.li/images/IMP02Q313/asian140/908361511/"
+},
+{
+"file": "0369.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Math Part II",
+"caption": "A/T - Math Part II",
+"src": "https://charm.li/images/IMP02Q313/asian140/908363782/"
+},
+{
+"file": "0370.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Sprag Rotation",
+"caption": "A/T - Sprag Rotation",
+"src": "https://charm.li/images/IMP02Q313/asian140/908380354/"
+},
+{
+"file": "0371.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Sprag Rotation",
+"caption": "A/T - Sprag Rotation",
+"src": "https://charm.li/images/IMP02Q313/asian140/908392118/"
+},
+{
+"file": "0372.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Sprag Rotation",
+"caption": "A/T - Sprag Rotation",
+"src": "https://charm.li/images/IMP02Q313/asian140/908400525/"
+},
+{
+"file": "0373.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Sprag Rotation",
+"caption": "A/T - Sprag Rotation",
+"src": "https://charm.li/images/IMP02Q313/asian140/908411563/"
+},
+{
+"file": "0374.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Sprag Rotation",
+"caption": "A/T - Sprag Rotation",
+"src": "https://charm.li/images/IMP02Q313/asian140/908420980/"
+},
+{
+"file": "0375.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Park, Reverse, or Neutral Clunk/Ratcheting Noise",
+"caption": "A/T - Park, Reverse, or Neutral Clunk/Ratcheting Noise",
+"src": "https://charm.li/images/IMP02Q313/asian140/908429779/"
+},
+{
+"file": "0376.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Front Bushing Wear",
+"caption": "A/T - Front Bushing Wear",
+"src": "https://charm.li/images/IMP02Q313/asian140/908433696/"
+},
+{
+"file": "0377.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Front Bushing Wear",
+"caption": "A/T - Front Bushing Wear",
+"src": "https://charm.li/images/IMP02Q313/asian140/908438381/"
+},
+{
+"file": "0378.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Slipping or No-Shift/Metal Sealing Rings",
+"caption": "A/T - Slipping or No-Shift/Metal Sealing Rings",
+"src": "https://charm.li/images/IMP02Q313/asian140/908443443/"
+},
+{
+"file": "0379.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Slipping or No-Shift/Metal Sealing Rings",
+"caption": "A/T - Slipping or No-Shift/Metal Sealing Rings",
+"src": "https://charm.li/images/IMP02Q313/asian140/908445884/"
+},
+{
+"file": "0380.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - 3 and 4 Speed Rebuild Tip",
+"caption": "A/T - 3 and 4 Speed Rebuild Tip",
+"src": "https://charm.li/images/IMP02Q313/asian140/908454547/"
+},
+{
+"file": "0381.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - How To Use A Pressure Gauge",
+"caption": "A/T - How To Use A Pressure Gauge",
+"src": "https://charm.li/images/IMP02Q313/asian140/908874069/"
+},
+{
+"file": "0382.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Engine Vacuum Testing",
+"caption": "A/T - Engine Vacuum Testing",
+"src": "https://charm.li/images/IMP02Q313/asian140/908956764/"
+},
+{
+"file": "0383.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Engine Vacuum Testing",
+"caption": "A/T - Engine Vacuum Testing",
+"src": "https://charm.li/images/IMP02Q313/asian140/908957741/"
+},
+{
+"file": "0384.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Engine Vacuum Testing",
+"caption": "A/T - Engine Vacuum Testing",
+"src": "https://charm.li/images/IMP02Q313/asian140/908958720/"
+},
+{
+"file": "0385.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Engine Vacuum Testing",
+"caption": "A/T - Engine Vacuum Testing",
+"src": "https://charm.li/images/IMP02Q313/asian140/908959715/"
+},
+{
+"file": "0386.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/Tools - Low Pressure Gauge For A/T Available",
+"caption": "Tools - Low Pressure Gauge For A/T Available",
+"src": "https://charm.li/images/IMP02Q313/asian140/909217641/"
+},
+{
+"file": "0387.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/Tools - Low Pressure Gauge For A/T Available",
+"caption": "Tools - Low Pressure Gauge For A/T Available",
+"src": "https://charm.li/images/IMP02Q313/asian140/909218769/"
+},
+{
+"file": "0388.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Cooler Flushing Procedure",
+"caption": "A/T - Cooler Flushing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/864397269/"
+},
+{
+"file": "0389.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Cooler Flushing Procedure",
+"caption": "A/T - Cooler Flushing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/864400996/"
+},
+{
+"file": "0390.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/A/T - Cooler Flushing Procedure",
+"caption": "A/T - Cooler Flushing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/864402003/"
+},
+{
+"file": "0391.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/Torque Converter Oil Seal - Installation Tool",
+"caption": "Torque Converter Oil Seal - Installation Tool",
+"src": "https://charm.li/images/IMP02Q313/asian140/858538259/"
+},
+{
+"file": "0392.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/Torque Converter Oil Seal - Installation Tool",
+"caption": "Torque Converter Oil Seal - Installation Tool",
+"src": "https://charm.li/images/IMP02Q313/asian140/858542787/"
+},
+{
+"file": "0393.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Technical Service Bulletins/Torque Converter Oil Seal - Installation Tool",
+"caption": "Torque Converter Oil Seal - Installation Tool",
+"src": "https://charm.li/images/IMP02Q313/asian140/858544763/"
+},
+{
+"file": "0394.png",
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Technical Service Bulletins/Tools - Check Mainshaft End Play",
+"caption": "Tools - Check Mainshaft End Play",
+"src": "https://charm.li/images/IMP02Q313/asian140/977018289/"
+},
+{
+"file": "0395.png",
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Technical Service Bulletins/Tools - Check Mainshaft End Play",
+"caption": "Tools - Check Mainshaft End Play",
+"src": "https://charm.li/images/IMP02Q313/asian140/977023402/"
+},
+{
+"file": "0396.png",
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Technical Service Bulletins/Tools - Check Mainshaft End Play",
+"caption": "Tools - Check Mainshaft End Play",
+"src": "https://charm.li/images/IMP02Q313/asian140/977028876/"
+},
+{
+"file": "0397.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1004355393/"
+},
+{
+"file": "0398.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1004470923/"
+},
+{
+"file": "0399.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1004628584/"
+},
+{
+"file": "0400.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1004875612/"
+},
+{
+"file": "0401.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005054222/"
+},
+{
+"file": "0402.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005134283/"
+},
+{
+"file": "0403.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005277421/"
+},
+{
+"file": "0404.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005348482/"
+},
+{
+"file": "0405.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005402489/"
+},
+{
+"file": "0406.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005565063/"
+},
+{
+"file": "0407.jpg",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Brake Disc Refinishing Information",
+"caption": "Brakes - Brake Disc Refinishing Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005697708/"
+},
+{
+"file": "0408.png",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Semi-Metallic Brake Pads",
+"caption": "Wear indicator:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1002932780/"
+},
+{
+"file": "0409.png",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Disc Refinishing Procedure",
+"caption": "Brakes - Disc Refinishing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005890351/"
+},
+{
+"file": "0410.png",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Disc Refinishing Procedure",
+"caption": "Brakes - Disc Refinishing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005893716/"
+},
+{
+"file": "0411.png",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Disc Refinishing Procedure",
+"caption": "Brakes - Disc Refinishing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005896068/"
+},
+{
+"file": "0412.png",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Disc Refinishing Procedure",
+"caption": "Brakes - Disc Refinishing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005901669/"
+},
+{
+"file": "0413.png",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Disc Refinishing Procedure",
+"caption": "Brakes - Disc Refinishing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005905216/"
+},
+{
+"file": "0414.png",
+"path": "Brakes and Traction Control/Disc Brake System/Technical Service Bulletins/Brakes - Disc Refinishing Procedure",
+"caption": "Brakes - Disc Refinishing Procedure",
+"src": "https://charm.li/images/IMP02Q313/asian140/1005906556/"
+},
+{
+"file": "0415.png",
+"path": "Brakes and Traction Control/Drum Brake System/Technical Service Bulletins/Customer Interest/Brakes - Rear Brake Noise",
+"caption": "Brakes:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1006123872/"
+},
+{
+"file": "0416.png",
+"path": "Brakes and Traction Control/Technical Service Bulletins/All Technical Service Bulletins/Brakes - Master Cylinder Push Rod Adjustment",
+"caption": "Brakes - Master Cylinder Push Rod Adjustment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1009066280/"
+},
+{
+"file": "0417.png",
+"path": "Brakes and Traction Control/Technical Service Bulletins/All Technical Service Bulletins/Brakes - Master Cylinder Push Rod Adjustment",
+"caption": "Brakes - Master Cylinder Push Rod Adjustment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1009067922/"
+},
+{
+"file": "0418.png",
+"path": "Brakes and Traction Control/Technical Service Bulletins/All Technical Service Bulletins/Brakes - Master Cylinder Push Rod Adjustment",
+"caption": "Brakes - Master Cylinder Push Rod Adjustment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1009069595/"
+},
+{
+"file": "0419.png",
+"path": "Starting and Charging/Charging System/Alternator/Testing and Inspection",
+"caption": "Alternator Output Test:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1019680250/"
+},
+{
+"file": "0420.png",
+"path": "Starting and Charging/Charging System/Alternator/Testing and Inspection",
+"caption": "Alternator Current Output Chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1019684804/"
+},
+{
+"file": "0421.png",
+"path": "Starting and Charging/Charging System/Voltage Regulator/Testing and Inspection",
+"caption": "Charging System Components:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1025878363/"
+},
+{
+"file": "0422.png",
+"path": "Starting and Charging/Charging System/Voltage Regulator/Testing and Inspection",
+"caption": "Relay Box And Voltage Regulator:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1025885962/"
+},
+{
+"file": "0423.png",
+"path": "Starting and Charging/Charging System/Voltage Regulator/Testing and Inspection",
+"caption": "Voltage Regulator Test:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1025889229/"
+},
+{
+"file": "0424.png",
+"path": "Starting and Charging/Charging System/Voltage Regulator/Testing and Inspection",
+"caption": "Voltage Regulator Function Chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1025892797/"
+},
+{
+"file": "0425.png",
+"path": "Starting and Charging/Charging System/Technical Service Bulletins/Recalls/Recall - Replacement of Charging Circuit Wire",
+"caption": "Replacement of Charging Circuit Wire:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1029373136/"
+},
+{
+"file": "0426.png",
+"path": "Starting and Charging/Starting System/Technical Service Bulletins/Tools - Exacta Code Key Cutter",
+"caption": "Tools - Exacta Code Key Cutter",
+"src": "https://charm.li/images/IMP02Q313/asian140/1029784339/"
+},
+{
+"file": "0427.png",
+"path": "Starting and Charging/Starting System/Technical Service Bulletins/Tools - Exacta Code Key Cutter",
+"caption": "Tools - Exacta Code Key Cutter",
+"src": "https://charm.li/images/IMP02Q313/asian140/1029788212/"
+},
+{
+"file": "0428.png",
+"path": "Starting and Charging/Power and Ground Distribution/Technical Service Bulletins/All Technical Service Bulletins/Parasitic Draw - Test Clarifications",
+"caption": "Parasitic Draw - Test Clarifications",
+"src": "https://charm.li/images/IMP02Q313/asian140/1071490577/"
+},
+{
+"file": "0429.png",
+"path": "Starting and Charging/Power and Ground Distribution/Technical Service Bulletins/All Technical Service Bulletins/Parasitic Draw - Test Clarifications",
+"caption": "Parasitic Draw - Test Clarifications",
+"src": "https://charm.li/images/IMP02Q313/asian140/1071494152/"
+},
+{
+"file": "0430.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014161463/"
+},
+{
+"file": "0431.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014240165/"
+},
+{
+"file": "0432.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014310387/"
+},
+{
+"file": "0433.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014457995/"
+},
+{
+"file": "0434.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014527659/"
+},
+{
+"file": "0435.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014610993/"
+},
+{
+"file": "0436.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014684526/"
+},
+{
+"file": "0437.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014945085/"
+},
+{
+"file": "0438.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015024860/"
+},
+{
+"file": "0439.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015194854/"
+},
+{
+"file": "0440.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - ED-18 Battery Analyzer Update Info.",
+"caption": "Electrical - ED-18 Battery Analyzer Update Info.",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015392067/"
+},
+{
+"file": "0441.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015518811/"
+},
+{
+"file": "0442.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015639572/"
+},
+{
+"file": "0443.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015720227/"
+},
+{
+"file": "0444.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015760959/"
+},
+{
+"file": "0445.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015823391/"
+},
+{
+"file": "0446.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015883220/"
+},
+{
+"file": "0447.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1015948729/"
+},
+{
+"file": "0448.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016025437/"
+},
+{
+"file": "0449.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016101620/"
+},
+{
+"file": "0450.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016181102/"
+},
+{
+"file": "0451.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016265471/"
+},
+{
+"file": "0452.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016350636/"
+},
+{
+"file": "0453.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016436809/"
+},
+{
+"file": "0454.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016526148/"
+},
+{
+"file": "0455.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016634325/"
+},
+{
+"file": "0456.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016691237/"
+},
+{
+"file": "0457.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016753443/"
+},
+{
+"file": "0458.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016834306/"
+},
+{
+"file": "0459.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016895263/"
+},
+{
+"file": "0460.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1016955848/"
+},
+{
+"file": "0461.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017016457/"
+},
+{
+"file": "0462.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017081589/"
+},
+{
+"file": "0463.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017134252/"
+},
+{
+"file": "0464.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017265148/"
+},
+{
+"file": "0465.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017375244/"
+},
+{
+"file": "0466.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017486334/"
+},
+{
+"file": "0467.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017598256/"
+},
+{
+"file": "0468.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017703856/"
+},
+{
+"file": "0469.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017765391/"
+},
+{
+"file": "0470.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017831526/"
+},
+{
+"file": "0471.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017906976/"
+},
+{
+"file": "0472.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1017985239/"
+},
+{
+"file": "0473.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018051168/"
+},
+{
+"file": "0474.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018108245/"
+},
+{
+"file": "0475.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018168448/"
+},
+{
+"file": "0476.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018232598/"
+},
+{
+"file": "0477.png",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018289245/"
+},
+{
+"file": "0478.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018290418/"
+},
+{
+"file": "0479.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018477431/"
+},
+{
+"file": "0480.png",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018681643/"
+},
+{
+"file": "0481.png",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - Battery Testing and Replacement Information",
+"caption": "Electrical - Battery Testing and Replacement Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018682724/"
+},
+{
+"file": "0482.png",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Battery - Testing Equipment",
+"caption": "Battery - Testing Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018711111/"
+},
+{
+"file": "0483.png",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Battery - Testing Equipment",
+"caption": "Battery - Testing Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1018719482/"
+},
+{
+"file": "0484.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - GR8 Battery Diagnostic Station Update Information",
+"caption": "Electrical - GR8 Battery Diagnostic Station Update Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1013725013/"
+},
+{
+"file": "0485.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - GR8 Battery Diagnostic Station Update Information",
+"caption": "Electrical - GR8 Battery Diagnostic Station Update Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1013813933/"
+},
+{
+"file": "0486.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - GR8 Battery Diagnostic Station Update Information",
+"caption": "Electrical - GR8 Battery Diagnostic Station Update Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1013879743/"
+},
+{
+"file": "0487.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - GR8 Battery Diagnostic Station Update Information",
+"caption": "Electrical - GR8 Battery Diagnostic Station Update Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1013964702/"
+},
+{
+"file": "0488.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - GR8 Battery Diagnostic Station Update Information",
+"caption": "Electrical - GR8 Battery Diagnostic Station Update Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014062576/"
+},
+{
+"file": "0489.jpg",
+"path": "Starting and Charging/Technical Service Bulletins/All Technical Service Bulletins/Electrical - GR8 Battery Diagnostic Station Update Information",
+"caption": "Electrical - GR8 Battery Diagnostic Station Update Information",
+"src": "https://charm.li/images/IMP02Q313/asian140/1014110739/"
+},
+{
+"file": "0490.png",
+"path": "Steering and Suspension/Steering/Power Steering/Technical Service Bulletins/Tools - Power Steering Pressure Gauge Modification",
+"caption": "Tools - Power Steering Pressure Gauge Modification",
+"src": "https://charm.li/images/IMP02Q313/asian140/1074295836/"
+},
+{
+"file": "0491.png",
+"path": "Steering and Suspension/Steering/Power Steering/Technical Service Bulletins/Tools - Power Steering Pressure Gauge Modification",
+"caption": "Tools - Power Steering Pressure Gauge Modification",
+"src": "https://charm.li/images/IMP02Q313/asian140/1074297621/"
+},
+{
+"file": "0492.png",
+"path": "Steering and Suspension/Steering/Power Steering/Technical Service Bulletins/Tools - Power Steering Pressure Gauge Modification",
+"caption": "Tools - Power Steering Pressure Gauge Modification",
+"src": "https://charm.li/images/IMP02Q313/asian140/1074298913/"
+},
+{
+"file": "0493.png",
+"path": "Steering and Suspension/Steering/Technical Service Bulletins/All Technical Service Bulletins/Tools - Power Steering Pressure Gauge",
+"caption": "Tools - Power Steering Pressure Gauge",
+"src": "https://charm.li/images/IMP02Q313/asian140/1088049040/"
+},
+{
+"file": "0494.png",
+"path": "Steering and Suspension/Steering/Technical Service Bulletins/All Technical Service Bulletins/Tools - Power Steering Pressure Gauge",
+"caption": "Tools - Power Steering Pressure Gauge",
+"src": "https://charm.li/images/IMP02Q313/asian140/1088053005/"
+},
+{
+"file": "0495.png",
+"path": "Steering and Suspension/Suspension/Technical Service Bulletins/Tools - Instructions For New Ball Joint Tool",
+"caption": "Tools - Instructions For New Ball Joint Tool",
+"src": "https://charm.li/images/IMP02Q313/asian140/1089006334/"
+},
+{
+"file": "0496.png",
+"path": "Steering and Suspension/Suspension/Technical Service Bulletins/Tools - Instructions For New Ball Joint Tool",
+"caption": "Tools - Instructions For New Ball Joint Tool",
+"src": "https://charm.li/images/IMP02Q313/asian140/1089007798/"
+},
+{
+"file": "0497.png",
+"path": "Steering and Suspension/Suspension/Technical Service Bulletins/Tools - Instructions For New Ball Joint Tool",
+"caption": "Tools - Instructions For New Ball Joint Tool",
+"src": "https://charm.li/images/IMP02Q313/asian140/1089009723/"
+},
+{
+"file": "0498.png",
+"path": "Steering and Suspension/Suspension/Technical Service Bulletins/Tools - Instructions For New Ball Joint Tool",
+"caption": "Tools - Instructions For New Ball Joint Tool",
+"src": "https://charm.li/images/IMP02Q313/asian140/1089010603/"
+},
+{
+"file": "0499.png",
+"path": "Steering and Suspension/Suspension/Technical Service Bulletins/Tools - Instructions For New Ball Joint Tool",
+"caption": "Tools - Instructions For New Ball Joint Tool",
+"src": "https://charm.li/images/IMP02Q313/asian140/1089011709/"
+},
+{
+"file": "0500.png",
+"path": "Heating and Air Conditioning/Air Door/Air Door Actuator / Motor/Locations",
+"caption": "Heater System Components.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1114892804/"
+},
+{
+"file": "0501.png",
+"path": "Heating and Air Conditioning/Air Door/Air Door Cable/Adjustments/Heater Valve Cable",
+"caption": "Fig. 13 Heater VAlve Cable Adjustment At Heater Valve.  All Models:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1119673417/"
+},
+{
+"file": "0502.png",
+"path": "Heating and Air Conditioning/Blower Motor/Service and Repair",
+"caption": "Fig. 1 Blower Motor Assembly Removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1124649737/"
+},
+{
+"file": "0503.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Clutch/Testing and Inspection",
+"caption": "Fig. 7 Compressor Trouble Shooting Chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1126101249/"
+},
+{
+"file": "0504.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Clutch/Service and Repair",
+"caption": "Fig. 1  Center bolt removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1128032688/"
+},
+{
+"file": "0505.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Clutch/Service and Repair",
+"caption": "Fig. 2  Pressure plate removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1128037845/"
+},
+{
+"file": "0506.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Shaft Seal/Service and Repair/Removal",
+"caption": "Fig. 3  32 mm snap ring removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1129409326/"
+},
+{
+"file": "0507.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Shaft Seal/Service and Repair/Removal",
+"caption": "Fig. 4  Drive shaft seal seat removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1129415515/"
+},
+{
+"file": "0508.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Shaft Seal/Service and Repair/Removal",
+"caption": "Fig. 5  Drive shaft seal removal:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1129422394/"
+},
+{
+"file": "0509.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Shaft Seal/Service and Repair/Installation",
+"caption": "Fig. 6  Drive shaft seal installation:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1129429356/"
+},
+{
+"file": "0510.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Shaft Seal/Service and Repair/Installation",
+"caption": "Fig. 7  Measuring metal pawl clearance:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1129433655/"
+},
+{
+"file": "0511.png",
+"path": "Heating and Air Conditioning/Compressor HVAC/Compressor Shaft Seal/Service and Repair/Installation",
+"caption": "Fig. 8  Drive shaft seal seat installation ring.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1129435707/"
+},
+{
+"file": "0512.png",
+"path": "Heating and Air Conditioning/Condenser HVAC/Service and Repair",
+"caption": "Fig. 6 Condenser Mounting:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1134366726/"
+},
+{
+"file": "0513.png",
+"path": "Heating and Air Conditioning/Control Assembly/Testing and Inspection",
+"caption": "Fig. 15 A/C switch.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1138568840/"
+},
+{
+"file": "0514.png",
+"path": "Heating and Air Conditioning/Evaporator Core/Service and Repair",
+"caption": "Fig. 15 Evaporator Case Removal (Typical):",
+"src": "https://charm.li/images/IMP02Q313/asian140/1144220699/"
+},
+{
+"file": "0515.png",
+"path": "Heating and Air Conditioning/Evaporator Core/Service and Repair",
+"caption": "Fig. 16 Evaporator Core Removal (Typical):",
+"src": "https://charm.li/images/IMP02Q313/asian140/1144240891/"
+},
+{
+"file": "0516.png",
+"path": "Heating and Air Conditioning/Expansion Valve/Testing and Inspection",
+"caption": "Fig. 8 Expansion Valve Diagnosis Chart:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1144703767/"
+},
+{
+"file": "0517.png",
+"path": "Heating and Air Conditioning/Vacuum Controller/Testing and Inspection/Heat/Def & Vent/Def Solenoids",
+"caption": "Fig. 3 Heat/Def & Vent/Def Solenoid Test:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1147367720/"
+},
+{
+"file": "0518.png",
+"path": "Heating and Air Conditioning/Vacuum Controller/Testing and Inspection/Heat/Def & Vent/Def Solenoids",
+"caption": "Fig. 4 Using Vacuum Pump To Test Heat/Def & Vent/Def Solenoid:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1147371174/"
+},
+{
+"file": "0519.png",
+"path": "Heating and Air Conditioning/Vacuum Controller/Testing and Inspection/Outside Air Recirculation Solenoid",
+"caption": "Fig. 5 Outside Air/Recirculation Solenoid:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1147380855/"
+},
+{
+"file": "0520.png",
+"path": "Heating and Air Conditioning/Vacuum Controller/Testing and Inspection/Outside Air Recirculation Solenoid",
+"caption": "Fig. 6 Using Vacuum Pump To Test Outside Air/Recirculation Solenoid:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1147383519/"
+},
+{
+"file": "0521.png",
+"path": "Heating and Air Conditioning/Vacuum Controller/Testing and Inspection/Flow Solenoid",
+"caption": "Fig. 7 Flow solenoid test.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1147395996/"
+},
+{
+"file": "0522.png",
+"path": "Heating and Air Conditioning/Vacuum Controller/Testing and Inspection/Flow Solenoid",
+"caption": "Fig. 8 Using vacuum pump to test flow solenoid.:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1147398981/"
+},
+{
+"file": "0523.png",
+"path": "Heating and Air Conditioning/Technical Service Bulletins/Customer Interest/Door - Wind Whistle From Door Window Sill",
+"caption": "Door Trim Panel:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1165515033/"
+},
+{
+"file": "0524.png",
+"path": "Heating and Air Conditioning/Technical Service Bulletins/All Technical Service Bulletins/Tools - Denso HLD-100 Halogen Leak Detector/Overview",
+"caption": "Tools - Denso HLD-100 Halogen Leak Detector: Overview",
+"src": "https://charm.li/images/IMP02Q313/asian140/1165968809/"
+},
+{
+"file": "0525.png",
+"path": "Heating and Air Conditioning/Technical Service Bulletins/All Technical Service Bulletins/Tools - Denso HLD-100 Halogen Leak Detector/Finding Leaks In the Evaporator Area",
+"caption": "Finding Leaks In the Evaporator Area",
+"src": "https://charm.li/images/IMP02Q313/asian140/1165979135/"
+},
+{
+"file": "0526.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seats - New Guide Clip For Rear Seat Belt",
+"caption": "Seats - New Guide Clip For Rear Seat Belt",
+"src": "https://charm.li/images/IMP02Q313/asian140/1207344944/"
+},
+{
+"file": "0527.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seats - New Guide Clip For Rear Seat Belt",
+"caption": "Seats - New Guide Clip For Rear Seat Belt",
+"src": "https://charm.li/images/IMP02Q313/asian140/1207347881/"
+},
+{
+"file": "0528.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seat Belts - Testing and Repair",
+"caption": "SEAT BELT ASSEMBLY:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1201871805/"
+},
+{
+"file": "0529.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seat Belts - Testing and Repair",
+"caption": "Repositioning Tongue Plate:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1201874309/"
+},
+{
+"file": "0530.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seat Belts - Testing and Repair",
+"caption": "TWISTED SEAT BELT:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1201877750/"
+},
+{
+"file": "0531.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seat Belts - Testing and Repair",
+"caption": "WEBBING:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1201880456/"
+},
+{
+"file": "0532.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seat Belts - Testing and Repair",
+"caption": "D-RING:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1201881658/"
+},
+{
+"file": "0533.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seat Belts - Testing and Repair",
+"caption": "TRIM PANEL OPENING:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1201884984/"
+},
+{
+"file": "0534.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seat Belts - Testing and Repair",
+"caption": "TRIM PANEL:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1201886707/"
+},
+{
+"file": "0535.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Technical Service Bulletins/Seat Belts - Testing and Repair",
+"caption": "SEAT BELT ASSEMBLY:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1201889280/"
+},
+{
+"file": "0536.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Technical Service Bulletins/Customer Interest/Doors - Door Lock Silencer Replacement",
+"caption": "Doors - Door Lock Silencer Replacement",
+"src": "https://charm.li/images/IMP02Q313/asian140/1286971295/"
+},
+{
+"file": "0537.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Technical Service Bulletins/Customer Interest/Doors - Door Lock Silencer Replacement",
+"caption": "Doors - Door Lock Silencer Replacement",
+"src": "https://charm.li/images/IMP02Q313/asian140/1286976724/"
+},
+{
+"file": "0538.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Technical Service Bulletins/Customer Interest/Interior - Gap in Door Panel Covering",
+"caption": "Interior - Gap in Door Panel Covering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1287880906/"
+},
+{
+"file": "0539.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Technical Service Bulletins/Customer Interest/Interior - Gap in Door Panel Covering",
+"caption": "Interior - Gap in Door Panel Covering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1287883524/"
+},
+{
+"file": "0540.png",
+"path": "Body and Frame/Interior Moulding / Trim/Technical Service Bulletins/Customer Interest/Interior - Headliner Wrinkles or Sags",
+"caption": "Interior - Headliner Wrinkles or Sags",
+"src": "https://charm.li/images/IMP02Q313/asian140/1315800487/"
+},
+{
+"file": "0541.png",
+"path": "Body and Frame/Interior Moulding / Trim/Technical Service Bulletins/Customer Interest/Interior - Headliner Wrinkles or Sags",
+"caption": "Interior - Headliner Wrinkles or Sags",
+"src": "https://charm.li/images/IMP02Q313/asian140/1315802998/"
+},
+{
+"file": "0542.png",
+"path": "Body and Frame/Seats/Technical Service Bulletins/Customer Interest/Interior - Stains On Front Seat-Back Cover",
+"caption": "Rows Of Springs:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1341802155/"
+},
+{
+"file": "0543.png",
+"path": "Body and Frame/Technical Service Bulletins/Customer Interest/Mirrors - Wind Noise From the Right or Left Mirror",
+"caption": "FOAM GASKET:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329542035/"
+},
+{
+"file": "0544.png",
+"path": "Body and Frame/Technical Service Bulletins/Customer Interest/Mirrors - Wind Noise From the Right or Left Mirror",
+"caption": "Adhesive:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329545496/"
+},
+{
+"file": "0545.png",
+"path": "Body and Frame/Technical Service Bulletins/Customer Interest/Body - Outside Mirror Won't Hold or Adjust",
+"caption": "Body - Outside Mirror Won't Hold or Adjust",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329533009/"
+},
+{
+"file": "0546.png",
+"path": "Body and Frame/Technical Service Bulletins/Customer Interest/Body - Outside Mirror Won't Hold or Adjust",
+"caption": "Body - Outside Mirror Won't Hold or Adjust",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329535680/"
+},
+{
+"file": "0547.png",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Mirrors - Rear View Mirror Base Kit",
+"caption": "Mirrors - Rear View Mirror Base Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329573014/"
+},
+{
+"file": "0548.png",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Mirrors - Rear View Mirror Base Kit",
+"caption": "Mirrors - Rear View Mirror Base Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329574608/"
+},
+{
+"file": "0549.png",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Mirrors - Rear View Mirror Base Kit",
+"caption": "Mirrors - Rear View Mirror Base Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329576163/"
+},
+{
+"file": "0550.png",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Mirrors - Rear View Mirror Base Kit",
+"caption": "Mirrors - Rear View Mirror Base Kit",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329581451/"
+},
+{
+"file": "0551.png",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Inside Rear View Mirror - Repair Kit Availability",
+"caption": "Inside Rear View Mirror - Repair Kit Availability",
+"src": "https://charm.li/images/IMP02Q313/asian140/1329566167/"
+},
+{
+"file": "0552.png",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Body - Updated Paint Codes",
+"caption": "Body - Updated Paint Codes",
+"src": "https://charm.li/images/IMP02Q313/asian140/1333337326/"
+},
+{
+"file": "0553.png",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Paint - Industrial Fallout Paint Damage",
+"caption": "Paint - Industrial Fallout Paint Damage",
+"src": "https://charm.li/images/IMP02Q313/asian140/1332340747/"
+},
+{
+"file": "0554.png",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Paint - Industrial Fallout Paint Damage",
+"caption": "Paint - Industrial Fallout Paint Damage",
+"src": "https://charm.li/images/IMP02Q313/asian140/1332349114/"
+},
+{
+"file": "0555.jpg",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Paint - Industrial Fallout Paint Damage",
+"caption": "Paint - Industrial Fallout Paint Damage",
+"src": "https://charm.li/images/IMP02Q313/asian140/1332351314/"
+},
+{
+"file": "0556.jpg",
+"path": "Body and Frame/Technical Service Bulletins/All Technical Service Bulletins/Paint - Industrial Fallout Paint Damage",
+"caption": "Paint - Industrial Fallout Paint Damage",
+"src": "https://charm.li/images/IMP02Q313/asian140/1332440452/"
+},
+{
+"file": "0557.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Technical Service Bulletins/Customer Interest/Interior - Instrument Panel Squeak",
+"caption": "Instrument Panel:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1369841348/"
+},
+{
+"file": "0558.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Technical Service Bulletins/Customer Interest/Interior - Instrument Panel Squeak",
+"caption": "A/C CLUTCH HOLDER T/N 07923-PB80001 H/C 1459130:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1369844082/"
+},
+{
+"file": "0559.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Technical Service Bulletins/Customer Interest/Interior - Instrument Panel Squeak",
+"caption": "BEARING/TRANS CASE PULLER:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1369846189/"
+},
+{
+"file": "0560.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Technical Service Bulletins/Customer Interest/Interior - Instrument Panel Squeak",
+"caption": "BEZEL:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1369849027/"
+},
+{
+"file": "0561.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Technical Service Bulletins/Customer Interest/Interior - Instrument Panel Squeak",
+"caption": "Back Edge of Bezel:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1369852289/"
+},
+{
+"file": "0562.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Technical Service Bulletins/All Technical Service Bulletins/Cigarette Lighter - Identification",
+"caption": "Cigarette Lighter - Identification",
+"src": "https://charm.li/images/IMP02Q313/asian140/1361066436/"
+},
+{
+"file": "0563.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Technical Service Bulletins/All Technical Service Bulletins/Cigarette Lighter -  Switching Precautions",
+"caption": "Cigarette Lighter -  Switching Precautions",
+"src": "https://charm.li/images/IMP02Q313/asian140/1361060312/"
+},
+{
+"file": "0564.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Front Windows Raise/Lower Slowly",
+"caption": "Windows - Front Windows Raise/Lower Slowly",
+"src": "https://charm.li/images/IMP02Q313/asian140/1442868348/"
+},
+{
+"file": "0565.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Front Windows Raise/Lower Slowly",
+"caption": "Windows - Front Windows Raise/Lower Slowly",
+"src": "https://charm.li/images/IMP02Q313/asian140/1442869690/"
+},
+{
+"file": "0566.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Front Windows Raise/Lower Slowly",
+"caption": "Windows - Front Windows Raise/Lower Slowly",
+"src": "https://charm.li/images/IMP02Q313/asian140/1442870921/"
+},
+{
+"file": "0567.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Front Windows Raise/Lower Slowly",
+"caption": "Windows - Front Windows Raise/Lower Slowly",
+"src": "https://charm.li/images/IMP02Q313/asian140/1442873844/"
+},
+{
+"file": "0568.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Front Windows Raise/Lower Slowly",
+"caption": "Windows - Front Windows Raise/Lower Slowly",
+"src": "https://charm.li/images/IMP02Q313/asian140/1442878572/"
+},
+{
+"file": "0569.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Binding Front Window Mechanism",
+"caption": "DOOR SASH GARNISH:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1438498346/"
+},
+{
+"file": "0570.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Binding Front Window Mechanism",
+"caption": "CENTER PILLAR GROMMETS:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1438500174/"
+},
+{
+"file": "0571.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Binding Front Window Mechanism",
+"caption": "OUTSIDE DOOR SKIN:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1438501340/"
+},
+{
+"file": "0572.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Binding Front Window Mechanism",
+"caption": "Front and Rear Window Channels:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1438505449/"
+},
+{
+"file": "0573.png",
+"path": "Windows and Glass/Windows/Technical Service Bulletins/Customer Interest/Windows - Binding Front Window Mechanism",
+"caption": "Roller Guide Bolts:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1438509945/"
+},
+{
+"file": "0574.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger/Window Problem",
+"caption": "BUSS BAR:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1436202330/"
+},
+{
+"file": "0575.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger/Window Problem",
+"caption": "BUSS BAR:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1436205893/"
+},
+{
+"file": "0576.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger/Window Problem",
+"caption": "MASKING TAPE:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1436209910/"
+},
+{
+"file": "0577.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger/Window Problem",
+"caption": "EPOXY TUBE:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1436214520/"
+},
+{
+"file": "0578.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger/Window Problem",
+"caption": "BUSS BAR MASKS:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1436215735/"
+},
+{
+"file": "0579.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger/Window Problem",
+"caption": "MASK:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1436219164/"
+},
+{
+"file": "0580.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger/Window Problem",
+"caption": "NEW BUSS BAR:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1436223374/"
+},
+{
+"file": "0581.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger/Window Problem",
+"caption": "WEATHERSTRIP:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1436226813/"
+},
+{
+"file": "0582.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger",
+"caption": "Buss Bar Installation:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1435563815/"
+},
+{
+"file": "0583.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger",
+"caption": "Buss Bar Installation Procedure:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1435567550/"
+},
+{
+"file": "0584.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger",
+"caption": "Buss Bar Installation Procedure:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1435571866/"
+},
+{
+"file": "0585.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger",
+"caption": "Silicone Adhesive:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1435577442/"
+},
+{
+"file": "0586.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger",
+"caption": "Buss Bar Installation Procedure:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1435581826/"
+},
+{
+"file": "0587.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger",
+"caption": "Buss Bar Installation Procedure:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1435586800/"
+},
+{
+"file": "0588.png",
+"path": "Windows and Glass/Technical Service Bulletins/Recalls/Campaign - Rear Window Defogger",
+"caption": "Buss Bar Installation Procedure:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1435590657/"
+},
+{
+"file": "0589.png",
+"path": "Wiper and Washer Systems/Technical Service Bulletins/Customer Interest/Wipers - Check Valve In Rear Washer Hose",
+"caption": "Wipers - Check Valve In Rear Washer Hose",
+"src": "https://charm.li/images/IMP02Q313/asian140/1444598324/"
+},
+{
+"file": "0590.png",
+"path": "Technical Service Bulletins/Customer Interest/Cruise Control - Vehicle Gains Speed",
+"caption": "Solenoid Valve Set/Actuator:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1359174906/"
+},
+{
+"file": "0591.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672474667/"
+},
+{
+"file": "0592.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672487391/"
+},
+{
+"file": "0593.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672508353/"
+},
+{
+"file": "0594.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672526728/"
+},
+{
+"file": "0595.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672545231/"
+},
+{
+"file": "0596.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672566859/"
+},
+{
+"file": "0597.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672587997/"
+},
+{
+"file": "0598.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672597851/"
+},
+{
+"file": "0599.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672614289/"
+},
+{
+"file": "0600.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672633033/"
+},
+{
+"file": "0601.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672658028/"
+},
+{
+"file": "0602.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672679578/"
+},
+{
+"file": "0603.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672701419/"
+},
+{
+"file": "0604.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Tools - Required Special Tools And Equipment",
+"caption": "Tools - Required Special Tools And Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672719328/"
+},
+{
+"file": "0605.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tool Loan Program",
+"caption": "Special Tool Loan Program",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672738620/"
+},
+{
+"file": "0606.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672746276/"
+},
+{
+"file": "0607.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672753261/"
+},
+{
+"file": "0608.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672770238/"
+},
+{
+"file": "0609.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672782723/"
+},
+{
+"file": "0610.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672799615/"
+},
+{
+"file": "0611.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672812851/"
+},
+{
+"file": "0612.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672822863/"
+},
+{
+"file": "0613.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672828174/"
+},
+{
+"file": "0614.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672842390/"
+},
+{
+"file": "0615.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672856783/"
+},
+{
+"file": "0616.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672868313/"
+},
+{
+"file": "0617.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672880967/"
+},
+{
+"file": "0618.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672894235/"
+},
+{
+"file": "0619.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672908643/"
+},
+{
+"file": "0620.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672920824/"
+},
+{
+"file": "0621.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672940733/"
+},
+{
+"file": "0622.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672944270/"
+},
+{
+"file": "0623.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "Service Publications - Availability and Ordering",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672947350/"
+},
+{
+"file": "0624.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "&\ufffd\ufffdc:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672949639/"
+},
+{
+"file": "0625.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "f\ufffd\ufffdc:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672973402/"
+},
+{
+"file": "0626.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "f\ufffd\ufffdc:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1672998299/"
+},
+{
+"file": "0627.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "f\ufffd\ufffdc:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673025582/"
+},
+{
+"file": "0628.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "f\ufffd\ufffdc:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673048082/"
+},
+{
+"file": "0629.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Service Publications - Availability and Ordering",
+"caption": "f\ufffd\ufffdc:",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673068838/"
+},
+{
+"file": "0630.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673094041/"
+},
+{
+"file": "0631.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673096658/"
+},
+{
+"file": "0632.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673101492/"
+},
+{
+"file": "0633.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673107600/"
+},
+{
+"file": "0634.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673121432/"
+},
+{
+"file": "0635.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673130167/"
+},
+{
+"file": "0636.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673139073/"
+},
+{
+"file": "0637.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673152075/"
+},
+{
+"file": "0638.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673157667/"
+},
+{
+"file": "0639.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673176775/"
+},
+{
+"file": "0640.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673180406/"
+},
+{
+"file": "0641.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673191363/"
+},
+{
+"file": "0642.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673200727/"
+},
+{
+"file": "0643.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673210680/"
+},
+{
+"file": "0644.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673218561/"
+},
+{
+"file": "0645.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673241809/"
+},
+{
+"file": "0646.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673261979/"
+},
+{
+"file": "0647.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673268689/"
+},
+{
+"file": "0648.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673278778/"
+},
+{
+"file": "0649.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673282433/"
+},
+{
+"file": "0650.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673289600/"
+},
+{
+"file": "0651.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673303904/"
+},
+{
+"file": "0652.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673306697/"
+},
+{
+"file": "0653.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673313665/"
+},
+{
+"file": "0654.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Required Special Tools and Equipment",
+"caption": "Required Special Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673321926/"
+},
+{
+"file": "0655.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673384420/"
+},
+{
+"file": "0656.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673397257/"
+},
+{
+"file": "0657.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673418326/"
+},
+{
+"file": "0658.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673428631/"
+},
+{
+"file": "0659.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673435703/"
+},
+{
+"file": "0660.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673446650/"
+},
+{
+"file": "0661.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673460355/"
+},
+{
+"file": "0662.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673471917/"
+},
+{
+"file": "0663.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Special Tools",
+"caption": "Required Special Tools",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673484440/"
+},
+{
+"file": "0664.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Manuals",
+"caption": "Required Manuals",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673495321/"
+},
+{
+"file": "0665.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Manuals",
+"caption": "Required Manuals",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673508528/"
+},
+{
+"file": "0666.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Required Manuals",
+"caption": "Required Manuals",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673511182/"
+},
+{
+"file": "0667.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Essential Service Tools and Equipment",
+"caption": "Essential Service Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673524739/"
+},
+{
+"file": "0668.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Essential Service Tools and Equipment",
+"caption": "Essential Service Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673530376/"
+},
+{
+"file": "0669.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Essential Service Tools and Equipment",
+"caption": "Essential Service Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673548340/"
+},
+{
+"file": "0670.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Essential Service Tools and Equipment",
+"caption": "Essential Service Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673570330/"
+},
+{
+"file": "0671.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Essential Service Tools and Equipment",
+"caption": "Essential Service Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673579090/"
+},
+{
+"file": "0672.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Essential Service Tools and Equipment",
+"caption": "Essential Service Tools and Equipment",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673587152/"
+},
+{
+"file": "0673.png",
+"path": "Technical Service Bulletins/All Technical Service Bulletins/Special Tools -  Equipment, and Service Manual/Tools and Equipment Sources",
+"caption": "Tools and Equipment Sources",
+"src": "https://charm.li/images/IMP02Q313/asian140/1673603075/"
+},
+{
+"file": "0674.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions/Vehicle Damage Warnings",
+"caption": "Vehicle Damage Warnings",
+"src": "https://charm.li/images/SA201Q313/sa-a2/22370160/"
+},
+{
+"file": "0675.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions/Vehicle Damage Warnings",
+"caption": "Vehicle Damage Warnings",
+"src": "https://charm.li/images/SA201Q313/sa-a2/22371138/"
+},
+{
+"file": "0676.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions/Vehicle Damage Warnings",
+"caption": "Vehicle Damage Warnings",
+"src": "https://charm.li/images/SA201Q313/sa-a2/22372317/"
+},
+{
+"file": "0677.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions/Vehicle Damage Warnings",
+"caption": "Vehicle Damage Warnings",
+"src": "https://charm.li/images/SA201Q313/sa-a2/22376558/"
+},
+{
+"file": "0678.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions/Vehicle Damage Warnings",
+"caption": "Vehicle Damage Warnings",
+"src": "https://charm.li/images/SA201Q313/sa-a2/22380215/"
+},
+{
+"file": "0679.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Service Precautions/Vehicle Damage Warnings",
+"caption": "Vehicle Damage Warnings",
+"src": "https://charm.li/images/SA201Q313/sa-a2/22384122/"
+}
+]
