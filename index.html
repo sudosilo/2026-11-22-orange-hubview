@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Hub View</title>
 <style>
-html,body{margin:0;height:100%;background:#f6f1e7;font-family:Georgia,serif;color:#3a3226;overflow:hidden}
+html,body{margin:0;height:100%;background:#f3f1ec;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#3d3d3d;overflow:hidden}
 #c{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
-#bar{position:fixed;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(255,252,245,.94);border-top:1px solid #d9cfbd;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-button{font:inherit;font-size:14px;padding:8px 11px;border:1px solid #b9ab92;background:#fffaf0;border-radius:6px;color:#3a3226}
-button.on{background:#e8dcc4}
-#list{position:fixed;top:10px;right:10px;width:200px;max-height:52vh;overflow:auto;background:rgba(255,252,245,.96);border:1px solid #d9cfbd;border-radius:8px;font-size:13px;display:none}
+#bar{position:fixed;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(255,255,255,.92);border-top:1px solid #3d3d3d;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{font:inherit;font-size:13px;letter-spacing:.5px;text-transform:uppercase;padding:8px 10px;border:1px solid #3d3d3d;background:#fff;border-radius:0;color:#3d3d3d}
+button.on{background:#3d3d3d;color:#fff}
+#list{position:fixed;top:10px;right:10px;width:200px;max-height:52vh;overflow:auto;background:rgba(255,255,255,.96);border:1px solid #3d3d3d;font-size:13px;display:none}
 #list div{padding:7px 10px;border-bottom:1px solid #eee4d2}
-#list div.sel{background:#e8dcc4}
+#list div.sel{background:#3d3d3d;color:#fff}
 </style>
 </head>
 <body>
@@ -21,7 +21,8 @@ button.on{background:#e8dcc4}
 <div id="bar">
 <button id="bBack">Back</button>
 <button id="bExplode">Explode</button>
-<button id="bWire" class="on">Wireframe</button>
+<button id="bWire">X-Ray</button>
+<button id="bLbl" class="on">Labels</button>
 <button id="bParts">Parts</button>
 <button id="bInfo" class="on">Info</button>
 <button id="bBP" class="on">Blueprint</button>
@@ -34,22 +35,22 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 const PI=Math.PI;
-const PAL=[0x7a9cc6,0xc98b6b,0x8fb28a,0xd4b46a,0xa98bc4,0x6fb3b0,0xc77d8f,0x9c8f7a];
+const PAL=[0x8db3d6,0xe9a074,0x9cc7a4,0xf0cd6e,0xb8a3d1,0x7cc0bb,0xe58e95,0xd2cbbd];
 const V=(x,y,z)=>new THREE.Vector3(x,y,z);
 
 const canvas=document.getElementById('c');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 const scene=new THREE.Scene();
-scene.background=new THREE.Color(0xf6f1e7);
-const camera=new THREE.PerspectiveCamera(40,1,0.05,200);
-camera.position.set(6,3.5,7);
+scene.background=new THREE.Color(0xf3f1ec);
+const camera=new THREE.PerspectiveCamera(24,1,0.05,300);
+camera.position.set(10,5.8,11.7);
 const controls=new OrbitControls(camera,canvas);
 controls.enableDamping=true;
 controls.target.set(0,0.6,0);
-scene.add(new THREE.HemisphereLight(0xfffbf0,0xd8c9ad,1.1));
-const sun=new THREE.DirectionalLight(0xffffff,0.9);sun.position.set(5,10,7);scene.add(sun);
-const grid=new THREE.GridHelper(30,60,0xd9cdb6,0xe6dcc8);grid.position.y=-0.002;scene.add(grid);
+scene.add(new THREE.HemisphereLight(0xffffff,0xd6d0c4,1.7));
+const sun=new THREE.DirectionalLight(0xffffff,0.7);sun.position.set(5,10,7);scene.add(sun);
+const grid=new THREE.GridHelper(30,60,0xe0dbd0,0xe9e5dc);grid.position.y=-0.002;scene.add(grid);
 
 /* geometry helpers. car axes: x forward, y up, z toward the left side */
 function box(w,h,d){return new THREE.BoxGeometry(w,h,d)}
@@ -428,9 +429,9 @@ ASM.forEach((a,ai)=>{
     p.local=p.pos.clone().sub(c);
     if(!p.off){const d=p.local.clone(),l=d.length();p.off=l<0.02?V(0,0,0):d.normalize().multiplyScalar(0.2+l*1.3)}
     const col=PAL[(ai*3+i)%8];
-    p.mat=new THREE.MeshStandardMaterial({color:col,transparent:true,opacity:0.3,roughness:0.9,side:THREE.DoubleSide,depthWrite:false});
+    p.mat=new THREE.MeshStandardMaterial({color:col,transparent:true,opacity:1,roughness:1,metalness:0,flatShading:true,side:THREE.DoubleSide});
     p.mesh=new THREE.Mesh(p.geo,p.mat);p.mesh.userData.part=p;
-    p.edges=new THREE.LineSegments(new THREE.EdgesGeometry(p.geo,20),new THREE.LineBasicMaterial({color:new THREE.Color(col).multiplyScalar(0.55),transparent:true}));
+    p.edges=new THREE.LineSegments(new THREE.EdgesGeometry(p.geo,20),new THREE.LineBasicMaterial({color:0x3d3d3d,transparent:true}));
     p.wf=new THREE.LineSegments(new THREE.WireframeGeometry(p.geo),new THREE.LineBasicMaterial({color:new THREE.Color(col).multiplyScalar(0.75),transparent:true,opacity:0.2}));
     p.node=new THREE.Group();p.node.add(p.mesh,p.edges,p.wf);p.node.position.copy(p.local);a.group.add(p.node);
     p.geo.computeBoundingSphere();
@@ -440,28 +441,41 @@ ASM.forEach((a,ai)=>{
 });
 
 /* STATE AND UI */
-let carAmt=0,carTarget=0,focus=null,selected=null,wire=true,fly=0;
+let carAmt=0,carTarget=0,focus=null,selected=null,wire=false,fly=0,labelsOn=true;
 /* INFO CARD: lives in the scene above the selected item, so it shrinks when you zoom out */
-let typeKey='',typeText='',typeN=0,head=['',''],infoOn=true,typedAt=0;
+let typeKey='',typeText='',typeN=0,head=['',''],infoOn=true,typedAt=0,cardColor='#8db3d6';
 const card=document.createElement('canvas');card.width=512;card.height=400;const cg=card.getContext('2d');
 const cardMat=new THREE.SpriteMaterial({depthTest:false,transparent:true});
 const sprite=new THREE.Sprite(cardMat);sprite.center.set(0.5,0);sprite.renderOrder=10;sprite.visible=false;scene.add(sprite);
-const leader=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(0,0,0),V(0,1,0)]),new THREE.LineBasicMaterial({color:0x8a6d3b,depthTest:false}));leader.renderOrder=10;leader.visible=false;scene.add(leader);
+const leader=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(0,0,0),V(0,1,0)]),new THREE.LineBasicMaterial({color:0x3d3d3d,depthTest:false}));leader.renderOrder=10;leader.visible=false;scene.add(leader);
 function wrap(t,n=34){const out=[];t.split('\n').forEach(ln=>{if(ln.length<=n){out.push(ln);return}let cur='';ln.split(' ').forEach(w=>{if((cur+' '+w).trim().length>n){out.push(cur);cur=w}else cur=(cur+' '+w).trim()});out.push(cur)});return out}
 function sizeCard(){const n=wrap(typeText).length;const h=120+n*28;card.height=h;if(cardMat.map)cardMat.map.dispose();cardMat.map=new THREE.CanvasTexture(card);cardMat.map.colorSpace=THREE.SRGBColorSpace;cardMat.needsUpdate=true}
 function drawCard(){
   const w=card.width,h=card.height;cg.clearRect(0,0,w,h);
-  cg.fillStyle='#e3d7c0';cg.fillRect(8,8,w-8,h-8);
-  cg.fillStyle='#fffbf2';cg.fillRect(0,0,w-8,h-8);
-  cg.setLineDash([8,6]);cg.strokeStyle='#a89574';cg.lineWidth=3;cg.strokeRect(2,2,w-12,h-12);cg.setLineDash([]);
-  cg.fillStyle='#7a6c55';cg.font='20px Courier New, monospace';cg.fillText(head[0],20,36);
-  cg.fillStyle='#3a3226';cg.font='bold 28px Courier New, monospace';cg.fillText(head[1].toUpperCase().slice(0,28),20,72);
-  cg.fillStyle='#4a3e2c';cg.font='22px Courier New, monospace';
+  cg.fillStyle='#ffffff';cg.fillRect(0,0,w,h);
+  cg.strokeStyle='#3d3d3d';cg.lineWidth=3;cg.strokeRect(1.5,1.5,w-3,h-3);
+  cg.fillStyle=cardColor;cg.fillRect(1.5,1.5,12,h-3);
+  cg.fillStyle='#8a8a8a';cg.font='20px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[0],30,36);
+  cg.fillStyle='#3d3d3d';cg.font='bold 28px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[1].toUpperCase().slice(0,26),30,72);
+  cg.fillStyle='#3d3d3d';cg.font='22px Courier New, monospace';
   const lines=wrap(typeText.slice(0,typeN));let y=110;
-  lines.forEach(l=>{cg.fillText(l,20,y);y+=28});
-  if(typeN<typeText.length||performance.now()-typedAt<1500){if(Math.floor(performance.now()/250)%2===0){const last=lines[lines.length-1]||'';cg.fillStyle='#8a6d3b';cg.fillRect(20+cg.measureText(last).width+2,y-28-20,13,24)}}
+  lines.forEach(l=>{cg.fillText(l,30,y);y+=28});
+  if(typeN<typeText.length||performance.now()-typedAt<1500){if(Math.floor(performance.now()/250)%2===0){const last=lines[lines.length-1]||'';cg.fillStyle='#e9a074';cg.fillRect(30+cg.measureText(last).width+2,y-28-20,13,24)}}
   cardMat.map.needsUpdate=true;
 }
+/* CALLOUT LABELS on every part of an exploded assembly */
+const LBL=new Map();
+function label(p){
+  if(LBL.has(p))return LBL.get(p);
+  const c=document.createElement('canvas'),g=c.getContext('2d'),f='500 30px Helvetica Neue, Helvetica, Arial, sans-serif';
+  g.font=f;const w=Math.ceil(g.measureText(p.name).width)+28;c.width=w;c.height=46;
+  g.fillStyle='rgba(255,255,255,0.92)';g.fillRect(0,0,w,46);g.fillStyle='#'+p.mat.color.getHexString();g.fillRect(0,0,8,46);
+  g.font=f;g.fillStyle='#3d3d3d';g.fillText(p.name,16,32);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:false,transparent:true}));
+  sp.center.set(0,0.5);sp.renderOrder=9;sp.userData.aspect=w/46;sp.visible=false;scene.add(sp);LBL.set(p,sp);return sp;
+}
+const callLines=new THREE.LineSegments(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:0x3d3d3d,depthTest:false,transparent:true,opacity:0.8}));callLines.renderOrder=9;scene.add(callLines);
 function typeOut(key,text){if(key===typeKey)return;typeKey=key;typeText=text;typeN=0;sizeCard()}
 const row=(l,v)=>(l+' ').padEnd(14,'.')+' '+v;
 const mm=v=>Math.round(v*1000);
@@ -471,21 +485,21 @@ function locTxt(b){const c=new THREE.Vector3();b.getCenter(c);return [row('FROM 
 const list=document.getElementById('list'),slide=document.getElementById('slide');
 
 function refresh(){
-  const base=wire?0.3:0.85;
+  const base=wire?0.3:1;
   ASM.forEach(a=>a.parts.forEach(p=>{
     const off=focus&&a!==focus, dim=selected&&p!==selected;
-    p.mat.opacity=off?0.03:dim?0.07:base;
+    p.mat.opacity=off?0.04:dim?0.1:base;
     p.mat.depthWrite=!wire&&!off&&!dim;
-    p.edges.material.opacity=off?0.08:dim?0.2:1;
+    p.edges.material.opacity=off?0.06:dim?0.15:wire?0.9:0.75;
     p.wf.visible=wire&&!off&&!dim;
   }));
   if(selected){
     const b=homeBox(selected),i=focus.parts.indexOf(selected)+1;
-    head=['1982 ACCORD / '+focus.name.toUpperCase(),selected.name];
+    head=['1982 ACCORD / '+focus.name.toUpperCase(),selected.name];cardColor='#'+selected.mat.color.getHexString();
     typeOut('p'+focus.name+i,[row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
   }else if(focus){
     const b=new THREE.Box3();focus.parts.forEach(p=>b.union(homeBox(p)));
-    head=['1982 ACCORD',focus.name];
+    head=['1982 ACCORD',focus.name];cardColor='#'+focus.parts[0].mat.color.getHexString();
     typeOut('a'+focus.name,[row('PARTS',focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',focus.desc.toUpperCase(),'','> TAP TO EXPLODE, TAP A PART TO INSPECT'].join('\n'));
   }else{typeKey=''}
   list.innerHTML='';
@@ -506,6 +520,7 @@ function back(){
 function setWire(on){wire=on;document.getElementById('bWire').classList.toggle('on',on);refresh()}
 
 document.getElementById('bBack').onclick=back;
+document.getElementById('bLbl').onclick=e=>{labelsOn=!labelsOn;e.target.classList.toggle('on',labelsOn)};
 document.getElementById('bInfo').onclick=e=>{infoOn=!infoOn;e.target.classList.toggle('on',infoOn)};
 document.getElementById('bBP').onclick=e=>{showBP=!showBP;BP.forEach(m=>m.visible=showBP);e.target.classList.toggle('on',showBP)};
 document.getElementById('bExplode').onclick=()=>{fly=90;if(focus)focus.target=focus.target>0.5?0:1;else{carTarget=carTarget>0.5?0:1;fly=90}};
@@ -554,12 +569,19 @@ const goal=V(0,0,0);
   if(fly>0){
     fly--;
     let dist;
-    if(focus){goal.copy(focus.group.position);dist=Math.max(1.0,focus.radius*(0.9+focus.target*1.4))}
-    else{goal.set(0,0.6+carTarget*0.6,0);dist=7+carTarget*5}
+    if(focus){goal.copy(focus.group.position);dist=Math.max(1.6,focus.radius*(1.5+focus.target*2.2))}
+    else{goal.set(0,0.6+carTarget*0.6,0);dist=11+carTarget*8}
     controls.target.lerp(goal,0.08);
     const d=camera.position.clone().sub(controls.target),l=d.length();
     camera.position.copy(controls.target).add(d.multiplyScalar((l+(dist-l)*0.08)/l));
   }
+  LBL.forEach(sp=>sp.visible=false);
+  const pts=[];
+  if(labelsOn&&focus&&!selected&&focus.amt>0.6){
+    const h=Math.min(0.08,Math.max(0.035,focus.radius*0.03)),wp=new THREE.Vector3(),cr=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0);
+    focus.parts.forEach(p=>{const sp=label(p);p.node.getWorldPosition(wp);const lp=wp.clone().add(V(0,h*2.2,0)).addScaledVector(cr,h*1.2);sp.position.copy(lp);sp.scale.set(h*sp.userData.aspect,h,1);sp.visible=true;pts.push(wp.clone(),lp)});
+  }
+  callLines.geometry.setFromPoints(pts);callLines.visible=pts.length>0;
   const tgt=infoOn&&(selected?selected.node:focus?focus.group:null);
   sprite.visible=leader.visible=!!tgt;
   if(tgt){
