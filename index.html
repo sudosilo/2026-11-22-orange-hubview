@@ -15,10 +15,45 @@ button.on{background:#3d3d3d;color:#fff}
 #list div.sel{background:#3d3d3d;color:#fff}
 .sl{flex:1;min-width:140px;display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.5px}
 .sl input{flex:1}
+
+#hb{position:fixed;top:10px;left:10px;z-index:30;width:44px;height:44px;padding:0;font-size:22px;line-height:1;background:#fff;border:1px solid #3d3d3d;border-left:6px solid #1e6fd9}
+#hb.on{background:#1e6fd9;color:#fff}
+#menu{position:fixed;top:0;left:0;bottom:0;width:min(330px,84vw);z-index:25;background:rgba(255,255,255,.97);border-right:2px solid #3d3d3d;overflow-y:auto;transform:translateX(-105%);transition:transform .18s;padding:64px 14px 24px;box-sizing:border-box;font-size:13px}
+#menu.open{transform:none}
+#menu h4{margin:16px 0 8px;font-size:11px;letter-spacing:1px;color:#1e6fd9;border-bottom:2px solid #1e6fd9;padding-bottom:4px}
+#menu button{width:100%;margin:0 0 6px;text-align:left}
+#menu button:disabled{opacity:.35}
+#menu .note{min-height:34px;font-size:12px;color:#6a6a6a;margin:2px 0 8px;line-height:1.4}
+#menu .blue{border-left:6px solid #1e6fd9}
+#bl div{display:flex;gap:6px;align-items:flex-start;padding:6px 0;border-bottom:1px solid #eee4d2;font-size:12px}
+#bl div span{flex:1}
+#bl div b{font-weight:normal;color:#6a6a6a;white-space:nowrap}
+#bl div button{width:auto;margin:0;padding:2px 8px}
+#bl .ok{color:#1e6fd9}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
+<button id="hb" aria-label="Menu">&#8801;</button>
+<div id="menu">
+<h4>SAVE</h4>
+<button id="mSave" class="blue">Save card as image</button>
+<div class="note" id="mSaveNote">Saves the current view with the info card and the site address on it.</div>
+<div id="mTipWrap" style="display:none"><button id="mTip" class="blue">Tip the shop</button><div class="note" id="mTipNote"></div></div>
+<h4>FIND THIS PART</h4>
+<div class="note" id="mFindNote">Tap a part or an assembly first.</div>
+<button id="mStore" class="blue" disabled>Buy from our store</button>
+<button id="mEbay" disabled>Search eBay Motors</button>
+<button id="mAmazon" disabled>Search Amazon</button>
+<h4>BUILD SHEET</h4>
+<button id="mAdd" class="blue" disabled>Add selected part to build</button>
+<button id="mImport">Load build CSV</button>
+<button id="mExport">Download build CSV</button>
+<button id="mClear">Clear build</button>
+<input id="mFile" type="file" accept=".csv,text/csv" style="display:none">
+<div class="note" id="mBuildNote">Parts in the build are outlined in blue.</div>
+<div id="bl"></div>
+</div>
 <div id="list"></div>
 <div id="bar">
 <button id="bCar">Accord</button>
@@ -806,7 +841,7 @@ function buildPrius(){
 
 /* BUILD */
 let total=0;
-const CARS={accord:{id:'accord',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'}};
+const CARS={accord:{id:'accord',make:'Honda',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'}};
 let CAR=null;
 function buildAll(){ASM.forEach((a,ai)=>{
   const c=V(0,0,0);a.parts.forEach(p=>c.add(p.pos));c.divideScalar(a.parts.length);a.center=c;
@@ -901,6 +936,7 @@ function refresh(){
     head=[CAR.name,focus.name];cardColor='#'+focus.parts[0].mat.color.getHexString();
     typeOut('a'+focus.name,[row('PARTS',focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',focus.desc.toUpperCase(),'','> TAP TO EXPLODE, TAP A PART TO INSPECT'].join('\n'));
   }else{typeKey=''}
+  paintBuild();updateShop();
   list.innerHTML='';
   (focus?focus.parts:ASM).forEach(it=>{
     const d=document.createElement('div');d.textContent=it.name;
@@ -917,6 +953,137 @@ function back(){
   refresh();
 }
 function setWire(on){wire=on;document.getElementById('bWire').classList.toggle('on',on);refresh()}
+
+/* SHOP CONFIG: fill these in to switch on the store, affiliate links and tip button */
+const SHOP={
+  storeDomain:'',      /* Shopify store domain, the myshopify.com one */
+  storefrontToken:'',  /* public Storefront API access token */
+  apiVersion:'2025-10',
+  ebayCampaign:'',     /* eBay Partner Network campaign id */
+  amazonTag:'',        /* Amazon Associates tag */
+  tipUrl:''            /* Stripe payment link or any tip page */
+};
+const BLUE=0x1e6fd9;
+const $=id=>document.getElementById(id);
+const menu=$('menu'),hb=$('hb');
+hb.onclick=()=>{const o=!menu.classList.contains('open');menu.classList.toggle('open',o);hb.classList.toggle('on',o)};
+const store={get(k,d){try{const v=localStorage.getItem('hubview-'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('hubview-'+k,JSON.stringify(v))}catch(e){}}};
+
+/* what is selected right now, as words */
+function current(){
+  if(!CAR)return null;
+  if(selected)return {asm:focus.name,part:selected.name,p:selected};
+  if(focus)return {asm:focus.name,part:'',p:null};
+  return null;
+}
+function carWords(){const m=CAR.name.match(/^(\d{4}) (.*)$/);return m?m[1]+' '+CAR.make+' '+m[2].toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()):CAR.make+' '+CAR.name}
+function query(){const c=current();if(!c)return '';return carWords()+' '+(c.part||c.asm)}
+const slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function partKey(car,asmName,partName){return slug(car)+'/'+slug(asmName)+'/'+slug(partName||'')}
+
+/* FIND THIS PART */
+function updateShop(){
+  const c=current(),has=!!c;
+  $('mFindNote').textContent=has?query().toUpperCase():'Tap a part or an assembly first.';
+  $('mEbay').disabled=$('mAmazon').disabled=!has;
+  $('mStore').disabled=!has||!SHOP.storeDomain||!SHOP.storefrontToken;
+  $('mStore').textContent=SHOP.storeDomain?'Buy from our store':'Store not connected yet';
+  $('mAdd').disabled=!(c&&c.p);
+}
+function go(url){window.open(url,'_blank','noopener')}
+$('mEbay').onclick=()=>{let u='https://www.ebay.com/sch/i.html?_sacat=6000&_nkw='+encodeURIComponent(query());if(SHOP.ebayCampaign)u+='&mkcid=1&mkrid=711-53200-19255-0&siteid=0&toolid=10001&mkevt=1&campid='+encodeURIComponent(SHOP.ebayCampaign);go(u)};
+$('mAmazon').onclick=()=>{let u='https://www.amazon.com/s?k='+encodeURIComponent(query());if(SHOP.amazonTag)u+='&tag='+encodeURIComponent(SHOP.amazonTag);go(u)};
+/* Store: products are tagged hubview:car/assembly/part in Shopify, the button finds the match, makes a cart and opens checkout */
+async function sf(q,v){const r=await fetch('https://'+SHOP.storeDomain+'/api/'+SHOP.apiVersion+'/graphql.json',{method:'POST',headers:{'Content-Type':'application/json','X-Shopify-Storefront-Access-Token':SHOP.storefrontToken},body:JSON.stringify({query:q,variables:v})});return (await r.json()).data}
+$('mStore').onclick=async()=>{
+  const c=current();if(!c)return;const note=$('mFindNote');note.textContent='CHECKING THE STORE...';
+  try{
+    const key=partKey(CAR.id,c.asm,c.part);
+    const d=await sf('query($q:String!){products(first:1,query:$q){nodes{title variants(first:1){nodes{id availableForSale}}}}}',{q:'tag:"hubview:'+key+'"'});
+    const v=d&&d.products.nodes[0]&&d.products.nodes[0].variants.nodes[0];
+    if(!v||!v.availableForSale){note.textContent='NOT IN THE STORE YET. TRY THE SEARCH BUTTONS.';return}
+    const k=await sf('mutation($l:[CartLineInput!]){cartCreate(input:{lines:$l}){cart{checkoutUrl}}}',{l:[{merchandiseId:v.id,quantity:1}]});
+    location.href=k.cartCreate.cart.checkoutUrl;
+  }catch(e){note.textContent='STORE DID NOT ANSWER. TRY THE SEARCH BUTTONS.'}
+};
+
+/* SAVE CARD: the 3D view with the info card, plus a blue address strip */
+$('mSave').onclick=()=>{
+  renderer.render(scene,camera);
+  const w=canvas.width,h=canvas.height,fs=Math.round(Math.min(w/24,h/34)),strip=Math.round(fs*3.4),pad=Math.round(fs*0.9);
+  const o=document.createElement('canvas');o.width=w;o.height=h+strip;const g=o.getContext('2d');
+  g.drawImage(canvas,0,0);
+  g.fillStyle='#1e6fd9';g.fillRect(0,h,w,strip);
+  const c=current(),what=(c?(c.part||c.asm):'')+'';
+  g.fillStyle='#fff';g.textBaseline='middle';g.textAlign='left';
+  g.font='bold '+fs+'px Helvetica Neue, Helvetica, Arial, sans-serif';
+  g.fillText((CAR.name+(what?' / '+what:'')).toUpperCase(),pad,h+strip*0.33,w-pad*2);
+  g.font=Math.round(fs*0.8)+'px Helvetica Neue, Helvetica, Arial, sans-serif';
+  g.fillText((location.host||'hub view').toUpperCase(),pad,h+strip*0.7,w-pad*2);
+  const a=document.createElement('a');a.download='hubview-'+CAR.id+(what?'-'+slug(what):'')+'.png';a.href=o.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();
+  const n=store.get('saves',0)+1;store.set('saves',n);tipNote();
+};
+function tipNote(){
+  if(!SHOP.tipUrl)return;$('mTipWrap').style.display='block';
+  const n=store.get('saves',0);
+  $('mTipNote').textContent=n>=10?'You have grabbed a garage worth of cards. Toss a few bucks in the jar.':'Free to use. Tips keep the lights on.';
+}
+$('mTip').onclick=()=>{if(SHOP.tipUrl)go(SHOP.tipUrl)};
+tipNote();
+
+/* BUILD SHEET: rows of car, assembly, part, brand, part_number, price, link */
+const COLS=['car','assembly','part','brand','part_number','price','link'];
+let BUILD=store.get('build',[]);
+function saveBuild(){store.set('build',BUILD)}
+function carIdOf(t){t=(t||'').toLowerCase();for(const k in CARS){if(t.includes(k)||t===CARS[k].name.toLowerCase())return k}return CAR?CAR.id:''}
+function findPart(r){
+  if(!CAR||carIdOf(r.car)!==CAR.id)return null;
+  const pn=slug(r.part||''),an=slug(r.assembly||'');
+  for(const a of ASM){if(an&&slug(a.name)!==an)continue;for(const p of a.parts){if(slug(p.name)===pn)return p}}
+  return null;
+}
+function paintBuild(){
+  if(!CAR)return;
+  const hit=new Set();BUILD.forEach(r=>{const p=findPart(r);if(p)hit.add(p)});
+  ASM.forEach(a=>a.parts.forEach(p=>{const on=hit.has(p);p.edges.material.color.setHex(on?BLUE:0x3d3d3d);if(on)p.edges.material.opacity=Math.max(p.edges.material.opacity,0.95)}));
+  const bl=$('bl');bl.innerHTML='';let total=0;
+  BUILD.forEach((r,i)=>{
+    const d=document.createElement('div'),t=document.createElement('span'),st=document.createElement('b'),x=document.createElement('button');
+    const other=carIdOf(r.car)!==CAR.id,p=other?null:findPart(r);
+    t.textContent=[r.part||'?',r.brand,r.part_number].filter(Boolean).join(' / ')+(r.price?'  $'+r.price:'');
+    st.textContent=other?'OTHER CAR':p?'FOUND':'NO MATCH';if(p)st.className='ok';
+    x.textContent='X';x.onclick=()=>{BUILD.splice(i,1);saveBuild();refresh()};
+    if(p)t.onclick=()=>{menu.classList.remove('open');hb.classList.remove('on');if(focus!==p.asm){carTarget=1;open(p.asm)}p.asm.target=1;selected=p;refresh()};
+    d.append(t,st,x);bl.appendChild(d);
+    const pr=parseFloat(String(r.price||'').replace(/[^0-9.]/g,''));if(!isNaN(pr))total+=pr;
+  });
+  $('mBuildNote').textContent=BUILD.length?('BUILD TOTAL $'+total.toFixed(2)+'. Parts in the build are outlined in blue.'):'Parts in the build are outlined in blue.';
+}
+$('mAdd').onclick=()=>{const c=current();if(!c||!c.p)return;
+  if(BUILD.some(r=>findPart(r)===c.p))return;
+  BUILD.push({car:CAR.id,assembly:c.asm,part:c.part,brand:'',part_number:'',price:'',link:''});saveBuild();refresh()};
+$('mClear').onclick=()=>{BUILD=[];saveBuild();refresh()};
+function parseCSV(text){
+  const rows=[];let row=[],f='',q=false;
+  for(let i=0;i<text.length;i++){const ch=text[i];
+    if(q){if(ch==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=ch}
+    else if(ch==='"')q=true;else if(ch===','){row.push(f);f=''}else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}else f+=ch}
+  if(f!==''||row.length){row.push(f);rows.push(row)}
+  return rows.filter(r=>r.some(c=>c.trim()!==''));
+}
+$('mImport').onclick=()=>$('mFile').click();
+$('mFile').onchange=e=>{const file=e.target.files[0];if(!file)return;const rd=new FileReader();rd.onload=()=>{
+  const rows=parseCSV(String(rd.result));if(!rows.length)return;
+  const hd=rows[0].map(h=>slug(h).replace(/-/g,'_'));const named=hd.includes('part');
+  const body=named?rows.slice(1):rows;
+  body.forEach(r=>{const o={};COLS.forEach((c,i)=>{const j=named?hd.indexOf(c):i;o[c]=j>=0&&r[j]!==undefined?r[j].trim():''});if(!o.car)o.car=CAR.id;if(o.part)BUILD.push(o)});
+  saveBuild();refresh();e.target.value='';
+};rd.readAsText(file)};
+$('mExport').onclick=()=>{
+  const esc=v=>{v=String(v==null?'':v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+  const csv=[COLS.join(',')].concat(BUILD.map(r=>COLS.map(c=>esc(r[c])).join(','))).join('\n');
+  const a=document.createElement('a');a.download='hubview-build.csv';a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));document.body.appendChild(a);a.click();a.remove();
+};
 
 document.getElementById('bBack').onclick=back;
 document.getElementById('bLbl').onclick=e=>{labelsOn=!labelsOn;e.target.classList.toggle('on',labelsOn)};
