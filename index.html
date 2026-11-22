@@ -71,12 +71,12 @@ const WY=0.297;
 function arc(r,h,start,len){const g=new THREE.CylinderGeometry(r,r,h,20,1,true,start,len);g.rotateX(PI/2);return g}
 
 const ASM=[];
-function asm(name,desc,dir,fn,dx=0){
+function asm(name,desc,dir,fn,dx=0,dy=0){
   const a={name,desc,dir:V(...dir),parts:[],amt:0,target:0};
   const P=(n,d,geo,pos,off)=>{
     if(!geo)return;
     if(geo.geo){off=pos;pos=geo.pos;geo=geo.geo}
-    const v=pos.isVector3?pos.clone():V(...pos);v.x+=dx;a.parts.push({name:n,desc:d,geo,pos:v,off:off?V(...off):null,asm:a});
+    const v=pos.isVector3?pos.clone():V(...pos);v.x+=dx;v.y+=dy;a.parts.push({name:n,desc:d,geo,pos:v,off:off?V(...off):null,asm:a});
   };
   fn(P);ASM.push(a);
 }
@@ -188,7 +188,7 @@ asm('Engine','EK1 1751cc CVCC inline four, SOHC 12 valve, carbureted.',[1.8,0.8,
   P('Head Gasket','Seals the head to the block.',box(0.3,0.008,0.45),[EX,0.663,EZ],[0,0.25,0]);
   P('Cylinder Head','Aluminum head with CVCC prechambers.',box(0.28,0.12,0.45),[EX,0.73,EZ],[0,0.4,0]);
   P('Camshaft','Single overhead cam, belt driven.',cyl(0.015,0.015,0.46,'z'),[EX,0.77,EZ],[0,0.58,0]);
-  P('Valve Cover','Stamped cover over the cam and rockers.',box(0.22,0.07,0.44),[EX,0.83,EZ],[0,0.75,0]);
+  P('Valve Cover','Stamped cover over the cam and rockers.',box(0.22,0.05,0.44),[EX,0.815,EZ],[0,0.75,0]);
   P('Oil Pan','Steel sump.',box(0.28,0.1,0.42),[EX,0.29,EZ],[0,-0.4,0]);
   P('Crankshaft','Forged crank, five main bearings.',cyl(0.03,0.03,0.5,'z'),[EX,0.38,EZ],[0,-0.22,0]);
   CZ.forEach((z,i)=>{
@@ -203,7 +203,7 @@ asm('Engine','EK1 1751cc CVCC inline four, SOHC 12 valve, carbureted.',[1.8,0.8,
   P('Alternator','Charges the battery.',cyl(0.06,0.06,0.12,'z'),[EX+0.12,0.45,EZ-0.18],[0.4,-0.1,-0.3]);
   P('Intake Manifold','Feeds the main and prechamber ports.',box(0.12,0.1,0.38),[EX-0.2,0.68,EZ],[-0.4,0.1,0]);
   P('Carburetor','Keihin three barrel CVCC carburetor.',box(0.1,0.1,0.12),[EX-0.27,0.78,EZ],[-0.5,0.35,0]);
-  P('Air Cleaner','Round housing with paper element.',cyl(0.2,0.2,0.08),[EX-0.2,0.92,EZ],[0,0.9,0]);
+  P('Air Cleaner','Round housing with paper element.',cyl(0.18,0.18,0.06),[EX-0.2,0.83,EZ],[0,0.9,0]);
   P('Exhaust Manifold','Cast iron manifold with heat shield.',box(0.08,0.12,0.36),[EX+0.18,0.62,EZ],[0.4,0,0]);
   P('Distributor','Cam driven distributor.',cyl(0.035,0.04,0.12,'z'),[EX,0.77,EZ+0.28],[0,0.25,0.4]);
   P('Starter Motor','Engages the flywheel ring gear.',cyl(0.045,0.045,0.18,'z'),[EX-0.18,0.4,EZ+0.34],[-0.35,-0.1,0.35]);
@@ -441,32 +441,38 @@ function buildPrius(){
   const belt=x=>x>1.15?ytop(x):Math.min(tab(BELT,x),ytop(x));
   const gh=x=>Math.max(0,Math.min(1,(ytop(x)-belt(x))/0.12));
   const lerp=(a,b,t)=>a+(b-a)*t;
+  /* section split into zones so panel seams follow grid lines:
+     bot = underside, side = body side, up = shoulder to roof edge (side glass), top = roof or hood surface */
+  const NB=10,NS=22,NUP=14,NT=14,RK=3;
   function section(x){
     const t=ytop(x),b=ybot(x),w=hw(x),bl=belt(x),g=gh(x),r=rw(x);
     const sh=lerp(t-0.05,bl,g);
-    const lo=[[0,b],[w*0.55,b],[w*0.9,b+0.015],[w,b+0.1],[w,(b+0.1+sh)/2]];
-    const no=[[w*0.985,t-0.05],[w*0.95,t-0.03],[w*0.85,t-0.015],[w*0.55,t-0.004],[0,t]];
-    const ye=[[w*0.985,bl],[w*0.93,bl+0.03],[r+0.04,t-0.06],[r*0.6,t-0.006],[0,t]];
-    const up=no.map((p,i)=>[lerp(p[0],ye[i][0],g),lerp(p[1],ye[i][1],g)]);
-    const c=new THREE.CatmullRomCurve3([...lo,...up].map(p=>V(p[0],p[1],0)),false,'centripetal');
-    return c.getSpacedPoints(30).map(p=>[p.x,p.y]);
+    const S=[w*0.985,sh];
+    const E=[lerp(w*0.95,r+0.04,g),lerp(t-0.03,t-0.06,g)];
+    const seg=(pts,n,skip)=>{const c=new THREE.CatmullRomCurve3(pts.map(p=>V(p[0],p[1],0)),false,'centripetal');const o=c.getSpacedPoints(n).map(p=>[p.x,p.y]);return skip?o.slice(1):o};
+    const bot=seg([[0,b],[w*0.55,b],[w*0.9,b+0.015]],NB,false);
+    const side=seg([[w*0.9,b+0.015],[w,b+0.1],[w,(b+0.1+sh)/2],S],NS,true);
+    const up=seg([S,[lerp(w*0.97,w*0.93,g),lerp(t-0.04,bl+0.03,g)],E],NUP,true);
+    const top=seg([E,[lerp(w*0.85,r*0.85,g),lerp(t-0.015,t-0.03,g)],[lerp(w*0.55,r*0.6,g),lerp(t-0.004,t-0.006,g)],[0,t]],NT,true);
+    return [...bot,...side,...up,...top];
   }
-  const NX=120,X0=2.228,X1=-2.228,ST=[];
-  for(let i=0;i<=NX;i++){const x=X0+(X1-X0)*i/NX;ST.push({x,pts:section(x)})}
-  const NU=ST[0].pts.length;
+  const J1=NB,J2=NB+NS,J3=NB+NS+NUP;
+  const zone=j=>j<J1?'bot':j<J2?'side':j<J3?'up':'top';
   const FD0=0.893,BP=-0.311,RD1=-0.987;
-  function cls(x,y,az,ny,nz){
-    for(const A of [FA,RA]){const dx=x-A,dy=y-PWY;if(az>0.45&&dx*dx+dy*dy<0.37*0.37)return null}
-    if(ny<-0.7)return 'Underbody';
-    const bl=belt(x),g=gh(x);
-    if(ny>0.6&&x>1.15&&x<2.05&&az<hw(x)*0.78)return 'Hood';
-    if(x>1.97||(x>1.72&&y<0.45))return 'Front Bumper Cover';
-    if(x<-2.1&&y<0.62)return 'Rear Bumper Cover';
-    if(x<-1.85&&y<0.5&&az>0.5)return 'Rear Bumper Cover';
+  const XS=new Set();for(let i=0;i<=240;i++)XS.add(+(2.228-4.456*i/240).toFixed(4));
+  [2.05,1.97,1.85,1.15,FD0,0.1,BP+0.02,BP-0.02,RD1+0.03,RD1-0.03,-0.95,-1.75,-1.85,-2.1,-2.12].forEach(x=>XS.add(x));
+  const XL=[...XS].sort((a,b)=>b-a),ST=XL.map(x=>({x,pts:section(x)})),NX=ST.length-1,NU=ST[0].pts.length;
+  function cls(x,y,j){
+    const z=zone(j),g=gh(x);
+    if(z==='bot')return x>1.97?'Front Bumper Cover':x<-2.1?'Rear Bumper Cover':'Underbody';
     if(x<-2.12&&y>=0.62)return (y>0.8&&y<1.06)?'Hatch Lower Glass':'Hatch Panel';
-    if(y>bl+0.01&&g>0.3){
-      if(ny>0.55)return x>0.1?'Windshield':x>-0.95?'Roof Panel':'Hatch Glass';
-      if(y>ytop(x)-0.07)return 'Roof Rail';
+    if(x<-2.1&&y<0.62)return 'Rear Bumper Cover';
+    if(z==='top'){
+      if(x>1.15)return x<2.05?'Hood':'Front Bumper Cover';
+      return x>0.1?'Windshield':x>-0.95?'Roof Panel':'Hatch Glass';
+    }
+    if(z==='up'){
+      if(x>=1.15||g<0.3)return x>1.97?'Front Bumper Cover':'Front Fender';
       if(x>FD0)return 'Front Quarter Glass';
       if(x>BP+0.02)return 'Front Door Glass';
       if(x>BP-0.02)return 'B Pillar';
@@ -475,27 +481,29 @@ function buildPrius(){
       if(x>-1.75)return 'Rear Quarter Glass';
       return 'D Pillar';
     }
-    if(ny>0.6&&x>1.15)return 'Front Fender';
+    if(x>1.97||(x>1.85&&y<0.42))return 'Front Bumper Cover';
+    if(x<-1.85&&y<0.5)return 'Rear Bumper Cover';
     if(x>FD0)return 'Front Fender';
-    if(y<0.27&&x>RD1)return 'Rocker Panel';
+    if(j<J1+RK&&x>RD1)return 'Rocker Panel';
     if(x>BP)return 'Front Door Skin';
     if(x>RD1)return 'Rear Door Skin';
     return 'Rear Quarter Panel';
   }
-  const BUCK={};
+  const AR=0.37,BUCK={};
   const add=(key,tri)=>{(BUCK[key]=BUCK[key]||[]).push(...tri)};
+  const inArch=v=>{for(const A of [FA,RA]){const dx=v.x-A,dy=v.y-PWY;if(Math.abs(v.z)>0.4&&dx*dx+dy*dy<AR*AR)return A}return null};
+  const snap=v=>{const A=inArch(v);if(A===null)return v;const dx=v.x-A,dy=v.y-PWY;if(dy<0.12)return V(A+(dx<0?-1:1)*Math.sqrt(AR*AR-dy*dy),v.y,v.z);const l=Math.hypot(dx,dy)||1;return V(A+dx/l*AR,PWY+dy/l*AR,v.z)};
   [1,-1].forEach(s=>{
     const P3=(i,j)=>{const p=ST[i].pts[j];return V(ST[i].x,p[1],s*p[0])};
     for(let i=0;i<NX;i++)for(let j=0;j<NU-1;j++){
-      const a=P3(i,j),b=P3(i+1,j),c=P3(i+1,j+1),d=P3(i,j+1);
-      const n=new THREE.Vector3().crossVectors(b.clone().sub(a),d.clone().sub(a)).normalize();
+      let a=P3(i,j),b=P3(i+1,j),c=P3(i+1,j+1),d=P3(i,j+1);
       const ctr=a.clone().add(b).add(c).add(d).multiplyScalar(0.25);
-      if(n.dot(ctr.clone().sub(V(ctr.x,0.7,0)))<0)n.negate();
-      const k=cls(ctr.x,ctr.y,Math.abs(ctr.z),n.y,n.z);
+      const zj=zone(j);
+      if(zj==='bot'||zj==='side'){if([a,b,c,d].every(v=>inArch(v)!==null))continue;a=snap(a);b=snap(b);c=snap(c);d=snap(d)}
+      const k=cls(ctr.x,ctr.y,j);
       if(!k)continue;
       add(k+'|'+s,[a,b,c,a,c,d]);
     }
-    /* end caps: nose and tail */
     [[0,'Front Bumper Cover'],[NX,'Rear Bumper Cover']].forEach(([i,key])=>{
       const x=ST[i].x,pts=ST[i].pts,ctr=V(x,(ytop(x)+ybot(x))/2,0);
       for(let j=0;j<NU-1;j++){const a=V(x,pts[j][1],s*pts[j][0]),b=V(x,pts[j+1][1],s*pts[j+1][0]);add((key==='Rear Bumper Cover'&&pts[j][1]>0.62?'Hatch Panel':key)+'|'+s,[ctr,a,b])}
@@ -521,7 +529,6 @@ function buildPrius(){
       P(sd+' Front Fender','Bolt on steel fender, traced from the blueprint curves.',geoOf([sd==='Left'?'Front Fender|1':'Front Fender|-1']));
       P(sd+' Rear Quarter Panel','Welded rear quarter around the rear wheel.',geoOf(['Rear Quarter Panel|'+s]));
       P(sd+' Rocker Panel','Sill under the doors.',geoOf(['Rocker Panel|'+s]));
-      P(sd+' Roof Rail','Side rail along the roof edge.',geoOf(['Roof Rail|'+s]));
       P(sd+' B Pillar','Center pillar between the doors.',geoOf(['B Pillar|'+s]));
       P(sd+' C Pillar','Pillar behind the rear door.',geoOf(['C Pillar|'+s]));
       P(sd+' D Pillar','Rearmost pillar beside the hatch.',geoOf(['D Pillar|'+s]));
@@ -612,7 +619,7 @@ function buildPrius(){
     P('Water Pump','Engine driven coolant pump.',cyl(0.045,0.045,0.05,'z'),[PX+0.06,0.5,PZ-0.25],[0.2,0,-0.5]);
     P('Intake Manifold','Plastic intake manifold.',box(0.12,0.12,0.4),[PX-0.2,0.68,PZ],[-0.45,0.1,0]);
     P('Electronic Throttle Body','Drive by wire throttle.',cyl(0.04,0.04,0.06,'z'),[PX-0.22,0.72,PZ+0.26],[-0.5,0.2,0.3]);
-    P('Air Cleaner Box','Intake air box.',box(0.25,0.12,0.25),[PX-0.05,0.88,PZ+0.15],[0,1.1,0.2]);
+    P('Air Cleaner Box','Intake air box.',box(0.25,0.1,0.25),[PX-0.05,0.83,PZ+0.15],[0,1.1,0.2]);
     P('Exhaust Manifold','Manifold into the close coupled converter.',box(0.08,0.12,0.36),[PX+0.18,0.6,PZ],[0.4,0,0]);
     P('Oil Filter','Spin on filter.',cyl(0.035,0.035,0.08,'x'),[PX+0.14,0.36,PZ+0.1],[0.4,-0.15,0]);
   });
