@@ -19,17 +19,29 @@ index_path = os.path.join(out, 'index.json')
 index = json.load(open(index_path)) if os.path.exists(index_path) else []
 have = {e['src'] for e in index}
 
+import subprocess
+LOG = open(os.path.join(out, 'log.txt'), 'a')
 def get(url):
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 hubview-manual-fetch'})
+    # curl handles TLS and redirects the same way the rest of the workflow does
     for attempt in range(3):
         try:
-            with urllib.request.urlopen(req, timeout=30) as r:
-                return r.read(), r.headers.get('Content-Type', '')
+            r = subprocess.run(['curl', '-sSL', '-A', 'Mozilla/5.0 (Linux; Android) Firefox', '-w', '\n%{http_code} %{content_type}', url],
+                               capture_output=True, timeout=60)
+            body = r.stdout
+            i = body.rfind(b'\n')
+            meta = body[i+1:].decode('ascii', 'replace').split(' ', 1)
+            code, ctype = meta[0], (meta[1] if len(meta) > 1 else '')
+            if code == '200':
+                return body[:i], ctype
+            LOG.write('%s %s %s\n' % (code, url, r.stderr.decode('utf-8', 'replace')[:200])); LOG.flush()
         except Exception as e:
-            time.sleep(2 + attempt * 3)
+            LOG.write('ERR %s %s\n' % (url, e)); LOG.flush()
+        time.sleep(2 + attempt * 3)
     return None, ''
 
 tok = re.compile(r'<h[1-6][^>]*>(.*?)</h[1-6]>|<img[^>]*src="([^"]+)"|<a[^>]*href="([^"]+)"', re.S | re.I)
+# also accept single quoted attributes
+tok = re.compile(r'<h[1-6][^>]*>(.*?)</h[1-6]>|<img[^>]*src=["\']([^"\']+)|<a[^>]*href=["\']([^"\']+)', re.S | re.I)
 queue, seen, pages, saved = [base], {base}, 0, len(index)
 while queue and pages < MAX_PAGES and saved < MAX_IMAGES:
     url = queue.pop(0)
@@ -38,6 +50,8 @@ while queue and pages < MAX_PAGES and saved < MAX_IMAGES:
     if not body or 'html' not in ctype:
         continue
     text = body.decode('utf-8', 'replace')
+    if pages <= 2:
+        open(os.path.join(out, 'sample%d.html' % pages), 'w').write(text)
     rel = urllib.parse.unquote(url[len(base):]).strip('/')
     caption = ''
     for m in tok.finditer(text):
@@ -68,3 +82,4 @@ while queue and pages < MAX_PAGES and saved < MAX_IMAGES:
 
 json.dump(index, open(index_path, 'w'), indent=0)
 print(car, 'done. pages', pages, 'images', saved)
+LOG.write('done pages %d images %d\n' % (pages, saved)); LOG.flush()
