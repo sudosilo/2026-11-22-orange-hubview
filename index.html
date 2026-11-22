@@ -10,27 +10,20 @@ html,body{margin:0;height:100%;background:#f6f1e7;font-family:Georgia,serif;colo
 #bar{position:fixed;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(255,252,245,.94);border-top:1px solid #d9cfbd;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 button{font:inherit;font-size:14px;padding:8px 11px;border:1px solid #b9ab92;background:#fffaf0;border-radius:6px;color:#3a3226}
 button.on{background:#e8dcc4}
-#info{position:fixed;top:10px;left:10px;right:10px;padding:10px 12px;background:rgba(255,252,245,.94);border:1px solid #d9cfbd;border-radius:8px;font-size:14px;line-height:1.4}
-#crumb{font-size:12px;color:#7a6c55;margin-bottom:2px}
-#title{font-size:16px;font-weight:bold;text-transform:uppercase;letter-spacing:1px}
-#info{font-family:'Courier New',Courier,monospace;border:1px dashed #a89574;box-shadow:3px 3px 0 #e3d7c0}
-#spec{margin:6px 0 0;font:13px/1.35 'Courier New',Courier,monospace;white-space:pre-wrap;color:#4a3e2c}
-#spec.typing::after{content:'\2588';animation:blink .5s steps(1) infinite;color:#8a6d3b}
-@keyframes blink{50%{opacity:0}}
-#list{position:fixed;top:100px;right:10px;width:200px;max-height:52vh;overflow:auto;background:rgba(255,252,245,.96);border:1px solid #d9cfbd;border-radius:8px;font-size:13px;display:none}
+#list{position:fixed;top:10px;right:10px;width:200px;max-height:52vh;overflow:auto;background:rgba(255,252,245,.96);border:1px solid #d9cfbd;border-radius:8px;font-size:13px;display:none}
 #list div{padding:7px 10px;border-bottom:1px solid #eee4d2}
 #list div.sel{background:#e8dcc4}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
-<div id="info"><div id="crumb"></div><div id="title"></div><pre id="spec"></pre></div>
 <div id="list"></div>
 <div id="bar">
 <button id="bBack">Back</button>
 <button id="bExplode">Explode</button>
 <button id="bWire" class="on">Wireframe</button>
 <button id="bParts">Parts</button>
+<button id="bInfo" class="on">Info</button>
 <button id="bBP" class="on">Blueprint</button>
 <button id="bReset">Reset</button>
 <input id="slide" type="range" min="0" max="100" value="0" style="flex:1;min-width:110px">
@@ -448,9 +441,28 @@ ASM.forEach((a,ai)=>{
 
 /* STATE AND UI */
 let carAmt=0,carTarget=0,focus=null,selected=null,wire=true,fly=0;
-const crumb=document.getElementById('crumb'),title=document.getElementById('title'),spec=document.getElementById('spec');
-let typeKey='',typeText='',typeN=0;
-function typeOut(key,text){if(key===typeKey)return;typeKey=key;typeText=text;typeN=0;spec.textContent='';spec.classList.add('typing')}
+/* INFO CARD: lives in the scene above the selected item, so it shrinks when you zoom out */
+let typeKey='',typeText='',typeN=0,head=['',''],infoOn=true,typedAt=0;
+const card=document.createElement('canvas');card.width=512;card.height=400;const cg=card.getContext('2d');
+const cardMat=new THREE.SpriteMaterial({depthTest:false,transparent:true});
+const sprite=new THREE.Sprite(cardMat);sprite.center.set(0.5,0);sprite.renderOrder=10;sprite.visible=false;scene.add(sprite);
+const leader=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(0,0,0),V(0,1,0)]),new THREE.LineBasicMaterial({color:0x8a6d3b,depthTest:false}));leader.renderOrder=10;leader.visible=false;scene.add(leader);
+function wrap(t,n=34){const out=[];t.split('\n').forEach(ln=>{if(ln.length<=n){out.push(ln);return}let cur='';ln.split(' ').forEach(w=>{if((cur+' '+w).trim().length>n){out.push(cur);cur=w}else cur=(cur+' '+w).trim()});out.push(cur)});return out}
+function sizeCard(){const n=wrap(typeText).length;const h=120+n*28;card.height=h;if(cardMat.map)cardMat.map.dispose();cardMat.map=new THREE.CanvasTexture(card);cardMat.map.colorSpace=THREE.SRGBColorSpace;cardMat.needsUpdate=true}
+function drawCard(){
+  const w=card.width,h=card.height;cg.clearRect(0,0,w,h);
+  cg.fillStyle='#e3d7c0';cg.fillRect(8,8,w-8,h-8);
+  cg.fillStyle='#fffbf2';cg.fillRect(0,0,w-8,h-8);
+  cg.setLineDash([8,6]);cg.strokeStyle='#a89574';cg.lineWidth=3;cg.strokeRect(2,2,w-12,h-12);cg.setLineDash([]);
+  cg.fillStyle='#7a6c55';cg.font='20px Courier New, monospace';cg.fillText(head[0],20,36);
+  cg.fillStyle='#3a3226';cg.font='bold 28px Courier New, monospace';cg.fillText(head[1].toUpperCase().slice(0,28),20,72);
+  cg.fillStyle='#4a3e2c';cg.font='22px Courier New, monospace';
+  const lines=wrap(typeText.slice(0,typeN));let y=110;
+  lines.forEach(l=>{cg.fillText(l,20,y);y+=28});
+  if(typeN<typeText.length||performance.now()-typedAt<1500){if(Math.floor(performance.now()/250)%2===0){const last=lines[lines.length-1]||'';cg.fillStyle='#8a6d3b';cg.fillRect(20+cg.measureText(last).width+2,y-28-20,13,24)}}
+  cardMat.map.needsUpdate=true;
+}
+function typeOut(key,text){if(key===typeKey)return;typeKey=key;typeText=text;typeN=0;sizeCard()}
 const row=(l,v)=>(l+' ').padEnd(14,'.')+' '+v;
 const mm=v=>Math.round(v*1000);
 function homeBox(p){p.geo.computeBoundingBox();const b=p.geo.boundingBox.clone();const c=p.asm.center.clone().add(p.local);b.min.add(c);b.max.add(c);return b}
@@ -469,16 +481,13 @@ function refresh(){
   }));
   if(selected){
     const b=homeBox(selected),i=focus.parts.indexOf(selected)+1;
-    crumb.textContent='1982 ACCORD / '+focus.name.toUpperCase();title.textContent=selected.name;
+    head=['1982 ACCORD / '+focus.name.toUpperCase(),selected.name];
     typeOut('p'+focus.name+i,[row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
   }else if(focus){
     const b=new THREE.Box3();focus.parts.forEach(p=>b.union(homeBox(p)));
-    crumb.textContent='1982 ACCORD';title.textContent=focus.name;
+    head=['1982 ACCORD',focus.name];
     typeOut('a'+focus.name,[row('PARTS',focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',focus.desc.toUpperCase(),'','> TAP TO EXPLODE, TAP A PART TO INSPECT'].join('\n'));
-  }else{
-    crumb.textContent='SPEC SHEET';title.textContent='1982 Honda Accord Sedan';
-    typeOut('car',[row('LENGTH','4410 MM'),row('WIDTH','1650 MM'),row('HEIGHT','1375 MM'),row('WHEELBASE','2450 MM'),row('TRACK F/R','1430 / 1420 MM'),row('ENGINE','EK1 1751CC CVCC I4'),row('TIRES','165SR13'),row('ASSEMBLIES',ASM.length),row('PARTS',total),'','> TAP THE CAR TO EXPLODE IT'].join('\n'));
-  }
+  }else{typeKey=''}
   list.innerHTML='';
   (focus?focus.parts:ASM).forEach(it=>{
     const d=document.createElement('div');d.textContent=it.name;
@@ -497,6 +506,7 @@ function back(){
 function setWire(on){wire=on;document.getElementById('bWire').classList.toggle('on',on);refresh()}
 
 document.getElementById('bBack').onclick=back;
+document.getElementById('bInfo').onclick=e=>{infoOn=!infoOn;e.target.classList.toggle('on',infoOn)};
 document.getElementById('bBP').onclick=e=>{showBP=!showBP;BP.forEach(m=>m.visible=showBP);e.target.classList.toggle('on',showBP)};
 document.getElementById('bExplode').onclick=()=>{fly=90;if(focus)focus.target=focus.target>0.5?0:1;else{carTarget=carTarget>0.5?0:1;fly=90}};
 document.getElementById('bWire').onclick=()=>setWire(!wire);
@@ -550,7 +560,18 @@ const goal=V(0,0,0);
     const d=camera.position.clone().sub(controls.target),l=d.length();
     camera.position.copy(controls.target).add(d.multiplyScalar((l+(dist-l)*0.08)/l));
   }
-  if(typeN<typeText.length){typeN=Math.min(typeText.length,typeN+4);spec.textContent=typeText.slice(0,typeN);if(typeN>=typeText.length)setTimeout(()=>spec.classList.remove('typing'),1500)}
+  const tgt=infoOn&&(selected?selected.node:focus?focus.group:null);
+  sprite.visible=leader.visible=!!tgt;
+  if(tgt){
+    if(typeN<typeText.length){typeN=Math.min(typeText.length,typeN+4);typedAt=performance.now()}
+    drawCard();
+    const bb=new THREE.Box3().setFromObject(tgt),c=new THREE.Vector3(),sz=new THREE.Vector3();bb.getCenter(c);bb.getSize(sz);
+    const W=Math.min(1.3,Math.max(0.5,Math.max(sz.x,sz.z)*0.7));
+    sprite.scale.set(W,W*card.height/card.width,1);
+    const top=V(c.x,bb.max.y,c.z),at=V(c.x,bb.max.y+0.2+W*0.15,c.z);
+    sprite.position.copy(at);
+    leader.geometry.setFromPoints([top,at]);
+  }
   controls.update();renderer.render(scene,camera);
 })();
 </script>
