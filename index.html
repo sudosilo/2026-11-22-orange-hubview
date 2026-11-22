@@ -650,6 +650,7 @@ function buildPrius(){
       P('Piston '+(i+1),'Low friction piston.',cyl(0.037,0.037,0.06),[PX,0.6,PZ+z],[0.45,0.1,0]);
       P('Connecting Rod '+(i+1),'Rod between piston and crank.',box(0.02,0.12,0.03),[PX,0.49,PZ+z],[0.45,-0.08,0]);
       P('Ignition Coil '+(i+1),'Coil on plug ignition.',cyl(0.015,0.015,0.09),[PX,0.86,PZ+z],[0,0.95,0]);
+      P('Spark Plug '+(i+1),'Long life iridium plug under the coil.',cyl(0.008,0.008,0.07),[PX,0.79,PZ+z],[0,0.75,0]);
       P('Fuel Injector '+(i+1),'Port fuel injector.',cyl(0.007,0.007,0.07),[PX-0.16,0.72,PZ+z],[-0.35,0.3,0]);
     });
     P('Timing Chain Cover','Covers the timing chain.',box(0.2,0.42,0.03),[PX,0.55,PZ-0.23],[0,0,-0.45]);
@@ -875,11 +876,41 @@ const sprite=new THREE.Sprite(cardMat);sprite.center.set(0.5,0);sprite.renderOrd
 const leader=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(0,0,0),V(0,1,0)]),new THREE.LineBasicMaterial({color:0x3d3d3d,depthTest:false}));leader.renderOrder=10;leader.visible=false;scene.add(leader);
 function wrap(t,n=34){const out=[];t.split('\n').forEach(ln=>{if(ln.length<=n){out.push(ln);return}let cur='';ln.split(' ').forEach(w=>{if((cur+' '+w).trim().length>n){out.push(cur);cur=w}else cur=(cur+' '+w).trim()});out.push(cur)});return out}
 function sizeCard(){const n=wrap(typeText).length;let h=120+n*28;if(cardImg)h+=50+Math.round(cardImg.height*472/cardImg.width);card.height=h;if(cardMat.map)cardMat.map.dispose();cardMat.map=new THREE.CanvasTexture(card);cardMat.map.colorSpace=THREE.SRGBColorSpace;cardMat.needsUpdate=true}
-const CARD_HIT={print:null,img:null};
+const CARD_HIT={print:null,img:null,buy:null};
+let PN={};
+function partNums(a,p){
+  if(!a||!p)return [];
+  const base=p.name.replace(/\s+\d+$/,'');
+  return PN[a.name+'/'+p.name]||PN[a.name+'/'+base]||PN['*/'+p.name]||PN['*/'+base]||[];
+}
+function searchQuery(){
+  const car=CAR.id==='prius'?'2007 Toyota Prius':'1982 Honda Accord';
+  const nums=selected?partNums(focus,selected):[];
+  const nm=(selected?selected.name:focus?focus.name:'').replace(/\s+\d+$/,'');
+  return {car,name:nm,num:nums[0]?nums[0][1]:'',q:car+' '+nm};
+}
+function buySheet(){
+  const s=searchQuery(),enc=encodeURIComponent;
+  const terms=[s.q].concat(s.num?[s.num]:[]);
+  let ov=document.getElementById('buy');if(ov)ov.remove();
+  ov=document.createElement('div');ov.id='buy';
+  ov.style.cssText='position:fixed;left:0;right:0;bottom:0;z-index:45;background:#fff;border-top:2px solid #3d3d3d;padding:14px;font-size:14px;max-height:70vh;overflow:auto';
+  const nums=selected?partNums(focus,selected):[];
+  let h='<div style="font-weight:bold;text-transform:uppercase;margin-bottom:6px">Find '+esc(s.name)+'</div>';
+  if(nums.length)h+='<div style="font:13px Courier New,monospace;margin-bottom:8px">'+nums.map(n=>esc(n[0])+' .... '+esc(n[1])).join('<br>')+'</div>';
+  terms.forEach(t=>{
+    h+='<div style="color:#8a8a8a;margin:8px 0 4px">'+esc(t)+'</div><div style="display:flex;gap:8px;flex-wrap:wrap">'+
+      '<a target="_blank" rel="noopener" href="https://www.oreillyauto.com/search?q='+enc(t)+'"><button>O\'Reilly</button></a>'+
+      '<a target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw='+enc(t)+'"><button>eBay</button></a>'+
+      '<a target="_blank" rel="noopener" href="https://www.amazon.com/s?k='+enc(t)+'"><button>Amazon</button></a></div>';
+  });
+  h+='<div style="margin-top:12px"><button id="buyclose">Close</button></div>';
+  ov.innerHTML=h;document.body.appendChild(ov);document.getElementById('buyclose').onclick=()=>ov.remove();
+}
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 function cardHTML(forPrint){
   const img=cardImg?'<p class="cap">MANUAL: '+esc(cardCap)+'</p><img src="'+esc(new URL(cardImg.src,location.href).href)+'">':'';
-  return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'+esc(head[1])+'</title><style>body{font-family:Helvetica Neue,Helvetica,Arial,sans-serif;color:#3d3d3d;background:#fff;margin:24px}h1{font-size:22px;margin:4px 0 12px;text-transform:uppercase}.sub{color:#8a8a8a;font-size:13px}pre{font:13px/1.5 Courier New,monospace;white-space:pre-wrap;border-top:1px solid #3d3d3d;padding-top:10px}.cap{color:#8a8a8a;font-size:12px;margin-top:18px}img{max-width:100%;max-height:62vh;object-fit:contain;border:1px solid #3d3d3d;display:block}@media print{img{max-height:6.2in}}@page{margin:0.5in}.src{color:#8a8a8a;font-size:11px;margin-top:16px}</style></head><body><div class="sub">'+esc(head[0])+'</div><h1>'+esc(head[1])+'</h1><pre>'+esc(typeText.split('\n').filter(l=>!l.startsWith('>')).join('\n').trim())+'</pre>'+img+'<div class="src">Diagram source: Operation CHARM repair manual</div>'+(forPrint?'<script>window.onload=()=>setTimeout(()=>window.print(),300)<\/script>':'')+'</body></html>';
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'+esc(head[1])+'</title><style>body{font-family:Helvetica Neue,Helvetica,Arial,sans-serif;color:#3d3d3d;background:#fff;margin:24px}h1{font-size:22px;margin:4px 0 12px;text-transform:uppercase}.sub{color:#8a8a8a;font-size:13px}pre{font:13px/1.5 Courier New,monospace;white-space:pre-wrap;border-top:1px solid #3d3d3d;padding-top:10px}.cap{color:#8a8a8a;font-size:12px;margin-top:18px}img{max-width:100%;max-height:62vh;object-fit:contain;border:1px solid #3d3d3d;display:block}@media print{img{max-height:6.2in}}@page{margin:0.5in}.src{color:#8a8a8a;font-size:11px;margin-top:16px}</style></head><body><div class="sub">'+esc(head[0])+'</div><h1>'+esc(head[1])+'</h1><pre>'+esc(typeText.split('\n').filter(l=>!l.startsWith('>')).join('\n').trim())+'</pre>'+img+'<div class="src">Search: '+esc(searchQuery().q)+(searchQuery().num?' / '+esc(searchQuery().num):'')+'</div><div class="src">Diagram source: Operation CHARM repair manual</div>'+(forPrint?'<script>window.onload=()=>setTimeout(()=>window.print(),300)<\/script>':'')+'</body></html>';
 }
 function printCard(){
   const w=window.open('','_blank');
@@ -903,7 +934,8 @@ function viewDiagram(){
 }
 function cardTap(uv){
   const x=uv.x*card.width,y=(1-uv.y)*card.height,inR=r=>r&&x>=r[0]&&x<=r[0]+r[2]&&y>=r[1]&&y<=r[1]+r[3];
-  if(inR(CARD_HIT.print))printCard();
+  if(inR(CARD_HIT.buy))buySheet();
+  else if(inR(CARD_HIT.print))printCard();
   else if(inR(CARD_HIT.img))viewDiagram();
 }
 function drawCard(){
@@ -912,8 +944,9 @@ function drawCard(){
   cg.strokeStyle='#3d3d3d';cg.lineWidth=3;cg.strokeRect(1.5,1.5,w-3,h-3);
   cg.fillStyle=cardColor;cg.fillRect(1.5,1.5,12,h-3);
   cg.fillStyle='#8a8a8a';cg.font='20px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[0],30,36);
-  cg.fillStyle='#3d3d3d';cg.font='bold 28px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[1].toUpperCase().slice(0,22),30,72);
+  cg.fillStyle='#3d3d3d';cg.font='bold 28px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[1].toUpperCase().slice(0,18),30,72);
   CARD_HIT.print=[w-128,14,112,44];cg.fillStyle='#3d3d3d';cg.fillRect(...CARD_HIT.print);cg.fillStyle='#fff';cg.font='bold 20px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText('PRINT',w-104,43);
+  CARD_HIT.buy=[w-200,14,64,44];cg.fillStyle='#e9a074';cg.fillRect(...CARD_HIT.buy);cg.fillStyle='#3d3d3d';cg.fillText('BUY',w-188,43);
   cg.fillStyle='#3d3d3d';cg.font='22px Courier New, monospace';
   const lines=wrap(typeText.slice(0,typeN));let y=110;
   lines.forEach(l=>{cg.fillText(l,30,y);y+=28});
@@ -964,7 +997,7 @@ function refresh(){
   if(selected){
     const b=homeBox(selected),i=focus.parts.indexOf(selected)+1;
     head=[CAR.name+' / '+focus.name.toUpperCase(),selected.name];cardColor='#'+selected.mat.color.getHexString();
-    typeOut('p'+focus.name+'/'+selected.name,[row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
+    typeOut('p'+focus.name+'/'+selected.name,[...partNums(focus,selected).map(n=>row('PART NO',n[1]+'  '+n[0].toUpperCase())),row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
   }else if(focus){
     const b=new THREE.Box3();focus.parts.forEach(p=>b.union(homeBox(p)));
     head=[CAR.name,focus.name];cardColor='#'+focus.parts[0].mat.color.getHexString();
@@ -1163,6 +1196,7 @@ function loadCar(id){
   BP.forEach(m=>ROOT.remove(m));BP.length=0;
   total=0;focus=null;selected=null;carAmt=carTarget=0;typeKey='';
   CAR=CARS[id];CAR.build();buildAll();
+  PN={};fetch('ref/parts/'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{PN=j;typeKey='';refresh()}).catch(()=>{});
   MANUAL={};const gen=carGen;fetch('ref/manual/map-'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
   document.getElementById('bCar').textContent=CAR.btn;
   try{history.replaceState(null,'','#'+id)}catch(e){}

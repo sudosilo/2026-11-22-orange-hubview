@@ -1,0 +1,14 @@
+{
+ "*/Brake Disc": [["Toyota OEM","43512-47030"],["ACDelco (O'Reilly)","18A813"],["BrakeBest Select (O'Reilly)","980312RGS"]],
+ "*/Inner Brake Pad": [["Toyota OEM front pad set","04465-47050"]],
+ "*/Outer Brake Pad": [["Toyota OEM front pad set","04465-47050"]],
+ "*/Leading Brake Shoe": [["Toyota OEM rear shoe set","04495-52040"]],
+ "*/Trailing Brake Shoe": [["Toyota OEM rear shoe set","04495-52040"]],
+ "Front Left Corner/Front Strut": [["Toyota OEM front left strut","48520-80064"]],
+ "Front Right Corner/Front Strut": [["Toyota OEM front right strut","48510-80274"]],
+ "*/Upper Strut Mount": [["Toyota OEM strut mount","48609-13010"]],
+ "Rear Right Corner/Rear Shock Absorber": [["Toyota OEM rear right shock","48530-49735"]],
+ "Engine/Oil Filter": [["Toyota OEM","90915-10003"]],
+ "Engine/Spark Plug": [["Toyota OEM","90919-01253"],["Denso","SK16R11"],["NGK","IFR5A11"]],
+ "Electrical/12V Auxiliary Battery": [["Toyota OEM S34B20R","28800-21181"],["Toyota OEM S46B24R","28800-21171"]]
+}
