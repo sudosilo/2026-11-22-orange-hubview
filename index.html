@@ -12,7 +12,11 @@ button{font:inherit;font-size:14px;padding:8px 11px;border:1px solid #b9ab92;bac
 button.on{background:#e8dcc4}
 #info{position:fixed;top:10px;left:10px;right:10px;padding:10px 12px;background:rgba(255,252,245,.94);border:1px solid #d9cfbd;border-radius:8px;font-size:14px;line-height:1.4}
 #crumb{font-size:12px;color:#7a6c55;margin-bottom:2px}
-#title{font-size:16px;font-weight:bold}
+#title{font-size:16px;font-weight:bold;text-transform:uppercase;letter-spacing:1px}
+#info{font-family:'Courier New',Courier,monospace;border:1px dashed #a89574;box-shadow:3px 3px 0 #e3d7c0}
+#spec{margin:6px 0 0;font:13px/1.35 'Courier New',Courier,monospace;white-space:pre-wrap;color:#4a3e2c}
+#spec.typing::after{content:'\2588';animation:blink .5s steps(1) infinite;color:#8a6d3b}
+@keyframes blink{50%{opacity:0}}
 #list{position:fixed;top:100px;right:10px;width:200px;max-height:52vh;overflow:auto;background:rgba(255,252,245,.96);border:1px solid #d9cfbd;border-radius:8px;font-size:13px;display:none}
 #list div{padding:7px 10px;border-bottom:1px solid #eee4d2}
 #list div.sel{background:#e8dcc4}
@@ -20,7 +24,7 @@ button.on{background:#e8dcc4}
 </head>
 <body>
 <canvas id="c"></canvas>
-<div id="info"><div id="crumb"></div><div id="title"></div><div id="desc"></div></div>
+<div id="info"><div id="crumb"></div><div id="title"></div><pre id="spec"></pre></div>
 <div id="list"></div>
 <div id="bar">
 <button id="bBack">Back</button>
@@ -444,7 +448,14 @@ ASM.forEach((a,ai)=>{
 
 /* STATE AND UI */
 let carAmt=0,carTarget=0,focus=null,selected=null,wire=true,fly=0;
-const crumb=document.getElementById('crumb'),title=document.getElementById('title'),desc=document.getElementById('desc');
+const crumb=document.getElementById('crumb'),title=document.getElementById('title'),spec=document.getElementById('spec');
+let typeKey='',typeText='',typeN=0;
+function typeOut(key,text){if(key===typeKey)return;typeKey=key;typeText=text;typeN=0;spec.textContent='';spec.classList.add('typing')}
+const row=(l,v)=>(l+' ').padEnd(14,'.')+' '+v;
+const mm=v=>Math.round(v*1000);
+function homeBox(p){p.geo.computeBoundingBox();const b=p.geo.boundingBox.clone();const c=p.asm.center.clone().add(p.local);b.min.add(c);b.max.add(c);return b}
+function sizeTxt(b){const d=new THREE.Vector3();b.getSize(d);return 'L '+mm(d.x)+' x H '+mm(d.y)+' x W '+mm(d.z)+' MM'}
+function locTxt(b){const c=new THREE.Vector3();b.getCenter(c);return [row('FROM FRONT',mm(2.205-c.x)+' MM'),row('HEIGHT',mm(c.y)+' MM'),row('SIDE',c.z>0.05?'LEFT':c.z<-0.05?'RIGHT':'CENTER')]}
 const list=document.getElementById('list'),slide=document.getElementById('slide');
 
 function refresh(){
@@ -456,9 +467,18 @@ function refresh(){
     p.edges.material.opacity=off?0.08:dim?0.2:1;
     p.wf.visible=wire&&!off&&!dim;
   }));
-  if(selected){crumb.textContent='1982 Accord / '+focus.name;title.textContent=selected.name;desc.textContent=selected.desc}
-  else if(focus){crumb.textContent='1982 Accord';title.textContent=focus.name;desc.textContent=focus.desc+' '+focus.parts.length+' parts. Tap to explode, tap a part to inspect.'}
-  else{crumb.textContent='';title.textContent='1982 Honda Accord Sedan';desc.textContent=ASM.length+' assemblies, '+total+' parts. Tap the car to explode it, then tap an assembly to open it.'}
+  if(selected){
+    const b=homeBox(selected),i=focus.parts.indexOf(selected)+1;
+    crumb.textContent='1982 ACCORD / '+focus.name.toUpperCase();title.textContent=selected.name;
+    typeOut('p'+focus.name+i,[row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
+  }else if(focus){
+    const b=new THREE.Box3();focus.parts.forEach(p=>b.union(homeBox(p)));
+    crumb.textContent='1982 ACCORD';title.textContent=focus.name;
+    typeOut('a'+focus.name,[row('PARTS',focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',focus.desc.toUpperCase(),'','> TAP TO EXPLODE, TAP A PART TO INSPECT'].join('\n'));
+  }else{
+    crumb.textContent='SPEC SHEET';title.textContent='1982 Honda Accord Sedan';
+    typeOut('car',[row('LENGTH','4410 MM'),row('WIDTH','1650 MM'),row('HEIGHT','1375 MM'),row('WHEELBASE','2450 MM'),row('TRACK F/R','1430 / 1420 MM'),row('ENGINE','EK1 1751CC CVCC I4'),row('TIRES','165SR13'),row('ASSEMBLIES',ASM.length),row('PARTS',total),'','> TAP THE CAR TO EXPLODE IT'].join('\n'));
+  }
   list.innerHTML='';
   (focus?focus.parts:ASM).forEach(it=>{
     const d=document.createElement('div');d.textContent=it.name;
@@ -530,6 +550,7 @@ const goal=V(0,0,0);
     const d=camera.position.clone().sub(controls.target),l=d.length();
     camera.position.copy(controls.target).add(d.multiplyScalar((l+(dist-l)*0.08)/l));
   }
+  if(typeN<typeText.length){typeN=Math.min(typeText.length,typeN+4);spec.textContent=typeText.slice(0,typeN);if(typeN>=typeText.length)setTimeout(()=>spec.classList.remove('typing'),1500)}
   controls.update();renderer.render(scene,camera);
 })();
 </script>
