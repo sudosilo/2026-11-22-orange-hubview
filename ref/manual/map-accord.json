@@ -1,0 +1,147 @@
+{
+"Body Shell/Radiator Core Support": {
+"file": "0185.png",
+"caption": "Cooling System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations"
+},
+"Engine/Cylinder Block": {
+"file": "0018.png",
+"caption": "Engine Block - Part 1:",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Diagrams"
+},
+"Engine/Cylinder Head": {
+"file": "0028.jpg",
+"caption": "Cylinder Head Installation:",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair"
+},
+"Engine/Connecting Rod 1": {
+"file": "0296.png",
+"caption": "Crank Bearing Code Location:",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Connecting Rod Bearing/Application and ID"
+},
+"Engine/Connecting Rod 2": {
+"file": "0296.png",
+"caption": "Crank Bearing Code Location:",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Connecting Rod Bearing/Application and ID"
+},
+"Engine/Connecting Rod 3": {
+"file": "0296.png",
+"caption": "Crank Bearing Code Location:",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Connecting Rod Bearing/Application and ID"
+},
+"Engine/Connecting Rod 4": {
+"file": "0296.png",
+"caption": "Crank Bearing Code Location:",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Connecting Rod Bearing/Application and ID"
+},
+"Engine/Timing Belt": {
+"file": "0237.png",
+"caption": "Timing Belt Replacement:",
+"path": "Maintenance/Timing Belt/Service and Repair"
+},
+"Engine/Timing Belt Cover": {
+"file": "0237.png",
+"caption": "Timing Belt Replacement:",
+"path": "Maintenance/Timing Belt/Service and Repair"
+},
+"Engine/Carburetor": {
+"file": "0141.png",
+"caption": "Carburetor: Locations",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Carburetor/Locations"
+},
+"Engine/Air Cleaner": {
+"file": "0132.png",
+"caption": "Fig.61 - Air Intake Control System:",
+"path": "Powertrain Management/Emission Control Systems/Thermostatic Air Cleaner/Description and Operation"
+},
+"Engine/Distributor": {
+"file": "0004.png",
+"caption": "Fig. 44 Toyo Denso electronic distributor exploded view.:",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Distributor/Diagrams/Toyodenso"
+},
+"Front Left Corner/Tire": {
+"file": "0242.png",
+"caption": "Tires: Description and Operation",
+"path": "Maintenance/Wheels and Tires/Tires/Description and Operation"
+},
+"Front Right Corner/Tire": {
+"file": "0242.png",
+"caption": "Tires: Description and Operation",
+"path": "Maintenance/Wheels and Tires/Tires/Description and Operation"
+},
+"Rear Left Corner/Tire": {
+"file": "0242.png",
+"caption": "Tires: Description and Operation",
+"path": "Maintenance/Wheels and Tires/Tires/Description and Operation"
+},
+"Rear Right Corner/Tire": {
+"file": "0242.png",
+"caption": "Tires: Description and Operation",
+"path": "Maintenance/Wheels and Tires/Tires/Description and Operation"
+},
+"Fuel System/Fuel Sending Unit": {
+"file": "0187.png",
+"caption": "Fuel System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Instrument Panel/Fuel Gauge Sender/Locations"
+},
+"Fuel System/Fuel Filter": {
+"file": "0203.png",
+"caption": "Fuel Filter: Locations",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Filter/Locations"
+},
+"Fuel System/Fuel Hose": {
+"file": "0185.png",
+"caption": "Cooling System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations"
+},
+"Cooling System/Radiator": {
+"file": "0185.png",
+"caption": "Cooling System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations"
+},
+"Cooling System/Fan Shroud": {
+"file": "0185.png",
+"caption": "Cooling System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations"
+},
+"Cooling System/Cooling Fan": {
+"file": "0185.png",
+"caption": "Cooling System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations"
+},
+"Cooling System/Fan Motor": {
+"file": "0185.png",
+"caption": "Cooling System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations"
+},
+"Cooling System/Upper Radiator Hose": {
+"file": "0185.png",
+"caption": "Cooling System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations"
+},
+"Cooling System/Lower Radiator Hose": {
+"file": "0185.png",
+"caption": "Cooling System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Cooling System/Engine - Coolant Temperature Sensor/Switch/Radiator Cooling Fan Temperature Sensor / Switch/Locations"
+},
+"Cooling System/Heater Hose": {
+"file": "0161.png",
+"caption": "Fig. 17 Component & Bolt Locations For Heater Assembly Removal:",
+"path": "Heating and Air Conditioning/Service and Repair/Heater Assembly"
+},
+"Exhaust System/Catalytic Converter": {
+"file": "0318.png",
+"caption": "Fig.154 - Cutaway View Of Catalytic Converter:",
+"path": "Engine, Cooling and Exhaust/Exhaust System/Catalytic Converter/Description and Operation"
+},
+"Interior/Dashboard": {
+"file": "0187.png",
+"caption": "Fuel System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Instrument Panel/Fuel Gauge Sender/Locations"
+},
+"Interior/Instrument Cluster": {
+"file": "0187.png",
+"caption": "Fuel System Components.:",
+"path": "Sensors and Switches/Sensors and Switches - Instrument Panel/Fuel Gauge Sender/Locations"
+}
+}

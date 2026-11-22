@@ -1,0 +1,412 @@
+{
+"Body Shell/Radiator Core Support": {
+"file": "0617.png",
+"caption": "Fan Components (Part 1):",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Service and Repair"
+},
+"Front Left Door/Door Latch": {
+"file": "1664.png",
+"caption": "System Diagram (Part 1):",
+"path": "Starting and Charging/Starting System/Description and Operation/System Description/Door Lock - Smart Key System"
+},
+"Rear Left Door/Door Latch": {
+"file": "1664.png",
+"caption": "System Diagram (Part 1):",
+"path": "Starting and Charging/Starting System/Description and Operation/System Description/Door Lock - Smart Key System"
+},
+"Front Right Door/Door Latch": {
+"file": "1664.png",
+"caption": "System Diagram (Part 1):",
+"path": "Starting and Charging/Starting System/Description and Operation/System Description/Door Lock - Smart Key System"
+},
+"Rear Right Door/Door Latch": {
+"file": "1664.png",
+"caption": "System Diagram (Part 1):",
+"path": "Starting and Charging/Starting System/Description and Operation/System Description/Door Lock - Smart Key System"
+},
+"Engine/Cylinder Block": {
+"file": "0186.png",
+"caption": "Cylinder Block Assembly: Specifications",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Specifications"
+},
+"Engine/Cylinder Head": {
+"file": "0289.jpg",
+"caption": "Cylinder Head Assembly: Tools and Equipment",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Tools and Equipment"
+},
+"Hybrid Transaxle/Transaxle Case": {
+"file": "1237.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Continuously Variable Transmission/Transaxle/Service and Repair/Overhaul/Automatic Transaxle Unit/Transmission Disassembly"
+},
+"Hybrid Transaxle/MG1 Motor Generator": {
+"file": "1226.png",
+"caption": "Generator Cable",
+"path": "Transmission and Drivetrain/Continuously Variable Transmission/Transaxle/Service and Repair/Removal and Replacement/Generator Cable"
+},
+"Hybrid Transaxle/Power Split Device": {
+"file": "1237.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Continuously Variable Transmission/Transaxle/Service and Repair/Overhaul/Automatic Transaxle Unit/Transmission Disassembly"
+},
+"Hybrid Transaxle/Transaxle Damper": {
+"file": "1237.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Continuously Variable Transmission/Transaxle/Service and Repair/Overhaul/Automatic Transaxle Unit/Transmission Disassembly"
+},
+"Hybrid Transaxle/Counter Drive Gear": {
+"file": "1358.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Continuously Variable Transmission/Transaxle/Service and Repair/Overhaul/Sprocket Driven Gear and Counter Drive Gear"
+},
+"Hybrid Transaxle/Differential": {
+"file": "1363.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Continuously Variable Transmission/Transaxle/Service and Repair/Overhaul/Differential Drive Pinion"
+},
+"Hybrid Battery/Battery Case": {
+"file": "0728.png",
+"caption": "HV Battery Service Plug Precautions",
+"path": "Hybrid Drive Systems/Battery System, Hybrid Drive/Service Precautions/Technician Safety Information/HV Battery Service Plug Precautions"
+},
+"Hybrid Battery/Battery ECU": {
+"file": "0733.png",
+"caption": "System Diagram (Part 1):",
+"path": "Hybrid Drive Systems/Battery System, Hybrid Drive/Description and Operation/Hybrid Battery System"
+},
+"Hybrid Battery/Battery Cooling Fan": {
+"file": "0676.png",
+"caption": "Battery Blower:",
+"path": "Hybrid Drive Systems/Battery System, Hybrid Drive/Battery Cooling Fan/Service and Repair"
+},
+"Drive Axles/Left Inner CV Joint": {
+"file": "1391.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Drive Axles, Bearings and Joints/Axle Shaft Assembly/Service and Repair"
+},
+"Drive Axles/Left Half Shaft": {
+"file": "1391.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Drive Axles, Bearings and Joints/Axle Shaft Assembly/Service and Repair"
+},
+"Drive Axles/Right Inner CV Joint": {
+"file": "1391.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Drive Axles, Bearings and Joints/Axle Shaft Assembly/Service and Repair"
+},
+"Drive Axles/Right Half Shaft": {
+"file": "1391.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Drive Axles, Bearings and Joints/Axle Shaft Assembly/Service and Repair"
+},
+"Front Left Corner/Tire": {
+"file": "0065.png",
+"caption": "Tire Monitoring System: Locations",
+"path": "Maintenance/Wheels and Tires/Tire Monitoring System/Locations"
+},
+"Front Left Corner/Alloy Wheel": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Left Corner/Lug Nut 1": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Left Corner/Lug Nut 2": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Left Corner/Lug Nut 3": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Left Corner/Lug Nut 4": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Left Corner/Lug Nut 5": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Left Corner/Hub Nut": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Left Corner/Brake Disc": {
+"file": "1566.png",
+"caption": "Front Brake Components:",
+"path": "Brakes and Traction Control/Disc Brake System/Service and Repair"
+},
+"Front Left Corner/Front Hub": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Left Corner/Wheel Bearing": {
+"file": "0155.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Rear Axle Hub and Bearing"
+},
+"Rear Left Corner/Tire": {
+"file": "0065.png",
+"caption": "Tire Monitoring System: Locations",
+"path": "Maintenance/Wheels and Tires/Tire Monitoring System/Locations"
+},
+"Rear Left Corner/Alloy Wheel": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Left Corner/Lug Nut 1": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Left Corner/Lug Nut 2": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Left Corner/Lug Nut 3": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Left Corner/Lug Nut 4": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Left Corner/Lug Nut 5": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Left Corner/Hub Bearing Unit": {
+"file": "0155.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Rear Axle Hub and Bearing"
+},
+"Rear Left Corner/Brake Drum": {
+"file": "1583.png",
+"caption": "Rear Drum Brake Components:",
+"path": "Brakes and Traction Control/Drum Brake System/Service and Repair"
+},
+"Rear Left Corner/Backing Plate": {
+"file": "1583.png",
+"caption": "Rear Drum Brake Components:",
+"path": "Brakes and Traction Control/Drum Brake System/Service and Repair"
+},
+"Front Right Corner/Tire": {
+"file": "0065.png",
+"caption": "Tire Monitoring System: Locations",
+"path": "Maintenance/Wheels and Tires/Tire Monitoring System/Locations"
+},
+"Front Right Corner/Alloy Wheel": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Right Corner/Lug Nut 1": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Right Corner/Lug Nut 2": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Right Corner/Lug Nut 3": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Right Corner/Lug Nut 4": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Right Corner/Lug Nut 5": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Right Corner/Hub Nut": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Right Corner/Brake Disc": {
+"file": "1566.png",
+"caption": "Front Brake Components:",
+"path": "Brakes and Traction Control/Disc Brake System/Service and Repair"
+},
+"Front Right Corner/Front Hub": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Front Right Corner/Wheel Bearing": {
+"file": "0155.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Rear Axle Hub and Bearing"
+},
+"Rear Right Corner/Tire": {
+"file": "0065.png",
+"caption": "Tire Monitoring System: Locations",
+"path": "Maintenance/Wheels and Tires/Tire Monitoring System/Locations"
+},
+"Rear Right Corner/Alloy Wheel": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Right Corner/Lug Nut 1": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Right Corner/Lug Nut 2": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Right Corner/Lug Nut 3": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Right Corner/Lug Nut 4": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Right Corner/Lug Nut 5": {
+"file": "0144.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Front Axle Hub"
+},
+"Rear Right Corner/Hub Bearing Unit": {
+"file": "0155.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Rear Axle Hub and Bearing"
+},
+"Rear Right Corner/Brake Drum": {
+"file": "1583.png",
+"caption": "Rear Drum Brake Components:",
+"path": "Brakes and Traction Control/Drum Brake System/Service and Repair"
+},
+"Rear Right Corner/Backing Plate": {
+"file": "1583.png",
+"caption": "Rear Drum Brake Components:",
+"path": "Brakes and Traction Control/Drum Brake System/Service and Repair"
+},
+"Rear Axle Beam/Torsion Beam": {
+"file": "0155.png",
+"caption": "Components:",
+"path": "Maintenance/Wheels and Tires/Wheel Hub/Service and Repair/Rear Axle Hub and Bearing"
+},
+"Front Suspension Member/Left Transaxle Mount": {
+"file": "1237.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Continuously Variable Transmission/Transaxle/Service and Repair/Overhaul/Automatic Transaxle Unit/Transmission Disassembly"
+},
+"Steering/Intermediate Shaft": {
+"file": "1862.png",
+"caption": "Components:",
+"path": "Steering and Suspension/Steering/Steering Column/Service and Repair"
+},
+"Steering/Steering Column": {
+"file": "1862.png",
+"caption": "Components:",
+"path": "Steering and Suspension/Steering/Steering Column/Service and Repair"
+},
+"Steering/Airbag Pad": {
+"file": "2161.png",
+"caption": "Airbag System:",
+"path": "Restraints and Safety Systems/Air Bag Systems/Locations"
+},
+"Brake System/Brake Actuator": {
+"file": "1506.png",
+"caption": "Brake Actuator",
+"path": "Brakes and Traction Control/Antilock Brakes / Traction Control Systems/Testing and Inspection/Component Tests and General Diagnostics/Brake Actuator"
+},
+"Brake System/Parking Brake Pedal": {
+"file": "1610.png",
+"caption": "Parking Brake System: Adjustments",
+"path": "Brakes and Traction Control/Parking Brake System/Adjustments"
+},
+"Brake System/Parking Brake Cable": {
+"file": "1610.png",
+"caption": "Parking Brake System: Adjustments",
+"path": "Brakes and Traction Control/Parking Brake System/Adjustments"
+},
+"Cooling System/Radiator": {
+"file": "0617.png",
+"caption": "Fan Components (Part 1):",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Service and Repair"
+},
+"Cooling System/Inverter Radiator": {
+"file": "0617.png",
+"caption": "Fan Components (Part 1):",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Service and Repair"
+},
+"Cooling System/Cooling Fan 1": {
+"file": "0617.png",
+"caption": "Fan Components (Part 1):",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Service and Repair"
+},
+"Cooling System/Cooling Fan 2": {
+"file": "0617.png",
+"caption": "Fan Components (Part 1):",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Service and Repair"
+},
+"Cooling System/Upper Radiator Hose": {
+"file": "0617.png",
+"caption": "Fan Components (Part 1):",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Service and Repair"
+},
+"Cooling System/Lower Radiator Hose": {
+"file": "0617.png",
+"caption": "Fan Components (Part 1):",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Service and Repair"
+},
+"Electrical/12V Auxiliary Battery": {
+"file": "0731.jpg",
+"caption": "Hybrid Vehicle (HV) Battery Pack and Auxiliary Battery",
+"path": "Hybrid Drive Systems/Battery System, Hybrid Drive/Description and Operation/Hybrid Vehicle (HV) Battery Pack and Auxiliary Battery"
+},
+"Electrical/Wiring Harness": {
+"file": "0069.jpg",
+"caption": "Key to Diagrams",
+"path": "Maintenance/Wheels and Tires/Tire Monitoring System/Diagrams/Diagram Information and Instructions/How to Use Wiring Diagrams/Key to Diagrams"
+},
+"Electrical/Hybrid Vehicle ECU": {
+"file": "0751.jpg",
+"caption": "Hybrid Synergy Drive Component Locations & Descriptions",
+"path": "Hybrid Drive Systems/Description and Operation/Emergency Response Guide/Hybrid Synergy Drive Component Locations & Descriptions"
+},
+"Interior/Power Button": {
+"file": "1831.jpg",
+"caption": "Push Button Start System And Hybrid Vehicle Immobilizer System Part 1:",
+"path": "Starting and Charging/Starting System/Diagrams/Electrical Diagrams/Push Button Start System and Hybrid Vehicle Immobilizer System"
+},
+"Hybrid Battery": {
+"file": "0733.png",
+"caption": "System Diagram (Part 1):",
+"path": "Hybrid Drive Systems/Battery System, Hybrid Drive/Description and Operation/Hybrid Battery System"
+},
+"Hybrid Transaxle": {
+"file": "1237.png",
+"caption": "Components:",
+"path": "Transmission and Drivetrain/Continuously Variable Transmission/Transaxle/Service and Repair/Overhaul/Automatic Transaxle Unit/Transmission Disassembly"
+}
+}
