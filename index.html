@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Hub View</title>
+<style>
+html,body{margin:0;height:100%;background:#f6f1e7;font-family:Georgia,serif;color:#3a3226;overflow:hidden}
+#c{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+#bar{position:fixed;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(255,252,245,.92);border-top:1px solid #d9cfbd;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{font:inherit;font-size:14px;padding:8px 12px;border:1px solid #b9ab92;background:#fffaf0;border-radius:6px;color:#3a3226}
+button.on{background:#e8dcc4}
+#info{position:fixed;top:10px;left:10px;right:10px;padding:10px 12px;background:rgba(255,252,245,.92);border:1px solid #d9cfbd;border-radius:8px;font-size:14px;line-height:1.4}
+#info b{font-size:16px}
+#list{position:fixed;top:90px;right:10px;max-height:55vh;overflow:auto;background:rgba(255,252,245,.92);border:1px solid #d9cfbd;border-radius:8px;font-size:13px;display:none}
+#list div{padding:6px 10px;border-bottom:1px solid #eee4d2}
+#list div.sel{background:#e8dcc4}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="info"><b>Front Wheel Hub, 1982 Accord</b><br>Tap the hub to explode it. Tap any part to inspect it.</div>
+<div id="list"></div>
+<div id="bar">
+<button id="bExplode">Explode</button>
+<button id="bWire" class="on">Wireframe</button>
+<button id="bParts">Parts</button>
+<button id="bAll">Show All</button>
+<input id="slide" type="range" min="0" max="100" value="0" style="flex:1;min-width:120px">
+</div>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0xf6f1e7);
+const camera=new THREE.PerspectiveCamera(40,1,0.1,200);
+camera.position.set(9,5,12);
+const controls=new OrbitControls(camera,canvas);
+controls.enableDamping=true;
+scene.add(new THREE.HemisphereLight(0xfffbf0,0xd8c9ad,1.1));
+const sun=new THREE.DirectionalLight(0xffffff,0.9);sun.position.set(5,10,7);scene.add(sun);
+
+const palette=[0x7a9cc6,0xc98b6b,0x8fb28a,0xd4b46a,0xa98bc4,0x6fb3b0,0xc77d8f,0x9c8f7a];
+const parts=[];
+let wire=true;
+
+function lathe(pts,seg=48){return new THREE.LatheGeometry(pts.map(p=>new THREE.Vector2(p[0],p[1])),seg)}
+function ring(r1,r2,h,seg=48){return lathe([[r1,-h/2],[r2,-h/2],[r2,h/2],[r1,h/2],[r1,-h/2]],seg)}
+
+function addPart(name,desc,geo,offset,color,rotX=Math.PI/2,group=null){
+  const g=new THREE.Group();
+  const mat=new THREE.MeshStandardMaterial({color,transparent:true,opacity:0.38,roughness:0.9,side:THREE.DoubleSide,depthWrite:false});
+  const mesh=new THREE.Mesh(geo,mat);
+  const edges=new THREE.LineSegments(new THREE.EdgesGeometry(geo,18),new THREE.LineBasicMaterial({color:new THREE.Color(color).multiplyScalar(0.55)}));
+  const wf=new THREE.LineSegments(new THREE.WireframeGeometry(geo),new THREE.LineBasicMaterial({color:new THREE.Color(color).multiplyScalar(0.7),transparent:true,opacity:0.25}));
+  g.add(mesh,edges,wf);
+  if(rotX)g.rotation.x=rotX;
+  const holder=group||new THREE.Group();
+  if(!group){holder.add(g);scene.add(holder)}
+  const p={name,desc,holder,mesh,wf,edges,mat,offset:new THREE.Vector3(...offset),base:new THREE.Vector3()};
+  mesh.userData.part=p;
+  parts.push(p);
+  return p;
+}
+
+/* axis runs along z: positive z is outboard toward the wheel */
+addPart('Tire','155SR13 radial on a steel wheel. Removed first.',
+  lathe([[2.2,-0.8],[2.75,-0.95],[3.05,-0.6],[3.1,0],[3.05,0.6],[2.75,0.95],[2.2,0.8]],64),[0,0,9],palette[7]);
+addPart('Steel Wheel','13 inch steel wheel, 4 lug, 100 mm bolt circle.',
+  lathe([[0.5,0.25],[1.6,0.3],[1.9,0.1],[2.2,-0.7],[2.25,-0.8],[2.25,0.8],[2.2,0.7],[1.9,0.45],[1.6,0.45],[0.5,0.4]],64),[0,0,7],palette[0]);
+addPart('Hub Cap','Snaps over the lug nuts and spindle nut.',
+  lathe([[0,0.55],[0.9,0.5],[1.3,0.35],[1.35,0.2],[1.3,0.15]],48),[0,0,10.5],palette[3]);
+
+const lugGroup=new THREE.Group();scene.add(lugGroup);
+for(let i=0;i<4;i++){
+  const a=i*Math.PI/2+Math.PI/4,r=0.71;
+  const lg=new THREE.Group();lg.position.set(Math.cos(a)*r,Math.sin(a)*r,0);lugGroup.add(lg);
+  addPart('Lug Nut '+(i+1),'12 x 1.5 mm, 19 mm hex. Torque about 80 ft lb in a star pattern.',
+    new THREE.CylinderGeometry(0.16,0.16,0.3,6),[Math.cos(a)*0.4,Math.sin(a)*0.4,6],palette[3],Math.PI/2,lg).holder=lg;
+  scene.remove(lg);lugGroup.add(lg);
+  lg.add(parts[parts.length-1].mesh.parent);
+}
+
+addPart('Spindle Nut','Staked nut on the CV axle stub. Holds the hub and bearing preload.',
+  new THREE.CylinderGeometry(0.3,0.3,0.25,6),[0,0,5.2],palette[6]);
+addPart('Brake Disc','Solid front rotor. Sits on the hub, held by two screws and the wheel.',
+  lathe([[0.6,0.32],[0.95,0.32],[0.95,0.12],[1.85,0.12],[1.85,-0.12],[0.95,-0.12],[0.95,0.0],[0.6,0.0]],64),[0,0,3.6],palette[1]);
+addPart('Front Hub','Splined to the CV stub, carries the 4 wheel studs.',
+  lathe([[0.22,-0.9],[0.42,-0.9],[0.42,-0.1],[1.05,-0.05],[1.05,0.15],[0.3,0.2],[0.22,0.2]],48),[0,0,2.4],palette[2]);
+addPart('Outer Dust Seal','Keeps grit out of the bearing on the wheel side.',
+  ring(0.45,0.7,0.1),[0,0,1.5],palette[5]);
+addPart('Wheel Bearing','Sealed double row ball bearing pressed into the knuckle.',
+  ring(0.42,0.72,0.55),[0,0,0.9],palette[4]);
+addPart('Bearing Snap Ring','Retains the bearing in the knuckle bore.',
+  ring(0.72,0.8,0.04),[0,0,0.3],palette[6]);
+
+const kn=new THREE.Group();
+{
+  const body=lathe([[0.74,-0.45],[1.05,-0.45],[1.1,0.35],[0.74,0.35]],48);
+  const p=addPart('Steering Knuckle','Cast knuckle. Ball joints top and bottom, tie rod arm at rear.',body,[0,0,-0.4],palette[7]);
+  const extra=[
+    [new THREE.BoxGeometry(0.4,2.0,0.35),[0,1.9,0]],
+    [new THREE.BoxGeometry(0.4,1.2,0.35),[0,-1.5,0]],
+    [new THREE.BoxGeometry(1.2,0.3,0.3),[-1.5,-0.4,0]],
+  ];
+  extra.forEach(([g,pos])=>{
+    const m=new THREE.Mesh(g,p.mat);m.position.set(...pos);m.userData.part=p;
+    const e=new THREE.LineSegments(new THREE.EdgesGeometry(g),p.edges.material);e.position.copy(m.position);
+    p.holder.add(m,e);
+  });
+}
+addPart('Inner Dust Seal','Seals the axle side of the bearing.',
+  ring(0.38,0.7,0.1),[0,0,-1.4],palette[5]);
+addPart('Splash Guard','Thin steel shield behind the disc.',
+  lathe([[0.8,0],[1.95,0],[2.0,0.25]],64),[0,0,-2.2],palette[0]);
+
+{
+  const g=new THREE.BoxGeometry(0.7,1.3,0.9);
+  const p=addPart('Brake Caliper','Single piston sliding caliper. Two bolts to the knuckle.',g,[2.4,1.2,3.8],palette[6],0);
+  p.holder.position.set(0,1.6,0);
+  p.homeExtra=new THREE.Vector3(0,1.6,0.35);
+}
+{
+  const g=new THREE.BoxGeometry(0.55,1.1,0.18);
+  const a=addPart('Inner Brake Pad','Piston side pad.',g,[3.6,1.4,2.8],palette[3],0);
+  a.homeExtra=new THREE.Vector3(0,1.6,0.2);
+  const b=addPart('Outer Brake Pad','Finger side pad.',g,[3.6,1.4,4.6],palette[3],0);
+  b.homeExtra=new THREE.Vector3(0,1.6,0.5);
+}
+addPart('CV Axle Stub','Outer CV joint stub. Splines pass through bearing and hub.',
+  lathe([[0,-4.2],[0.75,-4.2],[0.8,-3.2],[0.3,-2.9],[0.25,-0.6],[0.2,1.0],[0,1.0]],32),[0,0,-5.5],palette[4]);
+
+parts.forEach(p=>{if(p.homeExtra)p.base.copy(p.homeExtra)});
+lugGroup.position.set(0,0,0.95);
+parts.filter(p=>p.name.startsWith('Lug')).forEach(p=>{p.base.set(0,0,0);});
+
+/* Lug group handled as one holder for explode offset */
+const lugParts=parts.filter(p=>p.name.startsWith('Lug'));
+
+let target=0,amount=0,selected=null,isolate=false;
+const slide=document.getElementById('slide');
+const info=document.getElementById('info');
+const list=document.getElementById('list');
+
+function layout(){
+  parts.forEach(p=>{
+    if(p.name.startsWith('Lug'))return;
+    p.holder.position.copy(p.base).addScaledVector(p.offset,amount);
+  });
+  lugGroup.position.set(0,0,0.95+6*amount);
+  lugParts.forEach(p=>{p.holder.position.set(p.holder.position.x,p.holder.position.y,0)});
+}
+
+function setWire(on){
+  wire=on;document.getElementById('bWire').classList.toggle('on',on);
+  parts.forEach(p=>{p.wf.visible=on;p.mat.opacity=on?0.32:0.85;p.mat.depthWrite=!on});
+}
+setWire(true);
+
+function select(p){
+  selected=p;
+  parts.forEach(q=>{
+    const dim=p&&q!==p;
+    q.mat.opacity=dim?0.06:(wire?0.32:0.85);
+    q.edges.material.opacity=dim?0.15:1;q.edges.material.transparent=true;
+    q.wf.visible=wire&&!dim;
+  });
+  if(p){info.innerHTML='<b>'+p.name+'</b><br>'+p.desc;}
+  else info.innerHTML='<b>Front Wheel Hub, 1982 Accord</b><br>Tap the hub to explode it. Tap any part to inspect it.';
+  [...list.children].forEach(d=>d.classList.toggle('sel',p&&d.textContent===p.name));
+}
+
+parts.forEach(p=>{
+  const d=document.createElement('div');d.textContent=p.name;
+  d.onclick=()=>{target=Math.max(target,1);select(p)};list.appendChild(d);
+});
+
+document.getElementById('bExplode').onclick=()=>{target=target>0.5?0:1;};
+document.getElementById('bWire').onclick=()=>{setWire(!wire);select(selected)};
+document.getElementById('bParts').onclick=e=>{const s=list.style.display==='block';list.style.display=s?'none':'block';e.target.classList.toggle('on',!s)};
+document.getElementById('bAll').onclick=()=>select(null);
+slide.oninput=()=>{target=slide.value/100;amount=target;};
+
+const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();
+let down=null;
+canvas.addEventListener('pointerdown',e=>{down=[e.clientX,e.clientY]});
+canvas.addEventListener('pointerup',e=>{
+  if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;
+  ptr.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);
+  ray.setFromCamera(ptr,camera);
+  const meshes=[];scene.traverse(o=>{if(o.isMesh&&o.userData.part)meshes.push(o)});
+  const hit=ray.intersectObjects(meshes,false)[0];
+  if(!hit){select(null);return}
+  if(amount<0.5){target=1;return}
+  select(hit.object.userData.part);
+});
+
+function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}
+addEventListener('resize',resize);resize();
+
+(function loop(){
+  requestAnimationFrame(loop);
+  amount+=(target-amount)*0.08;
+  slide.value=Math.round(amount*100);
+  layout();controls.update();renderer.render(scene,camera);
+})();
+</script>
+</body>
+</html>
