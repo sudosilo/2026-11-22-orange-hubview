@@ -7,184 +7,457 @@
 <style>
 html,body{margin:0;height:100%;background:#f6f1e7;font-family:Georgia,serif;color:#3a3226;overflow:hidden}
 #c{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
-#bar{position:fixed;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(255,252,245,.92);border-top:1px solid #d9cfbd;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-button{font:inherit;font-size:14px;padding:8px 12px;border:1px solid #b9ab92;background:#fffaf0;border-radius:6px;color:#3a3226}
+#bar{position:fixed;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(255,252,245,.94);border-top:1px solid #d9cfbd;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{font:inherit;font-size:14px;padding:8px 11px;border:1px solid #b9ab92;background:#fffaf0;border-radius:6px;color:#3a3226}
 button.on{background:#e8dcc4}
-#info{position:fixed;top:10px;left:10px;right:10px;padding:10px 12px;background:rgba(255,252,245,.92);border:1px solid #d9cfbd;border-radius:8px;font-size:14px;line-height:1.4}
-#info b{font-size:16px}
-#list{position:fixed;top:90px;right:10px;max-height:55vh;overflow:auto;background:rgba(255,252,245,.92);border:1px solid #d9cfbd;border-radius:8px;font-size:13px;display:none}
-#list div{padding:6px 10px;border-bottom:1px solid #eee4d2}
+#info{position:fixed;top:10px;left:10px;right:10px;padding:10px 12px;background:rgba(255,252,245,.94);border:1px solid #d9cfbd;border-radius:8px;font-size:14px;line-height:1.4}
+#crumb{font-size:12px;color:#7a6c55;margin-bottom:2px}
+#title{font-size:16px;font-weight:bold}
+#list{position:fixed;top:100px;right:10px;width:200px;max-height:52vh;overflow:auto;background:rgba(255,252,245,.96);border:1px solid #d9cfbd;border-radius:8px;font-size:13px;display:none}
+#list div{padding:7px 10px;border-bottom:1px solid #eee4d2}
 #list div.sel{background:#e8dcc4}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
-<div id="info"><b>Front Wheel Hub, 1982 Accord</b><br>Tap the hub to explode it. Tap any part to inspect it.</div>
+<div id="info"><div id="crumb"></div><div id="title"></div><div id="desc"></div></div>
 <div id="list"></div>
 <div id="bar">
+<button id="bBack">Back</button>
 <button id="bExplode">Explode</button>
 <button id="bWire" class="on">Wireframe</button>
 <button id="bParts">Parts</button>
-<button id="bAll">Show All</button>
-<input id="slide" type="range" min="0" max="100" value="0" style="flex:1;min-width:120px">
+<button id="bReset">Reset</button>
+<input id="slide" type="range" min="0" max="100" value="0" style="flex:1;min-width:110px">
 </div>
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
+const PI=Math.PI;
+const PAL=[0x7a9cc6,0xc98b6b,0x8fb28a,0xd4b46a,0xa98bc4,0x6fb3b0,0xc77d8f,0x9c8f7a];
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+
 const canvas=document.getElementById('c');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 const scene=new THREE.Scene();
 scene.background=new THREE.Color(0xf6f1e7);
-const camera=new THREE.PerspectiveCamera(40,1,0.1,200);
-camera.position.set(9,5,12);
+const camera=new THREE.PerspectiveCamera(40,1,0.05,200);
+camera.position.set(6,3.5,7);
 const controls=new OrbitControls(camera,canvas);
 controls.enableDamping=true;
+controls.target.set(0,0.6,0);
 scene.add(new THREE.HemisphereLight(0xfffbf0,0xd8c9ad,1.1));
 const sun=new THREE.DirectionalLight(0xffffff,0.9);sun.position.set(5,10,7);scene.add(sun);
+const grid=new THREE.GridHelper(30,60,0xd9cdb6,0xe6dcc8);scene.add(grid);
 
-const palette=[0x7a9cc6,0xc98b6b,0x8fb28a,0xd4b46a,0xa98bc4,0x6fb3b0,0xc77d8f,0x9c8f7a];
-const parts=[];
-let wire=true;
+/* geometry helpers. car axes: x forward, y up, z toward the left side */
+function box(w,h,d){return new THREE.BoxGeometry(w,h,d)}
+function cyl(r1,r2,h,ax='y',seg=24){const g=new THREE.CylinderGeometry(r1,r2,h,seg);if(ax==='x')g.rotateZ(PI/2);if(ax==='z')g.rotateX(PI/2);return g}
+function lathe(pts,ax='y',seg=40){const g=new THREE.LatheGeometry(pts.map(p=>new THREE.Vector2(p[0],p[1])),seg);if(ax==='z')g.rotateX(PI/2);if(ax==='x')g.rotateZ(-PI/2);return g}
+function ring(r1,r2,h,ax='y',seg=40){return lathe([[r1,-h/2],[r2,-h/2],[r2,h/2],[r1,h/2],[r1,-h/2]],ax,seg)}
+function sph(r){return new THREE.SphereGeometry(r,12,8)}
+function rz(g,a){g.rotateZ(a);return g}
+function rod(a,b,r,seg=12){const A=V(...a),B=V(...b),d=B.clone().sub(A);const g=new THREE.CylinderGeometry(r,r,d.length(),seg);g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(V(0,1,0),d.clone().normalize()));return{geo:g,pos:A.clone().add(B).multiplyScalar(0.5)}}
+function coil(r,h,turns,w){const pts=[],n=turns*20;for(let i=0;i<=n;i++){const t=i/n,a=t*turns*2*PI;pts.push(V(Math.cos(a)*r,t*h-h/2,Math.sin(a)*r))}return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),n,w,6,false)}
+function arc(r,h,start,len){const g=new THREE.CylinderGeometry(r,r,h,20,1,true,start,len);g.rotateX(PI/2);return g}
 
-function lathe(pts,seg=48){return new THREE.LatheGeometry(pts.map(p=>new THREE.Vector2(p[0],p[1])),seg)}
-function ring(r1,r2,h,seg=48){return lathe([[r1,-h/2],[r2,-h/2],[r2,h/2],[r1,h/2],[r1,-h/2]],seg)}
-
-function addPart(name,desc,geo,offset,color,rotX=Math.PI/2,group=null){
-  const g=new THREE.Group();
-  const mat=new THREE.MeshStandardMaterial({color,transparent:true,opacity:0.38,roughness:0.9,side:THREE.DoubleSide,depthWrite:false});
-  const mesh=new THREE.Mesh(geo,mat);
-  const edges=new THREE.LineSegments(new THREE.EdgesGeometry(geo,18),new THREE.LineBasicMaterial({color:new THREE.Color(color).multiplyScalar(0.55)}));
-  const wf=new THREE.LineSegments(new THREE.WireframeGeometry(geo),new THREE.LineBasicMaterial({color:new THREE.Color(color).multiplyScalar(0.7),transparent:true,opacity:0.25}));
-  g.add(mesh,edges,wf);
-  if(rotX)g.rotation.x=rotX;
-  const holder=group||new THREE.Group();
-  if(!group){holder.add(g);scene.add(holder)}
-  const p={name,desc,holder,mesh,wf,edges,mat,offset:new THREE.Vector3(...offset),base:new THREE.Vector3()};
-  mesh.userData.part=p;
-  parts.push(p);
-  return p;
+const ASM=[];
+function asm(name,desc,dir,fn){
+  const a={name,desc,dir:V(...dir),parts:[],amt:0,target:0};
+  const P=(n,d,geo,pos,off)=>{
+    if(geo.geo){off=pos;pos=geo.pos;geo=geo.geo}
+    a.parts.push({name:n,desc:d,geo,pos:pos.isVector3?pos.clone():V(...pos),off:off?V(...off):null,asm:a});
+  };
+  fn(P);ASM.push(a);
 }
+const LR=[[1,'Left'],[-1,'Right']];
 
-/* axis runs along z: positive z is outboard toward the wheel */
-addPart('Tire','155SR13 radial on a steel wheel. Removed first.',
-  lathe([[2.2,-0.8],[2.75,-0.95],[3.05,-0.6],[3.1,0],[3.05,0.6],[2.75,0.95],[2.2,0.8]],64),[0,0,9],palette[7]);
-addPart('Steel Wheel','13 inch steel wheel, 4 lug, 100 mm bolt circle.',
-  lathe([[0.5,0.25],[1.6,0.3],[1.9,0.1],[2.2,-0.7],[2.25,-0.8],[2.25,0.8],[2.2,0.7],[1.9,0.45],[1.6,0.45],[0.5,0.4]],64),[0,0,7],palette[0]);
-addPart('Hub Cap','Snaps over the lug nuts and spindle nut.',
-  lathe([[0,0.55],[0.9,0.5],[1.3,0.35],[1.35,0.2],[1.3,0.15]],48),[0,0,10.5],palette[3]);
-
-const lugGroup=new THREE.Group();scene.add(lugGroup);
-for(let i=0;i<4;i++){
-  const a=i*Math.PI/2+Math.PI/4,r=0.71;
-  const lg=new THREE.Group();lg.position.set(Math.cos(a)*r,Math.sin(a)*r,0);lugGroup.add(lg);
-  addPart('Lug Nut '+(i+1),'12 x 1.5 mm, 19 mm hex. Torque about 80 ft lb in a star pattern.',
-    new THREE.CylinderGeometry(0.16,0.16,0.3,6),[Math.cos(a)*0.4,Math.sin(a)*0.4,6],palette[3],Math.PI/2,lg).holder=lg;
-  scene.remove(lg);lugGroup.add(lg);
-  lg.add(parts[parts.length-1].mesh.parent);
-}
-
-addPart('Spindle Nut','Staked nut on the CV axle stub. Holds the hub and bearing preload.',
-  new THREE.CylinderGeometry(0.3,0.3,0.25,6),[0,0,5.2],palette[6]);
-addPart('Brake Disc','Solid front rotor. Sits on the hub, held by two screws and the wheel.',
-  lathe([[0.6,0.32],[0.95,0.32],[0.95,0.12],[1.85,0.12],[1.85,-0.12],[0.95,-0.12],[0.95,0.0],[0.6,0.0]],64),[0,0,3.6],palette[1]);
-addPart('Front Hub','Splined to the CV stub, carries the 4 wheel studs.',
-  lathe([[0.22,-0.9],[0.42,-0.9],[0.42,-0.1],[1.05,-0.05],[1.05,0.15],[0.3,0.2],[0.22,0.2]],48),[0,0,2.4],palette[2]);
-addPart('Outer Dust Seal','Keeps grit out of the bearing on the wheel side.',
-  ring(0.45,0.7,0.1),[0,0,1.5],palette[5]);
-addPart('Wheel Bearing','Sealed double row ball bearing pressed into the knuckle.',
-  ring(0.42,0.72,0.55),[0,0,0.9],palette[4]);
-addPart('Bearing Snap Ring','Retains the bearing in the knuckle bore.',
-  ring(0.72,0.8,0.04),[0,0,0.3],palette[6]);
-
-const kn=new THREE.Group();
-{
-  const body=lathe([[0.74,-0.45],[1.05,-0.45],[1.1,0.35],[0.74,0.35]],48);
-  const p=addPart('Steering Knuckle','Cast knuckle. Ball joints top and bottom, tie rod arm at rear.',body,[0,0,-0.4],palette[7]);
-  const extra=[
-    [new THREE.BoxGeometry(0.4,2.0,0.35),[0,1.9,0]],
-    [new THREE.BoxGeometry(0.4,1.2,0.35),[0,-1.5,0]],
-    [new THREE.BoxGeometry(1.2,0.3,0.3),[-1.5,-0.4,0]],
-  ];
-  extra.forEach(([g,pos])=>{
-    const m=new THREE.Mesh(g,p.mat);m.position.set(...pos);m.userData.part=p;
-    const e=new THREE.LineSegments(new THREE.EdgesGeometry(g),p.edges.material);e.position.copy(m.position);
-    p.holder.add(m,e);
+/* BODY SHELL */
+asm('Body Shell','Welded steel unibody. Everything else bolts to it.',[0,0,0],P=>{
+  P('Floor Pan','Stamped steel floor, the base of the unibody.',box(2.1,0.035,1.5),[-0.2,0.22,0]);
+  P('Trunk Floor','Raised floor over the fuel tank.',box(0.9,0.03,1.4),[-1.7,0.4,0]);
+  P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.5,1.45),[0.85,0.6,0]);
+  P('Cowl Panel','Panel under the windshield with the fresh air intake.',box(0.3,0.03,1.4),[0.97,0.87,0]);
+  P('Radiator Core Support','Front bulkhead that holds the radiator and latch.',box(0.05,0.42,1.4),[2.02,0.55,0]);
+  P('Roof Panel','Single stamped roof skin.',box(1.15,0.035,1.3),[-0.28,1.35,0]);
+  P('Rear Package Shelf','Shelf behind the rear seat.',box(0.35,0.03,1.35),[-1.05,0.88,0]);
+  P('Rear Body Panel','Panel under the trunk opening.',box(0.035,0.35,1.5),[-2.17,0.55,0]);
+  LR.forEach(([s,sd])=>{
+    P(sd+' Rocker Panel','Boxed sill under the doors. Main side rail of the shell.',box(1.95,0.14,0.06),[-0.2,0.3,s*0.8]);
+    P(sd+' Front Frame Rail','Box section rail carrying the engine and front suspension.',box(1.25,0.1,0.08),[1.45,0.33,s*0.52]);
+    P(sd+' Front Strut Tower','Stamped tower that takes the top of the front strut.',cyl(0.1,0.13,0.32),[1.25,0.66,s*0.6]);
+    P(sd+' Front Fender','Bolt on steel fender.',box(1.25,0.4,0.035),[1.55,0.62,s*0.81]);
+    P(sd+' Rear Quarter Panel','Welded rear quarter, part of the shell.',box(1.05,0.42,0.035),[-1.68,0.62,s*0.81]);
+    P(sd+' A Pillar','Windshield pillar.',rz(box(0.7,0.05,0.05),-0.765),[0.5,1.09,s*0.72]);
+    P(sd+' B Pillar','Center pillar between the doors.',box(0.07,0.5,0.05),[-0.3,1.08,s*0.76]);
+    P(sd+' C Pillar','Rear roof pillar.',rz(box(0.6,0.05,0.06),0.94),[-1.02,1.09,s*0.7]);
+    P(sd+' Rear Strut Tower','Rear strut tower inside the trunk.',cyl(0.09,0.11,0.3),[-1.25,0.68,s*0.6]);
   });
-}
-addPart('Inner Dust Seal','Seals the axle side of the bearing.',
-  ring(0.38,0.7,0.1),[0,0,-1.4],palette[5]);
-addPart('Splash Guard','Thin steel shield behind the disc.',
-  lathe([[0.8,0],[1.95,0],[2.0,0.25]],64),[0,0,-2.2],palette[0]);
-
-{
-  const g=new THREE.BoxGeometry(0.7,1.3,0.9);
-  const p=addPart('Brake Caliper','Single piston sliding caliper. Two bolts to the knuckle.',g,[2.4,1.2,3.8],palette[6],0);
-  p.holder.position.set(0,1.6,0);
-  p.homeExtra=new THREE.Vector3(0,1.6,0.35);
-}
-{
-  const g=new THREE.BoxGeometry(0.55,1.1,0.18);
-  const a=addPart('Inner Brake Pad','Piston side pad.',g,[3.6,1.4,2.8],palette[3],0);
-  a.homeExtra=new THREE.Vector3(0,1.6,0.2);
-  const b=addPart('Outer Brake Pad','Finger side pad.',g,[3.6,1.4,4.6],palette[3],0);
-  b.homeExtra=new THREE.Vector3(0,1.6,0.5);
-}
-addPart('CV Axle Stub','Outer CV joint stub. Splines pass through bearing and hub.',
-  lathe([[0,-4.2],[0.75,-4.2],[0.8,-3.2],[0.3,-2.9],[0.25,-0.6],[0.2,1.0],[0,1.0]],32),[0,0,-5.5],palette[4]);
-
-parts.forEach(p=>{if(p.homeExtra)p.base.copy(p.homeExtra)});
-lugGroup.position.set(0,0,0.95);
-parts.filter(p=>p.name.startsWith('Lug')).forEach(p=>{p.base.set(0,0,0);});
-
-/* Lug group handled as one holder for explode offset */
-const lugParts=parts.filter(p=>p.name.startsWith('Lug'));
-
-let target=0,amount=0,selected=null,isolate=false;
-const slide=document.getElementById('slide');
-const info=document.getElementById('info');
-const list=document.getElementById('list');
-
-function layout(){
-  parts.forEach(p=>{
-    if(p.name.startsWith('Lug'))return;
-    p.holder.position.copy(p.base).addScaledVector(p.offset,amount);
-  });
-  lugGroup.position.set(0,0,0.95+6*amount);
-  lugParts.forEach(p=>{p.holder.position.set(p.holder.position.x,p.holder.position.y,0)});
-}
-
-function setWire(on){
-  wire=on;document.getElementById('bWire').classList.toggle('on',on);
-  parts.forEach(p=>{p.wf.visible=on;p.mat.opacity=on?0.32:0.85;p.mat.depthWrite=!on});
-}
-setWire(true);
-
-function select(p){
-  selected=p;
-  parts.forEach(q=>{
-    const dim=p&&q!==p;
-    q.mat.opacity=dim?0.06:(wire?0.32:0.85);
-    q.edges.material.opacity=dim?0.15:1;q.edges.material.transparent=true;
-    q.wf.visible=wire&&!dim;
-  });
-  if(p){info.innerHTML='<b>'+p.name+'</b><br>'+p.desc;}
-  else info.innerHTML='<b>Front Wheel Hub, 1982 Accord</b><br>Tap the hub to explode it. Tap any part to inspect it.';
-  [...list.children].forEach(d=>d.classList.toggle('sel',p&&d.textContent===p.name));
-}
-
-parts.forEach(p=>{
-  const d=document.createElement('div');d.textContent=p.name;
-  d.onclick=()=>{target=Math.max(target,1);select(p)};list.appendChild(d);
 });
 
-document.getElementById('bExplode').onclick=()=>{target=target>0.5?0:1;};
-document.getElementById('bWire').onclick=()=>{setWire(!wire);select(selected)};
+asm('Glass','Windshield and rear window.',[0,0.8,0],P=>{
+  P('Windshield','Laminated safety glass.',rz(box(0.7,0.008,1.32),-0.765),[0.5,1.09,0]);
+  P('Rear Window','Tempered glass with defroster grid.',rz(box(0.6,0.008,1.28),0.94),[-1.02,1.09,0]);
+});
+
+asm('Hood','Front hinged hood with prop rod.',[0.4,2.2,0],P=>{
+  P('Hood Panel','Steel hood skin and inner brace.',rz(box(1.12,0.03,1.42),-0.07),[1.48,0.88,0],[0,0.2,0]);
+  P('Hood Insulation Pad','Sound pad under the hood.',box(0.9,0.015,1.2),[1.45,0.85,0],[0,-0.15,0]);
+  LR.forEach(([s,sd])=>P(sd+' Hood Hinge','Bolted hinge at the cowl.',box(0.12,0.05,0.03),[0.95,0.87,s*0.62],[-0.2,0,s*0.15]));
+  P('Hood Latch','Latch on the core support with safety catch.',box(0.08,0.06,0.1),[2.0,0.8,0],[0.25,-0.1,0]);
+  P('Hood Prop Rod','Rod that holds the hood open.',rod([1.95,0.8,0.6],[1.3,0.82,0.6],0.005),[0,-0.25,0.2]);
+});
+
+asm('Trunk Lid','Rear deck lid with torsion bar hinges.',[-0.5,1.6,0],P=>{
+  P('Trunk Lid Panel','Steel deck lid.',rz(box(0.78,0.03,1.4),0.04),[-1.77,0.88,0],[0,0.2,0]);
+  LR.forEach(([s,sd])=>P(sd+' Trunk Hinge','Gooseneck hinge.',box(0.2,0.04,0.03),[-1.38,0.86,s*0.55],[0.2,0,s*0.15]));
+  P('Torsion Bars','Spring bars that lift the lid.',rod([-1.4,0.85,-0.5],[-1.4,0.85,0.5],0.005),[0.25,-0.15,0]);
+  P('Lock Cylinder','Key cylinder.',cyl(0.015,0.015,0.04,'x'),[-2.16,0.8,0],[-0.3,0,0]);
+  P('Trunk Latch','Latch that catches the striker.',box(0.06,0.05,0.08),[-2.12,0.72,0],[-0.2,-0.2,0]);
+});
+
+/* DOORS */
+function door(front,s,sd){
+  const x0=front?0.75:-0.3,x1=front?-0.3:-1.15,len=x0-x1,xc=(x0+x1)/2;
+  asm((front?'Front ':'Rear ')+sd+' Door',(front?'Front':'Rear')+' door, hinged at its front edge.',[0,0.1,s*1.1],P=>{
+    P('Outer Skin','Stamped steel door skin.',box(len,0.5,0.03),[xc,0.6,s*0.83],[0,0,s*0.3]);
+    P('Inner Panel','Inner door structure.',box(len,0.48,0.03),[xc,0.6,s*0.77],[0,0,0]);
+    P('Window Glass','Tempered side glass.',box(len*0.88,0.42,0.006),[xc,1.05,s*0.8],[0,0.5,0]);
+    P('Window Frame','Sash that guides the glass.',box(len,0.03,0.03),[xc,1.3,s*0.8],[0,0.8,0]);
+    P('Window Regulator','Crank driven scissor regulator.',box(0.32,0.3,0.02),[xc,0.65,s*0.8],[0,0.15,s*0.15]);
+    P('Window Crank','Hand crank for the regulator.',box(0.1,0.015,0.015),[xc,0.75,s*0.71],[0,0.1,-s*0.4]);
+    P('Door Trim Panel','Vinyl trim panel with armrest.',box(len,0.45,0.02),[xc,0.62,s*0.73],[0,0,-s*0.25]);
+    P('Outside Handle','Pull up door handle.',box(0.14,0.03,0.03),[x1+0.12,0.8,s*0.855],[0,0.1,s*0.5]);
+    P('Door Latch','Latch at the rear edge.',box(0.03,0.1,0.06),[x1+0.03,0.75,s*0.8],[-0.3,0,0]);
+    P('Upper Hinge','Bolted door hinge.',box(0.06,0.06,0.04),[x0,0.8,s*0.79],[0.3,0.05,0]);
+    P('Lower Hinge','Bolted door hinge.',box(0.06,0.06,0.04),[x0,0.45,s*0.79],[0.3,-0.05,0]);
+    if(front)P('Side Mirror','Door mounted mirror.',box(0.12,0.08,0.1),[x0-0.12,1.0,s*0.88],[0.1,0.25,s*0.35]);
+  });
+}
+LR.forEach(([s,sd])=>{door(true,s,sd);door(false,s,sd)});
+
+/* ENGINE: EK1 1751cc CVCC, transverse */
+const EX=1.5,EZ=-0.12,CZ=[-0.165,-0.055,0.055,0.165];
+asm('Engine','EK1 1751cc CVCC inline four, SOHC 12 valve, carbureted.',[1.8,0.8,-0.5],P=>{
+  P('Cylinder Block','Cast iron block with four bores.',box(0.3,0.32,0.45),[EX,0.5,EZ],[0,0,0]);
+  P('Head Gasket','Seals the head to the block.',box(0.3,0.008,0.45),[EX,0.663,EZ],[0,0.25,0]);
+  P('Cylinder Head','Aluminum head with CVCC prechambers.',box(0.28,0.12,0.45),[EX,0.73,EZ],[0,0.4,0]);
+  P('Camshaft','Single overhead cam, belt driven.',cyl(0.015,0.015,0.46,'z'),[EX,0.77,EZ],[0,0.58,0]);
+  P('Valve Cover','Stamped cover over the cam and rockers.',box(0.22,0.07,0.44),[EX,0.83,EZ],[0,0.75,0]);
+  P('Oil Pan','Steel sump.',box(0.28,0.1,0.42),[EX,0.29,EZ],[0,-0.4,0]);
+  P('Crankshaft','Forged crank, five main bearings.',cyl(0.03,0.03,0.5,'z'),[EX,0.38,EZ],[0,-0.22,0]);
+  CZ.forEach((z,i)=>{
+    P('Piston '+(i+1),'Cast aluminum piston with three rings.',cyl(0.04,0.04,0.07),[EX,0.6,EZ+z],[0.45,0.1,0]);
+    P('Connecting Rod '+(i+1),'Forged rod between piston and crank.',box(0.02,0.13,0.03),[EX,0.48,EZ+z],[0.45,-0.08,0]);
+    P('Spark Plug '+(i+1),'Plug threaded into the head.',cyl(0.008,0.008,0.08),[EX+0.06,0.8,EZ+z],[0.25,0.6,0]);
+  });
+  P('Timing Belt','Toothed belt from crank to cam.',box(0.06,0.4,0.02),[EX,0.57,EZ-0.25],[0,0,-0.3]);
+  P('Timing Belt Cover','Upper and lower belt covers.',box(0.12,0.45,0.03),[EX,0.57,EZ-0.28],[0,0,-0.45]);
+  P('Crank Pulley','Drives the alternator and water pump belt.',cyl(0.07,0.07,0.03,'z'),[EX,0.38,EZ-0.3],[0,0,-0.6]);
+  P('Water Pump','Belt driven coolant pump.',cyl(0.05,0.05,0.05,'z'),[EX+0.07,0.5,EZ-0.27],[0.2,0,-0.45]);
+  P('Alternator','Charges the battery.',cyl(0.06,0.06,0.12,'z'),[EX+0.12,0.45,EZ-0.18],[0.4,-0.1,-0.3]);
+  P('Intake Manifold','Feeds the main and prechamber ports.',box(0.12,0.1,0.38),[EX-0.2,0.68,EZ],[-0.4,0.1,0]);
+  P('Carburetor','Keihin three barrel CVCC carburetor.',box(0.1,0.1,0.12),[EX-0.27,0.78,EZ],[-0.5,0.35,0]);
+  P('Air Cleaner','Round housing with paper element.',cyl(0.2,0.2,0.08),[EX-0.2,0.92,EZ],[0,0.9,0]);
+  P('Exhaust Manifold','Cast iron manifold with heat shield.',box(0.08,0.12,0.36),[EX+0.18,0.62,EZ],[0.4,0,0]);
+  P('Distributor','Cam driven distributor.',cyl(0.035,0.04,0.12,'z'),[EX,0.77,EZ+0.28],[0,0.25,0.4]);
+  P('Starter Motor','Engages the flywheel ring gear.',cyl(0.045,0.045,0.18,'z'),[EX-0.18,0.4,EZ+0.34],[-0.35,-0.1,0.35]);
+  P('Flywheel','Ring gear and clutch face.',cyl(0.13,0.13,0.03,'z'),[EX,0.38,EZ+0.25],[0,0,0.4]);
+  P('Oil Filter','Spin on filter.',cyl(0.04,0.04,0.09,'x'),[EX+0.14,0.38,EZ+0.07],[0.4,-0.15,0]);
+  P('Fuel Pump','Mechanical pump run off the cam.',box(0.06,0.06,0.05),[EX-0.2,0.62,EZ+0.17],[-0.35,0.1,0.15]);
+});
+
+asm('Transmission','Five speed manual transaxle with clutch and differential.',[1.2,0.2,1.3],P=>{
+  P('Clutch Disc','Friction disc splined to the input shaft.',cyl(0.1,0.1,0.012,'z'),[EX,0.38,0.16],[0.3,0,-0.3]);
+  P('Pressure Plate','Diaphragm spring clamp.',cyl(0.11,0.11,0.04,'z'),[EX,0.38,0.19],[0.3,0,-0.15]);
+  P('Release Bearing','Pushes the diaphragm fingers.',ring(0.025,0.045,0.025,'z'),[EX,0.38,0.23],[0.3,0.12,0.02]);
+  P('Clutch Fork','Cable operated release fork.',box(0.02,0.15,0.02),[EX+0.06,0.45,0.25],[0.35,0.25,0]);
+  P('Bellhousing','Bolts the transaxle to the engine.',cyl(0.16,0.14,0.1,'z'),[EX,0.4,0.27],[0,0,0.05]);
+  P('Transmission Case','Aluminum gearbox case.',box(0.32,0.28,0.25),[EX-0.03,0.42,0.45],[0,0,0.25]);
+  P('Mainshaft','Input shaft with drive gears.',cyl(0.025,0.025,0.24,'z'),[EX,0.38,0.45],[0,0.45,0.35]);
+  P('Countershaft','Output shaft with driven gears.',cyl(0.03,0.03,0.22,'z'),[EX-0.1,0.42,0.45],[0,0.6,0.35]);
+  P('Final Drive Gear','Ring gear on the differential.',cyl(0.12,0.12,0.02,'z'),[1.25,0.29,0.22],[-0.3,-0.25,0.05]);
+  P('Differential','Open differential carrier.',cyl(0.09,0.09,0.12,'z'),[1.25,0.29,0.15],[-0.3,-0.25,-0.1]);
+  P('Shift Rod','Linkage from the shifter to the box.',rod([1.35,0.3,0.3],[0.45,0.32,0.05],0.008),[-0.2,-0.15,0]);
+});
+
+asm('Drive Axles','Half shafts with constant velocity joints.',[0.5,-0.8,0],P=>{
+  P('Left Inner CV Joint','Plunging inner joint.',cyl(0.045,0.045,0.07,'z'),[1.25,0.29,0.255]);
+  P('Left Inner CV Boot','Rubber boot holding grease.',cyl(0.025,0.05,0.07,'z'),[1.25,0.29,0.32]);
+  P('Left Half Shaft','Solid steel shaft.',rod([1.25,0.29,0.29],[1.25,0.29,0.455],0.013));
+  P('Right Inner CV Joint','Plunging inner joint.',cyl(0.045,0.045,0.07,'z'),[1.25,0.29,0.045]);
+  P('Right Inner CV Boot','Rubber boot holding grease.',cyl(0.05,0.025,0.07,'z'),[1.25,0.29,-0.02]);
+  P('Right Half Shaft','Solid steel shaft.',rod([1.25,0.29,0.01],[1.25,0.29,-0.455],0.013));
+});
+
+/* WHEEL PARTS shared by all four corners, drawn in hub units then scaled */
+const K=0.094;
+const TIRE=[[2.2,-0.8],[2.75,-0.95],[3.05,-0.6],[3.1,0],[3.05,0.6],[2.75,0.95],[2.2,0.8]];
+const WHEEL=[[0.5,0.25],[1.6,0.3],[1.9,0.1],[2.2,-0.7],[2.25,-0.8],[2.25,0.8],[2.2,0.7],[1.9,0.45],[1.6,0.45],[0.5,0.4]];
+const CAP=[[0,0.55],[0.9,0.5],[1.3,0.35],[1.35,0.2],[1.3,0.15]];
+function corner(P,cx,cz,s){
+  const sc=g=>{g.scale(K,K,K*s);return g};
+  const L=(pts,seg=48)=>sc(lathe(pts,'z',seg));
+  const at=(x,y,z)=>[cx+x*K,0.29+y*K,cz+z*K*s];
+  const o=(x,y,z)=>[x*K,y*K,z*K*s];
+  P('Tire','155SR13 steel belted radial.',L(TIRE,64),at(0,0,0),o(0,0,9));
+  P('Steel Wheel','13 inch steel wheel, 4 lug, 100 mm bolt circle.',L(WHEEL,64),at(0,0,0),o(0,0,7));
+  P('Hub Cap','Snaps over the lug nuts.',L(CAP),at(0,0,0),o(0,0,10.5));
+  for(let i=0;i<4;i++){const a=i*PI/2+PI/4;
+    P('Lug Nut '+(i+1),'12 x 1.5 mm, 19 mm hex. About 80 ft lb in a star pattern.',sc(cyl(0.16,0.16,0.3,'z',6)),at(Math.cos(a)*0.71,Math.sin(a)*0.71,0.95),o(Math.cos(a)*0.4,Math.sin(a)*0.4,6));}
+  return{sc,L,at,o};
+}
+
+LR.forEach(([s,sd])=>{
+  const cx=1.25,cz=s*0.70;
+  asm('Front '+sd+' Corner','Wheel, hub, disc brake and MacPherson strut.',[0.3,0,s*1.9],P=>{
+    const{sc,L,at,o}=corner(P,cx,cz,s);
+    P('Spindle Nut','Staked nut on the axle stub. Sets bearing preload.',sc(cyl(0.3,0.3,0.25,'z',6)),at(0,0,0.35),o(0,0,5.2));
+    P('Brake Disc','Solid front rotor.',L([[0.6,0.32],[0.95,0.32],[0.95,0.12],[1.85,0.12],[1.85,-0.12],[0.95,-0.12],[0.95,0],[0.6,0]],64),at(0,0,0),o(0,0,3.6));
+    P('Front Hub','Splined to the axle stub, carries the wheel studs.',L([[0.22,-0.9],[0.42,-0.9],[0.42,-0.1],[1.05,-0.05],[1.05,0.15],[0.3,0.2],[0.22,0.2]]),at(0,0,0),o(0,0,2.4));
+    P('Outer Dust Seal','Keeps grit out of the bearing.',L([[0.45,-0.05],[0.7,-0.05],[0.7,0.05],[0.45,0.05],[0.45,-0.05]]),at(0,0,0),o(0,0,1.5));
+    P('Wheel Bearing','Sealed double row ball bearing.',L([[0.42,-0.27],[0.72,-0.27],[0.72,0.27],[0.42,0.27],[0.42,-0.27]]),at(0,0,0),o(0,0,0.9));
+    P('Bearing Snap Ring','Retains the bearing in the knuckle.',L([[0.72,-0.02],[0.8,-0.02],[0.8,0.02],[0.72,0.02],[0.72,-0.02]]),at(0,0,0),o(0,0,0.3));
+    P('Steering Knuckle','Cast knuckle holding the bearing.',L([[0.74,-0.45],[1.05,-0.45],[1.1,0.35],[0.74,0.35]]),at(0,0,0),o(0,0,-0.4));
+    P('Knuckle Strut Clamp','Upper arm of the knuckle, clamps the strut.',sc(box(0.4,2.0,0.35)),at(0,1.9,0),o(0,1.8,-0.4));
+    P('Ball Joint Boss','Lower arm of the knuckle.',sc(box(0.4,1.2,0.35)),at(0,-1.5,0),o(0,-1.8,-0.4));
+    P('Steering Arm','Arm the tie rod pulls on.',sc(box(1.2,0.3,0.3)),at(-1.5,-0.4,0),o(-1.8,0,-0.4));
+    P('Inner Dust Seal','Seals the axle side.',L([[0.38,-0.05],[0.7,-0.05],[0.7,0.05],[0.38,0.05],[0.38,-0.05]]),at(0,0,0),o(0,0,-1.4));
+    P('Splash Guard','Steel shield behind the disc.',L([[0.8,0],[1.95,0],[2.0,0.25]],64),at(0,0,-0.2),o(0,0,-2.2));
+    P('Brake Caliper','Single piston sliding caliper.',sc(box(0.7,1.3,0.9)),at(0,1.6,0.35),o(2.4,1.2,3.8));
+    P('Inner Brake Pad','Piston side pad.',sc(box(0.55,1.1,0.18)),at(0,1.6,0.2),o(3.6,1.4,2.8));
+    P('Outer Brake Pad','Finger side pad.',sc(box(0.55,1.1,0.18)),at(0,1.6,0.5),o(3.6,1.4,4.6));
+    P('Outer CV Joint','Fixed outer joint with splined stub.',L([[0,-2.6],[0.75,-2.6],[0.8,-1.6],[0.3,-1.3],[0.25,-0.6],[0.2,1.0],[0,1.0]],32),at(0,0,0),o(0,0,-5.5));
+    P('Front Strut','Oil filled MacPherson strut.',rod([cx,0.57,s*0.66],[cx,0.8,s*0.6],0.022),[0,0.45,0]);
+    P('Front Coil Spring','Coil over the strut.',coil(0.065,0.2,5,0.006),[cx,0.7,s*0.62],[0,0.7,0]);
+    P('Upper Strut Mount','Rubber mount bolted to the tower.',cyl(0.08,0.08,0.03),[cx,0.83,s*0.6],[0,0.95,0]);
+    P('Lower Control Arm','Stamped lower arm.',rod([cx,0.11,s*0.3],[cx,0.11,s*0.62],0.015),[0,-0.3,-s*0.2]);
+    P('Lower Ball Joint','Joint between arm and knuckle.',sph(0.025),[cx,0.13,s*0.66],[0,-0.25,0]);
+    P('Radius Rod','Locates the lower arm fore and aft.',rod([cx,0.11,s*0.55],[1.68,0.15,s*0.45],0.012),[0.3,-0.3,-s*0.1]);
+    P('Tie Rod End','Ball joint on the steering arm.',sph(0.02),[1.05,0.25,s*0.66],[-0.3,0,0]);
+  });
+});
+
+LR.forEach(([s,sd])=>{
+  const cx=-1.2,cz=s*0.70;
+  asm('Rear '+sd+' Corner','Wheel, drum brake, hub and MacPherson strut.',[-0.3,0,s*1.9],P=>{
+    const{sc,L,at,o}=corner(P,cx,cz,s);
+    P('Hub Nut','Castle nut on the spindle.',sc(cyl(0.3,0.3,0.25,'z',6)),at(0,0,0.6),o(0,0,5.2));
+    P('Grease Cap','Cap over the hub nut.',L([[0,0.9],[0.35,0.85],[0.38,0.5]]),at(0,0,0),o(0,0,5.8));
+    P('Brake Drum','Cast iron drum with integral hub.',L([[0.6,0.5],[1.9,0.5],[1.9,-0.6],[1.75,-0.6],[1.75,0.35],[0.6,0.35]],64),at(0,0,0),o(0,0,3.6));
+    P('Outer Wheel Bearing','Tapered roller bearing.',L([[0.3,-0.15],[0.6,-0.15],[0.6,0.15],[0.3,0.15],[0.3,-0.15]]),at(0,0,0.3),o(0,0,2.6));
+    P('Inner Wheel Bearing','Tapered roller bearing.',L([[0.3,-0.15],[0.6,-0.15],[0.6,0.15],[0.3,0.15],[0.3,-0.15]]),at(0,0,-0.2),o(0,0,1.9));
+    P('Leading Brake Shoe','Bonded lining shoe.',sc(arc(1.65,0.45,0.15*PI,0.7*PI)),at(0,0,-0.1),o(0,1.6,1.2));
+    P('Trailing Brake Shoe','Bonded lining shoe.',sc(arc(1.65,0.45,1.15*PI,0.7*PI)),at(0,0,-0.1),o(0,-1.6,1.2));
+    P('Wheel Cylinder','Pushes the shoes out against the drum.',sc(cyl(0.15,0.15,0.9,'x')),at(0,1.5,-0.1),o(0,2.6,0.6));
+    P('Shoe Return Spring','Pulls the shoes back off the drum.',rz(coil(0.006,0.13,8,0.0015),PI/2),at(0,-1.4,-0.1),o(0,-2.6,0.6));
+    P('Backing Plate','Mounts the shoes and wheel cylinder.',L([[0.5,0],[1.85,0],[1.95,0.3]],64),at(0,0,-0.5),o(0,0,-1.2));
+    P('Rear Knuckle','Carries the spindle and backing plate.',L([[0.3,-0.6],[0.9,-0.6],[0.9,-0.9],[0.3,-0.9]]),at(0,0,0),o(0,0,-2.4));
+    P('Rear Spindle','Fixed stub axle.',L([[0,-0.6],[0.3,-0.6],[0.28,1.0],[0,1.0]],24),at(0,0,0),o(0,0,-3.4));
+    P('Rear Strut','MacPherson strut.',rod([cx,0.5,s*0.66],[-1.25,0.82,s*0.6],0.02),[0,0.45,0]);
+    P('Rear Coil Spring','Coil over the strut.',coil(0.06,0.2,5,0.006),[-1.23,0.68,s*0.62],[0,0.7,0]);
+    P('Rear Upper Mount','Rubber mount in the trunk tower.',cyl(0.07,0.07,0.03),[-1.25,0.84,s*0.6],[0,0.95,0]);
+    P('Lower Lateral Arm','Locates the wheel side to side.',rod([cx,0.13,s*0.62],[cx,0.15,s*0.15],0.013),[0,-0.3,-s*0.2]);
+    P('Rear Radius Rod','Locates the wheel fore and aft.',rod([cx,0.14,s*0.6],[-0.8,0.18,s*0.62],0.012),[0.3,-0.3,0]);
+  });
+});
+
+asm('Front Crossmember','Subframe, stabilizer bar and engine mounts.',[0.6,-1.0,0],P=>{
+  P('Crossmember','Bolted under the engine between the rails.',box(0.14,0.07,1.0),[1.42,0.17,0]);
+  P('Stabilizer Bar','Torsion bar linking the front wheels.',rod([1.62,0.16,-0.58],[1.62,0.16,0.58],0.011));
+  LR.forEach(([s,sd])=>P(sd+' Stabilizer Bushing','Rubber bushing clamp.',cyl(0.02,0.02,0.03,'z'),[1.62,0.18,s*0.3]));
+  P('Front Engine Mount','Rubber and steel mount.',box(0.06,0.06,0.06),[1.72,0.35,EZ]);
+  P('Rear Engine Mount','Rubber and steel mount.',box(0.06,0.06,0.06),[1.3,0.32,EZ]);
+  P('Side Engine Mount','Upper mount at the timing end.',box(0.06,0.06,0.06),[EX,0.72,-0.47]);
+  P('Transmission Mount','Upper mount on the transaxle.',box(0.06,0.06,0.06),[1.42,0.6,0.5]);
+});
+
+asm('Steering','Rack and pinion steering with column.',[0.1,1.4,0.7],P=>{
+  P('Rack Housing','Rack and pinion gear.',cyl(0.028,0.028,0.62,'z'),[1.0,0.42,0.02]);
+  P('Pinion Housing','Pinion gear input.',cyl(0.03,0.03,0.1),[1.0,0.47,0.3]);
+  P('Left Rack Boot','Bellows over the rack end.',cyl(0.02,0.03,0.1,'z'),[1.0,0.42,0.38]);
+  P('Right Rack Boot','Bellows over the rack end.',cyl(0.03,0.02,0.1,'z'),[1.0,0.42,-0.34]);
+  P('Left Tie Rod','Connects the rack to the knuckle.',rod([1.0,0.42,0.42],[1.05,0.26,0.64],0.01));
+  P('Right Tie Rod','Connects the rack to the knuckle.',rod([1.0,0.42,-0.38],[1.05,0.26,-0.64],0.01));
+  P('Intermediate Shaft','Universal jointed shaft through the firewall.',rod([1.0,0.52,0.3],[0.72,0.74,0.35],0.012));
+  P('Steering Column','Collapsible column with jacket.',rod([0.72,0.74,0.35],[0.3,0.94,0.35],0.03));
+  P('Ignition Switch','Key switch and steering lock.',box(0.05,0.05,0.05),[0.42,0.86,0.42]);
+  const w=new THREE.TorusGeometry(0.19,0.012,8,40);w.rotateY(PI/2);w.rotateZ(-0.445);
+  P('Steering Wheel','Two spoke wheel.',w,[0.27,0.955,0.35]);
+  P('Horn Pad','Center pad with horn switch.',rz(cyl(0.05,0.05,0.04,'x'),-0.445),[0.27,0.955,0.35]);
+});
+
+asm('Brake System','Booster, master cylinder and lines.',[0.2,1.6,1.0],P=>{
+  P('Brake Booster','Vacuum servo.',cyl(0.11,0.11,0.1,'x'),[0.79,0.72,0.42]);
+  P('Master Cylinder','Tandem master cylinder.',cyl(0.025,0.025,0.18,'x'),[0.93,0.74,0.42]);
+  P('Fluid Reservoir','Brake fluid reservoir.',box(0.07,0.06,0.08),[0.95,0.8,0.42]);
+  P('Proportioning Valve','Splits pressure front and rear.',box(0.05,0.04,0.04),[0.85,0.5,0.3]);
+  P('Left Front Brake Line','Steel line and hose to the caliper.',rod([0.9,0.5,0.4],[1.25,0.5,0.62],0.004));
+  P('Right Front Brake Line','Steel line and hose to the caliper.',rod([0.9,0.5,0.3],[1.25,0.5,-0.62],0.004));
+  P('Rear Brake Line','Steel line along the floor.',rod([0.85,0.21,0.3],[-1.15,0.21,0.3],0.004));
+  P('Left Rear Brake Hose','Hose to the wheel cylinder.',rod([-1.15,0.21,0.3],[-1.2,0.35,0.6],0.004));
+  P('Right Rear Brake Hose','Hose to the wheel cylinder.',rod([-1.15,0.21,0.3],[-1.2,0.35,-0.6],0.004));
+  P('Parking Brake Lever','Hand lever between the seats.',box(0.25,0.05,0.04),[0.0,0.38,0.05]);
+  P('Parking Brake Cable','Cable to the rear shoes.',rod([0,0.21,0],[-1.15,0.2,0],0.004));
+});
+
+asm('Fuel System','Tank, lines and filter.',[-0.6,-1.0,0.6],P=>{
+  P('Fuel Tank','Steel tank under the trunk floor.',box(0.5,0.18,0.62),[-1.62,0.2,0.14]);
+  P('Fuel Sending Unit','Float gauge sender.',cyl(0.04,0.04,0.03),[-1.62,0.305,0.2]);
+  P('Filler Neck','Pipe from the cap to the tank.',rod([-1.45,0.28,0.42],[-1.6,0.66,0.8],0.022));
+  P('Fuel Cap','Vented cap.',cyl(0.035,0.035,0.02,'z'),[-1.6,0.66,0.82]);
+  P('Fuel Line','Steel line forward along the floor.',rod([-1.38,0.2,0.32],[0.82,0.2,0.32],0.004));
+  P('Fuel Filter','Inline filter.',cyl(0.02,0.02,0.07),[0.88,0.35,0.32]);
+  P('Fuel Hose','Hose to the mechanical pump.',rod([0.88,0.39,0.32],[1.3,0.62,0.05],0.005));
+  P('Charcoal Canister','Holds fuel vapor.',cyl(0.05,0.05,0.15),[1.8,0.55,0.3]);
+});
+
+asm('Cooling System','Radiator, fan and hoses.',[1.6,0.3,-0.3],P=>{
+  P('Radiator','Crossflow radiator.',box(0.04,0.36,0.62),[1.94,0.55,-0.1]);
+  P('Radiator Cap','Pressure cap.',cyl(0.025,0.025,0.02),[1.94,0.75,-0.35]);
+  P('Fan Shroud','Ring around the fan.',ring(0.15,0.17,0.05,'x'),[1.88,0.55,-0.1]);
+  P('Cooling Fan','Electric fan blades.',cyl(0.15,0.15,0.015,'x',8),[1.88,0.55,-0.1]);
+  P('Fan Motor','Thermo switched motor.',cyl(0.04,0.04,0.06,'x'),[1.84,0.55,-0.1]);
+  P('Upper Radiator Hose','Hot side hose.',rod([1.92,0.7,-0.35],[1.58,0.72,-0.32],0.018));
+  P('Lower Radiator Hose','Cool side hose.',rod([1.92,0.4,0.15],[1.6,0.42,0.05],0.018));
+  P('Thermostat Housing','Holds the thermostat.',cyl(0.03,0.03,0.04,'x'),[1.56,0.72,-0.3]);
+  P('Coolant Reservoir','Overflow tank.',box(0.08,0.14,0.1),[1.85,0.66,-0.55]);
+  P('Heater Hose','Feeds the heater core.',rod([1.4,0.6,-0.3],[0.87,0.6,-0.2],0.01));
+});
+
+asm('Exhaust System','Pipes, converter and muffler.',[0,-1.3,0],P=>{
+  P('Front Pipe','Downpipe from the manifold.',rod([1.62,0.55,EZ],[1.15,0.15,-0.05],0.022));
+  P('Catalytic Converter','Converter under the floor.',cyl(0.07,0.07,0.3,'x'),[0.75,0.15,-0.05]);
+  P('Center Pipe','Pipe under the cabin.',rod([0.6,0.15,-0.05],[-0.45,0.15,-0.1],0.02));
+  P('Resonator','Inline silencer.',cyl(0.05,0.05,0.35,'x'),[-0.65,0.15,-0.12]);
+  P('Rear Pipe','Pipe over the rear suspension.',rod([-0.83,0.15,-0.15],[-1.5,0.22,-0.42],0.02));
+  P('Muffler','Main silencer.',box(0.42,0.12,0.25),[-1.75,0.22,-0.42]);
+  P('Tailpipe','Exit pipe.',rod([-1.96,0.22,-0.42],[-2.25,0.2,-0.45],0.02));
+  [[0.4,-0.05],[-0.4,-0.1],[-1.6,-0.42]].forEach(([x,z],i)=>P('Exhaust Hanger '+(i+1),'Rubber hanger.',cyl(0.02,0.02,0.03),[x,0.2,z]));
+});
+
+asm('Electrical','Battery, lights and wiring.',[0.8,1.3,1.0],P=>{
+  P('Battery','12 volt battery.',box(0.2,0.18,0.13),[1.72,0.72,0.55]);
+  P('Battery Cable','Positive cable to the starter.',rod([1.72,0.82,0.5],[1.35,0.42,0.25],0.006));
+  P('Ignition Coil','Feeds the distributor.',cyl(0.03,0.03,0.1),[1.25,0.75,0.45]);
+  P('Fuse Box','Under dash fuse block.',box(0.15,0.12,0.04),[0.62,0.6,0.62]);
+  P('Wiring Harness','Main engine bay harness.',rod([0.7,0.85,0.6],[1.95,0.65,0.55],0.008));
+  P('Horn','Electric horn.',cyl(0.04,0.04,0.03,'x'),[2.05,0.45,0.4]);
+  P('Wiper Motor','Drives the wiper linkage.',cyl(0.035,0.035,0.08,'x'),[0.92,0.82,0.45]);
+  P('Left Wiper Arm','Wiper arm and blade.',rod([0.83,0.9,0.4],[0.72,1.0,-0.05],0.006));
+  P('Right Wiper Arm','Wiper arm and blade.',rod([0.83,0.9,-0.15],[0.72,1.0,-0.55],0.006));
+  P('Dome Light','Cabin light.',box(0.08,0.02,0.12),[-0.4,1.32,0]);
+  LR.forEach(([s,sd])=>{
+    P(sd+' Headlight','Rectangular sealed beam.',box(0.05,0.14,0.32),[2.17,0.62,s*0.55]);
+    P(sd+' Front Turn Signal','Amber signal lamp.',box(0.04,0.05,0.14),[2.2,0.5,s*0.66]);
+    P(sd+' Taillight','Combination tail, stop and signal lamp.',box(0.04,0.14,0.42),[-2.18,0.68,s*0.56]);
+  });
+});
+
+asm('Interior','Seats, dash, pedals and trim.',[-0.2,2.4,0],P=>{
+  LR.forEach(([s,sd])=>{
+    const n=s>0?'Driver':'Passenger';
+    P(n+' Seat Cushion','Front bucket seat cushion on rails.',box(0.5,0.12,0.5),[-0.05,0.42,s*0.38]);
+    P(n+' Seat Back','Reclining seat back.',rz(box(0.1,0.6,0.5),0.2),[-0.32,0.75,s*0.38]);
+    P(sd+' Sun Visor','Padded visor.',box(0.15,0.01,0.35),[0.4,1.31,s*0.38]);
+  });
+  P('Rear Seat Cushion','Bench cushion.',box(0.5,0.13,1.3),[-0.9,0.42,0]);
+  P('Rear Seat Back','Bench back.',rz(box(0.1,0.55,1.3),0.2),[-1.15,0.72,0]);
+  P('Dashboard','Padded instrument panel.',box(0.35,0.25,1.4),[0.62,0.85,0]);
+  P('Instrument Cluster','Speedometer, tach and gauges.',box(0.06,0.13,0.35),[0.44,0.93,0.35]);
+  P('Glove Box','Passenger side glove box.',box(0.05,0.12,0.35),[0.47,0.75,-0.38]);
+  P('Heater Core','Small radiator behind the dash.',box(0.15,0.15,0.2),[0.72,0.6,0]);
+  P('Radio','AM FM radio.',box(0.05,0.05,0.18),[0.45,0.78,0]);
+  P('Center Console','Console between the seats.',box(0.5,0.12,0.18),[0.2,0.35,0]);
+  P('Gear Shift Lever','Five speed shifter.',rod([0.25,0.38,0],[0.2,0.6,0],0.008));
+  P('Shift Knob','Knob with shift pattern.',sph(0.025),[0.2,0.62,0]);
+  P('Clutch Pedal','Cable clutch pedal.',box(0.02,0.2,0.07),[0.65,0.42,0.52]);
+  P('Brake Pedal','Pushes the booster rod.',box(0.02,0.2,0.08),[0.65,0.42,0.38]);
+  P('Accelerator Pedal','Cable throttle pedal.',box(0.02,0.2,0.05),[0.67,0.42,0.26]);
+  P('Carpet','Molded floor carpet.',box(2.0,0.01,1.4),[-0.2,0.245,0]);
+  P('Headliner','Cloth roof liner.',box(1.15,0.01,1.25),[-0.28,1.32,0]);
+  P('Rearview Mirror','Day night mirror.',box(0.03,0.05,0.2),[0.42,1.2,0]);
+});
+
+asm('Front Bumper','Bumper bar, absorbers and grille.',[1.3,-0.1,0],P=>{
+  P('Front Bumper Bar','Steel face bar.',box(0.1,0.13,1.62),[2.25,0.45,0]);
+  LR.forEach(([s,sd])=>P(sd+' Energy Absorber','Gas filled bumper shock.',cyl(0.03,0.03,0.14,'x'),[2.13,0.45,s*0.5]));
+  P('Grille','Front grille.',box(0.03,0.14,0.72),[2.2,0.64,0]);
+  P('Front Valance','Lower apron.',box(0.04,0.1,1.5),[2.18,0.3,0]);
+});
+
+asm('Rear Bumper','Bumper bar and absorbers.',[-1.3,-0.1,0],P=>{
+  P('Rear Bumper Bar','Steel face bar.',box(0.1,0.13,1.62),[-2.25,0.45,0]);
+  LR.forEach(([s,sd])=>P(sd+' Energy Absorber','Gas filled bumper shock.',cyl(0.03,0.03,0.14,'x'),[-2.13,0.45,s*0.5]));
+  P('License Plate Light','Plate lamp.',box(0.03,0.03,0.1),[-2.22,0.6,0]);
+  P('Rear Valance','Lower apron.',box(0.04,0.1,1.5),[-2.18,0.3,0]);
+});
+
+/* BUILD */
+let total=0;
+ASM.forEach((a,ai)=>{
+  const c=V(0,0,0);a.parts.forEach(p=>c.add(p.pos));c.divideScalar(a.parts.length);a.center=c;
+  a.group=new THREE.Group();a.group.position.copy(c);scene.add(a.group);
+  let rad=0;
+  a.parts.forEach((p,i)=>{
+    total++;
+    p.local=p.pos.clone().sub(c);
+    if(!p.off){const d=p.local.clone(),l=d.length();p.off=l<0.02?V(0,0,0):d.normalize().multiplyScalar(0.2+l*1.3)}
+    const col=PAL[(ai*3+i)%8];
+    p.mat=new THREE.MeshStandardMaterial({color:col,transparent:true,opacity:0.3,roughness:0.9,side:THREE.DoubleSide,depthWrite:false});
+    p.mesh=new THREE.Mesh(p.geo,p.mat);p.mesh.userData.part=p;
+    p.edges=new THREE.LineSegments(new THREE.EdgesGeometry(p.geo,20),new THREE.LineBasicMaterial({color:new THREE.Color(col).multiplyScalar(0.55),transparent:true}));
+    p.wf=new THREE.LineSegments(new THREE.WireframeGeometry(p.geo),new THREE.LineBasicMaterial({color:new THREE.Color(col).multiplyScalar(0.75),transparent:true,opacity:0.2}));
+    p.node=new THREE.Group();p.node.add(p.mesh,p.edges,p.wf);p.node.position.copy(p.local);a.group.add(p.node);
+    p.geo.computeBoundingSphere();
+    rad=Math.max(rad,p.local.clone().add(p.off).length()+p.geo.boundingSphere.radius);
+  });
+  a.radius=rad;
+});
+
+/* STATE AND UI */
+let carAmt=0,carTarget=0,focus=null,selected=null,wire=true,fly=0;
+const crumb=document.getElementById('crumb'),title=document.getElementById('title'),desc=document.getElementById('desc');
+const list=document.getElementById('list'),slide=document.getElementById('slide');
+
+function refresh(){
+  const base=wire?0.3:0.85;
+  ASM.forEach(a=>a.parts.forEach(p=>{
+    const off=focus&&a!==focus, dim=selected&&p!==selected;
+    p.mat.opacity=off?0.03:dim?0.07:base;
+    p.mat.depthWrite=!wire&&!off&&!dim;
+    p.edges.material.opacity=off?0.08:dim?0.2:1;
+    p.wf.visible=wire&&!off&&!dim;
+  }));
+  if(selected){crumb.textContent='1982 Accord / '+focus.name;title.textContent=selected.name;desc.textContent=selected.desc}
+  else if(focus){crumb.textContent='1982 Accord';title.textContent=focus.name;desc.textContent=focus.desc+' '+focus.parts.length+' parts. Tap to explode, tap a part to inspect.'}
+  else{crumb.textContent='';title.textContent='1982 Honda Accord Sedan';desc.textContent=ASM.length+' assemblies, '+total+' parts. Tap the car to explode it, then tap an assembly to open it.'}
+  list.innerHTML='';
+  (focus?focus.parts:ASM).forEach(it=>{
+    const d=document.createElement('div');d.textContent=it.name;
+    if(it===selected||(!focus&&it===focus))d.className='sel';
+    d.onclick=()=>{if(focus){focus.target=1;selected=it;refresh()}else{carTarget=1;open(it)}};
+    list.appendChild(d);
+  });
+}
+function open(a){if(focus&&focus!==a)focus.target=0;focus=a;selected=null;fly=90;refresh()}
+function back(){
+  if(selected){selected=null}
+  else if(focus){focus.target=0;focus=null;fly=90}
+  else{carTarget=0;fly=90}
+  refresh();
+}
+function setWire(on){wire=on;document.getElementById('bWire').classList.toggle('on',on);refresh()}
+
+document.getElementById('bBack').onclick=back;
+document.getElementById('bExplode').onclick=()=>{fly=90;if(focus)focus.target=focus.target>0.5?0:1;else{carTarget=carTarget>0.5?0:1;fly=90}};
+document.getElementById('bWire').onclick=()=>setWire(!wire);
 document.getElementById('bParts').onclick=e=>{const s=list.style.display==='block';list.style.display=s?'none':'block';e.target.classList.toggle('on',!s)};
-document.getElementById('bAll').onclick=()=>select(null);
-slide.oninput=()=>{target=slide.value/100;amount=target;};
+document.getElementById('bReset').onclick=()=>{ASM.forEach(a=>a.target=0);carTarget=0;focus=null;selected=null;fly=90;refresh()};
+slide.oninput=()=>{const v=slide.value/100;if(focus){focus.target=v;focus.amt=v}else{carTarget=v;carAmt=v}};
 
 const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();
 let down=null;
@@ -193,21 +466,46 @@ canvas.addEventListener('pointerup',e=>{
   if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;
   ptr.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);
   ray.setFromCamera(ptr,camera);
-  const meshes=[];scene.traverse(o=>{if(o.isMesh&&o.userData.part)meshes.push(o)});
-  const hit=ray.intersectObjects(meshes,false)[0];
-  if(!hit){select(null);return}
-  if(amount<0.5){target=1;return}
-  select(hit.object.userData.part);
+  const meshes=a=>a.parts.map(p=>p.mesh);
+  if(focus){
+    const hit=ray.intersectObjects(meshes(focus),false)[0];
+    if(hit){
+      if(focus.amt<0.5&&focus.target<0.5){focus.target=1;fly=90;return}
+      selected=hit.object.userData.part;refresh();return;
+    }
+  }
+  const all=[];ASM.forEach(a=>{if(a!==focus)all.push(...meshes(a))});
+  const hit=ray.intersectObjects(all,false)[0];
+  if(!hit){if(selected){selected=null;refresh()}return}
+  const a=hit.object.userData.part.asm;
+  if(carAmt<0.5&&carTarget<0.5){carTarget=1;fly=90;return}
+  open(a);
 });
 
 function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}
 addEventListener('resize',resize);resize();
+refresh();
 
+const goal=V(0,0,0);
 (function loop(){
   requestAnimationFrame(loop);
-  amount+=(target-amount)*0.08;
-  slide.value=Math.round(amount*100);
-  layout();controls.update();renderer.render(scene,camera);
+  carAmt+=(carTarget-carAmt)*0.07;
+  ASM.forEach(a=>{
+    a.amt+=(a.target-a.amt)*0.08;
+    a.group.position.copy(a.center).addScaledVector(a.dir,carAmt);
+    a.parts.forEach(p=>p.node.position.copy(p.local).addScaledVector(p.off,a.amt));
+  });
+  if(!document.activeElement||document.activeElement!==slide)slide.value=Math.round((focus?focus.amt:carAmt)*100);
+  if(fly>0){
+    fly--;
+    let dist;
+    if(focus){goal.copy(focus.group.position);dist=Math.max(1.0,focus.radius*(0.9+focus.target*1.4))}
+    else{goal.set(0,0.6+carTarget*0.6,0);dist=7+carTarget*5}
+    controls.target.lerp(goal,0.08);
+    const d=camera.position.clone().sub(controls.target),l=d.length();
+    camera.position.copy(controls.target).add(d.multiplyScalar((l+(dist-l)*0.08)/l));
+  }
+  controls.update();renderer.render(scene,camera);
 })();
 </script>
 </body>
