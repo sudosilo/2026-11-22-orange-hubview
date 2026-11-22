@@ -27,6 +27,7 @@ button.on{background:#e8dcc4}
 <button id="bExplode">Explode</button>
 <button id="bWire" class="on">Wireframe</button>
 <button id="bParts">Parts</button>
+<button id="bBP" class="on">Blueprint</button>
 <button id="bReset">Reset</button>
 <input id="slide" type="range" min="0" max="100" value="0" style="flex:1;min-width:110px">
 </div>
@@ -51,7 +52,7 @@ controls.enableDamping=true;
 controls.target.set(0,0.6,0);
 scene.add(new THREE.HemisphereLight(0xfffbf0,0xd8c9ad,1.1));
 const sun=new THREE.DirectionalLight(0xffffff,0.9);sun.position.set(5,10,7);scene.add(sun);
-const grid=new THREE.GridHelper(30,60,0xd9cdb6,0xe6dcc8);scene.add(grid);
+const grid=new THREE.GridHelper(30,60,0xd9cdb6,0xe6dcc8);grid.position.y=-0.002;scene.add(grid);
 
 /* geometry helpers. car axes: x forward, y up, z toward the left side */
 function box(w,h,d){return new THREE.BoxGeometry(w,h,d)}
@@ -62,79 +63,93 @@ function sph(r){return new THREE.SphereGeometry(r,12,8)}
 function rz(g,a){g.rotateZ(a);return g}
 function rod(a,b,r,seg=12){const A=V(...a),B=V(...b),d=B.clone().sub(A);const g=new THREE.CylinderGeometry(r,r,d.length(),seg);g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(V(0,1,0),d.clone().normalize()));return{geo:g,pos:A.clone().add(B).multiplyScalar(0.5)}}
 function coil(r,h,turns,w){const pts=[],n=turns*20;for(let i=0;i<=n;i++){const t=i/n,a=t*turns*2*PI;pts.push(V(Math.cos(a)*r,t*h-h/2,Math.sin(a)*r))}return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),n,w,6,false)}
+function side(build,z,t=0.03){const sh=new THREE.Shape();build(sh);const g=new THREE.ExtrudeGeometry(sh,{depth:t,bevelEnabled:false,curveSegments:24});g.computeBoundingBox();const c=new THREE.Vector3();g.boundingBox.getCenter(c);g.translate(-c.x,-c.y,-c.z);return{geo:g,pos:V(c.x,c.y,z)}}
+const poly=pts=>sh=>{sh.moveTo(...pts[0]);pts.slice(1).forEach(p=>sh.lineTo(...p));sh.closePath()};
+const WY=0.297;
 function arc(r,h,start,len){const g=new THREE.CylinderGeometry(r,r,h,20,1,true,start,len);g.rotateX(PI/2);return g}
 
 const ASM=[];
-function asm(name,desc,dir,fn){
+function asm(name,desc,dir,fn,dx=0){
   const a={name,desc,dir:V(...dir),parts:[],amt:0,target:0};
   const P=(n,d,geo,pos,off)=>{
     if(geo.geo){off=pos;pos=geo.pos;geo=geo.geo}
-    a.parts.push({name:n,desc:d,geo,pos:pos.isVector3?pos.clone():V(...pos),off:off?V(...off):null,asm:a});
+    const v=pos.isVector3?pos.clone():V(...pos);v.x+=dx;a.parts.push({name:n,desc:d,geo,pos:v,off:off?V(...off):null,asm:a});
   };
   fn(P);ASM.push(a);
 }
 const LR=[[1,'Left'],[-1,'Right']];
+const DX=0.07;
 
-/* BODY SHELL */
+/* BODY: traced from the 1982 Accord sedan blueprint. front axle x 1.32, rear axle x -1.13 */
 asm('Body Shell','Welded steel unibody. Everything else bolts to it.',[0,0,0],P=>{
-  P('Floor Pan','Stamped steel floor, the base of the unibody.',box(2.1,0.035,1.5),[-0.2,0.22,0]);
-  P('Trunk Floor','Raised floor over the fuel tank.',box(0.9,0.03,1.4),[-1.7,0.4,0]);
-  P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.5,1.45),[0.85,0.6,0]);
-  P('Cowl Panel','Panel under the windshield with the fresh air intake.',box(0.3,0.03,1.4),[0.97,0.87,0]);
-  P('Radiator Core Support','Front bulkhead that holds the radiator and latch.',box(0.05,0.42,1.4),[2.02,0.55,0]);
-  P('Roof Panel','Single stamped roof skin.',box(1.15,0.035,1.3),[-0.28,1.35,0]);
-  P('Rear Package Shelf','Shelf behind the rear seat.',box(0.35,0.03,1.35),[-1.05,0.88,0]);
-  P('Rear Body Panel','Panel under the trunk opening.',box(0.035,0.35,1.5),[-2.17,0.55,0]);
+  P('Floor Pan','Stamped steel floor, the base of the unibody.',box(2.15,0.035,1.5),[-0.175,0.24,0]);
+  P('Trunk Floor','Raised floor over the fuel tank.',box(0.85,0.03,1.4),[-1.72,0.42,0]);
+  P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.5,1.45),[0.9,0.62,0]);
+  P('Cowl Panel','Panel under the windshield with the fresh air intake.',box(0.25,0.03,1.4),[1.0,0.9,0]);
+  P('Radiator Core Support','Front bulkhead that holds the radiator and latch.',box(0.05,0.42,1.4),[2.08,0.55,0]);
+  P('Roof Panel','Single stamped roof skin.',box(1.3,0.03,1.24),[-0.315,1.335,0]);
+  P('Rear Package Shelf','Shelf behind the rear seat.',box(0.45,0.03,1.35),[-1.33,0.96,0]);
+  P('Rear Body Panel','Panel under the trunk opening.',box(0.035,0.42,1.5),[-2.19,0.62,0]);
   LR.forEach(([s,sd])=>{
-    P(sd+' Rocker Panel','Boxed sill under the doors. Main side rail of the shell.',box(1.95,0.14,0.06),[-0.2,0.3,s*0.8]);
-    P(sd+' Front Frame Rail','Box section rail carrying the engine and front suspension.',box(1.25,0.1,0.08),[1.45,0.33,s*0.52]);
-    P(sd+' Front Strut Tower','Stamped tower that takes the top of the front strut.',cyl(0.1,0.13,0.32),[1.25,0.66,s*0.6]);
-    P(sd+' Front Fender','Bolt on steel fender.',box(1.25,0.4,0.035),[1.55,0.62,s*0.81]);
-    P(sd+' Rear Quarter Panel','Welded rear quarter, part of the shell.',box(1.05,0.42,0.035),[-1.68,0.62,s*0.81]);
-    P(sd+' A Pillar','Windshield pillar.',rz(box(0.7,0.05,0.05),-0.765),[0.5,1.09,s*0.72]);
-    P(sd+' B Pillar','Center pillar between the doors.',box(0.07,0.5,0.05),[-0.3,1.08,s*0.76]);
-    P(sd+' C Pillar','Rear roof pillar.',rz(box(0.6,0.05,0.06),0.94),[-1.02,1.09,s*0.7]);
-    P(sd+' Rear Strut Tower','Rear strut tower inside the trunk.',cyl(0.09,0.11,0.3),[-1.25,0.68,s*0.6]);
+    P(sd+' Rocker Panel','Boxed sill under the doors. Main side rail of the shell.',box(1.82,0.12,0.06),[-0.09,0.31,s*0.8]);
+    P(sd+' Front Frame Rail','Box section rail carrying the engine and front suspension.',box(1.3,0.1,0.08),[1.5,0.33,s*0.52]);
+    P(sd+' Front Strut Tower','Stamped tower that takes the top of the front strut.',cyl(0.1,0.13,0.32),[1.32,0.68,s*0.6]);
+    P(sd+' Front Fender','Bolt on steel fender.',side(sh=>{sh.moveTo(0.82,0.92);sh.lineTo(0.82,0.3);sh.lineTo(0.95,0.3);sh.absarc(1.32,WY,0.37,PI,0,true);sh.lineTo(2.0,0.3);sh.lineTo(2.12,0.45);sh.lineTo(2.12,0.74);sh.lineTo(0.88,0.92);sh.closePath()},s*0.81));
+    P(sd+' Rear Quarter Panel','Welded rear quarter, part of the shell.',side(sh=>{sh.moveTo(-1.0,0.95);sh.lineTo(-1.56,0.98);sh.lineTo(-2.05,0.94);sh.lineTo(-2.19,0.86);sh.lineTo(-2.19,0.45);sh.lineTo(-1.9,0.3);sh.lineTo(-1.5,0.3);sh.absarc(-1.13,WY,0.37,PI,1.212,true);sh.lineTo(-1.0,0.95);sh.closePath()},s*0.81));
+    P(sd+' C Pillar','Sail panel behind the rear door glass.',side(poly([[-0.76,1.29],[-0.98,1.335],[-1.56,0.98],[-1.02,0.96]]),s*0.76));
+    P(sd+' A Pillar','Windshield pillar.',rod([0.91,0.93,s*0.75],[0.33,1.32,s*0.65],0.025));
+    P(sd+' B Pillar','Center pillar between the doors.',box(0.07,0.38,0.05),[-0.14,1.12,s*0.75]);
+    P(sd+' Rear Strut Tower','Rear strut tower inside the trunk.',cyl(0.09,0.11,0.3),[-1.18,0.7,s*0.6]);
   });
 });
 
 asm('Glass','Windshield and rear window.',[0,0.8,0],P=>{
-  P('Windshield','Laminated safety glass.',rz(box(0.7,0.008,1.32),-0.765),[0.5,1.09,0]);
-  P('Rear Window','Tempered glass with defroster grid.',rz(box(0.6,0.008,1.28),0.94),[-1.02,1.09,0]);
+  P('Windshield','Laminated safety glass.',rz(box(0.7,0.008,1.32),-0.596),[0.621,1.124,0]);
+  P('Rear Window','Tempered glass with defroster grid.',rz(box(0.676,0.008,1.26),0.545),[-1.269,1.155,0]);
 });
 
 asm('Hood','Front hinged hood with prop rod.',[0.4,2.2,0],P=>{
-  P('Hood Panel','Steel hood skin and inner brace.',rz(box(1.12,0.03,1.42),-0.07),[1.48,0.88,0],[0,0.2,0]);
-  P('Hood Insulation Pad','Sound pad under the hood.',box(0.9,0.015,1.2),[1.45,0.85,0],[0,-0.15,0]);
-  LR.forEach(([s,sd])=>P(sd+' Hood Hinge','Bolted hinge at the cowl.',box(0.12,0.05,0.03),[0.95,0.87,s*0.62],[-0.2,0,s*0.15]));
-  P('Hood Latch','Latch on the core support with safety catch.',box(0.08,0.06,0.1),[2.0,0.8,0],[0.25,-0.1,0]);
-  P('Hood Prop Rod','Rod that holds the hood open.',rod([1.95,0.8,0.6],[1.3,0.82,0.6],0.005),[0,-0.25,0.2]);
+  P('Hood Panel','Steel hood skin and inner brace.',rz(box(1.19,0.03,1.45),-0.127),[1.495,0.85,0],[0,0.2,0]);
+  P('Hood Insulation Pad','Sound pad under the hood.',rz(box(0.95,0.015,1.2),-0.127),[1.5,0.83,0],[0,-0.15,0]);
+  LR.forEach(([s,sd])=>P(sd+' Hood Hinge','Bolted hinge at the cowl.',box(0.12,0.05,0.03),[0.97,0.9,s*0.62],[-0.2,0,s*0.15]));
+  P('Hood Latch','Latch on the core support with safety catch.',box(0.08,0.06,0.1),[2.05,0.76,0],[0.25,-0.1,0]);
+  P('Hood Prop Rod','Rod that holds the hood open.',rod([2.0,0.78,0.6],[1.35,0.84,0.6],0.005),[0,-0.25,0.2]);
 });
 
 asm('Trunk Lid','Rear deck lid with torsion bar hinges.',[-0.5,1.6,0],P=>{
-  P('Trunk Lid Panel','Steel deck lid.',rz(box(0.78,0.03,1.4),0.04),[-1.77,0.88,0],[0,0.2,0]);
-  LR.forEach(([s,sd])=>P(sd+' Trunk Hinge','Gooseneck hinge.',box(0.2,0.04,0.03),[-1.38,0.86,s*0.55],[0.2,0,s*0.15]));
-  P('Torsion Bars','Spring bars that lift the lid.',rod([-1.4,0.85,-0.5],[-1.4,0.85,0.5],0.005),[0.25,-0.15,0]);
-  P('Lock Cylinder','Key cylinder.',cyl(0.015,0.015,0.04,'x'),[-2.16,0.8,0],[-0.3,0,0]);
-  P('Trunk Latch','Latch that catches the striker.',box(0.06,0.05,0.08),[-2.12,0.72,0],[-0.2,-0.2,0]);
+  P('Trunk Lid Panel','Steel deck lid.',rz(box(0.5,0.03,1.4),0.102),[-1.805,0.96,0],[0,0.2,0]);
+  LR.forEach(([s,sd])=>P(sd+' Trunk Hinge','Gooseneck hinge.',box(0.2,0.04,0.03),[-1.55,0.94,s*0.55],[0.2,0,s*0.15]));
+  P('Torsion Bars','Spring bars that lift the lid.',rod([-1.55,0.92,-0.5],[-1.55,0.92,0.5],0.005),[0.25,-0.15,0]);
+  P('Lock Cylinder','Key cylinder.',cyl(0.015,0.015,0.04,'x'),[-2.19,0.85,0],[-0.3,0,0]);
+  P('Trunk Latch','Latch that catches the striker.',box(0.06,0.05,0.08),[-2.15,0.8,0],[-0.2,-0.2,0]);
 });
 
 /* DOORS */
 function door(front,s,sd){
-  const x0=front?0.75:-0.3,x1=front?-0.3:-1.15,len=x0-x1,xc=(x0+x1)/2;
+  const x0=front?0.82:-0.14,x1=front?-0.14:-1.0,xc=(x0+x1)/2;
+  const skin=front?poly([[x0,0.93],[x1,0.93],[x1,0.29],[x0,0.29]]):sh=>{sh.moveTo(x0,0.93);sh.lineTo(x1,0.93);sh.lineTo(x1,0.643);sh.absarc(-1.13,WY,0.37,1.212,0,true);sh.lineTo(x0,0.29);sh.closePath()};
   asm((front?'Front ':'Rear ')+sd+' Door',(front?'Front':'Rear')+' door, hinged at its front edge.',[0,0.1,s*1.1],P=>{
-    P('Outer Skin','Stamped steel door skin.',box(len,0.5,0.03),[xc,0.6,s*0.83],[0,0,s*0.3]);
-    P('Inner Panel','Inner door structure.',box(len,0.48,0.03),[xc,0.6,s*0.77],[0,0,0]);
-    P('Window Glass','Tempered side glass.',box(len*0.88,0.42,0.006),[xc,1.05,s*0.8],[0,0.5,0]);
-    P('Window Frame','Sash that guides the glass.',box(len,0.03,0.03),[xc,1.3,s*0.8],[0,0.8,0]);
-    P('Window Regulator','Crank driven scissor regulator.',box(0.32,0.3,0.02),[xc,0.65,s*0.8],[0,0.15,s*0.15]);
+    P('Outer Skin','Stamped steel door skin.',side(skin,s*0.81),[0,0,s*0.3]);
+    P('Inner Panel','Inner door structure.',side(skin,s*0.765),[0,0,0]);
+    P('Door Trim Panel','Vinyl trim panel with armrest.',side(skin,s*0.73,0.02),[0,0,-s*0.25]);
+    if(front){
+      P('Window Glass','Tempered side glass.',side(poly([[0.78,0.95],[0.36,1.27],[-0.12,1.27],[-0.12,0.95]]),s*0.785,0.006),[0,0.5,0]);
+      P('Front Window Sash','Frame along the pillar edge.',rod([0.8,0.94,s*0.785],[0.35,1.3,s*0.775],0.012),[0.1,0.75,0]);
+      P('Upper Window Sash','Frame along the roof edge.',rod([0.35,1.3,s*0.775],[-0.13,1.3,s*0.775],0.012),[0,0.8,0]);
+      P('Side Mirror','Door mounted mirror.',box(0.12,0.08,0.1),[0.72,1.0,s*0.88],[0.1,0.25,s*0.35]);
+    }else{
+      P('Window Glass','Tempered side glass.',side(poly([[-0.16,0.95],[-0.16,1.27],[-0.68,1.27],[-0.68,0.95]]),s*0.785,0.006),[0,0.5,0]);
+      P('Vent Glass','Fixed rear quarter glass.',side(poly([[-0.71,0.95],[-0.71,1.27],[-0.75,1.27],[-0.98,0.96]]),s*0.785,0.006),[-0.15,0.45,0]);
+      P('Division Bar','Channel between the glass and vent glass.',rod([-0.695,0.94,s*0.785],[-0.695,1.29,s*0.785],0.008),[0,0.3,s*0.15]);
+      P('Upper Window Sash','Frame along the roof edge.',rod([-0.15,1.3,s*0.775],[-0.76,1.3,s*0.775],0.012),[0,0.8,0]);
+      P('Rear Window Sash','Frame along the C pillar.',rod([-0.76,1.3,s*0.775],[-1.0,0.96,s*0.78],0.012),[-0.2,0.7,0]);
+    }
+    P('Window Regulator','Crank driven scissor regulator.',box(0.32,0.3,0.02),[xc,0.62,s*0.787],[0,0.15,s*0.15]);
     P('Window Crank','Hand crank for the regulator.',box(0.1,0.015,0.015),[xc,0.75,s*0.71],[0,0.1,-s*0.4]);
-    P('Door Trim Panel','Vinyl trim panel with armrest.',box(len,0.45,0.02),[xc,0.62,s*0.73],[0,0,-s*0.25]);
-    P('Outside Handle','Pull up door handle.',box(0.14,0.03,0.03),[x1+0.12,0.8,s*0.855],[0,0.1,s*0.5]);
-    P('Door Latch','Latch at the rear edge.',box(0.03,0.1,0.06),[x1+0.03,0.75,s*0.8],[-0.3,0,0]);
+    P('Outside Handle','Pull up door handle.',box(0.14,0.03,0.03),[front?0.05:-0.86,front?0.77:0.8,s*0.83],[0,0.1,s*0.5]);
+    P('Door Latch','Latch at the rear edge.',box(0.03,0.1,0.06),[x1+0.03,0.75,s*0.79],[-0.3,0,0]);
     P('Upper Hinge','Bolted door hinge.',box(0.06,0.06,0.04),[x0,0.8,s*0.79],[0.3,0.05,0]);
     P('Lower Hinge','Bolted door hinge.',box(0.06,0.06,0.04),[x0,0.45,s*0.79],[0.3,-0.05,0]);
-    if(front)P('Side Mirror','Door mounted mirror.',box(0.12,0.08,0.1),[x0-0.12,1.0,s*0.88],[0.1,0.25,s*0.35]);
   });
 }
 LR.forEach(([s,sd])=>{door(true,s,sd);door(false,s,sd)});
@@ -168,7 +183,7 @@ asm('Engine','EK1 1751cc CVCC inline four, SOHC 12 valve, carbureted.',[1.8,0.8,
   P('Flywheel','Ring gear and clutch face.',cyl(0.13,0.13,0.03,'z'),[EX,0.38,EZ+0.25],[0,0,0.4]);
   P('Oil Filter','Spin on filter.',cyl(0.04,0.04,0.09,'x'),[EX+0.14,0.38,EZ+0.07],[0.4,-0.15,0]);
   P('Fuel Pump','Mechanical pump run off the cam.',box(0.06,0.06,0.05),[EX-0.2,0.62,EZ+0.17],[-0.35,0.1,0.15]);
-});
+},DX);
 
 asm('Transmission','Five speed manual transaxle with clutch and differential.',[1.2,0.2,1.3],P=>{
   P('Clutch Disc','Friction disc splined to the input shaft.',cyl(0.1,0.1,0.012,'z'),[EX,0.38,0.16],[0.3,0,-0.3]);
@@ -182,7 +197,7 @@ asm('Transmission','Five speed manual transaxle with clutch and differential.',[
   P('Final Drive Gear','Ring gear on the differential.',cyl(0.12,0.12,0.02,'z'),[1.25,0.29,0.22],[-0.3,-0.25,0.05]);
   P('Differential','Open differential carrier.',cyl(0.09,0.09,0.12,'z'),[1.25,0.29,0.15],[-0.3,-0.25,-0.1]);
   P('Shift Rod','Linkage from the shifter to the box.',rod([1.35,0.3,0.3],[0.45,0.32,0.05],0.008),[-0.2,-0.15,0]);
-});
+},DX);
 
 asm('Drive Axles','Half shafts with constant velocity joints.',[0.5,-0.8,0],P=>{
   P('Left Inner CV Joint','Plunging inner joint.',cyl(0.045,0.045,0.07,'z'),[1.25,0.29,0.255]);
@@ -191,19 +206,19 @@ asm('Drive Axles','Half shafts with constant velocity joints.',[0.5,-0.8,0],P=>{
   P('Right Inner CV Joint','Plunging inner joint.',cyl(0.045,0.045,0.07,'z'),[1.25,0.29,0.045]);
   P('Right Inner CV Boot','Rubber boot holding grease.',cyl(0.05,0.025,0.07,'z'),[1.25,0.29,-0.02]);
   P('Right Half Shaft','Solid steel shaft.',rod([1.25,0.29,0.01],[1.25,0.29,-0.455],0.013));
-});
+},DX);
 
 /* WHEEL PARTS shared by all four corners, drawn in hub units then scaled */
-const K=0.094;
+const K=0.0958;
 const TIRE=[[2.2,-0.8],[2.75,-0.95],[3.05,-0.6],[3.1,0],[3.05,0.6],[2.75,0.95],[2.2,0.8]];
 const WHEEL=[[0.5,0.25],[1.6,0.3],[1.9,0.1],[2.2,-0.7],[2.25,-0.8],[2.25,0.8],[2.2,0.7],[1.9,0.45],[1.6,0.45],[0.5,0.4]];
 const CAP=[[0,0.55],[0.9,0.5],[1.3,0.35],[1.35,0.2],[1.3,0.15]];
 function corner(P,cx,cz,s){
   const sc=g=>{g.scale(K,K,K*s);return g};
   const L=(pts,seg=48)=>sc(lathe(pts,'z',seg));
-  const at=(x,y,z)=>[cx+x*K,0.29+y*K,cz+z*K*s];
+  const at=(x,y,z)=>[cx+x*K,WY+y*K,cz+z*K*s];
   const o=(x,y,z)=>[x*K,y*K,z*K*s];
-  P('Tire','155SR13 steel belted radial.',L(TIRE,64),at(0,0,0),o(0,0,9));
+  P('Tire','165SR13 steel belted radial.',L(TIRE,64),at(0,0,0),o(0,0,9));
   P('Steel Wheel','13 inch steel wheel, 4 lug, 100 mm bolt circle.',L(WHEEL,64),at(0,0,0),o(0,0,7));
   P('Hub Cap','Snaps over the lug nuts.',L(CAP),at(0,0,0),o(0,0,10.5));
   for(let i=0;i<4;i++){const a=i*PI/2+PI/4;
@@ -238,7 +253,7 @@ LR.forEach(([s,sd])=>{
     P('Lower Ball Joint','Joint between arm and knuckle.',sph(0.025),[cx,0.13,s*0.66],[0,-0.25,0]);
     P('Radius Rod','Locates the lower arm fore and aft.',rod([cx,0.11,s*0.55],[1.68,0.15,s*0.45],0.012),[0.3,-0.3,-s*0.1]);
     P('Tie Rod End','Ball joint on the steering arm.',sph(0.02),[1.05,0.25,s*0.66],[-0.3,0,0]);
-  });
+  },DX);
 });
 
 LR.forEach(([s,sd])=>{
@@ -262,7 +277,7 @@ LR.forEach(([s,sd])=>{
     P('Rear Upper Mount','Rubber mount in the trunk tower.',cyl(0.07,0.07,0.03),[-1.25,0.84,s*0.6],[0,0.95,0]);
     P('Lower Lateral Arm','Locates the wheel side to side.',rod([cx,0.13,s*0.62],[cx,0.15,s*0.15],0.013),[0,-0.3,-s*0.2]);
     P('Rear Radius Rod','Locates the wheel fore and aft.',rod([cx,0.14,s*0.6],[-0.8,0.18,s*0.62],0.012),[0.3,-0.3,0]);
-  });
+  },DX);
 });
 
 asm('Front Crossmember','Subframe, stabilizer bar and engine mounts.',[0.6,-1.0,0],P=>{
@@ -273,7 +288,7 @@ asm('Front Crossmember','Subframe, stabilizer bar and engine mounts.',[0.6,-1.0,
   P('Rear Engine Mount','Rubber and steel mount.',box(0.06,0.06,0.06),[1.3,0.32,EZ]);
   P('Side Engine Mount','Upper mount at the timing end.',box(0.06,0.06,0.06),[EX,0.72,-0.47]);
   P('Transmission Mount','Upper mount on the transaxle.',box(0.06,0.06,0.06),[1.42,0.6,0.5]);
-});
+},DX);
 
 asm('Steering','Rack and pinion steering with column.',[0.1,1.4,0.7],P=>{
   P('Rack Housing','Rack and pinion gear.',cyl(0.028,0.028,0.62,'z'),[1.0,0.42,0.02]);
@@ -288,12 +303,12 @@ asm('Steering','Rack and pinion steering with column.',[0.1,1.4,0.7],P=>{
   const w=new THREE.TorusGeometry(0.19,0.012,8,40);w.rotateY(PI/2);w.rotateZ(-0.445);
   P('Steering Wheel','Two spoke wheel.',w,[0.27,0.955,0.35]);
   P('Horn Pad','Center pad with horn switch.',rz(cyl(0.05,0.05,0.04,'x'),-0.445),[0.27,0.955,0.35]);
-});
+},DX);
 
 asm('Brake System','Booster, master cylinder and lines.',[0.2,1.6,1.0],P=>{
-  P('Brake Booster','Vacuum servo.',cyl(0.11,0.11,0.1,'x'),[0.79,0.72,0.42]);
-  P('Master Cylinder','Tandem master cylinder.',cyl(0.025,0.025,0.18,'x'),[0.93,0.74,0.42]);
-  P('Fluid Reservoir','Brake fluid reservoir.',box(0.07,0.06,0.08),[0.95,0.8,0.42]);
+  P('Brake Booster','Vacuum servo.',cyl(0.11,0.11,0.1,'x'),[0.9,0.72,0.42]);
+  P('Master Cylinder','Tandem master cylinder.',cyl(0.025,0.025,0.18,'x'),[1.04,0.74,0.42]);
+  P('Fluid Reservoir','Brake fluid reservoir.',box(0.07,0.06,0.08),[1.06,0.8,0.42]);
   P('Proportioning Valve','Splits pressure front and rear.',box(0.05,0.04,0.04),[0.85,0.5,0.3]);
   P('Left Front Brake Line','Steel line and hose to the caliper.',rod([0.9,0.5,0.4],[1.25,0.5,0.62],0.004));
   P('Right Front Brake Line','Steel line and hose to the caliper.',rod([0.9,0.5,0.3],[1.25,0.5,-0.62],0.004));
@@ -302,18 +317,18 @@ asm('Brake System','Booster, master cylinder and lines.',[0.2,1.6,1.0],P=>{
   P('Right Rear Brake Hose','Hose to the wheel cylinder.',rod([-1.15,0.21,0.3],[-1.2,0.35,-0.6],0.004));
   P('Parking Brake Lever','Hand lever between the seats.',box(0.25,0.05,0.04),[0.0,0.38,0.05]);
   P('Parking Brake Cable','Cable to the rear shoes.',rod([0,0.21,0],[-1.15,0.2,0],0.004));
-});
+},DX);
 
 asm('Fuel System','Tank, lines and filter.',[-0.6,-1.0,0.6],P=>{
   P('Fuel Tank','Steel tank under the trunk floor.',box(0.5,0.18,0.62),[-1.62,0.2,0.14]);
   P('Fuel Sending Unit','Float gauge sender.',cyl(0.04,0.04,0.03),[-1.62,0.305,0.2]);
-  P('Filler Neck','Pipe from the cap to the tank.',rod([-1.45,0.28,0.42],[-1.6,0.66,0.8],0.022));
-  P('Fuel Cap','Vented cap.',cyl(0.035,0.035,0.02,'z'),[-1.6,0.66,0.82]);
+  P('Filler Neck','Pipe from the cap to the tank.',rod([-1.47,0.3,0.42],[-1.42,0.85,0.8],0.022));
+  P('Fuel Cap','Vented cap.',cyl(0.035,0.035,0.02,'z'),[-1.42,0.865,0.82]);
   P('Fuel Line','Steel line forward along the floor.',rod([-1.38,0.2,0.32],[0.82,0.2,0.32],0.004));
   P('Fuel Filter','Inline filter.',cyl(0.02,0.02,0.07),[0.88,0.35,0.32]);
   P('Fuel Hose','Hose to the mechanical pump.',rod([0.88,0.39,0.32],[1.3,0.62,0.05],0.005));
   P('Charcoal Canister','Holds fuel vapor.',cyl(0.05,0.05,0.15),[1.8,0.55,0.3]);
-});
+},DX);
 
 asm('Cooling System','Radiator, fan and hoses.',[1.6,0.3,-0.3],P=>{
   P('Radiator','Crossflow radiator.',box(0.04,0.36,0.62),[1.94,0.55,-0.1]);
@@ -326,7 +341,7 @@ asm('Cooling System','Radiator, fan and hoses.',[1.6,0.3,-0.3],P=>{
   P('Thermostat Housing','Holds the thermostat.',cyl(0.03,0.03,0.04,'x'),[1.56,0.72,-0.3]);
   P('Coolant Reservoir','Overflow tank.',box(0.08,0.14,0.1),[1.85,0.66,-0.55]);
   P('Heater Hose','Feeds the heater core.',rod([1.4,0.6,-0.3],[0.87,0.6,-0.2],0.01));
-});
+},DX);
 
 asm('Exhaust System','Pipes, converter and muffler.',[0,-1.3,0],P=>{
   P('Front Pipe','Downpipe from the manifold.',rod([1.62,0.55,EZ],[1.15,0.15,-0.05],0.022));
@@ -337,23 +352,23 @@ asm('Exhaust System','Pipes, converter and muffler.',[0,-1.3,0],P=>{
   P('Muffler','Main silencer.',box(0.42,0.12,0.25),[-1.75,0.22,-0.42]);
   P('Tailpipe','Exit pipe.',rod([-1.96,0.22,-0.42],[-2.25,0.2,-0.45],0.02));
   [[0.4,-0.05],[-0.4,-0.1],[-1.6,-0.42]].forEach(([x,z],i)=>P('Exhaust Hanger '+(i+1),'Rubber hanger.',cyl(0.02,0.02,0.03),[x,0.2,z]));
-});
+},DX);
 
 asm('Electrical','Battery, lights and wiring.',[0.8,1.3,1.0],P=>{
-  P('Battery','12 volt battery.',box(0.2,0.18,0.13),[1.72,0.72,0.55]);
-  P('Battery Cable','Positive cable to the starter.',rod([1.72,0.82,0.5],[1.35,0.42,0.25],0.006));
-  P('Ignition Coil','Feeds the distributor.',cyl(0.03,0.03,0.1),[1.25,0.75,0.45]);
-  P('Fuse Box','Under dash fuse block.',box(0.15,0.12,0.04),[0.62,0.6,0.62]);
-  P('Wiring Harness','Main engine bay harness.',rod([0.7,0.85,0.6],[1.95,0.65,0.55],0.008));
-  P('Horn','Electric horn.',cyl(0.04,0.04,0.03,'x'),[2.05,0.45,0.4]);
-  P('Wiper Motor','Drives the wiper linkage.',cyl(0.035,0.035,0.08,'x'),[0.92,0.82,0.45]);
-  P('Left Wiper Arm','Wiper arm and blade.',rod([0.83,0.9,0.4],[0.72,1.0,-0.05],0.006));
-  P('Right Wiper Arm','Wiper arm and blade.',rod([0.83,0.9,-0.15],[0.72,1.0,-0.55],0.006));
-  P('Dome Light','Cabin light.',box(0.08,0.02,0.12),[-0.4,1.32,0]);
+  P('Battery','12 volt battery.',box(0.2,0.18,0.13),[1.79,0.72,0.55]);
+  P('Battery Cable','Positive cable to the starter.',rod([1.79,0.82,0.5],[1.42,0.42,0.25],0.006));
+  P('Ignition Coil','Feeds the distributor.',cyl(0.03,0.03,0.1),[1.32,0.75,0.45]);
+  P('Fuse Box','Under dash fuse block.',box(0.15,0.12,0.04),[0.69,0.6,0.62]);
+  P('Wiring Harness','Main engine bay harness.',rod([0.95,0.85,0.6],[2.0,0.65,0.55],0.008));
+  P('Horn','Electric horn.',cyl(0.04,0.04,0.03,'x'),[2.07,0.45,0.4]);
+  P('Wiper Motor','Drives the wiper linkage.',cyl(0.035,0.035,0.08,'x'),[0.99,0.85,0.45]);
+  P('Left Wiper Arm','Wiper arm and blade.',rod([0.93,0.95,0.4],[0.8,1.02,-0.05],0.006));
+  P('Right Wiper Arm','Wiper arm and blade.',rod([0.93,0.95,-0.15],[0.8,1.02,-0.55],0.006));
+  P('Dome Light','Cabin light.',box(0.08,0.02,0.12),[-0.35,1.31,0]);
   LR.forEach(([s,sd])=>{
-    P(sd+' Headlight','Rectangular sealed beam.',box(0.05,0.14,0.32),[2.17,0.62,s*0.55]);
-    P(sd+' Front Turn Signal','Amber signal lamp.',box(0.04,0.05,0.14),[2.2,0.5,s*0.66]);
-    P(sd+' Taillight','Combination tail, stop and signal lamp.',box(0.04,0.14,0.42),[-2.18,0.68,s*0.56]);
+    P(sd+' Headlight','Rectangular sealed beam.',box(0.05,0.13,0.33),[2.14,0.66,s*0.52]);
+    P(sd+' Front Turn Signal','Amber signal lamp.',box(0.04,0.05,0.14),[2.16,0.56,s*0.66]);
+    P(sd+' Taillight','Combination tail, stop and signal lamp.',box(0.04,0.14,0.42),[-2.19,0.72,s*0.56]);
   });
 });
 
@@ -380,21 +395,30 @@ asm('Interior','Seats, dash, pedals and trim.',[-0.2,2.4,0],P=>{
   P('Carpet','Molded floor carpet.',box(2.0,0.01,1.4),[-0.2,0.245,0]);
   P('Headliner','Cloth roof liner.',box(1.15,0.01,1.25),[-0.28,1.32,0]);
   P('Rearview Mirror','Day night mirror.',box(0.03,0.05,0.2),[0.42,1.2,0]);
-});
+},DX);
 
 asm('Front Bumper','Bumper bar, absorbers and grille.',[1.3,-0.1,0],P=>{
-  P('Front Bumper Bar','Steel face bar.',box(0.1,0.13,1.62),[2.25,0.45,0]);
-  LR.forEach(([s,sd])=>P(sd+' Energy Absorber','Gas filled bumper shock.',cyl(0.03,0.03,0.14,'x'),[2.13,0.45,s*0.5]));
-  P('Grille','Front grille.',box(0.03,0.14,0.72),[2.2,0.64,0]);
-  P('Front Valance','Lower apron.',box(0.04,0.1,1.5),[2.18,0.3,0]);
+  P('Front Bumper Bar','Steel face bar.',box(0.1,0.12,1.62),[2.155,0.49,0]);
+  LR.forEach(([s,sd])=>P(sd+' Energy Absorber','Gas filled bumper shock.',cyl(0.03,0.03,0.14,'x'),[2.05,0.49,s*0.5]));
+  P('Grille','Front grille.',box(0.03,0.13,0.72),[2.12,0.64,0]);
+  P('Front Valance','Lower apron.',box(0.04,0.1,1.5),[2.1,0.33,0]);
 });
 
 asm('Rear Bumper','Bumper bar and absorbers.',[-1.3,-0.1,0],P=>{
-  P('Rear Bumper Bar','Steel face bar.',box(0.1,0.13,1.62),[-2.25,0.45,0]);
-  LR.forEach(([s,sd])=>P(sd+' Energy Absorber','Gas filled bumper shock.',cyl(0.03,0.03,0.14,'x'),[-2.13,0.45,s*0.5]));
-  P('License Plate Light','Plate lamp.',box(0.03,0.03,0.1),[-2.22,0.6,0]);
-  P('Rear Valance','Lower apron.',box(0.04,0.1,1.5),[-2.18,0.3,0]);
+  P('Rear Bumper Bar','Steel face bar.',box(0.1,0.12,1.62),[-2.155,0.5,0]);
+  LR.forEach(([s,sd])=>P(sd+' Energy Absorber','Gas filled bumper shock.',cyl(0.03,0.03,0.14,'x'),[-2.05,0.5,s*0.5]));
+  P('License Plate Light','Plate lamp.',box(0.03,0.03,0.1),[-2.2,0.62,0]);
+  P('Rear Valance','Lower apron.',box(0.04,0.1,1.5),[-2.1,0.34,0]);
 });
+
+/* BLUEPRINT OVERLAY: 1982 Accord sedan drawing, scaled to mm */
+let showBP=true;const BP=[];
+const tl=new THREE.TextureLoader();
+function bp(file,w,h,setup){tl.load(file,t=>{t.colorSpace=THREE.SRGBColorSpace;const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:t,transparent:true,opacity:0.85,side:THREE.DoubleSide,depthWrite:false}));setup(m);m.visible=showBP;m.renderOrder=-1;scene.add(m);BP.push(m)})}
+bp('ref/bp-side.png',4.49,1.4299,m=>m.position.set(0,0.7024,-1.5));
+bp('ref/bp-top.png',4.5059,1.9111,m=>{m.rotation.x=-PI/2;m.position.set(0,0.004,0)});
+bp('ref/bp-front.png',1.9098,1.4308,m=>{m.rotation.y=PI/2;m.position.set(3.3,0.7029,0.004)});
+bp('ref/bp-rear.png',1.9542,1.655,m=>{m.rotation.y=-PI/2;m.position.set(-3.3,0.8183,0)});
 
 /* BUILD */
 let total=0;
@@ -453,6 +477,7 @@ function back(){
 function setWire(on){wire=on;document.getElementById('bWire').classList.toggle('on',on);refresh()}
 
 document.getElementById('bBack').onclick=back;
+document.getElementById('bBP').onclick=e=>{showBP=!showBP;BP.forEach(m=>m.visible=showBP);e.target.classList.toggle('on',showBP)};
 document.getElementById('bExplode').onclick=()=>{fly=90;if(focus)focus.target=focus.target>0.5?0:1;else{carTarget=carTarget>0.5?0:1;fly=90}};
 document.getElementById('bWire').onclick=()=>setWire(!wire);
 document.getElementById('bParts').onclick=e=>{const s=list.style.display==='block';list.style.display=s?'none':'block';e.target.classList.toggle('on',!s)};
