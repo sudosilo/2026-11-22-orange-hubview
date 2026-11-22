@@ -875,18 +875,50 @@ const sprite=new THREE.Sprite(cardMat);sprite.center.set(0.5,0);sprite.renderOrd
 const leader=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(0,0,0),V(0,1,0)]),new THREE.LineBasicMaterial({color:0x3d3d3d,depthTest:false}));leader.renderOrder=10;leader.visible=false;scene.add(leader);
 function wrap(t,n=34){const out=[];t.split('\n').forEach(ln=>{if(ln.length<=n){out.push(ln);return}let cur='';ln.split(' ').forEach(w=>{if((cur+' '+w).trim().length>n){out.push(cur);cur=w}else cur=(cur+' '+w).trim()});out.push(cur)});return out}
 function sizeCard(){const n=wrap(typeText).length;let h=120+n*28;if(cardImg)h+=50+Math.round(cardImg.height*472/cardImg.width);card.height=h;if(cardMat.map)cardMat.map.dispose();cardMat.map=new THREE.CanvasTexture(card);cardMat.map.colorSpace=THREE.SRGBColorSpace;cardMat.needsUpdate=true}
+const CARD_HIT={print:null,img:null};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+function cardHTML(forPrint){
+  const img=cardImg?'<p class="cap">MANUAL: '+esc(cardCap)+'</p><img src="'+esc(new URL(cardImg.src,location.href).href)+'">':'';
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'+esc(head[1])+'</title><style>body{font-family:Helvetica Neue,Helvetica,Arial,sans-serif;color:#3d3d3d;background:#fff;margin:24px}h1{font-size:22px;margin:4px 0 12px;text-transform:uppercase}.sub{color:#8a8a8a;font-size:13px}pre{font:13px/1.5 Courier New,monospace;white-space:pre-wrap;border-top:1px solid #3d3d3d;padding-top:10px}.cap{color:#8a8a8a;font-size:12px;margin-top:18px}img{max-width:100%;border:1px solid #3d3d3d}.src{color:#8a8a8a;font-size:11px;margin-top:16px}</style></head><body><div class="sub">'+esc(head[0])+'</div><h1>'+esc(head[1])+'</h1><pre>'+esc(typeText)+'</pre>'+img+'<div class="src">Diagram source: Operation CHARM repair manual</div>'+(forPrint?'<script>window.onload=()=>setTimeout(()=>window.print(),300)<\/script>':'')+'</body></html>';
+}
+function printCard(){
+  const w=window.open('','_blank');
+  if(w){w.document.open();w.document.write(cardHTML(true));w.document.close();return}
+  viewDiagram(true);
+}
+function viewDiagram(){
+  let ov=document.getElementById('diag');if(ov)ov.remove();
+  ov=document.createElement('div');ov.id='diag';
+  ov.style.cssText='position:fixed;inset:0;background:#fff;z-index:20;display:flex;flex-direction:column';
+  const bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;padding:10px;border-bottom:1px solid #3d3d3d;flex-wrap:wrap';
+  const box=document.createElement('div');box.style.cssText='flex:1;overflow:auto;padding:10px';
+  box.innerHTML='<div style="color:#8a8a8a;font-size:12px">'+esc(head[0])+'</div><div style="font-weight:bold;font-size:18px;text-transform:uppercase;margin:4px 0 8px">'+esc(head[1])+'</div><div style="color:#8a8a8a;font-size:12px;margin-bottom:6px">MANUAL: '+esc(cardCap)+'</div>'+(cardImg?'<img id="diagimg" style="width:100%;border:1px solid #3d3d3d" src="'+esc(cardImg.src)+'">':'');
+  let zoom=100;
+  const btn=(t,f)=>{const b=document.createElement('button');b.textContent=t;b.onclick=f;bar.appendChild(b)};
+  btn('Close',()=>ov.remove());
+  btn('Zoom +',()=>{zoom=Math.min(400,zoom+50);const i=document.getElementById('diagimg');if(i)i.style.width=zoom+'%'});
+  btn('Zoom -',()=>{zoom=Math.max(50,zoom-50);const i=document.getElementById('diagimg');if(i)i.style.width=zoom+'%'});
+  btn('Print',printCard);
+  ov.appendChild(bar);ov.appendChild(box);document.body.appendChild(ov);
+}
+function cardTap(uv){
+  const x=uv.x*card.width,y=(1-uv.y)*card.height,inR=r=>r&&x>=r[0]&&x<=r[0]+r[2]&&y>=r[1]&&y<=r[1]+r[3];
+  if(inR(CARD_HIT.print))printCard();
+  else if(inR(CARD_HIT.img))viewDiagram();
+}
 function drawCard(){
   const w=card.width,h=card.height;cg.clearRect(0,0,w,h);
   cg.fillStyle='#ffffff';cg.fillRect(0,0,w,h);
   cg.strokeStyle='#3d3d3d';cg.lineWidth=3;cg.strokeRect(1.5,1.5,w-3,h-3);
   cg.fillStyle=cardColor;cg.fillRect(1.5,1.5,12,h-3);
   cg.fillStyle='#8a8a8a';cg.font='20px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[0],30,36);
-  cg.fillStyle='#3d3d3d';cg.font='bold 28px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[1].toUpperCase().slice(0,26),30,72);
+  cg.fillStyle='#3d3d3d';cg.font='bold 28px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[1].toUpperCase().slice(0,22),30,72);
+  CARD_HIT.print=[w-128,14,112,44];cg.fillStyle='#3d3d3d';cg.fillRect(...CARD_HIT.print);cg.fillStyle='#fff';cg.font='bold 20px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText('PRINT',w-104,43);
   cg.fillStyle='#3d3d3d';cg.font='22px Courier New, monospace';
   const lines=wrap(typeText.slice(0,typeN));let y=110;
   lines.forEach(l=>{cg.fillText(l,30,y);y+=28});
   if(typeN<typeText.length||performance.now()-typedAt<1500){if(Math.floor(performance.now()/250)%2===0){const last=lines[lines.length-1]||'';cg.fillStyle='#e9a074';cg.fillRect(30+cg.measureText(last).width+2,y-28-20,13,24)}}
-  if(cardImg){const ih=Math.round(cardImg.height*472/cardImg.width),top=card.height-ih-24;cg.fillStyle='#8a8a8a';cg.font='18px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(('MANUAL: '+cardCap).toUpperCase().slice(0,44),20,top-10);cg.drawImage(cardImg,20,top,472,ih);cg.strokeStyle='#3d3d3d';cg.lineWidth=1;cg.strokeRect(20,top,472,ih)}
+  if(cardImg){const ih=Math.round(cardImg.height*472/cardImg.width),top=card.height-ih-24;cg.fillStyle='#8a8a8a';cg.font='18px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(('MANUAL: '+cardCap).toUpperCase().slice(0,44),20,top-10);cg.drawImage(cardImg,20,top,472,ih);cg.strokeStyle='#3d3d3d';cg.lineWidth=1;cg.strokeRect(20,top,472,ih);CARD_HIT.img=[20,top,472,ih];cg.fillStyle='rgba(61,61,61,0.85)';cg.fillRect(20+472-150,top+ih-34,150,34);cg.fillStyle='#fff';cg.font='bold 16px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText('TAP TO ENLARGE',20+472-140,top+ih-11)}else CARD_HIT.img=null;
   cardMat.map.needsUpdate=true;
 }
 /* CALLOUT LABELS on every part of an exploded assembly */
@@ -1105,6 +1137,7 @@ canvas.addEventListener('pointerup',e=>{
   if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;
   ptr.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);
   ray.setFromCamera(ptr,camera);
+  if(sprite.visible){const hs=ray.intersectObject(sprite,false)[0];if(hs){if(hs.uv)cardTap(hs.uv);return}}
   const meshes=a=>a.parts.map(p=>p.mesh);
   if(focus){
     const hit=ray.intersectObjects(meshes(focus),false)[0];
