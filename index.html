@@ -105,6 +105,21 @@ function coil(r,h,turns,w){const pts=[],n=turns*20;for(let i=0;i<=n;i++){const t
 function side(build,z,t=0.03){const sh=new THREE.Shape();build(sh);const g=new THREE.ExtrudeGeometry(sh,{depth:t,bevelEnabled:false,curveSegments:24});g.computeBoundingBox();const c=new THREE.Vector3();g.boundingBox.getCenter(c);g.translate(-c.x,-c.y,-c.z);return{geo:g,pos:V(c.x,c.y,z)}}
 const poly=pts=>sh=>{sh.moveTo(...pts[0]);pts.slice(1).forEach(p=>sh.lineTo(...p));sh.closePath()};
 const WY=0.297;
+/* split a polygon of Vector3 where f changes sign, so part edges follow a smooth line instead of the mesh grid */
+function cut(pg,f){const A=[],Bo=[];for(let i=0;i<pg.length;i++){const p=pg[i],q=pg[(i+1)%pg.length],fp=f(p),fq=f(q);
+  (fp<0?A:Bo).push(p);if((fp<0)!==(fq<0)){const t=fp/(fp-fq),m=p.clone().lerp(q,t);A.push(m);Bo.push(m.clone())}}
+  return [A,Bo].filter(x=>x.length>=3)}
+/* rounded block: rounded rectangle in the z,y plane pushed along x, bevelled so the edges are soft */
+function rbox(L,H,W,r){const sh=new THREE.Shape(),w=W/2-r,h=H/2-r;sh.moveTo(-w,-H/2+0);sh.lineTo(w,-H/2);sh.absarc(w,-h,r,-PI/2,0);sh.lineTo(W/2,h);sh.absarc(w,h,r,0,PI/2);sh.lineTo(-w,H/2);sh.absarc(-w,h,r,PI/2,PI);sh.lineTo(-W/2,-h);sh.absarc(-w,-h,r,PI,PI*1.5);
+  const b=Math.min(r,L/2)*0.8,g=new THREE.ExtrudeGeometry(sh,{depth:Math.max(L-2*b,0.002),bevelEnabled:true,bevelSize:b*0.9,bevelThickness:b,bevelSegments:4,curveSegments:8});g.translate(0,0,-(L-2*b)/2);g.rotateY(PI/2);return g}
+/* door mirror: base on the door, arm out to a housing, glass on the rear face. s is the side, z points outboard */
+function mirror(P,base,hc,L,H,W,r,desc){
+  const s=Math.sign(hc[2]),[bx,by,bz]=base,[hx,hy,hz]=hc;
+  P('Mirror Base','Mount on the door frame.',rbox(0.07,0.05,0.025,0.008),[bx,by,bz],[0.05,0.2,s*0.25]);
+  P('Mirror Arm','Arm from the base to the housing.',rod([bx,by,bz+s*0.012],[hx+L*0.1,hy-H*0.25,hz-s*W*0.38],0.016),[0.05,0.25,s*0.32]);
+  P('Mirror Housing',desc,rbox(L,H,W,r),[hx,hy,hz],[0.1,0.3,s*0.45]);
+  P('Mirror Glass','Flat glass, adjustable from inside.',box(0.006,H*0.8,W*0.86),[hx-L/2-0.003,hy,hz],[-0.15,0.3,s*0.45]);
+}
 function arc(r,h,start,len){const g=new THREE.CylinderGeometry(r,r,h,20,1,true,start,len);g.rotateX(PI/2);return g}
 
 const ASM=[];
@@ -178,9 +193,6 @@ const GH=(()=>{
     if(x>-0.71)return 'Division Bar';
     return 'Vent Glass';
   }
-  const cut=(pg,f)=>{const A=[],Bo=[];for(let i=0;i<pg.length;i++){const p=pg[i],q=pg[(i+1)%pg.length],fp=f(p),fq=f(q);
-    (fp<0?A:Bo).push(p);if((fp<0)!==(fq<0)){const t=fp/(fp-fq),m=p.clone().lerp(q,t);A.push(m);Bo.push(m.clone())}}
-    return [A,Bo].filter(x=>x.length>=3)};
   const B={};
   [1,-1].forEach(s=>{
     const Q=(i,j)=>{const p=ST[i].pts[j];return V(ST[i].x,p[1],s*p[0])};
@@ -214,7 +226,10 @@ asm('Body Shell','Welded steel unibody. Everything else bolts to it.',[0,0,0],P=
   P('Rear Package Shelf','Shelf behind the rear seat.',box(0.45,0.03,1.35),[-1.33,0.96,0]);
   P('Rear Body Panel','Panel under the trunk opening.',box(0.035,0.42,1.5),[-2.19,0.62,0]);
   LR.forEach(([s,sd])=>{
-    P(sd+' Rocker Panel','Boxed sill under the doors. Main side rail of the shell.',box(1.82,0.12,0.06),[-0.09,0.31,s*0.8]);
+    {const sh=new THREE.Shape();[[0.7,0.37],[0.812,0.37],[0.815,0.33],[0.808,0.28],[0.79,0.255],[0.75,0.24],[0.7,0.24]].forEach((p,i)=>i?sh.lineTo(...p):sh.moveTo(...p));sh.closePath();
+     const g=new THREE.ExtrudeGeometry(sh,{depth:1.58,bevelEnabled:false});g.rotateY(-PI/2);g.translate(0.82,0,0);if(s<0)g.scale(1,1,-1);
+     g.computeBoundingBox();const c=new THREE.Vector3();g.boundingBox.getCenter(c);g.translate(-c.x,-c.y,-c.z);
+     P(sd+' Rocker Panel','Boxed sill under the doors, rolled under at the bottom edge. Main side rail of the shell.',{geo:g,pos:c});}
     P(sd+' Front Frame Rail','Box section rail carrying the engine and front suspension.',box(1.3,0.1,0.08),[1.5,0.33,s*0.52]);
     P(sd+' Front Strut Tower','Stamped tower that takes the top of the front strut.',cyl(0.1,0.13,0.32),[1.32,0.68,s*0.6]);
     P(sd+' Front Fender','Bolt on steel fender.',side(sh=>{sh.moveTo(0.82,0.92);sh.lineTo(0.82,0.3);sh.lineTo(0.95,0.3);sh.absarc(1.32,WY,0.37,PI,0,true);sh.lineTo(2.0,0.3);sh.lineTo(2.12,0.45);sh.lineTo(2.12,0.74);sh.lineTo(0.88,0.92);sh.closePath()},s*0.81));
@@ -250,7 +265,7 @@ asm('Trunk Lid','Rear deck lid with torsion bar hinges.',[-0.5,1.6,0],P=>{
 /* DOORS */
 function door(front,s,sd){
   const x0=front?0.82:-0.14,x1=front?-0.14:-1.0,xc=(x0+x1)/2;
-  const skin=front?poly([[x0,0.93],[x1,0.93],[x1,0.29],[x0,0.29]]):sh=>{sh.moveTo(x0,0.93);sh.lineTo(x1,0.93);sh.lineTo(x1,0.643);sh.absarc(-1.13,WY,0.37,1.212,0,true);sh.lineTo(x0,0.29);sh.closePath()};
+  const skin=front?poly([[x0,0.93],[x1,0.93],[x1,0.37],[x0,0.37]]):sh=>{sh.moveTo(x0,0.93);sh.lineTo(x1,0.93);sh.lineTo(x1,0.643);sh.absarc(-1.13,WY,0.37,1.212,0.26,true);sh.lineTo(-0.73,0.37);sh.lineTo(x0,0.37);sh.closePath()};
   asm((front?'Front ':'Rear ')+sd+' Door',(front?'Front':'Rear')+' door, hinged at its front edge.',[0,0.1,s*1.1],P=>{
     P('Outer Skin','Stamped steel door skin.',side(skin,s*0.81),[0,0,s*0.3]);
     P('Inner Panel','Inner door structure.',side(skin,s*0.765),[0,0,0]);
@@ -258,7 +273,7 @@ function door(front,s,sd){
     if(front){
       P('Window Glass','Tempered side glass, curved with the tumblehome.',GH(['Front Glass|'+s]),[0,0.5,0]);
       P('Window Sash','Door frame along the A pillar and roof edge.',GH(['Front Sash|'+s]),[0,0.8,0]);
-      P('Side Mirror','Door mounted mirror.',box(0.12,0.08,0.1),[0.72,1.0,s*0.88],[0.1,0.25,s*0.35]);
+      mirror(P,[0.75,0.975,s*0.8],[0.71,1.035,s*0.93],0.075,0.095,0.16,0.02,'Chrome trimmed manual mirror housing.');
     }else{
       P('Window Glass','Tempered side glass, curved with the tumblehome.',GH(['Rear Glass|'+s]),[0,0.5,0]);
       P('Vent Glass','Fixed rear quarter glass.',GH(['Vent Glass|'+s]),[-0.15,0.45,0]);
@@ -557,9 +572,11 @@ function buildPrius(){
   const XS=new Set();for(let i=0;i<=240;i++)XS.add(+(2.228-4.456*i/240).toFixed(4));
   [2.05,1.97,1.85,1.15,FD0,0.1,BP+0.02,BP-0.02,RD1+0.03,RD1-0.03,-0.95,-1.75,-1.85,-2.1,-2.12].forEach(x=>XS.add(x));
   const XL=[...XS].sort((a,b)=>b-a),ST=XL.map(x=>({x,pts:section(x)})),NX=ST.length-1,NU=ST[0].pts.length;
-  function cls(x,y,j){
+  const hlLow=x=>0.93-(x-1.5)*0.42,hlIn=x=>0.66-(x-1.5)*0.24,hlTop=x=>ytop(x)-0.012;
+  function cls(x,y,j,az){
     const z=zone(j),g=gh(x);
     if(z==='bot')return x>1.97?'Front Bumper Cover':x<-2.1?'Rear Bumper Cover':'Underbody';
+    if(z!=='bot'&&x>1.5&&x<2.23&&az>hlIn(x)&&y>hlLow(x)&&y<hlTop(x))return 'Headlight';
     if(x<-2.12&&y>=0.62)return (y>0.8&&y<1.06)?'Hatch Lower Glass':'Hatch Panel';
     if(x<-2.1&&y<0.62)return 'Rear Bumper Cover';
     if(z==='top'){
@@ -595,7 +612,15 @@ function buildPrius(){
       const ctr=a.clone().add(b).add(c).add(d).multiplyScalar(0.25);
       const zj=zone(j);
       if(zj==='bot'||zj==='side'){if([a,b,c,d].every(v=>inArch(v)!==null))continue;a=snap(a);b=snap(b);c=snap(c);d=snap(d)}
-      const k=cls(ctr.x,ctr.y,j);
+      if(Math.max(a.x,b.x,c.x,d.x)>1.45&&zj!=='bot'){
+        /* headlight lens: cut along its lower, inner and hood edge lines */
+        let polys=[[a,b,c,d]];
+        [v=>v.y-hlLow(v.x),v=>Math.abs(v.z)-hlIn(v.x),v=>hlTop(v.x)-v.y].forEach(f=>{polys=polys.flatMap(pg=>cut(pg,f))});
+        polys.forEach(pg=>{const m=pg.reduce((acc,v)=>acc.add(v),V(0,0,0)).multiplyScalar(1/pg.length);const kk=cls(m.x,m.y,j,Math.abs(m.z));
+          if(kk)for(let q=1;q<pg.length-1;q++)add(kk+'|'+s,[pg[0],pg[q],pg[q+1]])});
+        continue;
+      }
+      const k=cls(ctr.x,ctr.y,j,Math.abs(ctr.z));
       if(!k)continue;
       add(k+'|'+s,[a,b,c,a,c,d]);
     }
@@ -674,7 +699,7 @@ function buildPrius(){
       P('Door Latch','Latch at the rear edge.',box(0.03,0.1,0.06),[front?BP+0.04:RD1+0.04,0.85,s*0.8],[-0.3,0,0]);
       P('Upper Hinge','Bolted door hinge.',box(0.06,0.06,0.04),[x0,0.85,s*0.8],[0.3,0.05,0]);
       P('Lower Hinge','Bolted door hinge.',box(0.06,0.06,0.04),[x0,0.5,s*0.82],[0.3,-0.05,0]);
-      if(front)P('Side Mirror','Power mirror.',box(0.14,0.1,0.12),[0.85,1.03,s*0.92],[0.1,0.25,s*0.35]);
+      if(front)mirror(P,[0.86,1.0,s*0.83],[0.8,1.07,s*0.99],0.11,0.13,0.21,0.045,'Power mirror housing, body colored.');
     });
   }
   PL.forEach(([s,sd])=>{pdoor(true,s,sd);pdoor(false,s,sd)});
@@ -868,7 +893,7 @@ function buildPrius(){
     P('Left Wiper Arm','Wiper arm and blade.',rod([1.1,1.06,0.55],[0.9,1.15,0.0],0.006));
     P('Right Wiper Arm','Wiper arm and blade.',rod([1.1,1.06,0.0],[0.9,1.15,-0.55],0.006));
     PL.forEach(([s,sd])=>{
-      P(sd+' Headlight','Swept headlight assembly.',rz(box(0.25,0.1,0.32),-0.35),[2.05,0.72,s*0.6]);
+      P(sd+' Headlight','Swept headlight assembly, wraps the front corner.',geoOf(['Headlight|'+s]),[0.3,0.1,s*0.35]);
       P(sd+' Taillight','LED tail and stop lamp.',box(0.05,0.2,0.2),[-2.16,0.9,s*0.66]);
     });
   });
