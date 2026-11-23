@@ -37,7 +37,7 @@ def get(url):
 
 link_re = re.compile(r'/parts-select/(' + re.escape(prefix) + r'[a-z0-9\-]+)')
 pn = r'[0-9A-Z]{5}-[0-9A-Z]{5}(?:-[0-9A-Z]{2})?'
-part_re = re.compile(re.escape(label) + r' ([^<>]{2,120}?)\s*Part Number:\s*(' + pn + ')')
+part_re = re.compile(re.escape(label) + r' ((?:(?!Toyota Prius|Part Number)[^<>]){2,120}?)\s*Part Number:\s*(' + pn + ')')
 seen = set(prefix + s for s in seeds)
 queue = list(seen)
 items, keyset, pages = [], set(), 0
