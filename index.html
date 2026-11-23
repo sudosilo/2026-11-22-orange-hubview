@@ -984,7 +984,7 @@ function buildAll(){ASM.forEach((a,ai)=>{
 });}
 
 /* STATE AND UI */
-let carAmt=0,carTarget=0,focus=null,selected=null,wire=false,labelsOn=true,alpha=1,MANUAL={},cardImg=null,cardCap='';const imgCache={};
+let extra=false,carAmt=0,carTarget=0,focus=null,selected=null,wire=false,labelsOn=true,alpha=1,MANUAL={},cardImg=null,cardCap='';const imgCache={};
 /* INFO CARD: lives in the scene above the selected item, so it shrinks when you zoom out */
 let typeKey='',typeText='',typeN=0,head=['',''],infoOn=true,typedAt=0,cardColor='#8db3d6';
 const card=document.createElement('canvas');card.width=512;card.height=400;const cg=card.getContext('2d');
@@ -1126,7 +1126,7 @@ function refresh(){
     head=[CAR.name,focus.name];cardColor='#'+focus.parts[0].mat.color.getHexString();
     typeOut('a'+focus.name,[row('PARTS',focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',focus.desc.toUpperCase(),'','> TAP TO EXPLODE, TAP A PART TO INSPECT'].join('\n'));
   }else{typeKey=''}
-  paintBuild();updateShop();
+  paintBuild();updateShop();if(typeof explodeLabel==='function')explodeLabel();
   list.innerHTML='';
   (focus?focus.parts:ASM).forEach(it=>{
     const d=document.createElement('div');d.textContent=it.name;
@@ -1135,10 +1135,11 @@ function refresh(){
     list.appendChild(d);
   });
 }
-function open(a){if(focus&&focus!==a)focus.target=0;focus=a;selected=null;refresh()}
+function open(a){if(focus&&focus!==a&&!extra)focus.target=0;focus=a;selected=null;refresh()}
 function back(){
   if(selected){selected=null}
-  else if(focus){focus.target=0;focus=null}
+  else if(focus){if(!extra)focus.target=0;focus=null}
+  else if(extra){setExtra(false);carTarget=1}
   else{carTarget=0}
   refresh();
 }
@@ -1279,12 +1280,24 @@ document.getElementById('bBack').onclick=back;
 document.getElementById('bLbl').onclick=e=>{labelsOn=!labelsOn;e.target.classList.toggle('on',labelsOn)};
 document.getElementById('bInfo').onclick=e=>{infoOn=!infoOn;e.target.classList.toggle('on',infoOn)};
 document.getElementById('bBP').onclick=e=>{showBP=!showBP;BP.forEach(m=>m.visible=showBP);e.target.classList.toggle('on',showBP)};
-document.getElementById('bExplode').onclick=()=>{if(focus)focus.target=focus.target>0.5?0:1;else{carTarget=carTarget>0.5?0:1}};
+/* EXPLODE cycles: explode the assemblies, then extra explode every part of every assembly, then collapse */
+const EXTRA_SPREAD=1.9;
+function setExtra(on){extra=on;ASM.forEach(a=>a.target=on?1:0);carTarget=on?EXTRA_SPREAD:carTarget;explodeLabel()}
+function explodeLabel(){const b=document.getElementById('bExplode');
+  if(focus){b.textContent=focus.target>0.5?'Collapse':'Explode';b.classList.toggle('on',extra);return}
+  b.textContent=extra?'Collapse':carTarget>0.5?'Extra explode':'Explode';b.classList.toggle('on',extra)}
+document.getElementById('bExplode').onclick=()=>{
+  if(focus&&!extra){focus.target=focus.target>0.5?0:1}
+  else if(extra){focus=null;selected=null;setExtra(false);carTarget=0;refresh()}
+  else if(carTarget>0.5){setExtra(true)}
+  else{carTarget=1}
+  explodeLabel();
+};
 document.getElementById('bWire').onclick=()=>setWire(!wire);
 document.getElementById('bParts').onclick=e=>{const s=list.style.display==='block';list.style.display=s?'none':'block';e.target.classList.toggle('on',!s)};
-document.getElementById('bReset').onclick=()=>{ASM.forEach(a=>a.target=0);carTarget=0;focus=null;selected=null;refresh()};
+document.getElementById('bReset').onclick=()=>{extra=false;ASM.forEach(a=>a.target=0);carTarget=0;focus=null;selected=null;refresh();explodeLabel()};
 document.getElementById('alpha').oninput=e=>{alpha=e.target.value/100;refresh()};
-slide.oninput=()=>{const v=slide.value/100;if(focus){focus.target=v;focus.amt=v}else{carTarget=v;carAmt=v}};
+slide.oninput=()=>{const v=slide.value/100;if(focus){focus.target=v;focus.amt=v}else{const m=extra?EXTRA_SPREAD:1;carTarget=v*m;carAmt=v*m}};
 
 const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();
 let down=null;
@@ -1306,8 +1319,8 @@ canvas.addEventListener('pointerup',e=>{
   const hit=ray.intersectObjects(all,false)[0];
   if(!hit){if(selected){selected=null;refresh()}return}
   const a=hit.object.userData.part.asm;
-  if(carAmt<0.5&&carTarget<0.5){carTarget=1;return}
-  open(a);
+  if(carAmt<0.5&&carTarget<0.5){carTarget=1;explodeLabel();return}
+  open(a);if(extra){selected=hit.object.userData.part;refresh()}
 });
 
 function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}
@@ -1317,7 +1330,7 @@ function loadCar(id){
   ASM.forEach(a=>{ROOT.remove(a.group);a.parts.forEach(p=>{p.geo.dispose();p.mat.dispose()})});ASM.length=0;
   LBL.forEach(sp=>{scene.remove(sp);sp.material.map.dispose()});LBL.clear();
   BP.forEach(m=>ROOT.remove(m));BP.length=0;
-  total=0;focus=null;selected=null;carAmt=carTarget=0;typeKey='';
+  total=0;focus=null;selected=null;extra=false;carAmt=carTarget=0;typeKey='';
   CAR=CARS[id];CAR.build();buildAll();if(typeof applyPaint==='function')applyPaint();
   PN={};fetch('ref/parts/'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{PN=j;typeKey='';refresh()}).catch(()=>{});
   SPECS=[];TREE=[];fetch('ref/archive/'+id+'/specs.json').then(r=>r.ok?r.json():[]).then(j=>{SPECS=j}).catch(()=>{});
@@ -1425,7 +1438,7 @@ const goal=V(0,0,0);
     a.group.position.copy(a.center).addScaledVector(a.dir,carAmt);
     a.parts.forEach(p=>p.node.position.copy(p.local).addScaledVector(p.off,a.amt));
   });
-  if(!document.activeElement||document.activeElement!==slide)slide.value=Math.round((focus?focus.amt:carAmt)*100);
+  if(!document.activeElement||document.activeElement!==slide)slide.value=Math.round((focus?focus.amt:carAmt/(extra?EXTRA_SPREAD:1))*100);
   LBL.forEach(sp=>sp.visible=false);
   const pts=[];
   if(labelsOn&&!selected){
