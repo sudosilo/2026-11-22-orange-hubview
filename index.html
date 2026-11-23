@@ -30,6 +30,18 @@ button.on{background:#3d3d3d;color:#fff}
 #bl div b{font-weight:normal;color:#6a6a6a;white-space:nowrap}
 #bl div button{width:auto;margin:0;padding:2px 8px}
 #bl .ok{color:#1e6fd9}
+#find{position:fixed;top:10px;left:64px;z-index:20;width:min(300px,calc(100vw - 290px));min-width:150px}
+#find input{width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:11px 10px;border:1px solid #3d3d3d;border-radius:0;background:#fff;color:#3d3d3d}
+#findres{background:#fff;border:1px solid #3d3d3d;border-top:0;max-height:46vh;overflow:auto;display:none}
+#findres div{padding:9px 10px;border-bottom:1px solid #eee4d2;font-size:13px}
+#findres div small{display:block;color:#8a8a8a;font-size:11px}
+#more{position:fixed;inset:0;background:#fff;z-index:42;display:flex;flex-direction:column}
+#more .tabs{display:flex;gap:6px;padding:10px;border-bottom:1px solid #3d3d3d;flex-wrap:wrap}
+#more .body{flex:1;overflow:auto;padding:12px 14px;font-size:14px;line-height:1.45}
+#more pre{font:13px/1.5 Courier New,monospace;white-space:pre-wrap;margin:4px 0 14px}
+#more .lnk{display:block;margin:0 0 8px}
+#more .lnk button{width:100%;text-align:left;text-transform:none}
+#more h5{margin:12px 0 4px;font-size:12px;letter-spacing:.5px;color:#1e6fd9;font-weight:normal;text-transform:uppercase}
 #paint{flex-basis:100%;display:none;gap:6px;flex-wrap:wrap;align-items:center}
 #paint.open{display:flex}
 #paint button{width:34px;height:34px;padding:0}
@@ -61,6 +73,7 @@ button.on{background:#3d3d3d;color:#fff}
 <div id="bl"></div>
 </div>
 <div id="list"></div>
+<div id="find"><input id="findq" type="search" placeholder="FIND A PART" autocomplete="off"><div id="findres"></div></div>
 <div id="bar">
 <button id="bCar">Accord</button>
 <button id="bBack">Back</button>
@@ -939,6 +952,7 @@ function buildPrius(){
 
 /* BUILD */
 let total=0;
+const CHARM={accord:'https://charm.li/Honda/1982/Accord%20L4-1751cc%201800%20EK1/Repair%20and%20Diagnosis/',prius:'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/'};
 const CARS={accord:{id:'accord',make:'Honda',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'}};
 let CAR=null;
 function buildAll(){ASM.forEach((a,ai)=>{
@@ -971,7 +985,7 @@ const sprite=new THREE.Sprite(cardMat);sprite.center.set(0.5,0);sprite.renderOrd
 const leader=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(0,0,0),V(0,1,0)]),new THREE.LineBasicMaterial({color:0x3d3d3d,depthTest:false}));leader.renderOrder=10;leader.visible=false;scene.add(leader);
 function wrap(t,n=34){const out=[];t.split('\n').forEach(ln=>{if(ln.length<=n){out.push(ln);return}let cur='';ln.split(' ').forEach(w=>{if((cur+' '+w).trim().length>n){out.push(cur);cur=w}else cur=(cur+' '+w).trim()});out.push(cur)});return out}
 function sizeCard(){const n=wrap(typeText).length;let h=120+n*28;if(cardImg)h+=50+Math.round(cardImg.height*472/cardImg.width);card.height=h;if(cardMat.map)cardMat.map.dispose();cardMat.map=new THREE.CanvasTexture(card);cardMat.map.colorSpace=THREE.SRGBColorSpace;cardMat.needsUpdate=true}
-const CARD_HIT={print:null,img:null,buy:null};
+const CARD_HIT={print:null,img:null,buy:null,more:null};
 let PN={};
 function partNums(a,p){
   if(!a||!p)return [];
@@ -1033,7 +1047,8 @@ function viewDiagram(){
 }
 function cardTap(uv){
   const x=uv.x*card.width,y=(1-uv.y)*card.height,inR=r=>r&&x>=r[0]&&x<=r[0]+r[2]&&y>=r[1]&&y<=r[1]+r[3];
-  if(inR(CARD_HIT.buy))buySheet();
+  if(inR(CARD_HIT.more))moreSheet();
+  else if(inR(CARD_HIT.buy))buySheet();
   else if(inR(CARD_HIT.print))printCard();
   else if(inR(CARD_HIT.img))viewDiagram();
 }
@@ -1046,6 +1061,7 @@ function drawCard(){
   cg.fillStyle='#3d3d3d';cg.font='bold 28px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText(head[1].toUpperCase().slice(0,18),30,72);
   CARD_HIT.print=[w-128,14,112,44];cg.fillStyle='#3d3d3d';cg.fillRect(...CARD_HIT.print);cg.fillStyle='#fff';cg.font='bold 20px Helvetica Neue, Helvetica, Arial, sans-serif';cg.fillText('PRINT',w-104,43);
   CARD_HIT.buy=[w-200,14,64,44];cg.fillStyle='#e9a074';cg.fillRect(...CARD_HIT.buy);cg.fillStyle='#3d3d3d';cg.fillText('BUY',w-188,43);
+  CARD_HIT.more=[w-292,14,84,44];cg.fillStyle='#1e6fd9';cg.fillRect(...CARD_HIT.more);cg.fillStyle='#fff';cg.fillText('MORE',w-282,43);
   cg.fillStyle='#3d3d3d';cg.font='22px Courier New, monospace';
   const lines=wrap(typeText.slice(0,typeN));let y=110;
   lines.forEach(l=>{cg.fillText(l,30,y);y+=28});
@@ -1296,11 +1312,61 @@ function loadCar(id){
   total=0;focus=null;selected=null;carAmt=carTarget=0;typeKey='';
   CAR=CARS[id];CAR.build();buildAll();if(typeof applyPaint==='function')applyPaint();
   PN={};fetch('ref/parts/'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{PN=j;typeKey='';refresh()}).catch(()=>{});
+  SPECS=[];TREE=[];fetch('ref/archive/'+id+'/specs.json').then(r=>r.ok?r.json():[]).then(j=>{SPECS=j}).catch(()=>{});
+  fetch('ref/archive/'+id+'/tree.json').then(r=>r.ok?r.json():[]).then(j=>{TREE=j}).catch(()=>{});
   MANUAL={};const gen=carGen;fetch('ref/manual/map-'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
   document.getElementById('bCar').textContent=CAR.btn;
   try{history.replaceState(null,'','#'+id)}catch(e){}
   refresh();
 }
+/* ARCHIVE LOOKUPS: spec lines and manual pages that mention a part */
+let SPECS=[],TREE=[];
+const STOP=/^(left|right|front|rear|upper|lower|inner|outer|lh|rh|assembly|assy|\d+)$/i;
+function keyWords(n){return n.replace(/[^A-Za-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>2&&!STOP.test(w))}
+function scorePath(path,words){const t=path.toLowerCase();let s=0;words.forEach((w,i)=>{if(t.includes(w.toLowerCase()))s+=i===words.length-1?3:1});return s}
+function archiveFor(p){
+  const words=keyWords(p.name);if(!words.length)return{specs:[],pages:[]};
+  const need=3;
+  const specs=SPECS.map(e=>[scorePath(e.path+' '+e.title,words),e]).filter(x=>x[0]>=need).sort((a,b)=>b[0]-a[0]).slice(0,8).map(x=>x[1]);
+  const pages=TREE.map(t=>[scorePath(t,words),t]).filter(x=>x[0]>=need&&!/Diagnostic Trouble Codes|Technical Service Bulletins/.test(x[1])).sort((a,b)=>b[0]-a[0]||a[1].length-b[1].length).slice(0,14).map(x=>x[1]);
+  return{specs,pages};
+}
+function moreSheet(tab){
+  const p=selected||null,subject=p?p.name:(focus?focus.name:'');if(!subject)return;
+  let ov=document.getElementById('more');if(ov)ov.remove();
+  ov=document.createElement('div');ov.id='more';
+  const yr=CAR.name.split(' ')[0],model=CAR.name.split(' ').slice(1).join(' '),carQ=yr+' '+(CAR.make||'')+' '+model,q=(carQ+' '+subject).replace(/\s+/g,' ').trim();
+  const enc=encodeURIComponent,a=p?archiveFor(p):{specs:[],pages:[]};
+  const L=(t,u)=>'<a class="lnk" target="_blank" rel="noopener" href="'+esc(u)+'"><button>'+esc(t)+'</button></a>';
+  const tabs={
+    SPECS:()=>a.specs.length?a.specs.map(e=>'<h5>'+esc(e.path)+'</h5><pre>'+esc(e.lines.join('\n'))+'</pre>').join(''):'<p>Spec pages appear here once this car\'s manual archive is built.</p>',
+    MANUAL:()=>{const b=CHARM[CAR.id];return a.pages.length&&b?a.pages.map(t=>L(t,b+t.split('/').map(enc).join('/')+'/')).join(''):(b?L('Open the full repair manual',b):'')+'<p>Matching manual pages appear here once this car\'s manual archive is built.</p>'},
+    LINKS:()=>'<h5>Reference</h5>'+L('Wikipedia: '+subject,'https://en.wikipedia.org/w/index.php?search='+enc(keyWords(subject).join(' ')||subject))+L('Wikipedia: '+(CAR.make||'')+' '+model,'https://en.wikipedia.org/w/index.php?search='+enc((CAR.make||'')+' '+model))+
+      '<h5>Guides and manuals</h5>'+L('Repair guides: '+q,'https://duckduckgo.com/?q='+enc(q+' replacement guide'))+L('iFixit: '+subject,'https://www.ifixit.com/Search?query='+enc((CAR.make||'')+' '+model+' '+subject))+L('Forum threads: '+q,'https://duckduckgo.com/?q='+enc(q+' forum how to'))+
+      '<h5>Videos</h5>'+L('Video search: '+q,'https://duckduckgo.com/?q='+enc(q+' how to replace')+'&iax=videos&ia=videos')+L('Vimeo: '+q,'https://vimeo.com/search?q='+enc(q))
+  };
+  let cur=tab||'SPECS';
+  const top=document.createElement('div');top.className='tabs';const body=document.createElement('div');body.className='body';
+  const draw=()=>{top.innerHTML='';const c=document.createElement('button');c.textContent='Close';c.onclick=()=>ov.remove();top.appendChild(c);
+    Object.keys(tabs).forEach(k=>{const b=document.createElement('button');b.textContent=k;if(k===cur)b.className='on';b.onclick=()=>{cur=k;draw()};top.appendChild(b)});
+    body.innerHTML='<div style="color:#8a8a8a;font-size:12px">'+esc(head[0])+'</div><div style="font-weight:bold;font-size:18px;text-transform:uppercase;margin:4px 0 8px">'+esc(subject)+'</div>'+tabs[cur]()};
+  draw();ov.appendChild(top);ov.appendChild(body);document.body.appendChild(ov);
+}
+/* FIND: type a part, tap a result, its assembly explodes and the part is selected. The camera stays put. */
+(function(){
+  const q=document.getElementById('findq'),res=document.getElementById('findres');
+  const hits=t=>{t=t.trim().toLowerCase();if(t.length<2)return[];const ws=t.split(/\s+/),out=[];
+    ASM.forEach(a=>{const an=a.name.toLowerCase();if(ws.every(w=>an.includes(w)))out.push([3,a,null]);
+      a.parts.forEach(p=>{const txt=(p.name+' '+a.name+' '+p.desc+' '+partNums(a,p).map(n=>n[1]+' '+n[0]).join(' ')).toLowerCase();
+        if(ws.every(w=>txt.includes(w)))out.push([p.name.toLowerCase().startsWith(ws[0])?2:ws.every(w=>p.name.toLowerCase().includes(w))?1:0,a,p])})});
+    return out.sort((x,y)=>y[0]-x[0]).slice(0,30)};
+  const go=(a,p)=>{res.style.display='none';q.blur();carTarget=1;if(focus!==a)open(a);a.target=1;selected=p;refresh()};
+  q.oninput=()=>{const h=hits(q.value);res.innerHTML='';res.style.display=h.length?'block':'none';
+    h.forEach(([,a,p])=>{const d=document.createElement('div');d.innerHTML=esc(p?p.name:a.name)+'<small>'+esc(p?a.name:'Assembly, '+a.parts.length+' parts')+'</small>';d.onclick=()=>go(a,p);res.appendChild(d)})};
+  q.onkeydown=e=>{if(e.key==='Enter'){const h=hits(q.value);if(h.length)go(h[0][1],h[0][2])}else if(e.key==='Escape'){res.style.display='none';q.blur()}};
+  q.onfocus=()=>{if(q.value)q.oninput()};
+  ['pointerdown','touchstart'].forEach(ev=>document.getElementById('find').addEventListener(ev,e=>e.stopPropagation()));
+})();
 /* PAINT: recolors the outside sheet metal; MULTI keeps the part color pack */
 const PAINTS=[['Multi',null],['White',0xf2f1ec],['Silver',0xbfc3c7],['Gray',0x6b7076],['Black',0x2a2c2f],['Red',0xb0262c],['Maroon',0x6e1f2a],['Blue',0x2b5ea8],['Navy',0x1f2f52],['Green',0x2f6b45],['Gold',0xc9a45a],['Orange',0xe07a2e],['Yellow',0xf0c93a],['Teal',0x2f8f8a]];
 const PAINTED=/Roof Panel|Fender|Quarter Panel|Rocker Panel|[ABCD] Pillar|Hood Panel|Hatch Panel|Rear Spoiler|Outer Skin|Bumper Cover|Trunk Lid Panel|Side Mirror|Mirror Housing|Cowl Panel|Rear Body Panel|Valance/;
