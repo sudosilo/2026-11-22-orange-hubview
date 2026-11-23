@@ -35,6 +35,7 @@ def get(url):
         time.sleep(2 + attempt * 3)
     return None
 
+pn = r'[0-9A-Z]{5}-[0-9A-Z]{5}(?:-[0-9A-Z]{2})?'
 site = 'https://www.toyotapartsnow.com'
 listing = '/parts-list/' + prefix.rstrip('-').replace('-toyota-prius', '-toyota-prius') + '/'
 link_re = re.compile(r'href="(' + re.escape(listing) + r'[a-z0-9\-/]+)"')
