@@ -30,6 +30,12 @@ button.on{background:#3d3d3d;color:#fff}
 #bl div b{font-weight:normal;color:#6a6a6a;white-space:nowrap}
 #bl div button{width:auto;margin:0;padding:2px 8px}
 #bl .ok{color:#1e6fd9}
+#paint{flex-basis:100%;display:none;gap:6px;flex-wrap:wrap;align-items:center}
+#paint.open{display:flex}
+#paint button{width:34px;height:34px;padding:0}
+#paint button.multi{width:auto;padding:0 10px;background:linear-gradient(90deg,#8db3d6,#e9a074,#9cc7a4,#f0cd6e,#b8a3d1)}
+#paint button.on{outline:3px solid #1e6fd9;outline-offset:1px}
+#paint span{font-size:11px;letter-spacing:.5px;min-width:90px}
 </style>
 </head>
 <body>
@@ -64,7 +70,9 @@ button.on{background:#3d3d3d;color:#fff}
 <button id="bParts">Parts</button>
 <button id="bInfo" class="on">Info</button>
 <button id="bBP" class="on">Blueprint</button>
+<button id="bPaint">Paint</button>
 <button id="bReset">Reset</button>
+<div id="paint"></div>
 <label class="sl">EXPLODE <input id="slide" type="range" min="0" max="100" value="0"></label>
 <label class="sl">OPACITY <input id="alpha" type="range" min="5" max="100" value="100"></label>
 </div>
@@ -1286,13 +1294,34 @@ function loadCar(id){
   LBL.forEach(sp=>{scene.remove(sp);sp.material.map.dispose()});LBL.clear();
   BP.forEach(m=>ROOT.remove(m));BP.length=0;
   total=0;focus=null;selected=null;carAmt=carTarget=0;typeKey='';
-  CAR=CARS[id];CAR.build();buildAll();
+  CAR=CARS[id];CAR.build();buildAll();if(typeof applyPaint==='function')applyPaint();
   PN={};fetch('ref/parts/'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{PN=j;typeKey='';refresh()}).catch(()=>{});
   MANUAL={};const gen=carGen;fetch('ref/manual/map-'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
   document.getElementById('bCar').textContent=CAR.btn;
   try{history.replaceState(null,'','#'+id)}catch(e){}
   refresh();
 }
+/* PAINT: recolors the outside sheet metal; MULTI keeps the part color pack */
+const PAINTS=[['Multi',null],['White',0xf2f1ec],['Silver',0xbfc3c7],['Gray',0x6b7076],['Black',0x2a2c2f],['Red',0xb0262c],['Maroon',0x6e1f2a],['Blue',0x2b5ea8],['Navy',0x1f2f52],['Green',0x2f6b45],['Gold',0xc9a45a],['Orange',0xe07a2e],['Yellow',0xf0c93a],['Teal',0x2f8f8a]];
+const PAINTED=/Roof Panel|Fender|Quarter Panel|Rocker Panel|[ABCD] Pillar|Hood Panel|Hatch Panel|Rear Spoiler|Outer Skin|Bumper Cover|Trunk Lid Panel|Side Mirror|Mirror Housing|Cowl Panel|Rear Body Panel|Valance/;
+let paint=null;try{const v=localStorage.getItem('hubPaint');paint=v===null||v==='null'?null:+v}catch(e){}
+function applyPaint(){
+  ASM.forEach(a=>{if(/Interior/.test(a.name))return;a.parts.forEach(p=>{
+    if(p.baseCol===undefined)p.baseCol=p.mat.color.getHex();
+    if(!PAINTED.test(p.name))return;
+    const c=paint===null?p.baseCol:paint;
+    p.mat.color.setHex(c);p.mat.roughness=paint===null?1:0.5;p.mat.metalness=paint===null?0:0.15;
+    p.wf.material.color.setHex(c).multiplyScalar(0.75);
+  })});
+  document.querySelectorAll('#paint button').forEach((b,i)=>b.classList.toggle('on',PAINTS[i][1]===paint));
+  document.getElementById('paintName').textContent='PAINT: '+PAINTS.find(x=>x[1]===paint)[0].toUpperCase();
+  typeKey='';
+}
+(function(){const box=document.getElementById('paint');
+  box.innerHTML=PAINTS.map(([n,c])=>'<button title="'+n+'" aria-label="'+n+'"'+(c===null?' class="multi">Multi':' style="background:#'+c.toString(16).padStart(6,'0')+'">')+'</button>').join('')+'<span id="paintName"></span>';
+  box.querySelectorAll('button').forEach((b,i)=>b.onclick=e=>{e.stopPropagation();paint=PAINTS[i][1];try{localStorage.setItem('hubPaint',String(paint))}catch(x){}applyPaint()});
+  document.getElementById('bPaint').onclick=()=>{box.classList.toggle('open');document.getElementById('bPaint').classList.toggle('on',box.classList.contains('open'))};
+})();
 document.getElementById('bCar').onclick=()=>loadCar(CAR===CARS.prius?'accord':'prius');
 loadCar(location.hash==='#accord'?'accord':'prius');
 
