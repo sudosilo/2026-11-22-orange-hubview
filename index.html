@@ -109,6 +109,9 @@ const WY=0.297;
 function cut(pg,f){const A=[],Bo=[];for(let i=0;i<pg.length;i++){const p=pg[i],q=pg[(i+1)%pg.length],fp=f(p),fq=f(q);
   (fp<0?A:Bo).push(p);if((fp<0)!==(fq<0)){const t=fp/(fp-fq),m=p.clone().lerp(q,t);A.push(m);Bo.push(m.clone())}}
   return [A,Bo].filter(x=>x.length>=3)}
+/* flat panel cut to an outline seen from above: pts are [x,z] pairs, y is the panel's middle height */
+function plan(pts,y,t){const sh=new THREE.Shape();pts.forEach((p,i)=>i?sh.lineTo(...p):sh.moveTo(...p));sh.closePath();
+  const g=new THREE.ExtrudeGeometry(sh,{depth:t,bevelEnabled:false});g.rotateX(PI/2);g.computeBoundingBox();const c=new THREE.Vector3();g.boundingBox.getCenter(c);g.translate(-c.x,-c.y,-c.z);c.y=y;return{geo:g,pos:c}}
 /* rounded block: rounded rectangle in the z,y plane pushed along x, bevelled so the edges are soft */
 function rbox(L,H,W,r){const sh=new THREE.Shape(),w=W/2-r,h=H/2-r;sh.moveTo(-w,-H/2+0);sh.lineTo(w,-H/2);sh.absarc(w,-h,r,-PI/2,0);sh.lineTo(W/2,h);sh.absarc(w,h,r,0,PI/2);sh.lineTo(-w,H/2);sh.absarc(-w,h,r,PI/2,PI);sh.lineTo(-W/2,-h);sh.absarc(-w,-h,r,PI,PI*1.5);
   const b=Math.min(r,L/2)*0.8,g=new THREE.ExtrudeGeometry(sh,{depth:Math.max(L-2*b,0.002),bevelEnabled:true,bevelSize:b*0.9,bevelThickness:b,bevelSegments:4,curveSegments:8});g.translate(0,0,-(L-2*b)/2);g.rotateY(PI/2);return g}
@@ -217,8 +220,8 @@ const GH=(()=>{
 const GB=n=>[n+'|1',n+'|-1'];
 /* BODY: traced from the 1982 Accord sedan blueprint. front axle x 1.32, rear axle x -1.13 */
 asm('Body Shell','Welded steel unibody. Everything else bolts to it.',[0,0,0],P=>{
-  P('Floor Pan','Stamped steel floor, the base of the unibody.',box(2.15,0.035,1.5),[-0.175,0.24,0]);
-  P('Trunk Floor','Raised floor over the fuel tank.',box(0.85,0.03,1.4),[-1.72,0.42,0]);
+  P('Floor Pan','Stamped steel floor, the base of the unibody. Narrows between the rear wheel wells.',plan([[0.9,-0.75],[0.9,0.75],[-0.86,0.75],[-0.9,0.56],[-1.25,0.56],[-1.25,-0.56],[-0.9,-0.56],[-0.86,-0.75]],0.24,0.035));
+  P('Trunk Floor','Raised floor over the fuel tank, notched around the rear wheel wells.',plan([[-1.295,-0.56],[-1.295,0.56],[-1.53,0.56],[-1.56,0.7],[-2.145,0.7],[-2.145,-0.7],[-1.56,-0.7],[-1.53,-0.56]],0.42,0.03));
   P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.5,1.45),[0.9,0.62,0]);
   P('Cowl Panel','Panel under the windshield with the fresh air intake.',box(0.25,0.03,1.4),[1.0,0.9,0]);
   P('Radiator Core Support','Front bulkhead that holds the radiator and latch.',box(0.05,0.42,1.4),[2.08,0.55,0]);
@@ -510,7 +513,7 @@ asm('Interior','Seats, dash, pedals and trim.',[-0.2,2.4,0],P=>{
   P('Clutch Pedal','Cable clutch pedal.',box(0.02,0.2,0.07),[0.65,0.42,0.52]);
   P('Brake Pedal','Pushes the booster rod.',box(0.02,0.2,0.08),[0.65,0.42,0.38]);
   P('Accelerator Pedal','Cable throttle pedal.',box(0.02,0.2,0.05),[0.67,0.42,0.26]);
-  P('Carpet','Molded floor carpet.',box(2.0,0.01,1.4),[-0.2,0.245,0]);
+  P('Carpet','Molded floor carpet.',plan([[0.8,-0.7],[0.8,0.7],[-0.86,0.7],[-0.9,0.55],[-1.2,0.55],[-1.2,-0.55],[-0.9,-0.55],[-0.86,-0.7]],0.262,0.01));
   const hl=GH(GB('Roof Panel'));hl.geo.scale(1,1,0.95);hl.pos.y-=0.03;
   P('Headliner','Cloth roof liner under the crowned roof.',hl);
   P('Rearview Mirror','Day night mirror.',box(0.03,0.05,0.2),[0.42,1.2,0]);
@@ -915,7 +918,8 @@ function buildPrius(){
     P('Brake Pedal','Brake pedal feeding the stroke simulator.',box(0.02,0.2,0.08),[0.72,0.45,0.38]);
     P('Accelerator Pedal','Drive by wire pedal.',box(0.02,0.2,0.05),[0.74,0.45,0.25]);
     P('Carpet','Molded floor carpet.',box(2.0,0.01,1.4),[-0.3,0.26,0]);
-    P('Headliner','Roof liner.',box(1.1,0.01,1.2),[-0.4,1.45,0]);
+    const hl=geoOf(both('Roof Panel'));hl.geo.scale(1,1,0.94);hl.pos.y-=0.035;
+    P('Headliner','Cloth roof liner, shaped to the roof.',hl);
     P('Rearview Mirror','Day night mirror.',box(0.03,0.05,0.2),[0.35,1.32,0]);
   });
 
