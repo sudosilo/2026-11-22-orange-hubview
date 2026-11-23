@@ -144,6 +144,65 @@ function corner(P,cx,cz,s,k=K,wy=WY,lugs=4,lugR=0.71,td='165SR13 steel belted ra
 }
 
 function buildAccord(){
+/* GREENHOUSE: one lofted surface from the belt line over the roof, traced from the side, front and plan views.
+   Glass, pillars and sashes are cut from it so every pane follows the tumblehome and roof crown. */
+const GH=(()=>{
+  const tab=(t,x)=>{if(x>=t[0][0])return t[0][1];for(let i=1;i<t.length;i++){if(x>=t[i][0]){const[x0,y0]=t[i-1],[x1,y1]=t[i];return y0+(y1-y0)*(x-x0)/(x1-x0)}}return t[t.length-1][1]};
+  const X0=0.92,X1=-1.56;
+  const TOPA=[[X0,0.935],[0.62,1.137],[0.42,1.27],[0.3,1.322],[0.15,1.34],[-0.5,1.347],[-0.85,1.342],[-0.96,1.33],[-1.05,1.29],[-1.27,1.153],[X1,0.975]];
+  const ytop=x=>tab(TOPA,x),ybelt=x=>0.935+(X0-x)*0.0161;
+  const NS=12,NT=18,cl=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
+  const curve=(pts,n)=>new THREE.CatmullRomCurve3(pts.map(p=>V(p[0],p[1],0)),false,'centripetal').getSpacedPoints(n).map(p=>[p.x,p.y]);
+  function section(x){
+    const t=ytop(x),b=ybelt(x),h=Math.max(t-b,0.0005),g=cl(h/0.37,0,1),c=0.04*cl(h/0.12,0,1);
+    const r=Math.max(b+h*0.02,t-c),wb=0.785,wr=lerp(0.77,0.635,g);
+    const sideC=curve([[wb,b],[lerp(wb,wr,0.5)+0.012*g,(b+r)/2],[wr,r]],NS);
+    const topC=curve([[wr,r],[wr-0.03*g-0.005,r+c*0.55],[wr*0.55,t-c*0.1],[0,t]],NT);
+    return [...sideC,...topC.slice(1)];
+  }
+  const XS=new Set();for(let i=0;i<=200;i++)XS.add(+(X0+(X1-X0)*i/200).toFixed(4));
+  [0.34,-0.105,-0.175,-0.68,-0.71,-0.98].forEach(x=>XS.add(x));
+  const XL=[...XS].sort((a,b)=>b-a),ST=XL.map(x=>({x,pts:section(x)})),NU=ST[0].pts.length;
+  const cline=y=>-0.76-(1.29-y)*0.788;
+  function cls(x,y,j){
+    if(j>=NS){const jt=j-NS;
+      if(x>0.34)return jt<2?'A Pillar':'Windshield';
+      if(x<-0.98)return jt<2?'C Pillar':'Rear Window';
+      return 'Roof Panel';}
+    const cx=cline(y);
+    if(x<cx)return 'C Pillar';
+    if(x>-0.105)return j===NS-1?'Front Sash':'Front Glass';
+    if(x>-0.175)return 'B Pillar';
+    if(j===NS-1||x<cx+0.035)return 'Rear Sash';
+    if(x>-0.68)return 'Rear Glass';
+    if(x>-0.71)return 'Division Bar';
+    return 'Vent Glass';
+  }
+  const cut=(pg,f)=>{const A=[],Bo=[];for(let i=0;i<pg.length;i++){const p=pg[i],q=pg[(i+1)%pg.length],fp=f(p),fq=f(q);
+    (fp<0?A:Bo).push(p);if((fp<0)!==(fq<0)){const t=fp/(fp-fq),m=p.clone().lerp(q,t);A.push(m);Bo.push(m.clone())}}
+    return [A,Bo].filter(x=>x.length>=3)};
+  const B={};
+  [1,-1].forEach(s=>{
+    const Q=(i,j)=>{const p=ST[i].pts[j];return V(ST[i].x,p[1],s*p[0])};
+    for(let i=0;i<ST.length-1;i++)for(let j=0;j<NU-1;j++){
+      const a=Q(i,j),b=Q(i+1,j),c=Q(i+1,j+1),d=Q(i,j+1);
+      if(j>=NS){const k=cls((a.x+c.x)/2,(a.y+b.y+c.y+d.y)/4,j)+'|'+s;(B[k]=B[k]||[]).push(a,b,c,a,c,d);continue}
+      /* side glass quads are cut along the C pillar and rear sash lines so the edges run straight */
+      let polys=[[a,b,c,d]];
+      [0,0.035].forEach(o=>{const f=v=>v.x-cline(v.y)-o;polys=polys.flatMap(pg=>cut(pg,f))});
+      polys.forEach(pg=>{if(pg.length<3)return;const m=pg.reduce((acc,v)=>acc.add(v),V(0,0,0)).multiplyScalar(1/pg.length);
+        const k=cls(m.x,m.y,j)+'|'+s;for(let q=1;q<pg.length-1;q++)(B[k]=B[k]||[]).push(pg[0],pg[q],pg[q+1])});
+    }
+  });
+  return keys=>{
+    const arr=[];keys.forEach(k=>(B[k]||[]).forEach(v=>arr.push(v.x,v.y,v.z)));
+    if(!arr.length)return null;
+    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(arr,3));
+    g.computeBoundingBox();const c=new THREE.Vector3();g.boundingBox.getCenter(c);g.translate(-c.x,-c.y,-c.z);g.computeVertexNormals();
+    return{geo:g,pos:c};
+  };
+})();
+const GB=n=>[n+'|1',n+'|-1'];
 /* BODY: traced from the 1982 Accord sedan blueprint. front axle x 1.32, rear axle x -1.13 */
 asm('Body Shell','Welded steel unibody. Everything else bolts to it.',[0,0,0],P=>{
   P('Floor Pan','Stamped steel floor, the base of the unibody.',box(2.15,0.035,1.5),[-0.175,0.24,0]);
@@ -151,7 +210,7 @@ asm('Body Shell','Welded steel unibody. Everything else bolts to it.',[0,0,0],P=
   P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.5,1.45),[0.9,0.62,0]);
   P('Cowl Panel','Panel under the windshield with the fresh air intake.',box(0.25,0.03,1.4),[1.0,0.9,0]);
   P('Radiator Core Support','Front bulkhead that holds the radiator and latch.',box(0.05,0.42,1.4),[2.08,0.55,0]);
-  P('Roof Panel','Single stamped roof skin.',box(1.3,0.03,1.24),[-0.315,1.335,0]);
+  P('Roof Panel','Single stamped roof skin with drip rails, crowned across.',GH(GB('Roof Panel')));
   P('Rear Package Shelf','Shelf behind the rear seat.',box(0.45,0.03,1.35),[-1.33,0.96,0]);
   P('Rear Body Panel','Panel under the trunk opening.',box(0.035,0.42,1.5),[-2.19,0.62,0]);
   LR.forEach(([s,sd])=>{
@@ -160,16 +219,16 @@ asm('Body Shell','Welded steel unibody. Everything else bolts to it.',[0,0,0],P=
     P(sd+' Front Strut Tower','Stamped tower that takes the top of the front strut.',cyl(0.1,0.13,0.32),[1.32,0.68,s*0.6]);
     P(sd+' Front Fender','Bolt on steel fender.',side(sh=>{sh.moveTo(0.82,0.92);sh.lineTo(0.82,0.3);sh.lineTo(0.95,0.3);sh.absarc(1.32,WY,0.37,PI,0,true);sh.lineTo(2.0,0.3);sh.lineTo(2.12,0.45);sh.lineTo(2.12,0.74);sh.lineTo(0.88,0.92);sh.closePath()},s*0.81));
     P(sd+' Rear Quarter Panel','Welded rear quarter, part of the shell.',side(sh=>{sh.moveTo(-1.0,0.95);sh.lineTo(-1.56,0.98);sh.lineTo(-2.05,0.94);sh.lineTo(-2.19,0.86);sh.lineTo(-2.19,0.45);sh.lineTo(-1.9,0.3);sh.lineTo(-1.5,0.3);sh.absarc(-1.13,WY,0.37,PI,1.212,true);sh.lineTo(-1.0,0.95);sh.closePath()},s*0.81));
-    P(sd+' C Pillar','Sail panel behind the rear door glass.',side(poly([[-0.76,1.29],[-0.98,1.335],[-1.56,0.98],[-1.02,0.96]]),s*0.76));
-    P(sd+' A Pillar','Windshield pillar.',rod([0.91,0.93,s*0.75],[0.33,1.32,s*0.65],0.025));
-    P(sd+' B Pillar','Center pillar between the doors.',box(0.07,0.38,0.05),[-0.14,1.12,s*0.75]);
+    P(sd+' C Pillar','Sail panel behind the rear door glass.',GH(['C Pillar|'+s]));
+    P(sd+' A Pillar','Windshield pillar.',GH(['A Pillar|'+s]));
+    P(sd+' B Pillar','Center pillar between the doors.',GH(['B Pillar|'+s]));
     P(sd+' Rear Strut Tower','Rear strut tower inside the trunk.',cyl(0.09,0.11,0.3),[-1.18,0.7,s*0.6]);
   });
 });
 
 asm('Glass','Windshield and rear window.',[0,0.8,0],P=>{
-  P('Windshield','Laminated safety glass.',rz(box(0.7,0.008,1.32),-0.596),[0.621,1.124,0]);
-  P('Rear Window','Tempered glass with defroster grid.',rz(box(0.676,0.008,1.26),0.545),[-1.269,1.155,0]);
+  P('Windshield','Laminated safety glass, curved to the pillars.',GH(GB('Windshield')));
+  P('Rear Window','Tempered glass with defroster grid, curved to the pillars.',GH(GB('Rear Window')));
 });
 
 asm('Hood','Front hinged hood with prop rod.',[0.4,2.2,0],P=>{
@@ -197,16 +256,14 @@ function door(front,s,sd){
     P('Inner Panel','Inner door structure.',side(skin,s*0.765),[0,0,0]);
     P('Door Trim Panel','Vinyl trim panel with armrest.',side(skin,s*0.73,0.02),[0,0,-s*0.25]);
     if(front){
-      P('Window Glass','Tempered side glass.',side(poly([[0.78,0.95],[0.36,1.27],[-0.12,1.27],[-0.12,0.95]]),s*0.785,0.006),[0,0.5,0]);
-      P('Front Window Sash','Frame along the pillar edge.',rod([0.8,0.94,s*0.785],[0.35,1.3,s*0.775],0.012),[0.1,0.75,0]);
-      P('Upper Window Sash','Frame along the roof edge.',rod([0.35,1.3,s*0.775],[-0.13,1.3,s*0.775],0.012),[0,0.8,0]);
+      P('Window Glass','Tempered side glass, curved with the tumblehome.',GH(['Front Glass|'+s]),[0,0.5,0]);
+      P('Window Sash','Door frame along the A pillar and roof edge.',GH(['Front Sash|'+s]),[0,0.8,0]);
       P('Side Mirror','Door mounted mirror.',box(0.12,0.08,0.1),[0.72,1.0,s*0.88],[0.1,0.25,s*0.35]);
     }else{
-      P('Window Glass','Tempered side glass.',side(poly([[-0.16,0.95],[-0.16,1.27],[-0.68,1.27],[-0.68,0.95]]),s*0.785,0.006),[0,0.5,0]);
-      P('Vent Glass','Fixed rear quarter glass.',side(poly([[-0.71,0.95],[-0.71,1.27],[-0.75,1.27],[-0.98,0.96]]),s*0.785,0.006),[-0.15,0.45,0]);
-      P('Division Bar','Channel between the glass and vent glass.',rod([-0.695,0.94,s*0.785],[-0.695,1.29,s*0.785],0.008),[0,0.3,s*0.15]);
-      P('Upper Window Sash','Frame along the roof edge.',rod([-0.15,1.3,s*0.775],[-0.76,1.3,s*0.775],0.012),[0,0.8,0]);
-      P('Rear Window Sash','Frame along the C pillar.',rod([-0.76,1.3,s*0.775],[-1.0,0.96,s*0.78],0.012),[-0.2,0.7,0]);
+      P('Window Glass','Tempered side glass, curved with the tumblehome.',GH(['Rear Glass|'+s]),[0,0.5,0]);
+      P('Vent Glass','Fixed rear quarter glass.',GH(['Vent Glass|'+s]),[-0.15,0.45,0]);
+      P('Division Bar','Channel between the glass and vent glass.',GH(['Division Bar|'+s]),[0,0.3,s*0.15]);
+      P('Window Sash','Door frame along the roof edge and C pillar.',GH(['Rear Sash|'+s]),[-0.1,0.8,0]);
     }
     P('Window Regulator','Crank driven scissor regulator.',box(0.32,0.3,0.02),[xc,0.62,s*0.787],[0,0.15,s*0.15]);
     P('Window Crank','Hand crank for the regulator.',box(0.1,0.015,0.015),[xc,0.75,s*0.71],[0,0.1,-s*0.4]);
@@ -423,7 +480,7 @@ asm('Interior','Seats, dash, pedals and trim.',[-0.2,2.4,0],P=>{
     const n=s>0?'Driver':'Passenger';
     P(n+' Seat Cushion','Front bucket seat cushion on rails.',box(0.5,0.12,0.5),[-0.05,0.42,s*0.38]);
     P(n+' Seat Back','Reclining seat back.',rz(box(0.1,0.6,0.5),0.2),[-0.32,0.75,s*0.38]);
-    P(sd+' Sun Visor','Padded visor.',box(0.15,0.01,0.35),[0.4,1.31,s*0.38]);
+    P(sd+' Sun Visor','Padded visor.',box(0.15,0.01,0.33),[0.22,1.27,s*0.36]);
   });
   P('Rear Seat Cushion','Bench cushion.',box(0.5,0.13,1.3),[-0.9,0.42,0]);
   P('Rear Seat Back','Bench back.',rz(box(0.1,0.55,1.3),0.2),[-1.15,0.72,0]);
@@ -439,7 +496,8 @@ asm('Interior','Seats, dash, pedals and trim.',[-0.2,2.4,0],P=>{
   P('Brake Pedal','Pushes the booster rod.',box(0.02,0.2,0.08),[0.65,0.42,0.38]);
   P('Accelerator Pedal','Cable throttle pedal.',box(0.02,0.2,0.05),[0.67,0.42,0.26]);
   P('Carpet','Molded floor carpet.',box(2.0,0.01,1.4),[-0.2,0.245,0]);
-  P('Headliner','Cloth roof liner.',box(1.15,0.01,1.25),[-0.28,1.32,0]);
+  const hl=GH(GB('Roof Panel'));hl.geo.scale(1,1,0.95);hl.pos.y-=0.03;
+  P('Headliner','Cloth roof liner under the crowned roof.',hl);
   P('Rearview Mirror','Day night mirror.',box(0.03,0.05,0.2),[0.42,1.2,0]);
 },DX);
 
