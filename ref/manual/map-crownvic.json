@@ -1,0 +1,116 @@
+{
+"Engine/Cylinder Block": {
+"file": "0398.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Cylinder Block - Core Plug Replacement",
+"caption": "Material:",
+"score": 7.5
+},
+"Engine/Timing Chains": {
+"file": "0242.png",
+"path": "Engine, Cooling and Exhaust/Engine/Timing Components/Diagrams",
+"caption": "Valve Train Components - Exploded View:",
+"score": 6.0
+},
+"Engine/Left Cylinder Head": {
+"file": "0186.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Cylinder Head Distortion",
+"caption": "Special Tool(s):",
+"score": 5.5
+},
+"Engine/Connecting Rod 5": {
+"file": "0379.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
+"caption": "Connecting Rod",
+"score": 5.5
+},
+"Engine/Connecting Rod 6": {
+"file": "0379.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
+"caption": "Connecting Rod",
+"score": 5.5
+},
+"Engine/Connecting Rod 7": {
+"file": "0379.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
+"caption": "Connecting Rod",
+"score": 5.5
+},
+"Engine/Connecting Rod 8": {
+"file": "0379.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
+"caption": "Connecting Rod",
+"score": 5.5
+},
+"Engine/Right Cylinder Head": {
+"file": "0186.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Cylinder Head Distortion",
+"caption": "Special Tool(s):",
+"score": 5.5
+},
+"Engine/Connecting Rod 1": {
+"file": "0379.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
+"caption": "Connecting Rod",
+"score": 5.5
+},
+"Engine/Connecting Rod 2": {
+"file": "0379.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
+"caption": "Connecting Rod",
+"score": 5.5
+},
+"Engine/Connecting Rod 3": {
+"file": "0379.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
+"caption": "Connecting Rod",
+"score": 5.5
+},
+"Engine/Connecting Rod 4": {
+"file": "0379.png",
+"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
+"caption": "Connecting Rod",
+"score": 5.5
+},
+"Transmission/Transmission Case": {
+"file": "0703.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Adjustments/Transmission Range (TR) Sensor Adjustment",
+"caption": "Special Tool(s):",
+"score": 5.5
+},
+"Front Left Corner/Tire": {
+"file": "0007.png",
+"path": "Maintenance/Wheels and Tires/Service and Repair",
+"caption": "Wheels and Tires: Service and Repair",
+"score": 6.0
+},
+"Rear Left Corner/Tire": {
+"file": "0007.png",
+"path": "Maintenance/Wheels and Tires/Service and Repair",
+"caption": "Wheels and Tires: Service and Repair",
+"score": 6.0
+},
+"Front Right Corner/Tire": {
+"file": "0007.png",
+"path": "Maintenance/Wheels and Tires/Service and Repair",
+"caption": "Wheels and Tires: Service and Repair",
+"score": 6.0
+},
+"Rear Right Corner/Tire": {
+"file": "0007.png",
+"path": "Maintenance/Wheels and Tires/Service and Repair",
+"caption": "Wheels and Tires: Service and Repair",
+"score": 6.0
+},
+"Fuel System/Fuel Filter": {
+"file": "0005.png",
+"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Filter/Service and Repair",
+"caption": "Front Fuel Tubes:",
+"score": 5.5
+},
+"Electrical/Wiring Harness": {
+"file": "0680.png",
+"path": "Powertrain Management/Diagrams/Electrical Diagrams/Wiring Diagram Index",
+"caption": "Wiring Diagram Index",
+"score": 4.5
+}
+}
