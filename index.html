@@ -42,6 +42,13 @@ button.on{background:#3d3d3d;color:#fff}
 #more .lnk{display:block;margin:0 0 8px}
 #more .lnk button{width:100%;text-align:left;text-transform:none}
 #more h5{margin:12px 0 4px;font-size:12px;letter-spacing:.5px;color:#1e6fd9;font-weight:normal;text-transform:uppercase}
+#cars{position:fixed;left:12px;bottom:64px;z-index:22;background:#fff;border:1px solid #3d3d3d;min-width:220px;max-height:60vh;overflow:auto;display:none;font-size:13px}
+#cars.open{display:block}
+#cars .mk{padding:9px 12px;border-bottom:1px solid #3d3d3d;letter-spacing:1px;text-transform:uppercase;color:#1e6fd9;font-size:11px;display:flex;justify-content:space-between}
+#cars .md{padding:10px 12px 10px 26px;border-bottom:1px solid #eee4d2;text-transform:uppercase}
+#cars .md.sel{background:#3d3d3d;color:#fff}
+#cars .md.off{color:#9a9a9a}
+#cars .md small{display:block;font-size:10px;color:#9a9a9a;text-transform:none}
 #paint{flex-basis:100%;display:none;gap:6px;flex-wrap:wrap;align-items:center}
 #paint.open{display:flex}
 #paint button{width:34px;height:34px;padding:0}
@@ -75,7 +82,7 @@ button.on{background:#3d3d3d;color:#fff}
 <div id="list"></div>
 <div id="find"><input id="findq" type="search" placeholder="FIND A PART" autocomplete="off"><div id="findres"></div></div>
 <div id="bar">
-<button id="bCar">Accord</button>
+<button id="bCar" aria-label="Choose car">&#8801; <span id="bCarName">CAR</span></button>
 <button id="bBack">Back</button>
 <button id="bExplode">Explode</button>
 <button id="bWire">X-Ray</button>
@@ -86,6 +93,7 @@ button.on{background:#3d3d3d;color:#fff}
 <button id="bPaint">Paint</button>
 <button id="bReset">Reset</button>
 <div id="paint"></div>
+<div id="cars"></div>
 <label class="sl">EXPLODE <input id="slide" type="range" min="0" max="100" value="0"></label>
 <label class="sl">OPACITY <input id="alpha" type="range" min="5" max="100" value="100"></label>
 </div>
@@ -1315,7 +1323,7 @@ function loadCar(id){
   SPECS=[];TREE=[];fetch('ref/archive/'+id+'/specs.json').then(r=>r.ok?r.json():[]).then(j=>{SPECS=j}).catch(()=>{});
   fetch('ref/archive/'+id+'/tree.json').then(r=>r.ok?r.json():[]).then(j=>{TREE=j}).catch(()=>{});
   MANUAL={};const gen=carGen;fetch('ref/manual/map-'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
-  document.getElementById('bCar').textContent=CAR.btn;
+  document.getElementById('bCarName').textContent=CAR.name;if(typeof drawCars==='function')drawCars();
   try{history.replaceState(null,'','#'+id)}catch(e){}
   refresh();
 }
@@ -1388,8 +1396,25 @@ function applyPaint(){
   box.querySelectorAll('button').forEach((b,i)=>b.onclick=e=>{e.stopPropagation();paint=PAINTS[i][1];try{localStorage.setItem('hubPaint',String(paint))}catch(x){}applyPaint()});
   document.getElementById('bPaint').onclick=()=>{box.classList.toggle('open');document.getElementById('bPaint').classList.toggle('on',box.classList.contains('open'))};
 })();
-document.getElementById('bCar').onclick=()=>loadCar(CAR===CARS.prius?'accord':'prius');
-loadCar(location.hash==='#accord'?'accord':'prius');
+/* CAR PICKER: makes with their models nested underneath */
+const LINEUP=[['Ford',[['crownvic','2006 Crown Victoria','Model in progress, manual archive loading']]],['Honda',[['accord','1982 Accord']]],['Toyota',[['prius','2007 Prius']]]];
+const openMk=new Set();
+function drawCars(){
+  const box=document.getElementById('cars');box.innerHTML='';
+  LINEUP.forEach(([mk,models])=>{
+    const h=document.createElement('div');h.className='mk';const isOpen=openMk.has(mk)||models.some(m=>CAR&&m[0]===CAR.id);
+    h.innerHTML='<span>'+esc(mk)+'</span><span>'+(isOpen?'&#9662;':'&#9656;')+'</span>';
+    h.onclick=e=>{e.stopPropagation();openMk.has(mk)?openMk.delete(mk):openMk.add(mk);drawCars()};box.appendChild(h);
+    if(!isOpen)return;
+    models.forEach(([id,label,note])=>{const d=document.createElement('div');const ok=!!CARS[id];
+      d.className='md'+(CAR&&CAR.id===id?' sel':'')+(ok?'':' off');d.innerHTML=esc(label)+(note&&!ok?'<small>'+esc(note)+'</small>':'');
+      if(ok)d.onclick=e=>{e.stopPropagation();box.classList.remove('open');document.getElementById('bCar').classList.remove('on');if(CAR.id!==id)loadCar(id)};
+      box.appendChild(d)});
+  });
+}
+document.getElementById('bCar').onclick=e=>{e.stopPropagation();const box=document.getElementById('cars');drawCars();box.style.bottom=(document.getElementById('bar').offsetHeight+6)+'px';box.classList.toggle('open');document.getElementById('bCar').classList.toggle('on',box.classList.contains('open'))};
+['pointerdown','touchstart'].forEach(ev=>document.getElementById('cars').addEventListener(ev,e=>e.stopPropagation()));
+loadCar(CARS[location.hash.slice(1)]?location.hash.slice(1):'prius');
 
 const goal=V(0,0,0);
 (function loop(){
