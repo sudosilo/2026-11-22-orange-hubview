@@ -10,10 +10,15 @@ CARS = {
 }
 MAX_PAGES = 4000
 MAX_IMAGES = 2500
+# Skip sections the exploded view never uses: trouble codes, bulletins,
+# diagnostic flowcharts and the mileage service schedules.
+SKIP = re.compile(r'Diagnostic Trouble Codes|Technical Service Bulletins|Testing and Inspection|Symptom Related|Diagnostic Procedures|Initial Inspection|Normal Service|Severe Service|Service Precautions|Road Test|Relays and Modules|Sensors and Switches|Computers and Control Systems|Description and Operation|Trouble Code|Pinpoint Test', re.I)
+CAPS = {'crownvic': 900}
 MAX_BYTES = 800000
 
 car = sys.argv[1]
 base = CARS[car]
+MAX_IMAGES = CAPS.get(car, MAX_IMAGES)
 out = os.path.join('ref', 'manual', car)
 os.makedirs(out, exist_ok=True)
 index_path = os.path.join(out, 'index.json')
@@ -73,7 +78,7 @@ while queue and pages < MAX_PAGES and saved < MAX_IMAGES:
             saved += 1
         elif m.group(3):
             href = urllib.parse.urljoin(url, html.unescape(m.group(3))).split('#')[0]
-            if href.startswith(base) and href.endswith('/') and href not in seen:
+            if href.startswith(base) and href.endswith('/') and href not in seen and not (car in CAPS and SKIP.search(urllib.parse.unquote(href[len(base):]))):
                 seen.add(href)
                 queue.append(href)
     if pages % 25 == 0:
