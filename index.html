@@ -220,8 +220,8 @@ const GH=(()=>{
 const GB=n=>[n+'|1',n+'|-1'];
 /* BODY: traced from the 1982 Accord sedan blueprint. front axle x 1.32, rear axle x -1.13 */
 asm('Body Shell','Welded steel unibody. Everything else bolts to it.',[0,0,0],P=>{
-  P('Floor Pan','Stamped steel floor, the base of the unibody. Narrows between the rear wheel wells.',plan([[0.9,-0.75],[0.9,0.75],[-0.86,0.75],[-0.9,0.56],[-1.25,0.56],[-1.25,-0.56],[-0.9,-0.56],[-0.86,-0.75]],0.24,0.035));
-  P('Trunk Floor','Raised floor over the fuel tank, notched around the rear wheel wells.',plan([[-1.295,-0.56],[-1.295,0.56],[-1.53,0.56],[-1.56,0.7],[-2.145,0.7],[-2.145,-0.7],[-1.56,-0.7],[-1.53,-0.56]],0.42,0.03));
+  P('Floor Pan','Stamped steel floor, the base of the unibody. Narrows between the rear wheel wells.',plan([[0.86,-0.66],[0.86,0.66],[-0.78,0.66],[-0.82,0.5],[-1.25,0.5],[-1.25,-0.5],[-0.82,-0.5],[-0.78,-0.66]],0.24,0.035));
+  P('Trunk Floor','Raised floor over the fuel tank, notched around the rear wheel wells.',plan([[-1.295,-0.5],[-1.295,0.5],[-1.56,0.5],[-1.6,0.66],[-2.145,0.66],[-2.145,-0.66],[-1.6,-0.66],[-1.56,-0.5]],0.42,0.03));
   P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.5,1.45),[0.9,0.62,0]);
   P('Cowl Panel','Panel under the windshield with the fresh air intake.',box(0.25,0.03,1.4),[1.0,0.9,0]);
   P('Radiator Core Support','Front bulkhead that holds the radiator and latch.',box(0.05,0.42,1.4),[2.08,0.55,0]);
@@ -513,7 +513,7 @@ asm('Interior','Seats, dash, pedals and trim.',[-0.2,2.4,0],P=>{
   P('Clutch Pedal','Cable clutch pedal.',box(0.02,0.2,0.07),[0.65,0.42,0.52]);
   P('Brake Pedal','Pushes the booster rod.',box(0.02,0.2,0.08),[0.65,0.42,0.38]);
   P('Accelerator Pedal','Cable throttle pedal.',box(0.02,0.2,0.05),[0.67,0.42,0.26]);
-  P('Carpet','Molded floor carpet.',plan([[0.8,-0.7],[0.8,0.7],[-0.86,0.7],[-0.9,0.55],[-1.2,0.55],[-1.2,-0.55],[-0.9,-0.55],[-0.86,-0.7]],0.262,0.01));
+  P('Carpet','Molded floor carpet.',plan([[0.8,-0.64],[0.8,0.64],[-0.78,0.64],[-0.82,0.48],[-1.2,0.48],[-1.2,-0.48],[-0.82,-0.48],[-0.78,-0.64]],0.262,0.01));
   const hl=GH(GB('Roof Panel'));hl.geo.scale(1,1,0.95);hl.pos.y-=0.03;
   P('Headliner','Cloth roof liner under the crowned roof.',hl);
   P('Rearview Mirror','Day night mirror.',box(0.03,0.05,0.2),[0.42,1.2,0]);
