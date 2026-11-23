@@ -961,7 +961,9 @@ function buildPrius(){
 /* ============ 2006 FORD CROWN VICTORIA (P7, Panther platform) ============
    Built from the Operation CHARM archive (specs, capacities, torque values) and published dimensions:
    length 5385 mm, wheelbase 2913 mm, width 1986 mm, height 1481 mm, track 1610 front 1666 rear. */
-function buildCrownVic(){
+function buildCrownVic(v='p71'){
+  const P71=v==='p71';
+  const TIRE_D=P71?'P235/55R17 police pursuit radial.':'P225/60R16 all season radial.',WHEEL_D=P71?'17 x 7.5 inch heavy duty steel wheel, 5 lug on a 114.3 mm (4.5 in) bolt circle.':'16 x 7 inch wheel, 5 lug on a 114.3 mm (4.5 in) bolt circle.';
   const FA=1.46,RA=-1.453,CWY=0.338,CK=0.109,TFz=0.805,TRz=0.833,HW=0.975;
   const beam=(a,b,w,h)=>{const A=V(...a),B=V(...b),d=B.clone().sub(A),L=d.length();const g=new THREE.BoxGeometry(L,h,w);
     const q=new THREE.Quaternion().setFromUnitVectors(V(1,0,0),d.clone().normalize());g.applyQuaternion(q);return{geo:g,pos:A.clone().add(B).multiplyScalar(0.5)}};
@@ -1138,7 +1140,7 @@ function buildCrownVic(){
     });
   },0);
 
-  asm('Transmission','4R75E four speed electronic automatic with overdrive. Fluid 11.9 qt, 12.8 qt with police or handling package.',[0,-0.6,0.9],P=>{
+  asm('Transmission','4R75E four speed electronic automatic with overdrive. Fluid '+(P71?'12.8 qt (12.1 L) with the police package.':'11.9 qt (11.2 L).'),[0,-0.6,0.9],P=>{
     P('Torque Converter','Fluid coupling with lockup clutch.',cyl(0.15,0.15,0.1,'x'),[EX-0.4,0.42,0],[-0.1,0,0.3]);
     P('Bellhousing','Bolts the transmission to the engine.',cyl(0.13,0.19,0.18,'x'),[EX-0.42,0.42,0],[0,0,0.15]);
     P('Transmission Case','Aluminum case with the planetary gearsets.',cyl(0.1,0.13,0.5,'x'),[0.82,0.42,0],[0,0,0]);
@@ -1176,7 +1178,7 @@ function buildCrownVic(){
 
   LR.forEach(([s,sd])=>{
     asm('Front '+sd+' Corner','Wheel, hub bearing, vented disc brake and short long arm suspension.',[0.3,0,s*1.9],P=>{
-      const{sc,L,at,o}=corner(P,FA,s*TFz,s,CK,CWY,5,0.524,'P225/60R16 all season radial.','16 x 7 inch wheel, 5 lug on a 114.3 mm (4.5 in) bolt circle.','1/2 inch x 20 lug nut. 135 N.m (100 ft lb) in a star pattern.');
+      const{sc,L,at,o}=corner(P,FA,s*TFz,s,CK,CWY,5,0.524,TIRE_D,WHEEL_D,'1/2 inch x 20 lug nut. 135 N.m (100 ft lb) in a star pattern.');
       P('Brake Rotor','Vented front rotor.',L([[0.6,0.45],[0.95,0.45],[0.95,0.3],[1.45,0.3],[1.45,-0.3],[0.95,-0.3],[0.95,0]],64),at(0,0,0),o(0,0,3.6));
       P('Hub Bearing','Sealed hub and bearing unit with the wheel studs.',L([[0.25,-0.9],[0.5,-0.9],[0.5,-0.1],[1.0,-0.05],[1.0,0.15],[0.3,0.2],[0.25,0.2]]),at(0,0,0),o(0,0,2.2));
       P('Steering Knuckle','Aluminum knuckle joining the upper and lower arms.',sc(box(0.6,3.6,0.6)),at(0,0.2,-1.1),o(0,0,-1.4));
@@ -1192,7 +1194,7 @@ function buildCrownVic(){
       P('Stabilizer Link','Link from the bar to the lower arm.',rod([FA+0.15,0.18,s*0.58],[FA+0.15,0.3,s*0.58],0.008),[0.2,-0.2,0]);
     });
     asm('Rear '+sd+' Corner','Wheel and rear disc brake on the axle flange.',[-0.3,0,s*1.9],P=>{
-      const{sc,L,at,o}=corner(P,RA,s*TRz,s,CK,CWY,5,0.524,'P225/60R16 all season radial.','16 x 7 inch wheel, 5 lug on a 114.3 mm (4.5 in) bolt circle.','1/2 inch x 20 lug nut. 135 N.m (100 ft lb) in a star pattern.');
+      const{sc,L,at,o}=corner(P,RA,s*TRz,s,CK,CWY,5,0.524,TIRE_D,WHEEL_D,'1/2 inch x 20 lug nut. 135 N.m (100 ft lb) in a star pattern.');
       P('Brake Rotor','Solid rear rotor.',L([[0.6,0.4],[0.95,0.4],[0.95,0.12],[1.4,0.12],[1.4,-0.12],[0.95,-0.12],[0.95,0]],64),at(0,0,0),o(0,0,3.6));
       P('Axle Flange','Flange on the end of the axle shaft with the wheel studs.',L([[0.25,-0.2],[0.9,-0.2],[0.9,0.1],[0.25,0.1]]),at(0,0,0),o(0,0,2.2));
       P('Brake Caliper','Single piston rear caliper.',sc(box(0.7,1.2,1.0)),at(0.6,0.9,0.1),o(2.2,1.2,3.6));
@@ -1258,6 +1260,11 @@ function buildCrownVic(){
     P('Thermostat Housing','Housing at the front of the intake.',cyl(0.03,0.03,0.05,'x'),[EX+0.28,0.88,0]);
     P('Degas Bottle','Pressurized coolant reservoir.',box(0.1,0.15,0.18),[2.0,0.85,-0.65]);
     P('Heater Hoses','Supply and return hoses to the heater core.',rod([EX,0.86,-0.1],[1.02,0.8,-0.3],0.012));
+    if(P71){
+      P('Engine Oil Cooler','Police package oil cooler ahead of the radiator.',box(0.03,0.1,0.5),[2.25,0.42,0]);
+      P('Transmission Fluid Cooler','Police package external transmission cooler.',box(0.03,0.12,0.55),[2.25,0.82,0]);
+      P('Power Steering Cooler','Police package power steering fluid cooler loop.',rod([2.24,0.36,-0.35],[2.24,0.36,0.35],0.008));
+    }
   });
 
   asm('Exhaust System','True dual exhaust with an H pipe crossover.',[0,-1.4,0],P=>{
@@ -1331,7 +1338,7 @@ function buildCrownVic(){
 /* BUILD */
 let total=0;
 const CHARM={accord:'https://charm.li/Honda/1982/Accord%20L4-1751cc%201800%20EK1/Repair%20and%20Diagnosis/',prius:'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/',crownvic:'https://charm.li/Ford/2006/Crown%20Victoria%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/'};
-const CARS={accord:{id:'accord',make:'Honda',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'},crownvic:{id:'crownvic',make:'Ford',name:'2006 CROWN VICTORIA',front:2.463,build:buildCrownVic,btn:'Prius'}};
+const CARS={accord:{id:'accord',make:'Honda',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'},crownvic:{id:'crownvic',make:'Ford',name:'2006 CROWN VIC P71',front:2.463,build:()=>buildCrownVic('p71'),btn:'Prius'},crownvic_lx:{id:'crownvic_lx',data:'crownvic',make:'Ford',name:'2006 CROWN VIC LX',front:2.463,build:()=>buildCrownVic('lx'),btn:'Prius'}};
 let CAR=null;
 function buildAll(){ASM.forEach((a,ai)=>{
   const c=V(0,0,0);a.parts.forEach(p=>c.add(p.pos));c.divideScalar(a.parts.length);a.center=c;
@@ -1464,7 +1471,7 @@ function manualFor(key){
   const m=MANUAL[key];cardImg=null;cardCap='';
   if(!m)return;
   cardCap=m.caption||m.path||'';
-  const url='ref/manual/'+CAR.id+'/'+m.file;
+  const url='ref/manual/'+(CAR.data||CAR.id)+'/'+m.file;
   if(imgCache[url]&&imgCache[url].complete){cardImg=imgCache[url];return}
   const im=imgCache[url]||new Image();imgCache[url]=im;
   im.onload=()=>{if(typeKey.endsWith(key)){cardImg=im;sizeCard()}};
@@ -1702,10 +1709,11 @@ function loadCar(id){
   BP.forEach(m=>ROOT.remove(m));BP.length=0;
   total=0;focus=null;selected=null;extra=false;carAmt=carTarget=0;typeKey='';
   CAR=CARS[id];CAR.build();buildAll();if(typeof applyPaint==='function')applyPaint();
-  PN={};fetch('ref/parts/'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{PN=j;typeKey='';refresh()}).catch(()=>{});
-  SPECS=[];TREE=[];fetch('ref/archive/'+id+'/specs.json').then(r=>r.ok?r.json():[]).then(j=>{SPECS=j}).catch(()=>{});
-  fetch('ref/archive/'+id+'/tree.json').then(r=>r.ok?r.json():[]).then(j=>{TREE=j}).catch(()=>{});
-  MANUAL={};const gen=carGen;fetch('ref/manual/map-'+id+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
+  const did=CAR.data||id;
+  PN={};fetch('ref/parts/'+did+'.json').then(r=>r.ok?r.json():{}).then(j=>{PN=j;typeKey='';refresh()}).catch(()=>{});
+  SPECS=[];TREE=[];fetch('ref/archive/'+did+'/specs.json').then(r=>r.ok?r.json():[]).then(j=>{SPECS=j}).catch(()=>{});
+  fetch('ref/archive/'+did+'/tree.json').then(r=>r.ok?r.json():[]).then(j=>{TREE=j}).catch(()=>{});
+  MANUAL={};const gen=carGen;fetch('ref/manual/map-'+did+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
   document.getElementById('bCarName').textContent=CAR.name;if(typeof drawCars==='function')drawCars();
   try{history.replaceState(null,'','#'+id)}catch(e){}
   refresh();
@@ -1731,7 +1739,7 @@ function moreSheet(tab){
   const L=(t,u)=>'<a class="lnk" target="_blank" rel="noopener" href="'+esc(u)+'"><button>'+esc(t)+'</button></a>';
   const tabs={
     SPECS:()=>a.specs.length?a.specs.map(e=>'<h5>'+esc(e.path)+'</h5><pre>'+esc(e.lines.map(l=>l.replace(/<.*$/,'')).filter(l=>l.trim()).join('\n'))+'</pre>').join(''):'<p>Spec pages appear here once this car\'s manual archive is built.</p>',
-    MANUAL:()=>{const b=CHARM[CAR.id];return a.pages.length&&b?a.pages.map(t=>L(t,b+t.split('/').map(enc).join('/')+'/')).join(''):(b?L('Open the full repair manual',b):'')+'<p>Matching manual pages appear here once this car\'s manual archive is built.</p>'},
+    MANUAL:()=>{const b=CHARM[CAR.data||CAR.id];return a.pages.length&&b?a.pages.map(t=>L(t,b+t.split('/').map(enc).join('/')+'/')).join(''):(b?L('Open the full repair manual',b):'')+'<p>Matching manual pages appear here once this car\'s manual archive is built.</p>'},
     LINKS:()=>'<h5>Reference</h5>'+L('Wikipedia: '+subject,'https://en.wikipedia.org/w/index.php?search='+enc(keyWords(subject).join(' ')||subject))+L('Wikipedia: '+(CAR.make||'')+' '+model,'https://en.wikipedia.org/w/index.php?search='+enc((CAR.make||'')+' '+model))+
       '<h5>Guides and manuals</h5>'+L('Repair guides: '+q,'https://duckduckgo.com/?q='+enc(q+' replacement guide'))+L('iFixit: '+subject,'https://www.ifixit.com/Search?query='+enc((CAR.make||'')+' '+model+' '+subject))+L('Forum threads: '+q,'https://duckduckgo.com/?q='+enc(q+' forum how to'))+
       '<h5>Videos</h5>'+L('Video search: '+q,'https://duckduckgo.com/?q='+enc(q+' how to replace')+'&iax=videos&ia=videos')+L('Vimeo: '+q,'https://vimeo.com/search?q='+enc(q))
@@ -1780,7 +1788,7 @@ function applyPaint(){
   document.getElementById('bPaint').onclick=()=>{box.classList.toggle('open');document.getElementById('bPaint').classList.toggle('on',box.classList.contains('open'))};
 })();
 /* CAR PICKER: makes with their models nested underneath */
-const LINEUP=[['Ford',[['crownvic','2006 Crown Victoria']]],['Honda',[['accord','1982 Accord']]],['Toyota',[['prius','2007 Prius']]]];
+const LINEUP=[['Ford',[['crownvic','2006 Crown Victoria Police Interceptor'],['crownvic_lx','2006 Crown Victoria LX']]],['Honda',[['accord','1982 Accord'],['accord2011','2011 Accord 2.4L four cylinder','Model in progress, manual archive loading'],['accord2011v6','2011 Accord 3.5L V6','Model in progress, manual archive loading']]],['Toyota',[['prius','2007 Prius']]]];
 const openMk=new Set();
 function drawCars(){
   const box=document.getElementById('cars');box.innerHTML='';

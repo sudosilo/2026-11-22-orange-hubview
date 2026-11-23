@@ -8,13 +8,14 @@ CARS = {
     'prius': 'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/',
     'crownvic': 'https://charm.li/Ford/2006/Crown%20Victoria%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/',
     'accord2011': 'https://charm.li/Honda/2011/Accord%20L4-2.4L/Repair%20and%20Diagnosis/',
+    'accord2011v6': 'https://charm.li/Honda/2011/Accord%20V6-3.5L/Repair%20and%20Diagnosis/',
 }
 MAX_PAGES = 9000
 MAX_IMAGES = 2500
 # Skip sections the exploded view never uses: trouble codes, bulletins,
 # diagnostic flowcharts and the mileage service schedules.
 SKIP = re.compile(r'Diagnostic Trouble Codes|Technical Service Bulletins|Testing and Inspection|Symptom Related|Diagnostic Procedures|Initial Inspection|Normal Service|Severe Service|Service Precautions|Road Test|Relays and Modules|Sensors and Switches|Computers and Control Systems|Description and Operation|Trouble Code|Pinpoint Test', re.I)
-CAPS = {'crownvic': 2600, 'accord2011': 2600}
+CAPS = {'crownvic': 2600, 'accord2011': 2600, 'accord2011v6': 1200}
 # sections read first, so the chassis and body diagrams come in before the cap
 FIRST = {'accord2011': ['Steering and Suspension', 'Brakes and Traction Control', 'Body and Frame', 'Windows and Glass', 'Lighting and Horns', 'Engine, Cooling and Exhaust', 'Transmission and Drivetrain'], 'crownvic': ['Steering and Suspension', 'Brakes and Traction Control', 'Body and Frame', 'Windows and Glass', 'Lighting and Horns', 'Starting and Charging', 'Heating and Air Conditioning', 'Restraints and Safety Systems', 'Wiper and Washer Systems', 'Power and Ground Distribution', 'Instrument Panel, Gauges and Warning Indicators', 'Accessories and Optional Equipment']}
 MAX_BYTES = 800000
