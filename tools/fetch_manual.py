@@ -8,12 +8,14 @@ CARS = {
     'prius': 'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/',
     'crownvic': 'https://charm.li/Ford/2006/Crown%20Victoria%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/',
 }
-MAX_PAGES = 4000
+MAX_PAGES = 9000
 MAX_IMAGES = 2500
 # Skip sections the exploded view never uses: trouble codes, bulletins,
 # diagnostic flowcharts and the mileage service schedules.
 SKIP = re.compile(r'Diagnostic Trouble Codes|Technical Service Bulletins|Testing and Inspection|Symptom Related|Diagnostic Procedures|Initial Inspection|Normal Service|Severe Service|Service Precautions|Road Test|Relays and Modules|Sensors and Switches|Computers and Control Systems|Description and Operation|Trouble Code|Pinpoint Test', re.I)
-CAPS = {'crownvic': 900}
+CAPS = {'crownvic': 2600}
+# sections read first, so the chassis and body diagrams come in before the cap
+FIRST = {'crownvic': ['Steering and Suspension', 'Brakes and Traction Control', 'Body and Frame', 'Windows and Glass', 'Lighting and Horns', 'Starting and Charging', 'Heating and Air Conditioning', 'Restraints and Safety Systems', 'Wiper and Washer Systems', 'Power and Ground Distribution', 'Instrument Panel, Gauges and Warning Indicators', 'Accessories and Optional Equipment']}
 MAX_BYTES = 800000
 
 car = sys.argv[1]
@@ -48,7 +50,8 @@ def get(url):
 tok = re.compile(r'<h[1-6][^>]*>(.*?)</h[1-6]>|<img[^>]*src="([^"]+)"|<a[^>]*href="([^"]+)"', re.S | re.I)
 # also accept single quoted attributes
 tok = re.compile(r'<h[1-6][^>]*>(.*?)</h[1-6]>|<img[^>]*src=["\']([^"\']+)|<a[^>]*href=["\']([^"\']+)', re.S | re.I)
-queue, seen, pages, saved = [base], {base}, 0, len(index)
+seeds = [base + urllib.parse.quote(x) + '/' for x in FIRST.get(car, [])]
+queue, seen, pages, saved = seeds + [base], set(seeds) | {base}, 0, len(index)
 while queue and pages < MAX_PAGES and saved < MAX_IMAGES:
     url = queue.pop(0)
     body, ctype = get(url)
