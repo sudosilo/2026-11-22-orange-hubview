@@ -35,33 +35,31 @@ def get(url):
         time.sleep(2 + attempt * 3)
     return None
 
-link_re = re.compile(r'/parts-select/(' + re.escape(prefix) + r'[a-z0-9\-]+)')
-pn = r'[0-9A-Z]{5}-[0-9A-Z]{5}(?:-[0-9A-Z]{2})?'
-part_re = re.compile(re.escape(label) + r' ((?:(?!Toyota Prius|Part Number)[^<>]){2,120}?)\s*Part Number:\s*(' + pn + ')')
-seen = set(prefix + s for s in seeds)
-queue = list(seen)
+site = 'https://www.toyotapartsnow.com'
+listing = '/parts-list/' + prefix.rstrip('-').replace('-toyota-prius', '-toyota-prius') + '/'
+link_re = re.compile(r'href="(' + re.escape(listing) + r'[a-z0-9\-/]+)"')
+item_re = re.compile(r'class="pl-pat-im-link" href="/oem/[^"]*~(' + pn + r')">[^<]*</a><br/><a class="pl-pat-im-link" href="[^"]*">([^<]+)</a>(?:<div class="pl-pat-im-aux-desc">([^<]*)</div>)?')
+queue = ['/catalog/' + prefix + 'parts'] + [base[len(site):] + prefix + s for s in seeds]
+seen = set(queue)
 items, keyset, pages = [], set(), 0
 while queue and pages < 3000:
-    slug = queue.pop(0)
-    page = get(base + slug)
+    rel = queue.pop(0)
+    page = get(site + rel)
     pages += 1
     if page is None:
         continue
-    if pages <= 2:
-        open(os.path.join(out, 'catalog-sample%d.html' % pages), 'w').write(page)
-    text = html.unescape(re.sub(r'<[^>]+>', ' ', page))
-    text = re.sub(r'\s+', ' ', text)
-    for m in part_re.finditer(text):
-        name, num = m.group(1).strip(), m.group(2)
-        k = (name, num)
-        if k not in keyset:
+    cat = rel[len(listing):] if rel.startswith(listing) else ''
+    for m in item_re.finditer(page):
+        num, name, desc = m.group(1), html.unescape(m.group(2)).strip(), html.unescape(m.group(3) or '').strip()
+        k = (cat, num)
+        if cat and k not in keyset:
             keyset.add(k)
-            items.append({'category': slug[len(prefix):], 'name': name, 'number': num})
+            items.append({'category': cat, 'name': name, 'desc': desc, 'number': num})
     for m in link_re.finditer(page):
-        s = m.group(1)
-        if s not in seen:
-            seen.add(s)
-            queue.append(s)
+        s2 = m.group(1).rstrip('/')
+        if s2 not in seen:
+            seen.add(s2)
+            queue.append(s2)
     if pages % 25 == 0:
         json.dump(items, open(path, 'w'), indent=0)
         print(car, 'pages', pages, 'parts', len(items), 'queued', len(queue), flush=True)
