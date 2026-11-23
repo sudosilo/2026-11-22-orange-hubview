@@ -55,7 +55,8 @@ for m in re.finditer(r"<a[^>]*href=['\"]([^'\"]+)['\"]", main_html(top)):
         hrefs.append(u)
 hrefs = list(dict.fromkeys(hrefs))
 hs = set(hrefs)
-leaves = [u for u in hrefs if not any(o != u and o.startswith(u) for o in hs)] if len(hrefs) < 40000 else hrefs
+srt = sorted(hrefs)
+leaves = [u for i, u in enumerate(srt) if not (i + 1 < len(srt) and srt[i + 1].startswith(u))]
 rel = lambda u: urllib.parse.unquote(u[len(base):]).strip('/')
 late = re.compile(r'Diagnostic Trouble Codes|Technical Service Bulletins|Relays and Modules|Sensors and Switches', re.I)
 leaves.sort(key=lambda u: (1 if late.search(rel(u)) else 0))
@@ -72,7 +73,19 @@ for f in os.listdir(out):
 
 def section_file(p):
     s = re.sub(r'[^a-z0-9]+', '-', p.split('/')[0].lower()).strip('-') or 'misc'
-    return os.path.join(out, s + '.jsonl')
+    k = 1
+    while True:
+        f = os.path.join(out, s + ('' if k == 1 else '-%d' % k) + '.jsonl')
+        if not os.path.exists(f) or os.path.getsize(f) < 40 * 1024 * 1024:
+            return f
+        k += 1
+
+def checkpoint(msg):
+    # save progress to GitHub so a crash or a closed Termux loses nothing
+    subprocess.run(['git', 'add', out])
+    subprocess.run(['git', 'commit', '-q', '-m', msg])
+    subprocess.run(['git', 'pull', '-q', '--rebase', '-X', 'theirs'])
+    subprocess.run(['git', 'push', '-q'])
 
 # 3. leaves
 n = 0
@@ -83,19 +96,24 @@ while queue:
     if p in done: continue
     t = get(u); n += 1
     if t is None: continue
-    m = main_html(t)
-    for k in re.findall(r"<a[^>]*href=['\"]([^'\"]+)['\"]", m):
-        c = urllib.parse.urljoin(u, html.unescape(k)).split('#')[0]
-        if c.startswith(u) and c != u and c.endswith('/') and c not in hs:
-            hs.add(c); queue.append(c)
-    imgs = [urllib.parse.urljoin(u, x) for x in re.findall(r"<img[^>]*src=['\"]([^'\"]+)", m) if '/images/' in x]
-    title = re.search(r'<h1>(.*?)</h1>', m, re.S)
-    rec = {'path': p, 'title': html.unescape(title.group(1)).strip() if title else p.split('/')[-1], 'text': to_text(m), 'images': imgs}
-    with open(section_file(p), 'a') as f:
-        f.write(json.dumps(rec) + '\n')
-    done.add(p)
+    try:
+      m = main_html(t)
+      for k in re.findall(r"<a[^>]*href=['\"]([^'\"]+)['\"]", m):
+          c = urllib.parse.urljoin(u, html.unescape(k)).split('#')[0]
+          if c.startswith(u) and c != u and c.endswith('/') and c not in hs:
+              hs.add(c); queue.append(c)
+      imgs = [urllib.parse.urljoin(u, x) for x in re.findall(r"<img[^>]*src=['\"]([^'\"]+)", m) if '/images/' in x]
+      title = re.search(r'<h1>(.*?)</h1>', m, re.S)
+      rec = {'path': p, 'title': html.unescape(title.group(1)).strip() if title else p.split('/')[-1], 'text': to_text(m), 'images': imgs}
+      with open(section_file(p), 'a') as f:
+          f.write(json.dumps(rec) + '\n')
+      done.add(p)
+    except Exception as e:
+        LOG.write('PARSE %s %s\n' % (u, e)); LOG.flush()
     if n % 50 == 0:
         print(car, 'read', len(done), 'left', len(queue), flush=True)
+    if n % 500 == 0:
+        checkpoint('%s archive checkpoint %d pages' % (car, len(done)))
     time.sleep(0.15)
 
 # 4. specs index: torque and spec lines with their page path
@@ -111,3 +129,4 @@ for f in sorted(os.listdir(out)):
             specs.append({'path': r['path'], 'title': r['title'], 'lines': ls[:80]})
 json.dump(specs, open(os.path.join(out, 'specs.json'), 'w'), indent=0)
 print(car, 'done. pages', len(done), 'spec pages', len(specs))
+checkpoint('%s archive complete, %d pages' % (car, len(done)))
