@@ -1,11 +1,12 @@
 # Crawls the Operation CHARM repair manual for a car and saves every diagram
 # image plus an index of where each image came from.
-# Usage: python3 tools/fetch_manual.py accord   (or prius)
+# Usage: python3 tools/fetch_manual.py accord   (or prius, crownvic)
 import urllib.request, urllib.parse, re, json, os, sys, time, html
 
 CARS = {
     'accord': 'https://charm.li/Honda/1982/Accord%20L4-1751cc%201800%20EK1/Repair%20and%20Diagnosis/',
     'prius': 'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/',
+    'crownvic': 'https://charm.li/Ford/2006/Crown%20Victoria%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/',
 }
 MAX_PAGES = 4000
 MAX_IMAGES = 2500
