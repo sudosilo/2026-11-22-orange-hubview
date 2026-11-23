@@ -904,6 +904,10 @@ function buySheet(){
       '<a target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw='+enc(t)+'"><button>eBay</button></a>'+
       '<a target="_blank" rel="noopener" href="https://www.amazon.com/s?k='+enc(t)+'"><button>Amazon</button></a></div>';
   });
+  const nm=s.name.toLowerCase(),shops=[];
+  if(/glass|windshield|window/.test(nm))shops.push(['Safelite',CAR.id==='prius'?'https://www.safelite.com/vehicle-glass-repair/toyota-prius-windshields':'https://www.safelite.com/']);
+  if(/tire|wheel/.test(nm))shops.push(['Discount Tire',CAR.id==='prius'?'https://www.discounttire.com/fitmentresult/tires/size/185-65-15':'https://www.discounttire.com/fitmentresult/tires/size/165-80-13']);
+  if(shops.length)h+='<div style="color:#8a8a8a;margin:10px 0 4px">Service shops</div><div style="display:flex;gap:8px;flex-wrap:wrap">'+shops.map(x=>'<a target="_blank" rel="noopener" href="'+x[1]+'"><button>'+esc(x[0])+'</button></a>').join('')+'</div>';
   h+='<div style="margin-top:12px"><button id="buyclose">Close</button></div>';
   ov.innerHTML=h;document.body.appendChild(ov);document.getElementById('buyclose').onclick=()=>ov.remove();
 }
