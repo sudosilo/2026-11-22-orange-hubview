@@ -9,6 +9,7 @@ CARS = {
     'accord': 'https://charm.li/Honda/1982/Accord%20L4-1751cc%201800%20EK1/Repair%20and%20Diagnosis/',
     'prius': 'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/',
     'crownvic': 'https://charm.li/Ford/2006/Crown%20Victoria%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/',
+    'accord2011': 'https://charm.li/Honda/2011/Accord%20L4-2.4L/Repair%20and%20Diagnosis/',
 }
 car = sys.argv[1]
 base = CARS[car]
