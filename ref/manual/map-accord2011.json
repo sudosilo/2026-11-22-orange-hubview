@@ -1,0 +1,302 @@
+{
+"Body Shell/Radiator Support": {
+"file": "1893.png",
+"path": "Body and Frame/Seats/Locations/Power Lumbar Support Component Location Index",
+"caption": "Power Lumbar Support Component Location Index",
+"score": 5.0
+},
+"Front Left Door/Window Glass": {
+"file": "1761.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Front Door Window Glass/Adjustments",
+"caption": "Front Door Window Glass: Adjustments",
+"score": 6.0
+},
+"Rear Left Door/Window Glass": {
+"file": "1761.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Front Door Window Glass/Adjustments",
+"caption": "Front Door Window Glass: Adjustments",
+"score": 6.0
+},
+"Front Right Door/Window Glass": {
+"file": "1761.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Front Door Window Glass/Adjustments",
+"caption": "Front Door Window Glass: Adjustments",
+"score": 6.0
+},
+"Rear Right Door/Window Glass": {
+"file": "1761.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Front Door Window Glass/Adjustments",
+"caption": "Front Door Window Glass: Adjustments",
+"score": 6.0
+},
+"Engine/Cylinder Block": {
+"file": "0091.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Locations",
+"caption": "Cylinder Block Assembly: Locations",
+"score": 8.5
+},
+"Engine/Crankshaft": {
+"file": "0114.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Oil Pan": {
+"file": "0138.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Engine Oil Pan Removal",
+"caption": "Engine Oil Pan Removal",
+"score": 5.0
+},
+"Engine/Cylinder Head": {
+"file": "0216.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Locations/Cylinder Head Assembly Component Location Index (Except PZEV Models)",
+"caption": "Cylinder Head Assembly Component Location Index (Except PZEV Models)",
+"score": 8.0
+},
+"Engine/Exhaust Camshaft": {
+"file": "0325.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Overhaul/VTC Actuator, Exhaust Camshaft Sprocket Replacement (Except PZEV Models)",
+"caption": "VTC Actuator, Exhaust Camshaft Sprocket Replacement (Except PZEV Models)",
+"score": 5.0
+},
+"Engine/Cylinder Head Cover": {
+"file": "0216.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Locations/Cylinder Head Assembly Component Location Index (Except PZEV Models)",
+"caption": "Cylinder Head Assembly Component Location Index (Except PZEV Models)",
+"score": 8.0
+},
+"Engine/Crankshaft Pulley": {
+"file": "0114.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Piston 1": {
+"file": "0114.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Connecting Rod 1": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Connecting Rod And Crankshaft End Play Inspection",
+"caption": "Connecting Rod And Crankshaft End Play Inspection",
+"score": 5.5
+},
+"Engine/Piston 2": {
+"file": "0114.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Connecting Rod 2": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Connecting Rod And Crankshaft End Play Inspection",
+"caption": "Connecting Rod And Crankshaft End Play Inspection",
+"score": 5.5
+},
+"Engine/Piston 3": {
+"file": "0114.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Connecting Rod 3": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Connecting Rod And Crankshaft End Play Inspection",
+"caption": "Connecting Rod And Crankshaft End Play Inspection",
+"score": 5.5
+},
+"Engine/Piston 4": {
+"file": "0114.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Connecting Rod 4": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Connecting Rod And Crankshaft End Play Inspection",
+"caption": "Connecting Rod And Crankshaft End Play Inspection",
+"score": 5.5
+},
+"Transaxle/Transaxle Case": {
+"file": "0637.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 5.0
+},
+"Transaxle/Torque Converter Housing": {
+"file": "0822.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Service and Repair/Overhaul/Torque Converter Housing Main shaft Bearing And Oil Seal Replacement",
+"caption": "Torque Converter Housing Main shaft Bearing And Oil Seal Replacement",
+"score": 5.0
+},
+"Transaxle/Differential": {
+"file": "0639.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/A/T Differential Component Location Index",
+"caption": "A/T Differential Component Location Index",
+"score": 6.5
+},
+"Transaxle/Transmission Mount": {
+"file": "0637.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Front Subframe/Rear Engine Mount": {
+"file": "0419.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Locations",
+"caption": "Engine Mount: Locations",
+"score": 8.5
+},
+"Front Subframe/Front Engine Mount": {
+"file": "0419.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Locations",
+"caption": "Engine Mount: Locations",
+"score": 8.5
+},
+"Front Subframe/Side Engine Mount": {
+"file": "0419.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Locations",
+"caption": "Engine Mount: Locations",
+"score": 8.5
+},
+"Front Left Corner/Damper": {
+"file": "0637.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Rear Left Corner/Rear Damper": {
+"file": "0637.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Front Right Corner/Damper": {
+"file": "0637.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Rear Right Corner/Rear Damper": {
+"file": "0637.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Steering/Steering Column": {
+"file": "1381.png",
+"path": "Steering and Suspension/Steering/Steering Column/Service and Repair/Removal and Replacement/Steering Column Cover Removal/Installation",
+"caption": "Steering Column Cover Removal/Installation",
+"score": 8.0
+},
+"Brake System/Parking Brake Lever": {
+"file": "1243.png",
+"path": "Brakes and Traction Control/Parking Brake System/Adjustments",
+"caption": "Parking Brake System: Adjustments",
+"score": 5.5
+},
+"Brake System/Parking Brake Cable": {
+"file": "1243.png",
+"path": "Brakes and Traction Control/Parking Brake System/Adjustments",
+"caption": "Parking Brake System: Adjustments",
+"score": 5.5
+},
+"Fuel System/Fuel Tank": {
+"file": "0586.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Pump/Service and Repair/Fuel Tank Unit Removal/Installation",
+"caption": "Fuel Tank Unit Removal/Installation",
+"score": 5.0
+},
+"Cooling System/Left Cooling Fan": {
+"file": "0559.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Engine - Coolant Temperature Sensor/Switch/Locations/Cooling Fan Controls Component Location Index",
+"caption": "Cooling Fan Controls Component Location Index",
+"score": 10.0
+},
+"Cooling System/Right Cooling Fan": {
+"file": "0559.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Engine - Coolant Temperature Sensor/Switch/Locations/Cooling Fan Controls Component Location Index",
+"caption": "Cooling Fan Controls Component Location Index",
+"score": 10.0
+},
+"Cooling System/Fan Shroud": {
+"file": "0559.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Engine - Coolant Temperature Sensor/Switch/Locations/Cooling Fan Controls Component Location Index",
+"caption": "Cooling Fan Controls Component Location Index",
+"score": 8.5
+},
+"Electrical/Left Headlight": {
+"file": "2057.png",
+"path": "Lighting and Horns/Headlamp/Service and Repair/Headlight Bracket Replacement",
+"caption": "Headlight Bracket Replacement",
+"score": 5.5
+},
+"Electrical/Right Headlight": {
+"file": "2057.png",
+"path": "Lighting and Horns/Headlamp/Service and Repair/Headlight Bracket Replacement",
+"caption": "Headlight Bracket Replacement",
+"score": 5.5
+},
+"Interior/Driver Seat Cushion": {
+"file": "1628.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations/Seat Belts Component Location Index (2-Door)",
+"caption": "Seat Belts Component Location Index (2-Door)",
+"score": 4.5
+},
+"Interior/Driver Seat Back": {
+"file": "1628.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations/Seat Belts Component Location Index (2-Door)",
+"caption": "Seat Belts Component Location Index (2-Door)",
+"score": 4.5
+},
+"Interior/Passenger Seat Cushion": {
+"file": "1628.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations/Seat Belts Component Location Index (2-Door)",
+"caption": "Seat Belts Component Location Index (2-Door)",
+"score": 4.5
+},
+"Interior/Passenger Seat Back": {
+"file": "1628.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations/Seat Belts Component Location Index (2-Door)",
+"caption": "Seat Belts Component Location Index (2-Door)",
+"score": 4.5
+},
+"Interior/Rear Seat Cushion": {
+"file": "1628.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations/Seat Belts Component Location Index (2-Door)",
+"caption": "Seat Belts Component Location Index (2-Door)",
+"score": 4.5
+},
+"Interior/Rear Seat Back": {
+"file": "1628.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations/Seat Belts Component Location Index (2-Door)",
+"caption": "Seat Belts Component Location Index (2-Door)",
+"score": 4.5
+},
+"Interior/Center Console": {
+"file": "1806.png",
+"path": "Body and Frame/Interior Moulding / Trim/Console/Service and Repair/Center Console Panel Removal/Installation",
+"caption": "Center Console Panel Removal/Installation",
+"score": 6.0
+},
+"Interior/Rearview Mirror": {
+"file": "1864.png",
+"path": "Body and Frame/Mirrors/Service and Repair/Rearview Mirror Harness Cover Base Replacement (4-Door)",
+"caption": "Rearview Mirror Harness Cover Base Replacement (4-Door)",
+"score": 6.0
+},
+"Cooling System": {
+"file": "0560.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Engine - Coolant Temperature Sensor/Switch/Locations/Cooling System Component Location Index",
+"caption": "Cooling System Component Location Index",
+"score": 5.5
+},
+"Transaxle": {
+"file": "0637.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+}
+}

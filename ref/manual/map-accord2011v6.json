@@ -1,0 +1,188 @@
+{
+"Engine/Cylinder Block": {
+"file": "0091.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Locations",
+"caption": "Cylinder Block Assembly: Locations",
+"score": 8.5
+},
+"Engine/Crankshaft": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Oil Pan": {
+"file": "0149.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Engine Oil Pan Removal",
+"caption": "Engine Oil Pan Removal",
+"score": 5.0
+},
+"Engine/Crankshaft Pulley": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Front Cylinder Head": {
+"file": "0210.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Removal and Replacement/Cylinder Head Removal/J35Z2 Engine",
+"caption": "J35Z2 Engine",
+"score": 6.5
+},
+"Engine/Front Camshaft": {
+"file": "0254.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Overhaul/Camshaft, Rocker Arm Assembly, Camshaft Seal, And Pulley Installation/J35Z2 Engine",
+"caption": "J35Z2 Engine",
+"score": 4.5
+},
+"Engine/Piston 4": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Piston 5": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Piston 6": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Rear Cylinder Head": {
+"file": "0210.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Removal and Replacement/Cylinder Head Removal/J35Z2 Engine",
+"caption": "J35Z2 Engine",
+"score": 6.5
+},
+"Engine/Rear Camshaft": {
+"file": "0254.jpg",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Overhaul/Camshaft, Rocker Arm Assembly, Camshaft Seal, And Pulley Installation/J35Z2 Engine",
+"caption": "J35Z2 Engine",
+"score": 4.5
+},
+"Engine/Piston 1": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Piston 2": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Engine/Piston 3": {
+"file": "0111.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Overhaul/Crankshaft And Piston Removal",
+"caption": "Crankshaft And Piston Removal",
+"score": 4.5
+},
+"Transaxle/Transaxle Case": {
+"file": "0611.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 5.0
+},
+"Transaxle/Torque Converter Housing": {
+"file": "0790.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Service and Repair/Overhaul/Torque Converter Housing/Torque Converter Housing Countershaft Bearing Replacement",
+"caption": "Torque Converter Housing Countershaft Bearing Replacement",
+"score": 5.0
+},
+"Transaxle/Differential": {
+"file": "0615.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/A/T Differential Component Location Index",
+"caption": "A/T Differential Component Location Index",
+"score": 6.5
+},
+"Transaxle/Transmission Mount": {
+"file": "0611.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Front Subframe/Rear Engine Mount": {
+"file": "0415.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Service and Repair",
+"caption": "Engine Mount: Service and Repair",
+"score": 7.5
+},
+"Front Subframe/Front Engine Mount": {
+"file": "0415.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Service and Repair",
+"caption": "Engine Mount: Service and Repair",
+"score": 7.5
+},
+"Front Subframe/Side Engine Mount": {
+"file": "0415.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Service and Repair",
+"caption": "Engine Mount: Service and Repair",
+"score": 7.5
+},
+"Front Left Corner/Damper": {
+"file": "0611.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Rear Left Corner/Rear Damper": {
+"file": "0611.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Front Right Corner/Damper": {
+"file": "0611.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Rear Right Corner/Rear Damper": {
+"file": "0611.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+},
+"Fuel System/Fuel Tank": {
+"file": "0550.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Pump/Service and Repair/Fuel Tank Unit Removal/Installation",
+"caption": "Fuel Tank Unit Removal/Installation",
+"score": 5.0
+},
+"Cooling System/Left Cooling Fan": {
+"file": "0527.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Engine - Coolant Temperature Sensor/Switch/Locations/Cooling Fan Controls Component Location Index",
+"caption": "Cooling Fan Controls Component Location Index",
+"score": 10.0
+},
+"Cooling System/Right Cooling Fan": {
+"file": "0527.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Engine - Coolant Temperature Sensor/Switch/Locations/Cooling Fan Controls Component Location Index",
+"caption": "Cooling Fan Controls Component Location Index",
+"score": 10.0
+},
+"Cooling System/Fan Shroud": {
+"file": "0527.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Engine - Coolant Temperature Sensor/Switch/Locations/Cooling Fan Controls Component Location Index",
+"caption": "Cooling Fan Controls Component Location Index",
+"score": 8.5
+},
+"Cooling System": {
+"file": "0533.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Locations/Cooling System Component Location Index",
+"caption": "Cooling System Component Location Index",
+"score": 5.5
+},
+"Transaxle": {
+"file": "0611.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations/Automatic Transmission Component Location Index",
+"caption": "Automatic Transmission Component Location Index",
+"score": 4.5
+}
+}
