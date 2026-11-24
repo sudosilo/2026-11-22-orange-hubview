@@ -2979,5 +2979,184 @@
 "9. Replace any loose pinch bolts, and torque them to 211 N.m (156 lb-ft).",
 "10. Reinstall the front wheels, and torque the wheel nuts to 127 N.m (94 lb-ft)."
 ]
+},
+{
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Service and Repair/Removal and Replacement/Automatic Transmission Installation",
+"title": "Automatic Transmission Installation",
+"lines": [
+"54. Tighten the transmission upper mount bolts to 54 Nm (5.5 kg-m, 40 lb-ft).",
+"55. Tighten the transmission upper mount bracket bolts and nuts to 59 Nm (6.0 kg-m, 43 lb-ft).",
+"Tighten the damper fork mounting nut while holding the mounting bolt to 64 Nm (6.5 kg-m, 47 lb-ft), and tighten the damper pinch bolts to 49 Nm (5.0 kg-m, 36 lb-ft).",
+"79. Tighten the strut brace mounting nuts to 22 Nm (2.2 kg-m, 16 lb-ft)."
+]
+},
+{
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Specifications/Capacity Specifications",
+"title": "Capacity Specifications",
+"lines": [
+"Change 3.5 qt (3.3L)",
+"Total 7.9 qt (7.5L)"
+]
+},
+{
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Specifications/Fluid Type Specifications",
+"title": "Fluid Type Specifications",
+"lines": [
+"Type Honda ATF DW-1",
+"Use only Honda ATF DW-1 (Automatic Transmission Fluid). Do not mix with other transmission fluids. Using transmission fluid other than Honda ATF DW-1 may cause deterioration in transmission operation and durability, and could result in damage to the transmission.",
+"Damage resulting from the use of transmission fluid other than Honda ATF DW-1 is not covered by the Honda new vehicle warranty."
+]
+},
+{
+"path": "Transmission and Drivetrain/Clutch/Specifications/Tightening Torque And Sequence",
+"title": "Tightening Torque And Sequence",
+"lines": [
+"Tighten (180 degrees apart) the pressure plate mounting bolts (F) in the pattern as shown in several steps. Make sure that there is no clearance between the pressure plate and the flywheel."
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Service and Repair/Overhaul/M/T Differential Carrier Bearing Preload Adjustment",
+"title": "M/T Differential Carrier Bearing Preload Adjustment",
+"lines": [
+"- Compare the bearing preload you got on the first try with the specified preload of 3.43-4.51 Nm (35-46 kgf-cm, 30-40 lbf-in).",
+"NOTE: Each shim size up or down from standard makes about 0.3-0.4 Nm (3-4 kgf-cm, 2.6-3.5 lbf-in) difference in preload.",
+"In example (1), your preload was 1.96 Nm (20 kgf-cm, 17 lbf-in) less than the standard, so you need a shim five sizes thicker than standard (try the 2.65 mm (0.104 in) 81 mm shim, and recheck).",
+"In example (2), your preload was 0.78 Nm (8 kgf-cm, 7 lbf-in) more than the standard, so you need a shim two sizes thinner (try the 2.44 mm (0.096 in) 81 mm shim, and recheck)."
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/1st Triple Cone Synchro Specification(s) (M/T)",
+"title": "1st Triple Cone Synchro Specification(s) (M/T)",
+"lines": [
+"1st Triple Cone Synchro Specification(s) (M/T)",
+"1st triple cone synchro",
+"1st triple cone synchro"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/2nd Triple Cone Synchro Specification(s) (M/T)",
+"title": "2nd Triple Cone Synchro Specification(s) (M/T)",
+"lines": [
+"2nd Triple Cone Synchro Specification(s) (M/T)",
+"2nd triple cone synchro",
+"2nd triple cone synchro"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/3rd Triple Cone Synchro Specification(s) (M/T)",
+"title": "3rd Triple Cone Synchro Specification(s) (M/T)",
+"lines": [
+"3rd Triple Cone Synchro Specification(s) (M/T)",
+"3rd triple cone synchro",
+"3rd triple cone synchro"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/4th Double Cone Synchro Specification(s) (M/T)",
+"title": "4th Double Cone Synchro Specification(s) (M/T)",
+"lines": [
+"4th Double Cone Synchro Specification(s) (M/T)",
+"4th double cone synchro",
+"4th double cone synchro"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/5th Synchro ring Specification(s) (M/T)",
+"title": "5th Synchro ring Specification(s) (M/T)",
+"lines": [
+"5th Synchro ring Specification(s) (M/T)",
+"5th synchro ring",
+"5th synchro ring"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/6th Synchro ring Specification(s) (M/T)",
+"title": "6th Synchro ring Specification(s) (M/T)",
+"lines": [
+"6th Synchro ring Specification(s) (M/T)",
+"6th synchro ring",
+"6th synchro ring"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/Countershaft 1st Gear Specification(s) (M/T)",
+"title": "Countershaft 1st Gear Specification(s) (M/T)",
+"lines": [
+"Countershaft 1st Gear Specification(s) (M/T)",
+"Countershaft 1st gear",
+"Countershaft 1st gear"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/Countershaft 2ND Gear Distance Collar Specification(S) (M/T)",
+"title": "Countershaft 2ND Gear Distance Collar Specification(S) (M/T)",
+"lines": [
+"Countershaft 2ND Gear Distance Collar Specification(S) (M/T)",
+"Countershaft 2nd gear distance collar",
+"Countershaft 2nd gear distance collar"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/Countershaft 2ND Gear Specification(S) (M/T)",
+"title": "Countershaft 2ND Gear Specification(S) (M/T)",
+"lines": [
+"Countershaft 2ND Gear Specification(S) (M/T)",
+"Countershaft 2nd gear",
+"Countershaft 2nd gear"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/Mainshaft 3rd Gear Specification(s) (M/T)",
+"title": "Mainshaft 3rd Gear Specification(s) (M/T)",
+"lines": [
+"Mainshaft 3rd Gear Specification(s) (M/T)",
+"Mainshaft 3rd gear",
+"Mainshaft 3rd gear"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/Mainshaft 4th, 5th Gear Specification(s) (M/T)",
+"title": "Mainshaft 4th, 5th Gear Specification(s) (M/T)",
+"lines": [
+"Mainshaft 4th, 5th Gear Specification(s) (M/T)",
+"Mainshaft 4th, 5th gear",
+"Mainshaft 4th, 5th gear"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/Mainshaft 4th/5th Gear Distance Collar Specifications (M/T)",
+"title": "Mainshaft 4th/5th Gear Distance Collar Specifications (M/T)",
+"lines": [
+"Mainshaft 4th/5th Gear Distance Collar Specifications (M/T)",
+"Mainshaft 4th/5th gear distance collar",
+"Mainshaft 4th/5th gear distance collar"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/Mainshaft 6th Gear Distance Collar Specification(s) (M/T)",
+"title": "Mainshaft 6th Gear Distance Collar Specification(s) (M/T)",
+"lines": [
+"Mainshaft 6th Gear Distance Collar Specification(s) (M/T)",
+"Mainshaft 6th gear distance collar",
+"Mainshaft 6th gear distance collar"
+]
+},
+{
+"path": "Transmission and Drivetrain/Manual Transmission/Transaxle/Specifications/Mainshaft 6th Gear Specification(s) (M/T)",
+"title": "Mainshaft 6th Gear Specification(s) (M/T)",
+"lines": [
+"Mainshaft 6th Gear Specification(s) (M/T)",
+"Mainshaft 6th gear",
+"Mainshaft 6th gear"
+]
+},
+{
+"path": "Transmission and Drivetrain/Transmission Control Systems/Testing and Inspection/Component Tests and General Diagnostics/A/T Pressure Test",
+"title": "A/T Pressure Test",
+"lines": [
+"12. Install the sealing bolt to the line pressure inspection port with a new sealing washer, and tighten the bolt to 18 Nm (1.8 kg-m, 13 lb-ft). Do not reuse the old sealing washer.",
+"20. Install the sealing bolts in the 1st clutch pressure, the 1st- hold clutch pressure, and the 2nd clutch pressure inspection ports with new sealing washers, and tighten the bolts to 18 Nm (1.8 kg-m, 13 lb-ft). Do not reuse the old sealing washers.",
+"28. Install the sealing bolts in the 3rd, 4th, and 5th clutch pressure inspection ports with new sealing washers, and tighten the bolts to 18 Nm (1.8 kg-m, 13 lb-ft). Do not reuse the old sealing washers."
+]
 }
 ]
