@@ -972,31 +972,32 @@ function buildCrownVic(v='p71'){
   /* GREENHOUSE: lofted from the belt line over the roof, same method as the Accord */
   const GH=(()=>{
     const tab=(t,x)=>{if(x>=t[0][0])return t[0][1];for(let i=1;i<t.length;i++){if(x>=t[i][0]){const[x0,y0]=t[i-1],[x1,y1]=t[i];return y0+(y1-y0)*(x-x0)/(x1-x0)}}return t[t.length-1][1]};
-    const X0=0.98,X1=-1.66;
-    const TOPA=[[X0,0.99],[0.75,1.12],[0.5,1.30],[0.3,1.415],[0.15,1.462],[0.0,1.475],[-0.7,1.478],[-0.92,1.465],[-1.02,1.445],[-1.15,1.37],[-1.4,1.2],[X1,1.035]];
-    const ytop=x=>tab(TOPA,x),ybelt=x=>0.99+(X0-x)*0.0172;
+    const X0=0.885,X1=-1.89;
+    /* traced from the 2004 Police Interceptor side elevation, 169.8 px per meter */
+    const TOPA=[[X0,0.995],[0.768,1.048],[0.621,1.143],[0.474,1.225],[0.327,1.302],[0.179,1.372],[0.032,1.413],[-0.115,1.431],[-0.75,1.431],[-0.999,1.413],[-1.146,1.396],[-1.293,1.36],[-1.44,1.302],[-1.587,1.225],[-1.735,1.125],[X1,1.06]];
+    const ytop=x=>tab(TOPA,x),ybelt=x=>0.995+(X0-x)*0.0233;
     const NS=12,NT=18,cl=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
     const curve=(pts,n)=>new THREE.CatmullRomCurve3(pts.map(p=>V(p[0],p[1],0)),false,'centripetal').getSpacedPoints(n).map(p=>[p.x,p.y]);
     function section(x){
-      const t=ytop(x),b=ybelt(x),h=Math.max(t-b,0.0005),g=cl(h/0.46,0,1),c=0.05*cl(h/0.12,0,1);
-      const r=Math.max(b+h*0.02,t-c),wb=0.93,wr=lerp(0.92,0.71,g);
+      const t=ytop(x),b=ybelt(x),h=Math.max(t-b,0.0005),g=cl(h/0.44,0,1),c=0.05*cl(h/0.12,0,1);
+      const r=Math.max(b+h*0.02,t-c),wb=0.93,wr=lerp(0.92,0.72,g);
       const sideC=curve([[wb,b],[lerp(wb,wr,0.5)+0.014*g,(b+r)/2],[wr,r]],NS);
       const topC=curve([[wr,r],[wr-0.03*g-0.005,r+c*0.55],[wr*0.55,t-c*0.1],[0,t]],NT);
       return [...sideC,...topC.slice(1)];
     }
     const XS=new Set();for(let i=0;i<=220;i++)XS.add(+(X0+(X1-X0)*i/220).toFixed(4));
-    [0.3,-0.27,-0.34,-1.02].forEach(x=>XS.add(x));
+    [0.0,-0.3,-0.37,-1.0].forEach(x=>XS.add(x));
     const XL=[...XS].sort((a,b)=>b-a),ST=XL.map(x=>({x,pts:section(x)})),NU=ST[0].pts.length;
-    const cline=y=>-1.0-(1.44-y)*0.45;
+    const cline=y=>-1.25-(1.33-y)*0.09;
     function cls(x,y,j){
       if(j>=NS){const jt=j-NS;
-        if(x>0.3)return jt<2?'A Pillar':'Windshield';
-        if(x<-1.02)return jt<2?'C Pillar':'Rear Window';
+        if(x>0.0)return jt<2?'A Pillar':'Windshield';
+        if(x<-1.0)return jt<2?'C Pillar':'Rear Window';
         return 'Roof Panel';}
       const cx=cline(y);
       if(x<cx)return 'C Pillar';
-      if(x>-0.27)return j===NS-1?'Front Sash':'Front Glass';
-      if(x>-0.34)return 'B Pillar';
+      if(x>-0.3)return j===NS-1?'Front Sash':'Front Glass';
+      if(x>-0.37)return 'B Pillar';
       if(j===NS-1||x<cx+0.035)return 'Rear Sash';
       return 'Rear Glass';
     }
@@ -1025,35 +1026,35 @@ function buildCrownVic(v='p71'){
   /* FRAME: full perimeter frame, the body sits on rubber mounts */
   asm('Frame','Full perimeter ladder frame of boxed steel rails. The body bolts to it on rubber body mounts.',[0,-1.6,0],P=>{
     LR.forEach(([s,sd])=>{
-      P(sd+' Front Frame Rail','Boxed rail carrying the engine, front suspension and bumper.',beam([2.3,0.36,s*0.45],[1.0,0.34,s*0.45],0.07,0.13));
+      P(sd+' Front Frame Rail','Boxed rail carrying the engine, front suspension and bumper.',beam([2.36,0.4,s*0.45],[1.0,0.34,s*0.45],0.07,0.13));
       P(sd+' Torque Box','Angled section where the rail steps out under the cabin.',beam([1.0,0.34,s*0.45],[0.55,0.30,s*0.66],0.07,0.13));
       P(sd+' Center Frame Rail','Rail under the cabin floor along the rocker.',beam([0.55,0.30,s*0.66],[-0.95,0.30,s*0.66],0.07,0.12));
       P(sd+' Rear Kick Up','Rail arches up over the rear axle.',beam([-0.95,0.30,s*0.66],[-1.75,0.48,s*0.58],0.07,0.12));
-      P(sd+' Rear Frame Rail','Rail under the trunk out to the rear bumper.',beam([-1.75,0.48,s*0.58],[-2.75,0.46,s*0.58],0.07,0.11));
+      P(sd+' Rear Frame Rail','Rail under the trunk out to the rear bumper.',beam([-1.75,0.48,s*0.58],[-2.65,0.48,s*0.58],0.07,0.11));
       [[2.05,0.45],[0.9,0.45],[0.15,0.66],[-0.75,0.66],[-2.1,0.58]].forEach(([x,z],i)=>
         P(sd+' Body Mount '+(i+1),'Rubber isolator between frame and body. The body rides only on these.',cyl(0.035,0.035,0.05),[x,0.42+(x<-1.7?0.12:0),s*z],[0,0.15,s*0.1]));
     });
     P('No. 1 Crossmember','Front crossmember under the radiator support.',beam([2.25,0.34,-0.45],[2.25,0.34,0.45],0.08,0.1));
     P('Transmission Crossmember','Bolted crossmember carrying the transmission mount.',beam([0.4,0.27,-0.66],[0.4,0.27,0.66],0.1,0.06));
     P('No. 4 Crossmember','Crossmember ahead of the rear axle, anchors the rear control arms.',beam([-0.95,0.32,-0.66],[-0.95,0.32,0.66],0.1,0.1));
-    P('Rear Crossmember','Crossmember behind the fuel tank.',beam([-2.55,0.46,-0.58],[-2.55,0.46,0.58],0.08,0.1));
+    P('Rear Crossmember','Crossmember behind the fuel tank.',beam([-2.5,0.48,-0.58],[-2.5,0.48,0.58],0.08,0.1));
   });
 
   /* BODY SHELL */
   asm('Body Shell','Welded steel body on frame. Holds the cabin, trunk and front end sheet metal.',[0,0,0],P=>{
-    P('Floor Pan','Stamped floor with the transmission tunnel.',plan([[0.98,-0.9],[0.98,0.9],[-1.1,0.9],[-1.1,-0.9]],0.4,0.035));
+    P('Floor Pan','Stamped floor with the transmission tunnel.',plan([[0.9,-0.9],[0.9,0.9],[-1.1,0.9],[-1.1,-0.9]],0.4,0.035));
     P('Transmission Tunnel','Raised hump over the transmission and driveshaft.',beam([0.95,0.5,0],[-0.9,0.44,0],0.3,0.12));
-    P('Trunk Floor','Trunk pan over the fuel tank and spare tire well.',plan([[-1.75,-0.62],[-1.75,0.62],[-1.85,0.92],[-2.85,0.92],[-2.85,-0.92],[-1.85,-0.92]],0.58,0.03));
-    P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.55,1.6),[1.02,0.72,0]);
-    P('Cowl Panel','Plenum under the windshield with the fresh air intake and wiper pivots.',box(0.22,0.03,1.6),[1.08,0.98,0]);
-    P('Radiator Support','Front bulkhead holding the radiator, headlamps and hood latch.',box(0.05,0.5,1.7),[2.28,0.62,0]);
+    P('Trunk Floor','Trunk pan over the fuel tank and spare tire well.',plan([[-1.75,-0.62],[-1.75,0.62],[-1.85,0.92],[-2.78,0.92],[-2.78,-0.92],[-1.85,-0.92]],0.58,0.03));
+    P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.55,1.6),[0.98,0.72,0]);
+    P('Cowl Panel','Plenum under the windshield with the fresh air intake and wiper pivots.',box(0.2,0.03,1.6),[0.98,0.99,0]);
+    P('Radiator Support','Front bulkhead holding the radiator, headlamps and hood latch.',box(0.05,0.5,1.7),[2.32,0.62,0]);
     P('Roof Panel','Single stamped roof skin, crowned across.',GH(GB('Roof Panel')));
-    P('Rear Package Tray','Shelf behind the rear seat, speakers mount here.',box(0.42,0.03,1.7),[-1.4,1.02,0]);
-    P('Rear Body Panel','Panel under the trunk opening behind the taillamps.',box(0.035,0.4,1.75),[-2.9,0.78,0]);
+    P('Rear Package Tray','Shelf behind the rear seat under the back glass, speakers mount here.',box(0.5,0.03,1.7),[-1.62,1.04,0]);
+    P('Rear Body Panel','Panel under the trunk opening between the taillamps.',box(0.035,0.32,1.75),[-2.82,0.86,0]);
     LR.forEach(([s,sd])=>{
       P(sd+' Rocker Panel','Sill under the doors.',box(2.0,0.1,0.06),[-0.1,0.38,s*0.95]);
-      P(sd+' Front Fender','Bolt on steel fender with the wheel opening.',side(sh=>{sh.moveTo(0.97,0.99);sh.lineTo(0.97,0.34);sh.lineTo(1.055,0.34);sh.absarc(FA,CWY,0.405,PI,0,true);sh.lineTo(2.3,0.36);sh.lineTo(2.36,0.62);sh.lineTo(2.34,0.85);sh.lineTo(0.99,0.99);sh.closePath()},s*HW));
-      P(sd+' Rear Quarter Panel','Welded quarter panel from the rear door to the taillamp.',side(sh=>{sh.moveTo(-1.17,1.03);sh.lineTo(-2.88,1.02);sh.lineTo(-2.9,0.62);sh.lineTo(-2.78,0.45);sh.lineTo(-1.858,0.4);sh.absarc(RA,CWY,0.405,PI,0.7976,true);sh.lineTo(-1.17,1.03);sh.closePath()},s*HW));
+      P(sd+' Front Fender','Bolt on steel fender with the wheel opening.',side(sh=>{sh.moveTo(0.84,0.99);sh.lineTo(0.84,0.34);sh.lineTo(1.055,0.34);sh.absarc(FA,CWY,0.405,PI,0,true);sh.lineTo(2.3,0.62);sh.lineTo(2.4,0.66);sh.lineTo(2.46,0.76);sh.lineTo(2.3,0.86);sh.lineTo(1.95,0.92);sh.lineTo(1.36,0.98);sh.lineTo(0.88,0.99);sh.closePath()},s*HW));
+      P(sd+' Rear Quarter Panel','Welded quarter panel from the rear door to the taillamp.',side(sh=>{sh.moveTo(-1.34,1.045);sh.lineTo(-1.9,1.06);sh.lineTo(-2.62,1.035);sh.lineTo(-2.8,1.0);sh.lineTo(-2.82,0.72);sh.lineTo(-2.7,0.66);sh.lineTo(-1.858,0.66);sh.absarc(RA,CWY,0.405,PI,1.288,true);sh.lineTo(-1.34,1.045);sh.closePath()},s*HW));
       P(sd+' Front Wheelhouse','Inner fender apron arching over the front wheel.',arc(0.43,0.26,PI*0.55,PI*0.9),[FA,CWY,s*0.8],[0,0.15,s*0.2]);
       P(sd+' Rear Wheelhouse','Inner wheelhouse arching over the rear wheel.',arc(0.43,0.26,PI*0.55,PI*0.9),[RA,CWY,s*0.8],[0,0.15,s*0.2]);
       P(sd+' A Pillar','Windshield pillar.',GH(['A Pillar|'+s]));
@@ -1068,35 +1069,35 @@ function buildCrownVic(v='p71'){
   });
 
   asm('Hood','Front hinged steel hood.',[0.5,2.2,0],P=>{
-    P('Hood Panel','Steel hood skin with inner brace.',rz(box(1.36,0.03,1.82),-0.09),[1.66,0.93,0],[0,0.2,0]);
-    P('Hood Insulator','Sound pad under the hood.',rz(box(1.1,0.015,1.5),-0.09),[1.66,0.905,0],[0,-0.15,0]);
+    P('Hood Panel','Steel hood skin with inner brace.',rz(box(1.42,0.03,1.82),-0.075),[1.6,0.955,0],[0,0.2,0]);
+    P('Hood Insulator','Sound pad under the hood.',rz(box(1.1,0.015,1.5),-0.075),[1.6,0.93,0],[0,-0.15,0]);
     LR.forEach(([s,sd])=>{
-      P(sd+' Hood Hinge','Spring loaded hinge at the cowl.',box(0.14,0.06,0.03),[1.05,0.96,s*0.8],[-0.2,0,s*0.15]);
+      P(sd+' Hood Hinge','Spring loaded hinge at the cowl.',box(0.14,0.06,0.03),[0.95,0.97,s*0.8],[-0.2,0,s*0.15]);
     });
-    P('Hood Latch','Latch on the radiator support with safety catch.',box(0.08,0.06,0.1),[2.26,0.86,0],[0.25,-0.1,0]);
+    P('Hood Latch','Latch on the radiator support with safety catch.',box(0.08,0.06,0.1),[2.3,0.86,0],[0.25,-0.1,0]);
   });
 
   asm('Trunk Lid','Rear deck lid on torsion bar hinges.',[-0.5,1.6,0],P=>{
-    P('Trunk Lid Panel','Steel deck lid.',rz(box(1.18,0.03,1.76),0.018),[-2.28,1.04,0],[0,0.2,0]);
-    LR.forEach(([s,sd])=>P(sd+' Trunk Hinge','Gooseneck hinge.',box(0.25,0.04,0.03),[-1.82,1.0,s*0.6],[0.2,0,s*0.15]));
-    P('Torsion Bars','Spring bars that lift the lid.',rod([-1.8,0.98,-0.55],[-1.8,0.98,0.55],0.006),[0.25,-0.15,0]);
-    P('Trunk Latch','Power release latch.',box(0.06,0.05,0.08),[-2.86,0.98,0],[-0.2,-0.2,0]);
-    P('Decklid Applique','Trim panel between the taillamps.',box(0.03,0.14,0.56),[-2.915,0.88,0],[-0.3,0,0]);
+    P('Trunk Lid Panel','Steel deck lid.',rz(box(0.92,0.03,1.76),0.027),[-2.34,1.055,0],[0,0.2,0]);
+    LR.forEach(([s,sd])=>P(sd+' Trunk Hinge','Gooseneck hinge.',box(0.25,0.04,0.03),[-1.98,1.02,s*0.6],[0.2,0,s*0.15]));
+    P('Torsion Bars','Spring bars that lift the lid.',rod([-1.95,1.0,-0.55],[-1.95,1.0,0.55],0.006),[0.25,-0.15,0]);
+    P('Trunk Latch','Power release latch.',box(0.06,0.05,0.08),[-2.78,0.99,0],[-0.2,-0.2,0]);
+    P('Decklid Applique','Trim panel between the taillamps.',box(0.03,0.14,0.56),[-2.84,0.88,0],[-0.3,0,0]);
   });
 
   function door(front,s,sd){
-    const x0=front?0.95:-0.3,x1=front?-0.27:-1.17,xc=(x0+x1)/2;
-    const skin=front?poly([[x0,0.99],[x1,1.005],[x1,0.34],[x0,0.34]]):sh=>{sh.moveTo(x0,1.007);sh.lineTo(x1,1.02);sh.lineTo(x1,0.628);sh.absarc(RA,CWY,0.405,0.7976,0,true);sh.lineTo(-1.048,0.34);sh.lineTo(x0,0.34);sh.closePath()};
+    const x0=front?0.84:-0.37,x1=front?-0.3:-1.34,xc=(x0+x1)/2;
+    const skin=front?poly([[x0,0.996],[x1,1.022],[x1,0.34],[x0,0.34]]):sh=>{sh.moveTo(x0,1.023);sh.lineTo(x1,1.045);sh.lineTo(x1,0.727);sh.absarc(RA,CWY,0.405,1.288,0,true);sh.lineTo(-1.048,0.34);sh.lineTo(x0,0.34);sh.closePath()};
     asm((front?'Front ':'Rear ')+sd+' Door',(front?'Front':'Rear')+' door, hinged at its front edge.',[0,0.1,s*1.2],P=>{
       P('Outer Skin','Stamped steel door skin with body side molding.',side(skin,s*HW),[0,0,s*0.3]);
       P('Inner Panel','Inner door structure with the side impact beam.',side(skin,s*0.93),[0,0,0]);
       P('Door Trim Panel','Molded trim panel with armrest and switches.',side(skin,s*0.89,0.02),[0,0,-s*0.25]);
       P('Window Glass','Tempered side glass.',GH([(front?'Front Glass|':'Rear Glass|')+s]),[0,0.5,0]);
       P('Window Sash','Door frame around the glass.',GH([(front?'Front Sash|':'Rear Sash|')+s]),[0,0.8,0]);
-      if(front)mirror(P,[0.85,1.04,s*0.94],[0.8,1.1,s*1.06],0.09,0.13,0.2,0.025,'Power mirror housing.');
+      if(front)mirror(P,[0.74,1.04,s*0.93],[0.7,1.09,s*0.99],0.09,0.13,0.16,0.025,'Power mirror housing.');
       P('Window Regulator','Power window regulator and motor.',box(0.4,0.32,0.03),[xc,0.72,s*0.95],[0,0.15,s*0.15]);
       P('Window Motor','Drives the regulator.',cyl(0.04,0.04,0.05,'z'),[xc+0.12,0.6,s*0.94],[0.1,0,s*0.2]);
-      P('Outside Handle','Pull out door handle.',box(0.16,0.035,0.03),[front?-0.12:-1.0,0.9,s*(HW+0.04)],[0,0.1,s*0.5]);
+      P('Outside Handle','Pull out door handle.',box(0.16,0.035,0.03),[front?-0.12:-1.12,0.9,s*(HW+0.04)],[0,0.1,s*0.5]);
       P('Door Latch','Latch with power lock actuator at the rear edge.',box(0.03,0.12,0.07),[x1+0.03,0.85,s*0.94],[-0.3,0,0]);
       P('Upper Hinge','Bolted door hinge.',box(0.06,0.07,0.04),[x0,0.88,s*0.95],[0.3,0.05,0]);
       P('Lower Hinge','Bolted door hinge.',box(0.06,0.07,0.04),[x0,0.5,s*0.95],[0.3,-0.05,0]);
@@ -1223,7 +1224,7 @@ function buildCrownVic(v='p71'){
     });
     P('Power Steering Reservoir','Fluid reservoir on the pump.',cyl(0.04,0.04,0.07),[EX+0.22,0.82,0.2]);
     P('Intermediate Shaft','Jointed shaft from the column to the gear.',rod([FA-0.1,0.4,0.25],[0.98,0.66,0.38],0.013));
-    P('Steering Column','Tilt column with the shifter.',rod([0.98,0.66,0.38],[0.52,0.95,0.4],0.035));
+    P('Steering Column','Tilt column with the shifter.',rod([0.98,0.66,0.38],[0.48,0.95,0.4],0.035));
     P('Column Shift Lever','Automatic shift lever on the column.',rod([0.62,0.92,0.33],[0.55,0.98,0.18],0.008));
     const w=new THREE.TorusGeometry(0.19,0.014,8,40);w.rotateY(PI/2);w.rotateZ(-0.5);
     P('Steering Wheel','Four spoke wheel with the driver airbag.',w,[0.45,1.0,0.4]);
@@ -1245,13 +1246,13 @@ function buildCrownVic(v='p71'){
     P('Fuel Pump Module','Electric pump and sender in the tank.',cyl(0.06,0.06,0.06),[-2.05,0.56,0.2]);
     P('Fuel Filter','Inline filter on the frame rail.',cyl(0.03,0.03,0.12,'x'),[-0.7,0.33,0.6]);
     P('Fuel Supply Line','Steel line along the frame to the fuel rails.',rod([-1.85,0.42,0.6],[1.3,0.5,0.4],0.005));
-    P('Fuel Filler Pipe','Pipe from the fuel door to the tank.',rod([-2.05,0.5,0.5],[-2.2,0.85,0.92],0.025));
-    P('Fuel Cap','Tethered cap behind the fuel door.',cyl(0.04,0.04,0.02,'z'),[-2.2,0.86,0.94]);
+    P('Fuel Filler Pipe','Pipe from the fuel door to the tank.',rod([-2.05,0.5,0.5],[-2.3,0.85,0.92],0.025));
+    P('Fuel Cap','Tethered cap behind the fuel door.',cyl(0.04,0.04,0.02,'z'),[-2.3,0.86,0.94]);
     P('EVAP Canister','Holds fuel vapor.',box(0.15,0.1,0.15),[-1.75,0.5,-0.4]);
   });
 
   asm('Cooling System','Radiator, electric fan and hoses. Coolant 17.6 L (18.6 qt).',[1.6,0.4,-0.4],P=>{
-    P('Radiator','Aluminum crossflow radiator with plastic tanks.',box(0.05,0.45,0.75),[2.2,0.62,0]);
+    P('Radiator','Aluminum crossflow radiator with plastic tanks.',box(0.05,0.45,0.75),[2.24,0.62,0]);
     P('Electric Cooling Fan','Fan and shroud run by the cooling fan control module.',cyl(0.2,0.2,0.04,'x',10),[2.12,0.62,0]);
     P('Fan Shroud','Plastic shroud around the fan.',box(0.06,0.46,0.74),[2.15,0.62,0]);
     P('Cooling Fan Control Module','Sets the fan speed.',box(0.04,0.08,0.1),[2.1,0.42,-0.3]);
@@ -1274,7 +1275,7 @@ function buildCrownVic(v='p71'){
       P(sd+' Intermediate Pipe','Pipe under the cabin.',rod([0.57,0.22,s*0.28],[-0.95,0.24,s*0.3],0.025));
       P(sd+' Over Axle Pipe','Pipe that arches over the rear axle.',rod([-0.95,0.24,s*0.3],[-1.75,0.32,s*0.35],0.025));
       P(sd+' Muffler','Oval muffler.',box(0.5,0.13,0.26),[-2.05,0.27,s*0.62]);
-      P(sd+' Tailpipe','Exit pipe under the bumper.',rod([-2.3,0.27,s*0.62],[-2.9,0.3,s*0.62],0.025));
+      P(sd+' Tailpipe','Exit pipe under the bumper.',rod([-2.3,0.27,s*0.62],[-2.82,0.3,s*0.62],0.025));
     });
     P('H Pipe','Crossover that balances the two banks.',rod([0.3,0.22,-0.28],[0.3,0.22,0.28],0.022));
   });
@@ -1285,15 +1286,15 @@ function buildCrownVic(v='p71'){
     P('Power Distribution Box','Fuse and relay box under the hood.',box(0.15,0.1,0.22),[1.8,0.78,0.7]);
     P('Powertrain Control Module','Engine and transmission computer on the firewall.',box(0.04,0.18,0.24),[1.06,0.82,-0.45]);
     P('Wiring Harness','Main engine harness.',rod([1.06,0.9,0.6],[2.2,0.78,0.6],0.009));
-    P('Horn','Electric horn behind the bumper.',cyl(0.045,0.045,0.03,'x'),[2.3,0.5,0.45]);
+    P('Horn','Electric horn behind the bumper.',cyl(0.045,0.045,0.03,'x'),[2.35,0.5,0.45]);
     P('Wiper Motor','Drives the wiper linkage in the cowl.',cyl(0.04,0.04,0.09,'x'),[1.08,0.92,0.5]);
     LR.forEach(([s,sd])=>{
       P(sd+' Wiper Arm','Wiper arm and blade.',rod([1.06,1.0,s*0.4],[0.88,1.08,s*0.4-0.45],0.007));
-      P(sd+' Headlamp','Composite headlamp assembly.',box(0.08,0.13,0.4),[2.33,0.78,s*0.6]);
-      P(sd+' Parking Lamp','Park and turn lamp at the corner.',box(0.05,0.06,0.16),[2.34,0.66,s*0.86]);
-      P(sd+' Taillamp','Combination tail, stop and turn lamp.',box(0.05,0.22,0.42),[-2.9,0.84,s*0.7]);
+      P(sd+' Headlamp','Composite headlamp assembly.',box(0.1,0.12,0.4),[2.42,0.74,s*0.62]);
+      P(sd+' Parking Lamp','Park and turn lamp at the corner.',box(0.12,0.08,0.12),[2.38,0.74,s*0.88]);
+      P(sd+' Taillamp','Combination tail, stop and turn lamp.',box(0.16,0.24,0.36),[-2.74,0.86,s*0.76]);
     });
-    P('Dome Lamp','Cabin light.',box(0.1,0.02,0.14),[-0.4,1.44,0]);
+    P('Dome Lamp','Cabin light.',box(0.1,0.02,0.14),[-0.4,1.41,0]);
   });
 
   asm('Interior','Seats, instrument panel, pedals and trim.',[-0.2,2.5,0],P=>{
@@ -1301,44 +1302,48 @@ function buildCrownVic(v='p71'){
       const n=s>0?'Driver':'Passenger';
       P(n+' Seat Cushion','Split bench front seat cushion on power tracks.',box(0.55,0.14,0.7),[0.0,0.58,s*0.4]);
       P(n+' Seat Back','Reclining seat back with head restraint.',rz(box(0.12,0.68,0.66),0.2),[-0.3,0.95,s*0.4]);
-      P(sd+' Sun Visor','Padded visor with mirror.',box(0.18,0.012,0.42),[0.25,1.39,s*0.42]);
+      P(sd+' Sun Visor','Padded visor with mirror.',box(0.18,0.012,0.42),[0.08,1.37,s*0.42]);
       P(sd+' Front Seat Belt','Three point belt. Buckle nut 40 N.m (30 ft lb).',box(0.02,0.6,0.05),[-0.4,0.95,s*0.85]);
     });
     P('Rear Seat Cushion','Bench cushion.',box(0.55,0.15,1.6),[-1.0,0.56,0]);
     P('Rear Seat Back','Bench back.',rz(box(0.12,0.6,1.6),0.22),[-1.28,0.9,0]);
-    P('Instrument Panel','Padded dash with the heater and A/C ducts.',box(0.38,0.28,1.75),[0.78,0.88,0]);
-    P('Instrument Cluster','Speedometer and gauges.',box(0.06,0.14,0.4),[0.6,0.96,0.4]);
-    P('Glove Box','Passenger side glove box.',box(0.05,0.14,0.4),[0.6,0.78,-0.42]);
+    P('Instrument Panel','Padded dash with the heater and A/C ducts.',box(0.36,0.28,1.75),[0.7,0.88,0]);
+    P('Instrument Cluster','Speedometer and gauges.',box(0.06,0.14,0.4),[0.52,0.96,0.4]);
+    P('Glove Box','Passenger side glove box.',box(0.05,0.14,0.4),[0.52,0.78,-0.42]);
     P('Heater Core','Small radiator in the HVAC case.',box(0.15,0.18,0.25),[0.88,0.68,-0.2]);
-    P('Radio','Audio head unit.',box(0.06,0.07,0.2),[0.6,0.85,0]);
+    P('Radio','Audio head unit.',box(0.06,0.07,0.2),[0.52,0.85,0]);
     P('Brake Pedal','Adjustable brake pedal.',box(0.02,0.22,0.08),[0.82,0.55,0.32]);
     P('Accelerator Pedal','Adjustable accelerator pedal. Bracket nuts 9 N.m (80 in lb).',box(0.02,0.22,0.05),[0.84,0.55,0.2]);
-    P('Carpet','Molded floor carpet.',plan([[0.95,-0.88],[0.95,0.88],[-1.08,0.88],[-1.08,-0.88]],0.425,0.01));
+    P('Carpet','Molded floor carpet.',plan([[0.88,-0.88],[0.88,0.88],[-1.08,0.88],[-1.08,-0.88]],0.425,0.01));
     const hl=GH(GB('Roof Panel'));hl.geo.scale(1,1,0.95);hl.pos.y-=0.03;
     P('Headliner','Cloth headliner under the roof.',hl);
-    P('Rearview Mirror','Day night mirror.',box(0.03,0.06,0.24),[0.32,1.34,0]);
+    P('Rearview Mirror','Day night mirror.',box(0.03,0.06,0.24),[0.15,1.33,0]);
   });
 
   asm('Front Bumper','Fascia over a steel reinforcement beam, with the grille.',[1.4,-0.1,0],P=>{
-    P('Front Bumper Cover','Painted plastic fascia.',rbox(0.18,0.32,1.96,0.06),[2.38,0.48,0],[0.4,0,0]);
-    P('Front Bumper Reinforcement','Steel impact beam bolted to the frame horns.',box(0.08,0.12,1.7),[2.28,0.47,0],[0.15,0,0]);
-    P('Front Energy Absorber','Foam absorber between the cover and beam.',box(0.06,0.12,1.6),[2.34,0.47,0],[0.28,0,0]);
-    P('Grille','Chrome waterfall grille.',box(0.04,0.15,0.74),[2.37,0.74,0],[0.4,0.15,0]);
-    P('Lower Grille','Air opening in the fascia.',box(0.03,0.06,0.9),[2.46,0.42,0],[0.55,-0.1,0]);
+    P('Front Bumper Cover','Painted plastic fascia.',rbox(0.2,0.32,1.96,0.06),[2.46,0.49,0],[0.4,0,0]);
+    P('Front Bumper Reinforcement','Steel impact beam bolted to the frame horns.',box(0.08,0.12,1.7),[2.36,0.48,0],[0.15,0,0]);
+    P('Front Energy Absorber','Foam absorber between the cover and beam.',box(0.06,0.12,1.6),[2.42,0.48,0],[0.28,0,0]);
+    P('Grille','Chrome waterfall grille.',box(0.06,0.15,0.74),[2.46,0.73,0],[0.4,0.15,0]);
+    P('Lower Grille','Air opening in the fascia.',box(0.03,0.06,0.9),[2.55,0.42,0],[0.55,-0.1,0]);
   });
 
   asm('Rear Bumper','Fascia over a steel reinforcement beam.',[-1.4,-0.1,0],P=>{
-    P('Rear Bumper Cover','Painted plastic fascia.',rbox(0.18,0.3,1.96,0.06),[-2.83,0.48,0],[-0.4,0,0]);
-    P('Rear Bumper Reinforcement','Steel impact beam bolted to the frame.',box(0.08,0.12,1.7),[-2.72,0.47,0],[-0.15,0,0]);
-    P('Rear Energy Absorber','Foam absorber.',box(0.06,0.12,1.6),[-2.78,0.47,0],[-0.28,0,0]);
-    P('License Plate Lamp','Plate lamp.',box(0.03,0.03,0.12),[-2.92,0.62,0],[-0.5,0,0]);
+    P('Rear Bumper Cover','Painted plastic fascia.',rbox(0.2,0.34,1.96,0.06),[-2.75,0.53,0],[-0.4,0,0]);
+    P('Rear Bumper Reinforcement','Steel impact beam bolted to the frame.',box(0.08,0.12,1.7),[-2.64,0.5,0],[-0.15,0,0]);
+    P('Rear Energy Absorber','Foam absorber.',box(0.06,0.12,1.6),[-2.7,0.5,0],[-0.28,0,0]);
+    P('License Plate Lamp','Plate lamp.',box(0.03,0.03,0.12),[-2.84,0.72,0],[-0.5,0,0]);
   });
+  /* blueprint overlays cut from the 2004 Police Interceptor drawing */
+  bp('ref/cv-side.png',919/169.8,244/169.8,m=>m.position.set(-0.145,244/169.8/2-0.006,-1.7));
+  bp('ref/cv-front.png',327/154.1,1.431,m=>{m.rotation.y=PI/2;m.position.set(3.4,1.431/2,0)});
+  bp('ref/cv-rear.png',323/154.1,1.42,m=>{m.rotation.y=-PI/2;m.position.set(-3.4,1.42/2,0)});
 }
 
 /* BUILD */
 let total=0;
 const CHARM={accord:'https://charm.li/Honda/1982/Accord%20L4-1751cc%201800%20EK1/Repair%20and%20Diagnosis/',prius:'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/',crownvic:'https://charm.li/Ford/2006/Crown%20Victoria%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/'};
-const CARS={accord:{id:'accord',make:'Honda',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'},crownvic:{id:'crownvic',make:'Ford',name:'2006 CROWN VIC P71',front:2.463,build:()=>buildCrownVic('p71'),btn:'Prius'},crownvic_lx:{id:'crownvic_lx',data:'crownvic',make:'Ford',name:'2006 CROWN VIC LX',front:2.463,build:()=>buildCrownVic('lx'),btn:'Prius'}};
+const CARS={accord:{id:'accord',make:'Honda',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'},crownvic:{id:'crownvic',make:'Ford',name:'2006 CROWN VIC P71',front:2.555,build:()=>buildCrownVic('p71'),btn:'Prius'},crownvic_lx:{id:'crownvic_lx',data:'crownvic',make:'Ford',name:'2006 CROWN VIC LX',front:2.555,build:()=>buildCrownVic('lx'),btn:'Prius'}};
 let CAR=null;
 function buildAll(){ASM.forEach((a,ai)=>{
   const c=V(0,0,0);a.parts.forEach(p=>c.add(p.pos));c.divideScalar(a.parts.length);a.center=c;
