@@ -1422,7 +1422,7 @@ function buildCrownVic(v='p71'){
 /* BUILD */
 let total=0;
 const CHARM={accord:'https://charm.li/Honda/1982/Accord%20L4-1751cc%201800%20EK1/Repair%20and%20Diagnosis/',prius:'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/',crownvic:'https://charm.li/Ford/2006/Crown%20Victoria%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/'};
-const CARS={accord:{id:'accord',make:'Honda',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'},crownvic:{id:'crownvic',make:'Ford',name:'2006 CROWN VIC P71',front:2.555,build:()=>buildCrownVic('p71'),btn:'Prius'},crownvic_lx:{id:'crownvic_lx',data:'crownvic',make:'Ford',name:'2006 CROWN VIC LX',front:2.555,build:()=>buildCrownVic('lx'),btn:'Prius'}};
+const CARS={accord:{id:'accord',make:'Honda',search:'1982 Honda Accord',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',search:'2007 Toyota Prius',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'},crownvic:{id:'crownvic',make:'Ford',search:'2006 Ford Crown Victoria Police Interceptor',name:'2006 CROWN VIC P71',front:2.555,build:()=>buildCrownVic('p71'),btn:'Prius'},crownvic_lx:{id:'crownvic_lx',data:'crownvic',make:'Ford',search:'2006 Ford Crown Victoria',name:'2006 CROWN VIC LX',front:2.555,build:()=>buildCrownVic('lx'),btn:'Prius'}};
 let CAR=null;
 function buildAll(){ASM.forEach((a,ai)=>{
   const c=V(0,0,0);a.parts.forEach(p=>c.add(p.pos));c.divideScalar(a.parts.length);a.center=c;
@@ -1462,7 +1462,7 @@ function partNums(a,p){
   return PN[a.name+'/'+p.name]||PN[a.name+'/'+base]||PN['*/'+p.name]||PN['*/'+base]||[];
 }
 function searchQuery(){
-  const car=CAR.id==='prius'?'2007 Toyota Prius':'1982 Honda Accord';
+  const car=CAR.search||((CAR.make||'')+' '+CAR.name);
   const nums=selected?partNums(focus,selected):[];
   const nm=(selected?selected.name:focus?focus.name:'').replace(/\s+\d+$/,'');
   return {car,name:nm,num:nums[0]?nums[0][1]:'',q:car+' '+nm};
@@ -1581,7 +1581,8 @@ function refresh(){
   if(selected){
     const b=homeBox(selected),i=focus.parts.indexOf(selected)+1;
     head=[CAR.name+' / '+focus.name.toUpperCase(),selected.name];cardColor='#'+selected.mat.color.getHexString();
-    typeOut('p'+focus.name+'/'+selected.name,[...partNums(focus,selected).map(n=>row('PART NO',n[1]+'  '+n[0].toUpperCase())),row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
+    const pns=partNums(focus,selected);
+    typeOut('p'+focus.name+'/'+selected.name,[...(pns.length?pns.map(n=>row('PART NO',n[1]+'  '+n[0].toUpperCase())):[row('PART NO','NOT IN CATALOG DATA YET')]),row('ASSEMBLY',focus.name.toUpperCase()),row('PART',i+' OF '+focus.parts.length),row('SIZE',sizeTxt(b)),...locTxt(b),'',selected.desc.toUpperCase()].join('\n'));
   }else if(focus){
     const b=new THREE.Box3();focus.parts.forEach(p=>b.union(homeBox(p)));
     head=[CAR.name,focus.name];cardColor='#'+focus.parts[0].mat.color.getHexString();
@@ -1872,7 +1873,7 @@ function applyPaint(){
   document.getElementById('bPaint').onclick=()=>{box.classList.toggle('open');document.getElementById('bPaint').classList.toggle('on',box.classList.contains('open'))};
 })();
 /* CAR PICKER: makes with their models nested underneath */
-const LINEUP=[['Ford',[['crownvic','2006 Crown Victoria Police Interceptor'],['crownvic_lx','2006 Crown Victoria LX']]],['Honda',[['accord','1982 Accord'],['accord2011','2011 Accord 2.4L four cylinder','Model in progress, manual archive loading'],['accord2011v6','2011 Accord 3.5L V6','Model in progress, manual archive loading'],['civic2004','2004 Civic 1.7L','Queued after the Accords and Panthers']]],['Toyota',[['prius','2007 Prius']]]];
+const LINEUP=[['Ford',[['crownvic','2006 Crown Victoria Police Interceptor'],['crownvic_lx','2006 Crown Victoria LX']]],['Lincoln',[['towncar','2006 Town Car','Manual data not downloaded yet']]],['Mercury',[['grandmarquis','2004 Grand Marquis','Manual data not downloaded yet'],['marauder','2004 Marauder','Manual data not downloaded yet']]],['Honda',[['accord','1982 Accord'],['accord2011','2011 Accord 2.4L four cylinder','Manual data in, 3D model not built yet'],['accord2011v6','2011 Accord 3.5L V6','Manual data in, 3D model not built yet'],['civic2004','2004 Civic 1.7L','Manual data in, 3D model not built yet']]],['Toyota',[['prius','2007 Prius']]]];
 const openMk=new Set();
 function drawCars(){
   const box=document.getElementById('cars');box.innerHTML='';

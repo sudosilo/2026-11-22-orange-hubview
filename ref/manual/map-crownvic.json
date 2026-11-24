@@ -1,9 +1,33 @@
 {
+"Body Shell/Roof Panel": {
+"file": "1532.png",
+"path": "Body and Frame/Roof and Associated Components/Sunroof / Moonroof/Service and Repair/Roof Opening Panel - Exploded View",
+"caption": "Roof Opening Panel - Exploded View",
+"score": 5.5
+},
+"Body Shell/Left Front Fender": {
+"file": "1476.png",
+"path": "Body and Frame/Fender/Front Fender/Service and Repair",
+"caption": "Part 1:",
+"score": 4.5
+},
+"Body Shell/Right Front Fender": {
+"file": "1476.png",
+"path": "Body and Frame/Fender/Front Fender/Service and Repair",
+"caption": "Part 1:",
+"score": 4.5
+},
 "Engine/Cylinder Block": {
-"file": "0398.png",
-"path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Cylinder Block - Core Plug Replacement",
+"file": "2272.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Engine Block Heater/Service and Repair",
+"caption": "Block Heater:",
+"score": 10.0
+},
+"Engine/Oil Filter": {
+"file": "2314.png",
+"path": "Engine, Cooling and Exhaust/Engine/Engine Lubrication/Oil Filter Adapter/Service and Repair",
 "caption": "Material:",
-"score": 7.5
+"score": 5.5
 },
 "Engine/Timing Chains": {
 "file": "0242.png",
@@ -11,11 +35,23 @@
 "caption": "Valve Train Components - Exploded View:",
 "score": 6.0
 },
+"Engine/Intake Manifold": {
+"file": "2326.png",
+"path": "Engine, Cooling and Exhaust/Engine/Intake Manifold/Service and Repair",
+"caption": "Intake Manifold:",
+"score": 7.0
+},
 "Engine/Left Cylinder Head": {
 "file": "0186.png",
 "path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Cylinder Head Distortion",
 "caption": "Special Tool(s):",
 "score": 5.5
+},
+"Engine/Left Exhaust Manifold": {
+"file": "2368.png",
+"path": "Engine, Cooling and Exhaust/Exhaust System/Exhaust Manifold/Service and Repair/Exhaust Manifold - LH",
+"caption": "Exhaust Manifold - LH:",
+"score": 7.0
 },
 "Engine/Connecting Rod 5": {
 "file": "0379.png",
@@ -47,6 +83,12 @@
 "caption": "Special Tool(s):",
 "score": 5.5
 },
+"Engine/Right Exhaust Manifold": {
+"file": "2368.png",
+"path": "Engine, Cooling and Exhaust/Exhaust System/Exhaust Manifold/Service and Repair/Exhaust Manifold - LH",
+"caption": "Exhaust Manifold - LH:",
+"score": 7.0
+},
 "Engine/Connecting Rod 1": {
 "file": "0379.png",
 "path": "Engine, Cooling and Exhaust/Engine/Service and Repair/Connecting Rod",
@@ -72,45 +114,123 @@
 "score": 5.5
 },
 "Transmission/Transmission Case": {
-"file": "0703.png",
-"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Adjustments/Transmission Range (TR) Sensor Adjustment",
-"caption": "Special Tool(s):",
+"file": "1001.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Service and Repair/Transmission Filler Tube Removal and Installation",
+"caption": "Transmission Filler Tube Removal and Installation",
+"score": 6.5
+},
+"Rear Axle/Pinion Flange": {
+"file": "1121.png",
+"path": "Transmission and Drivetrain/Differential Assembly/Service and Repair/Removal and Installation/Rear Drive Axle/Differential Ring and Pinion",
+"caption": "Special Tool(s) (Part 1):",
+"score": 4.5
+},
+"Rear Axle/Differential Carrier": {
+"file": "1061.png",
+"path": "Transmission and Drivetrain/Differential Assembly/Service and Repair/Removal and Installation/Differential Carrier",
+"caption": "Differential Carrier",
+"score": 6.0
+},
+"Rear Axle/Ring and Pinion": {
+"file": "1121.png",
+"path": "Transmission and Drivetrain/Differential Assembly/Service and Repair/Removal and Installation/Rear Drive Axle/Differential Ring and Pinion",
+"caption": "Special Tool(s) (Part 1):",
+"score": 4.5
+},
+"Rear Axle/Differential Cover": {
+"file": "1061.png",
+"path": "Transmission and Drivetrain/Differential Assembly/Service and Repair/Removal and Installation/Differential Carrier",
+"caption": "Differential Carrier",
+"score": 4.5
+},
+"Steering/Intermediate Shaft": {
+"file": "1300.png",
+"path": "Steering and Suspension/Steering/Steering Column/Service and Repair/Removal and Installation",
+"caption": "Removal and Installation",
+"score": 5.0
+},
+"Steering/Steering Column": {
+"file": "1330.png",
+"path": "Steering and Suspension/Steering/Steering Column/Diagrams",
+"caption": "C2318:",
+"score": 8.0
+},
+"Cooling System/Electric Cooling Fan": {
+"file": "2356.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor/Service and Repair",
+"caption": "Cooling Fan Motor And Shroud:",
+"score": 7.5
+},
+"Cooling System/Fan Shroud": {
+"file": "2356.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor/Service and Repair",
+"caption": "Cooling Fan Motor And Shroud:",
+"score": 6.0
+},
+"Cooling System/Cooling Fan Control Module": {
+"file": "2356.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor/Service and Repair",
+"caption": "Cooling Fan Motor And Shroud:",
+"score": 7.5
+},
+"Cooling System/Upper Radiator Hose": {
+"file": "2356.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor/Service and Repair",
+"caption": "Cooling Fan Motor And Shroud:",
 "score": 5.5
 },
-"Front Left Corner/Tire": {
-"file": "0007.png",
-"path": "Maintenance/Wheels and Tires/Service and Repair",
-"caption": "Wheels and Tires: Service and Repair",
-"score": 6.0
-},
-"Rear Left Corner/Tire": {
-"file": "0007.png",
-"path": "Maintenance/Wheels and Tires/Service and Repair",
-"caption": "Wheels and Tires: Service and Repair",
-"score": 6.0
-},
-"Front Right Corner/Tire": {
-"file": "0007.png",
-"path": "Maintenance/Wheels and Tires/Service and Repair",
-"caption": "Wheels and Tires: Service and Repair",
-"score": 6.0
-},
-"Rear Right Corner/Tire": {
-"file": "0007.png",
-"path": "Maintenance/Wheels and Tires/Service and Repair",
-"caption": "Wheels and Tires: Service and Repair",
-"score": 6.0
-},
-"Fuel System/Fuel Filter": {
-"file": "0005.png",
-"path": "Maintenance/Tune-up and Engine Performance Checks/Fuel Filter/Service and Repair",
-"caption": "Front Fuel Tubes:",
+"Cooling System/Lower Radiator Hose": {
+"file": "2356.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor/Service and Repair",
+"caption": "Cooling Fan Motor And Shroud:",
 "score": 5.5
 },
 "Electrical/Wiring Harness": {
-"file": "0680.png",
-"path": "Powertrain Management/Diagrams/Electrical Diagrams/Wiring Diagram Index",
-"caption": "Wiring Diagram Index",
+"file": "1279.png",
+"path": "Starting and Charging/Power and Ground Distribution/Diagrams/Electrical Diagrams/Power Distribution Diagrams/Wiring Diagram Index",
+"caption": "4R70W Transmission - Ends In Harness In Glove Box (BLUNT CUT AND SEALED):",
+"score": 6.1
+},
+"Interior/Instrument Cluster": {
+"file": "1631.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Diagrams/Electrical Diagrams/Instrument Cluster",
+"caption": "60-1:",
+"score": 8.0
+},
+"Interior/Heater Core": {
+"file": "2360.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Heater Core/Service and Repair",
+"caption": "Heater Core: Service and Repair",
+"score": 5.5
+},
+"Interior/Accelerator Pedal": {
+"file": "2396.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Accelerator Pedal/Adjustments",
+"caption": "Accelerator Pedal: Adjustments",
+"score": 5.5
+},
+"Interior/Headliner": {
+"file": "1532.png",
+"path": "Body and Frame/Roof and Associated Components/Sunroof / Moonroof/Service and Repair/Roof Opening Panel - Exploded View",
+"caption": "Roof Opening Panel - Exploded View",
 "score": 4.5
+},
+"Interior/Rearview Mirror": {
+"file": "1518.png",
+"path": "Body and Frame/Mirrors/Service and Repair/Interior Rear View Mirror",
+"caption": "Special Tool(s):",
+"score": 4.5
+},
+"Front Bumper/Front Bumper Reinforcement": {
+"file": "1455.png",
+"path": "Body and Frame/Bumper/Front Bumper/Service and Repair",
+"caption": "Part 1:",
+"score": 6.0
+},
+"Rear Bumper/Rear Bumper Reinforcement": {
+"file": "1455.png",
+"path": "Body and Frame/Bumper/Front Bumper/Service and Repair",
+"caption": "Part 1:",
+"score": 6.0
 }
 }
