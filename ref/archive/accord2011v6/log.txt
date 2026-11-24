@@ -7,3 +7,5 @@
 502 https://charm.li/Honda/2011/Accord%20V6-3.5L/Repair%20and%20Diagnosis/Powertrain%20Management/Computers%20and%20Control%20Systems/Testing%20and%20Inspection/Symptom%20Related%20Diagnostic%20Procedures/Cold%20Fast%20Idle%20Too%20Low%20%28MIL%20Works%20OK%2C%20No%20DTCs%20Set%29/
 502 https://charm.li/Honda/2011/Accord%20V6-3.5L/Repair%20and%20Diagnosis/Specifications/Mechanical%20Specifications/Automatic%20Transmission%2FTransaxle/Stator%20Shaft%20Specification%28s%29%20%28A%2FT%29/
 502 https://charm.li/Honda/2011/Accord%20V6-3.5L/Repair%20and%20Diagnosis/Specifications/Mechanical%20Specifications/Body%20and%20Frame/Body%20Specifications%2FWheel%20Alignment/L4%20Engine%20Model/
+502 https://charm.li/Honda/2011/Accord%20V6-3.5L/Repair%20and%20Diagnosis/Specifications/Pressure%2C%20Vacuum%20and%20Temperature%20Specifications/Engine/System%20Specifications/
+502 https://charm.li/Honda/2011/Accord%20V6-3.5L/Repair%20and%20Diagnosis/Specifications/Pressure%2C%20Vacuum%20and%20Temperature%20Specifications/Engine/System%20Specifications/
