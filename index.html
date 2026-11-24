@@ -1046,8 +1046,10 @@ function buildCrownVic(v='p71'){
       const t=top(x),b=bot(x),w=wid(x);
       if(y<b+0.015&&az<w-0.06)return null;
       const isTop=y>t-0.03&&az<w-0.035;
-      if(x>2.3){if(y<0.66)return 'Front Bumper Cover';return isTop&&az<0.75?'Header Panel':'Front Fender'}
-      if(x<-2.62&&y<0.7)return 'Rear Bumper Cover';
+      /* bumper covers wrap the corners back to the wheel openings, as on the blueprint */
+      if(x>1.86&&y<0.635)return 'Front Bumper Cover';
+      if(x<-1.88&&y<0.715)return 'Rear Bumper Cover';
+      if(x>2.3)return isTop&&az<0.75?'Header Panel':'Front Fender';
       if(x<-2.78)return 'Rear Body Panel';
       if(isTop){
         if(x>0.885)return az<w-0.09?'Hood Panel':'Front Fender';
@@ -1084,7 +1086,7 @@ function buildCrownVic(v='p71'){
       }});
     });
     return keys=>{
-      const arr=[];keys.forEach(k=>(B[k]||[]).forEach(v=>arr.push(v.x,v.y,v.z)));
+      const arr=[];keys.forEach(k=>{const bump=/Bumper Cover/.test(k);(B[k]||[]).forEach(v=>bump?arr.push(v.x*1.006,v.y,v.z*1.018):arr.push(v.x,v.y,v.z))});
       if(!arr.length)return null;
       const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(arr,3));
       /* smooth normals: average face normals at shared positions */
