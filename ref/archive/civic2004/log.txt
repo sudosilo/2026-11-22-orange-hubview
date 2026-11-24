@@ -4,3 +4,5 @@
 502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/Starting%20and%20Charging/Starting%20System/Diagrams/Diagnostic%20Aids/Terminal%20Replacement%20Procedure/Checking%20For%20Poor%20Fir%20of%20Terminals/
 502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/Starting%20and%20Charging/Starting%20System/Diagrams/Diagram%20Information%20and%20Instructions/Circuit%20Schematics/
 502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/Transmission%20and%20Drivetrain/Clutch/Technical%20Service%20Bulletins/
+502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/Windows%20and%20Glass/Windows/Power%20Window%20Relay/Locations/
+502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/Windows%20and%20Glass/Windows/Power%20Window%20Relay/Locations/
