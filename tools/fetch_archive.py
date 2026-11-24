@@ -87,7 +87,7 @@ def section_file(p):
 
 def checkpoint(msg):
     # save progress to GitHub so a crash or a closed Termux loses nothing
-    subprocess.run(['git', 'add', out])
+    subprocess.run(['git', 'add', 'ref'])
     subprocess.run(['git', 'commit', '-q', '-m', msg])
     subprocess.run(['git', 'pull', '-q', '--rebase', '-X', 'theirs'])
     subprocess.run(['git', 'push', '-q'])
