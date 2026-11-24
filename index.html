@@ -1022,6 +1022,82 @@ function buildCrownVic(v='p71'){
     };
   })();
   const GB=n=>[n+'|1',n+'|-1'];
+  /* LOWER BODY: one lofted shell from bumper to bumper, cut into panels along the real seams.
+     Profiles traced from the 2004 Police Interceptor elevations; sections carry the side bulge,
+     the rounded shoulder and the hood and deck crown, so nothing is a flat slab. */
+  const LB=(()=>{
+    const tab=(t,x)=>{if(x>=t[0][0])return t[0][1];for(let i=1;i<t.length;i++){if(x>=t[i][0]){const[x0,y0]=t[i-1],[x1,y1]=t[i];return y0+(y1-y0)*(x-x0)/(x1-x0)}}return t[t.length-1][1]};
+    const XF=2.56,XR=-2.85;
+    const TOPL=[[XF,0.6],[2.53,0.7],[2.47,0.78],[2.38,0.84],[2.3,0.875],[2.0,0.92],[1.65,0.963],[1.36,0.984],[0.885,0.995],[-1.89,1.06],[-2.18,1.048],[-2.47,1.037],[-2.62,1.031],[-2.72,1.01],[-2.79,0.96],[-2.83,0.85],[XR,0.72]];
+    const WT=[[XF,0.82],[2.52,0.9],[2.45,0.945],[2.3,0.972],[1.6,0.985],[0.4,0.993],[-1.6,0.993],[-2.5,0.98],[-2.7,0.96],[-2.8,0.92],[XR,0.86]];
+    const BOT=[[XF,0.34],[2.45,0.31],[2.3,0.3],[-2.55,0.3],[-2.72,0.33],[XR,0.37]];
+    const top=x=>tab(TOPL,x),wid=x=>tab(WT,x),bot=x=>tab(BOT,x);
+    const M=40;
+    function section(x){
+      const t=top(x),b=bot(x),w=wid(x),h=t-b;
+      const pts=[[0,b],[w-0.14,b],[w-0.03,b+Math.min(0.06,h*0.2)],[w,b+h*0.35],[w+0.007,b+h*0.62],[w-0.004,t-Math.min(0.09,h*0.3)],[w-0.04,t-0.012],[w-0.13,t+0.004],[w*0.5,t+0.016],[0,t+0.02]];
+      return new THREE.CatmullRomCurve3(pts.map(p=>V(p[0],p[1],0)),false,'centripetal').getSpacedPoints(M).map(p=>[p.x,p.y]);
+    }
+    const XS=new Set();for(let i=0;i<=300;i++)XS.add(+(XF+(XR-XF)*i/300).toFixed(4));
+    [2.3,0.885,0.84,-0.335,-1.34,-1.89,-2.62,-2.78,FA-0.42,FA+0.42,RA-0.42,RA+0.42].forEach(x=>XS.add(x));
+    const XL=[...XS].sort((a,b)=>b-a),ST=XL.map(x=>({x,pts:section(x)})),NU=M+1;
+    const ARCH=[[FA,0.425],[RA,0.425]];
+    function cls(x,y,az){
+      const t=top(x),b=bot(x),w=wid(x);
+      if(y<b+0.015&&az<w-0.06)return null;
+      const isTop=y>t-0.03&&az<w-0.035;
+      if(x>2.3){if(y<0.66)return 'Front Bumper Cover';return isTop&&az<0.75?'Header Panel':'Front Fender'}
+      if(x<-2.62&&y<0.7)return 'Rear Bumper Cover';
+      if(x<-2.78)return 'Rear Body Panel';
+      if(isTop){
+        if(x>0.885)return az<w-0.09?'Hood Panel':'Front Fender';
+        if(x<-1.89)return az<w-0.09?'Trunk Lid Panel':'Rear Quarter Panel';
+        if(az<0.93)return null;
+      }
+      if(x>0.84)return 'Front Fender';
+      if(x>-0.335)return y<0.37?'Rocker Panel':'Front Door';
+      if(x>-1.34)return y<0.37?'Rocker Panel':'Rear Door';
+      return 'Rear Quarter Panel';
+    }
+    const SIDED=new Set(['Front Fender','Front Door','Rear Door','Rocker Panel','Rear Quarter Panel']);
+    const B={};
+    const push=(n,s,tri)=>{if(!n)return;const k=SIDED.has(n)?n+'|'+s:n;(B[k]=B[k]||[]).push(...tri)};
+    [1,-1].forEach(s=>{
+      const Q=(i,j)=>{const p=ST[i].pts[j];return V(ST[i].x,p[1],s*p[0])};
+      for(let i=0;i<ST.length-1;i++)for(let j=0;j<NU-1;j++){
+        let polys=[s>0?[Q(i,j),Q(i+1,j),Q(i+1,j+1),Q(i,j+1)]:[Q(i,j),Q(i,j+1),Q(i+1,j+1),Q(i+1,j)]];
+        ARCH.forEach(([cx,r])=>{polys=polys.flatMap(pg=>pg.some(v=>Math.abs(v.x-cx)<r+0.05&&v.y<CWY+r+0.05&&Math.abs(v.z)>0.55)?cut(pg,v=>Math.hypot(v.x-cx,v.y-CWY)-r):[pg])});
+        polys.forEach(pg=>{
+          const m=pg.reduce((a,v)=>a.add(v),V(0,0,0)).multiplyScalar(1/pg.length);
+          if(ARCH.some(([cx,r])=>Math.hypot(m.x-cx,m.y-CWY)<r&&Math.abs(m.z)>0.55))return;
+          const n=cls(m.x,m.y,Math.abs(m.z));if(!n)return;
+          for(let q=1;q<pg.length-1;q++)push(n,s,[pg[0],pg[q],pg[q+1]]);
+        });
+      }
+    });
+    /* end caps: fan from the centerline so the nose and tail are closed */
+    [[0,'Front Bumper Cover',1],[ST.length-1,null,-1]].forEach(([i,nm,dir])=>{
+      const st=ST[i];[1,-1].forEach(s=>{for(let j=0;j<NU-1;j++){
+        const a=V(st.x,st.pts[j][1],s*st.pts[j][0]),b=V(st.x,st.pts[j+1][1],s*st.pts[j+1][0]),c=V(st.x,(bot(st.x)+top(st.x))/2,0);
+        const name=nm||((a.y+b.y)/2<0.7?'Rear Bumper Cover':'Rear Body Panel');
+        push(name,s,(s*dir>0)?[c,b,a]:[c,a,b]);
+      }});
+    });
+    return keys=>{
+      const arr=[];keys.forEach(k=>(B[k]||[]).forEach(v=>arr.push(v.x,v.y,v.z)));
+      if(!arr.length)return null;
+      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(arr,3));
+      /* smooth normals: average face normals at shared positions */
+      const pos=g.attributes.position,n=new Float32Array(arr.length),acc=new Map(),key=i=>Math.round(pos.getX(i)*2e3)+','+Math.round(pos.getY(i)*2e3)+','+Math.round(pos.getZ(i)*2e3);
+      const A=V(0,0,0),Bv=V(0,0,0),C=V(0,0,0);
+      for(let i=0;i<pos.count;i+=3){A.fromBufferAttribute(pos,i);Bv.fromBufferAttribute(pos,i+1);C.fromBufferAttribute(pos,i+2);
+        const fn=Bv.clone().sub(A).cross(C.clone().sub(A));for(let k=0;k<3;k++){const kk=key(i+k);const e=acc.get(kk);if(e)e.add(fn);else acc.set(kk,fn.clone())}}
+      for(let i=0;i<pos.count;i++){const v=acc.get(key(i)).clone().normalize();n[i*3]=v.x;n[i*3+1]=v.y;n[i*3+2]=v.z}
+      g.setAttribute('normal',new THREE.BufferAttribute(n,3));
+      g.computeBoundingBox();const c=new THREE.Vector3();g.boundingBox.getCenter(c);g.translate(-c.x,-c.y,-c.z);
+      return{geo:g,pos:c};
+    };
+  })();
 
   /* FRAME: full perimeter frame, the body sits on rubber mounts */
   asm('Frame','Full perimeter ladder frame of boxed steel rails. The body bolts to it on rubber body mounts.',[0,-1.6,0],P=>{
@@ -1050,11 +1126,11 @@ function buildCrownVic(v='p71'){
     P('Radiator Support','Front bulkhead holding the radiator, headlamps and hood latch.',box(0.05,0.5,1.7),[2.32,0.62,0]);
     P('Roof Panel','Single stamped roof skin, crowned across.',GH(GB('Roof Panel')));
     P('Rear Package Tray','Shelf behind the rear seat under the back glass, speakers mount here.',box(0.5,0.03,1.7),[-1.62,1.04,0]);
-    P('Rear Body Panel','Panel under the trunk opening between the taillamps.',box(0.035,0.32,1.75),[-2.82,0.86,0]);
+    P('Rear Body Panel','Panel under the trunk opening between the taillamps.',LB(['Rear Body Panel']));
     LR.forEach(([s,sd])=>{
-      P(sd+' Rocker Panel','Sill under the doors.',box(2.0,0.1,0.06),[-0.1,0.38,s*0.95]);
-      P(sd+' Front Fender','Bolt on steel fender with the wheel opening.',side(sh=>{sh.moveTo(0.84,0.99);sh.lineTo(0.84,0.34);sh.lineTo(1.055,0.34);sh.absarc(FA,CWY,0.405,PI,0,true);sh.lineTo(2.3,0.62);sh.lineTo(2.4,0.66);sh.lineTo(2.46,0.76);sh.lineTo(2.3,0.86);sh.lineTo(1.95,0.92);sh.lineTo(1.36,0.98);sh.lineTo(0.88,0.99);sh.closePath()},s*HW));
-      P(sd+' Rear Quarter Panel','Welded quarter panel from the rear door to the taillamp.',side(sh=>{sh.moveTo(-1.34,1.045);sh.lineTo(-1.9,1.06);sh.lineTo(-2.62,1.035);sh.lineTo(-2.8,1.0);sh.lineTo(-2.82,0.72);sh.lineTo(-2.7,0.66);sh.lineTo(-1.858,0.66);sh.absarc(RA,CWY,0.405,PI,1.288,true);sh.lineTo(-1.34,1.045);sh.closePath()},s*HW));
+      P(sd+' Rocker Panel','Sill under the doors, part of the welded body side.',LB(['Rocker Panel|'+s]));
+      P(sd+' Front Fender','Bolt on steel fender with the wheel opening.',LB(['Front Fender|'+s]));
+      P(sd+' Rear Quarter Panel','Welded quarter panel from the rear door to the taillamp.',LB(['Rear Quarter Panel|'+s]));
       P(sd+' Front Wheelhouse','Inner fender apron arching over the front wheel.',arc(0.43,0.26,PI*0.55,PI*0.9),[FA,CWY,s*0.8],[0,0.15,s*0.2]);
       P(sd+' Rear Wheelhouse','Inner wheelhouse arching over the rear wheel.',arc(0.43,0.26,PI*0.55,PI*0.9),[RA,CWY,s*0.8],[0,0.15,s*0.2]);
       P(sd+' A Pillar','Windshield pillar.',GH(['A Pillar|'+s]));
@@ -1069,7 +1145,7 @@ function buildCrownVic(v='p71'){
   });
 
   asm('Hood','Front hinged steel hood.',[0.5,2.2,0],P=>{
-    P('Hood Panel','Steel hood skin with inner brace.',rz(box(1.42,0.03,1.82),-0.075),[1.6,0.955,0],[0,0.2,0]);
+    P('Hood Panel','Steel hood skin with a crowned center and inner brace.',LB(['Hood Panel']),[0,0.2,0]);
     P('Hood Insulator','Sound pad under the hood.',rz(box(1.1,0.015,1.5),-0.075),[1.6,0.93,0],[0,-0.15,0]);
     LR.forEach(([s,sd])=>{
       P(sd+' Hood Hinge','Spring loaded hinge at the cowl.',box(0.14,0.06,0.03),[0.95,0.97,s*0.8],[-0.2,0,s*0.15]);
@@ -1078,7 +1154,7 @@ function buildCrownVic(v='p71'){
   });
 
   asm('Trunk Lid','Rear deck lid on torsion bar hinges.',[-0.5,1.6,0],P=>{
-    P('Trunk Lid Panel','Steel deck lid.',rz(box(0.92,0.03,1.76),0.027),[-2.34,1.055,0],[0,0.2,0]);
+    P('Trunk Lid Panel','Steel deck lid.',LB(['Trunk Lid Panel']),[0,0.2,0]);
     LR.forEach(([s,sd])=>P(sd+' Trunk Hinge','Gooseneck hinge.',box(0.25,0.04,0.03),[-1.98,1.02,s*0.6],[0.2,0,s*0.15]));
     P('Torsion Bars','Spring bars that lift the lid.',rod([-1.95,1.0,-0.55],[-1.95,1.0,0.55],0.006),[0.25,-0.15,0]);
     P('Trunk Latch','Power release latch.',box(0.06,0.05,0.08),[-2.78,0.99,0],[-0.2,-0.2,0]);
@@ -1089,7 +1165,7 @@ function buildCrownVic(v='p71'){
     const x0=front?0.84:-0.37,x1=front?-0.3:-1.34,xc=(x0+x1)/2;
     const skin=front?poly([[x0,0.996],[x1,1.022],[x1,0.34],[x0,0.34]]):sh=>{sh.moveTo(x0,1.023);sh.lineTo(x1,1.045);sh.lineTo(x1,0.727);sh.absarc(RA,CWY,0.405,1.288,0,true);sh.lineTo(-1.048,0.34);sh.lineTo(x0,0.34);sh.closePath()};
     asm((front?'Front ':'Rear ')+sd+' Door',(front?'Front':'Rear')+' door, hinged at its front edge.',[0,0.1,s*1.2],P=>{
-      P('Outer Skin','Stamped steel door skin with body side molding.',side(skin,s*HW),[0,0,s*0.3]);
+      P('Outer Skin','Stamped steel door skin with body side molding.',LB([(front?'Front Door|':'Rear Door|')+s]),[0,0,s*0.3]);
       P('Inner Panel','Inner door structure with the side impact beam.',side(skin,s*0.93),[0,0,0]);
       P('Door Trim Panel','Molded trim panel with armrest and switches.',side(skin,s*0.89,0.02),[0,0,-s*0.25]);
       P('Window Glass','Tempered side glass.',GH([(front?'Front Glass|':'Rear Glass|')+s]),[0,0.5,0]);
@@ -1321,7 +1397,8 @@ function buildCrownVic(v='p71'){
   });
 
   asm('Front Bumper','Fascia over a steel reinforcement beam, with the grille.',[1.4,-0.1,0],P=>{
-    P('Front Bumper Cover','Painted plastic fascia.',rbox(0.2,0.32,1.96,0.06),[2.46,0.49,0],[0.4,0,0]);
+    P('Front Bumper Cover','Painted plastic fascia.',LB(['Front Bumper Cover']),[0.4,0,0]);
+    P('Header Panel','Panel above the grille between the headlamps.',LB(['Header Panel']),[0.3,0.1,0]);
     P('Front Bumper Reinforcement','Steel impact beam bolted to the frame horns.',box(0.08,0.12,1.7),[2.36,0.48,0],[0.15,0,0]);
     P('Front Energy Absorber','Foam absorber between the cover and beam.',box(0.06,0.12,1.6),[2.42,0.48,0],[0.28,0,0]);
     P('Grille','Chrome waterfall grille.',box(0.06,0.15,0.74),[2.46,0.73,0],[0.4,0.15,0]);
@@ -1329,7 +1406,7 @@ function buildCrownVic(v='p71'){
   });
 
   asm('Rear Bumper','Fascia over a steel reinforcement beam.',[-1.4,-0.1,0],P=>{
-    P('Rear Bumper Cover','Painted plastic fascia.',rbox(0.2,0.34,1.96,0.06),[-2.75,0.53,0],[-0.4,0,0]);
+    P('Rear Bumper Cover','Painted plastic fascia.',LB(['Rear Bumper Cover']),[-0.4,0,0]);
     P('Rear Bumper Reinforcement','Steel impact beam bolted to the frame.',box(0.08,0.12,1.7),[-2.64,0.5,0],[-0.15,0,0]);
     P('Rear Energy Absorber','Foam absorber.',box(0.06,0.12,1.6),[-2.7,0.5,0],[-0.28,0,0]);
     P('License Plate Lamp','Plate lamp.',box(0.03,0.03,0.12),[-2.84,0.72,0],[-0.5,0,0]);
@@ -1773,7 +1850,7 @@ function moreSheet(tab){
 })();
 /* PAINT: recolors the outside sheet metal; MULTI keeps the part color pack */
 const PAINTS=[['Multi',null],['White',0xf2f1ec],['Silver',0xbfc3c7],['Gray',0x6b7076],['Black',0x2a2c2f],['Red',0xb0262c],['Maroon',0x6e1f2a],['Blue',0x2b5ea8],['Navy',0x1f2f52],['Green',0x2f6b45],['Gold',0xc9a45a],['Orange',0xe07a2e],['Yellow',0xf0c93a],['Teal',0x2f8f8a]];
-const PAINTED=/Roof Panel|Fender|Quarter Panel|Rocker Panel|[ABCD] Pillar|Hood Panel|Hatch Panel|Rear Spoiler|Outer Skin|Bumper Cover|Trunk Lid Panel|Side Mirror|Mirror Housing|Cowl Panel|Rear Body Panel|Valance/;
+const PAINTED=/Header Panel|Rear Body Panel|Roof Panel|Fender|Quarter Panel|Rocker Panel|[ABCD] Pillar|Hood Panel|Hatch Panel|Rear Spoiler|Outer Skin|Bumper Cover|Trunk Lid Panel|Side Mirror|Mirror Housing|Cowl Panel|Rear Body Panel|Valance/;
 let paint=null;try{const v=localStorage.getItem('hubPaint');paint=v===null||v==='null'?null:+v}catch(e){}
 function applyPaint(){
   ASM.forEach(a=>{if(/Interior/.test(a.name))return;a.parts.forEach(p=>{
