@@ -9,3 +9,4 @@
 502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/A%20L%20L%20%20Diagnostic%20Trouble%20Codes%20%28%20DTC%20%29/Testing%20and%20Inspection/P%20Code%20Charts/P0420/
 502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/Body%20and%20Frame/Sensors%20and%20Switches%20-%20Body%20and%20Frame/Sunroof%20%2F%20Moonroof%20Switch/Locations/Connector%20Locations/
 502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/Body%20and%20Frame/Sensors%20and%20Switches%20-%20Body%20and%20Frame/Sunroof%20%2F%20Moonroof%20Switch/Service%20and%20Repair/
+502 https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/Sensors%20and%20Switches/Sensors%20and%20Switches%20-%20Restraints%20and%20Safety%20Systems/Seat%20Occupant%20Sensor/Service%20and%20Repair/
