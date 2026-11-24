@@ -1608,9 +1608,9 @@ function setWire(on){wire=on;document.getElementById('bWire').classList.toggle('
 
 /* SHOP CONFIG: fill these in to switch on the store, affiliate links and tip button */
 const SHOP={
-  storeDomain:'',      /* Shopify store domain, the myshopify.com one */
-  storefrontToken:'',  /* public Storefront API access token */
-  apiVersion:'2025-10',
+  storeDomain:'ia1hub-9v.myshopify.com', /* Shopify store; products and cart work without a token */
+  storefrontToken:'',  /* optional public Storefront token */
+  apiVersion:'2026-10',
   ebayCampaign:'',     /* eBay Partner Network campaign id */
   amazonTag:'',        /* Amazon Associates tag */
   tipUrl:''            /* Stripe payment link or any tip page */
@@ -1638,21 +1638,21 @@ function updateShop(){
   const c=current(),has=!!c;
   $('mFindNote').textContent=has?query().toUpperCase():'Tap a part or an assembly first.';
   $('mEbay').disabled=$('mAmazon').disabled=!has;
-  $('mStore').disabled=!has||!SHOP.storeDomain||!SHOP.storefrontToken;
+  $('mStore').disabled=!has||!SHOP.storeDomain;
   $('mStore').textContent=SHOP.storeDomain?'Buy from our store':'Store not connected yet';
   $('mAdd').disabled=!(c&&c.p);
 }
 function go(url){window.open(url,'_blank','noopener')}
 $('mEbay').onclick=()=>{let u='https://www.ebay.com/sch/i.html?_sacat=6000&_nkw='+encodeURIComponent(query());if(SHOP.ebayCampaign)u+='&mkcid=1&mkrid=711-53200-19255-0&siteid=0&toolid=10001&mkevt=1&campid='+encodeURIComponent(SHOP.ebayCampaign);go(u)};
 $('mAmazon').onclick=()=>{let u='https://www.amazon.com/s?k='+encodeURIComponent(query());if(SHOP.amazonTag)u+='&tag='+encodeURIComponent(SHOP.amazonTag);go(u)};
-/* Store: products are tagged hubview:car/assembly/part in Shopify, the button finds the match, makes a cart and opens checkout */
-async function sf(q,v){const r=await fetch('https://'+SHOP.storeDomain+'/api/'+SHOP.apiVersion+'/graphql.json',{method:'POST',headers:{'Content-Type':'application/json','X-Shopify-Storefront-Access-Token':SHOP.storefrontToken},body:JSON.stringify({query:q,variables:v})});return (await r.json()).data}
+/* Store: each product's handle is hubview-car-assembly-part; the button finds it, makes a cart and opens checkout */
+async function sf(q,v){const r=await fetch('https://'+SHOP.storeDomain+'/api/'+SHOP.apiVersion+'/graphql.json',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},SHOP.storefrontToken?{'X-Shopify-Storefront-Access-Token':SHOP.storefrontToken}:{}),body:JSON.stringify({query:q,variables:v})});return (await r.json()).data}
 $('mStore').onclick=async()=>{
   const c=current();if(!c)return;const note=$('mFindNote');note.textContent='CHECKING THE STORE...';
   try{
     const key=partKey(CAR.id,c.asm,c.part);
-    const d=await sf('query($q:String!){products(first:1,query:$q){nodes{title variants(first:1){nodes{id availableForSale}}}}}',{q:'tag:"hubview:'+key+'"'});
-    const v=d&&d.products.nodes[0]&&d.products.nodes[0].variants.nodes[0];
+    const d=await sf('query($h:String!){product(handle:$h){title variants(first:1){nodes{id availableForSale}}}}',{h:'hubview-'+key.replace(/\//g,'-')});
+    const v=d&&d.product&&d.product.variants.nodes[0];
     if(!v||!v.availableForSale){note.textContent='NOT IN THE STORE YET. TRY THE SEARCH BUTTONS.';return}
     const k=await sf('mutation($l:[CartLineInput!]){cartCreate(input:{lines:$l}){cart{checkoutUrl}}}',{l:[{merchandiseId:v.id,quantity:1}]});
     location.href=k.cartCreate.cart.checkoutUrl;
