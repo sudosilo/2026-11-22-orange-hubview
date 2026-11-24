@@ -1872,7 +1872,7 @@ function applyPaint(){
   document.getElementById('bPaint').onclick=()=>{box.classList.toggle('open');document.getElementById('bPaint').classList.toggle('on',box.classList.contains('open'))};
 })();
 /* CAR PICKER: makes with their models nested underneath */
-const LINEUP=[['Ford',[['crownvic','2006 Crown Victoria Police Interceptor'],['crownvic_lx','2006 Crown Victoria LX']]],['Honda',[['accord','1982 Accord'],['accord2011','2011 Accord 2.4L four cylinder','Model in progress, manual archive loading'],['accord2011v6','2011 Accord 3.5L V6','Model in progress, manual archive loading']]],['Toyota',[['prius','2007 Prius']]]];
+const LINEUP=[['Ford',[['crownvic','2006 Crown Victoria Police Interceptor'],['crownvic_lx','2006 Crown Victoria LX']]],['Honda',[['accord','1982 Accord'],['accord2011','2011 Accord 2.4L four cylinder','Model in progress, manual archive loading'],['accord2011v6','2011 Accord 3.5L V6','Model in progress, manual archive loading'],['civic2004','2004 Civic 1.7L','Queued after the Accords and Panthers']]],['Toyota',[['prius','2007 Prius']]]];
 const openMk=new Set();
 function drawCars(){
   const box=document.getElementById('cars');box.innerHTML='';

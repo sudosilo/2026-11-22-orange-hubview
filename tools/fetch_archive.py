@@ -12,6 +12,7 @@ CARS = {
     'marauder': 'https://charm.li/Mercury/2004/Marauder%20V8-4.6L%20DOHC%20VIN%20V/Repair%20and%20Diagnosis/',
     'grandmarquis': 'https://charm.li/Mercury/2004/Grand%20Marquis%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/',
     'towncar': 'https://charm.li/Lincoln/2006/Town%20Car%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/',
+    'civic2004': 'https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/',
     'accord2011': 'https://charm.li/Honda/2011/Accord%20L4-2.4L/Repair%20and%20Diagnosis/',
     'accord2011v6': 'https://charm.li/Honda/2011/Accord%20V6-3.5L/Repair%20and%20Diagnosis/',
 }
