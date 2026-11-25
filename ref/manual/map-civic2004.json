@@ -1,0 +1,404 @@
+{
+"Body Shell/Trunk Floor": {
+"file": "1227.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Trunk / Liftgate/Locations",
+"caption": "Entry Light Control System Component Location Index:",
+"score": 5.5
+},
+"Trunk Lid/Trunk Lid Panel": {
+"file": "1227.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Trunk / Liftgate/Locations",
+"caption": "Entry Light Control System Component Location Index:",
+"score": 5.0
+},
+"Trunk Lid/Left Trunk Hinge": {
+"file": "1227.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Trunk / Liftgate/Locations",
+"caption": "Entry Light Control System Component Location Index:",
+"score": 5.0
+},
+"Trunk Lid/Right Trunk Hinge": {
+"file": "1227.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Trunk / Liftgate/Locations",
+"caption": "Entry Light Control System Component Location Index:",
+"score": 5.0
+},
+"Trunk Lid/Trunk Latch": {
+"file": "1227.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Trunk / Liftgate/Locations",
+"caption": "Entry Light Control System Component Location Index:",
+"score": 5.0
+},
+"Front Left Door/Outer Skin": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 5.0
+},
+"Front Left Door/Inner Panel": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 5.0
+},
+"Front Left Door/Window Glass": {
+"file": "1201.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Front Door Window Glass/Service and Repair",
+"caption": "Front Door Window Glass: Service and Repair",
+"score": 6.0
+},
+"Rear Left Door/Outer Skin": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 5.0
+},
+"Rear Left Door/Inner Panel": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 5.0
+},
+"Rear Left Door/Window Glass": {
+"file": "1201.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Front Door Window Glass/Service and Repair",
+"caption": "Front Door Window Glass: Service and Repair",
+"score": 6.0
+},
+"Front Right Door/Outer Skin": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 5.0
+},
+"Front Right Door/Inner Panel": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 5.0
+},
+"Front Right Door/Window Glass": {
+"file": "1201.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Front Door Window Glass/Service and Repair",
+"caption": "Front Door Window Glass: Service and Repair",
+"score": 6.0
+},
+"Rear Right Door/Outer Skin": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 5.0
+},
+"Rear Right Door/Inner Panel": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 5.0
+},
+"Rear Right Door/Window Glass": {
+"file": "1201.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Front Door Window Glass/Service and Repair",
+"caption": "Front Door Window Glass: Service and Repair",
+"score": 6.0
+},
+"Engine/Cylinder Block": {
+"file": "0027.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Locations",
+"caption": "Part 1 Of 2:",
+"score": 8.5
+},
+"Engine/Crankshaft": {
+"file": "0029.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Crankshaft and Piston Removal",
+"caption": "Crankshaft and Piston Removal",
+"score": 4.5
+},
+"Engine/Oil Pan": {
+"file": "0051.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Oil Pan Installation",
+"caption": "Oil Pan Installation",
+"score": 5.0
+},
+"Engine/Cylinder Head": {
+"file": "0080.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Cylinder Head Removal",
+"caption": "Cylinder Head Removal",
+"score": 6.5
+},
+"Engine/Camshaft": {
+"file": "0131.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Camshaft, Rocker Arm, Camshaft Seal and Pulley Installation",
+"caption": "Camshaft, Rocker Arm, Camshaft Seal and Pulley Installation",
+"score": 4.5
+},
+"Engine/Cylinder Head Cover": {
+"file": "0080.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Head Assembly/Service and Repair/Cylinder Head Removal",
+"caption": "Cylinder Head Removal",
+"score": 6.5
+},
+"Engine/Timing Belt": {
+"file": "2153.png",
+"path": "Engine, Cooling and Exhaust/Engine/Timing Components/Timing Belt Tensioner/Service and Repair",
+"caption": "Timing Belt Tensioner: Service and Repair",
+"score": 6.5
+},
+"Engine/Timing Belt Cover": {
+"file": "2153.png",
+"path": "Engine, Cooling and Exhaust/Engine/Timing Components/Timing Belt Tensioner/Service and Repair",
+"caption": "Timing Belt Tensioner: Service and Repair",
+"score": 6.5
+},
+"Engine/Crankshaft Pulley": {
+"file": "2141.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Harmonic Balancer - Crankshaft Pulley/Service and Repair",
+"caption": "Harmonic Balancer - Crankshaft Pulley: Service and Repair",
+"score": 5.0
+},
+"Engine/Piston 1": {
+"file": "0029.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Crankshaft and Piston Removal",
+"caption": "Crankshaft and Piston Removal",
+"score": 4.5
+},
+"Engine/Connecting Rod 1": {
+"file": "0035.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Connecting Rod Bearing Replacement",
+"caption": "Connecting Rod Bearing Replacement",
+"score": 5.5
+},
+"Engine/Piston 2": {
+"file": "0029.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Crankshaft and Piston Removal",
+"caption": "Crankshaft and Piston Removal",
+"score": 4.5
+},
+"Engine/Connecting Rod 2": {
+"file": "0035.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Connecting Rod Bearing Replacement",
+"caption": "Connecting Rod Bearing Replacement",
+"score": 5.5
+},
+"Engine/Piston 3": {
+"file": "0029.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Crankshaft and Piston Removal",
+"caption": "Crankshaft and Piston Removal",
+"score": 4.5
+},
+"Engine/Connecting Rod 3": {
+"file": "0035.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Connecting Rod Bearing Replacement",
+"caption": "Connecting Rod Bearing Replacement",
+"score": 5.5
+},
+"Engine/Piston 4": {
+"file": "0029.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Crankshaft and Piston Removal",
+"caption": "Crankshaft and Piston Removal",
+"score": 4.5
+},
+"Engine/Connecting Rod 4": {
+"file": "0035.png",
+"path": "Engine, Cooling and Exhaust/Engine/Cylinder Block Assembly/Service and Repair/Connecting Rod Bearing Replacement",
+"caption": "Connecting Rod Bearing Replacement",
+"score": 5.5
+},
+"Transaxle/Transaxle Case": {
+"file": "0432.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations",
+"caption": "Automatic Transmission/Transaxle: Locations",
+"score": 5.0
+},
+"Transaxle/Torque Converter Housing": {
+"file": "0527.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Service and Repair/Overhaul (Transmission)/4. Torque Converter Housing Disassemble & Service",
+"caption": "4. Torque Converter Housing Disassemble & Service",
+"score": 5.0
+},
+"Front Subframe/Rear Engine Mount": {
+"file": "2149.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Service and Repair",
+"caption": "Engine Mount: Service and Repair",
+"score": 7.5
+},
+"Front Subframe/Front Engine Mount": {
+"file": "2149.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Service and Repair",
+"caption": "Engine Mount: Service and Repair",
+"score": 7.5
+},
+"Front Subframe/Side Engine Mount": {
+"file": "2149.png",
+"path": "Engine, Cooling and Exhaust/Engine/Drive Belts, Mounts, Brackets and Accessories/Engine Mount/Service and Repair",
+"caption": "Engine Mount: Service and Repair",
+"score": 7.5
+},
+"Rear Left Corner/Backing Plate": {
+"file": "1002.png",
+"path": "Brakes and Traction Control/Drum Brake System/Diagrams",
+"caption": "Drum Brake System: Diagrams",
+"score": 5.0
+},
+"Rear Left Corner/Wheel Cylinder": {
+"file": "2382.png",
+"path": "Brakes and Traction Control/Drum Brake System/Wheel Cylinder/Service and Repair",
+"caption": "Wheel Cylinder: Service and Repair",
+"score": 5.5
+},
+"Rear Right Corner/Backing Plate": {
+"file": "1002.png",
+"path": "Brakes and Traction Control/Drum Brake System/Diagrams",
+"caption": "Drum Brake System: Diagrams",
+"score": 5.0
+},
+"Rear Right Corner/Wheel Cylinder": {
+"file": "2382.png",
+"path": "Brakes and Traction Control/Drum Brake System/Wheel Cylinder/Service and Repair",
+"caption": "Wheel Cylinder: Service and Repair",
+"score": 5.5
+},
+"Brake System/Brake Booster": {
+"file": "2394.png",
+"path": "Brakes and Traction Control/Power Brake Assist/Vacuum Brake Booster/Service and Repair",
+"caption": "Vacuum Brake Booster: Service and Repair",
+"score": 7.5
+},
+"Fuel System/Fuel Pump Module": {
+"file": "0326.png",
+"path": "Powertrain Management/Fuel Delivery and Air Induction/Fuel Pump/Locations",
+"caption": "Fuel Supply System - Component Location Index:",
+"score": 6.5
+},
+"Cooling System/Radiator": {
+"file": "2162.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor Relay/Locations",
+"caption": "Under-hood Fuse/Relay Box:",
+"score": 4.5
+},
+"Cooling System/Cooling Fan": {
+"file": "2162.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor Relay/Locations",
+"caption": "Under-hood Fuse/Relay Box:",
+"score": 8.5
+},
+"Cooling System/Condenser Fan": {
+"file": "2162.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor Relay/Locations",
+"caption": "Under-hood Fuse/Relay Box:",
+"score": 7.0
+},
+"Cooling System/Upper Radiator Hose": {
+"file": "2162.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor Relay/Locations",
+"caption": "Under-hood Fuse/Relay Box:",
+"score": 6.5
+},
+"Cooling System/Lower Radiator Hose": {
+"file": "2162.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Radiator Cooling Fan/Radiator Cooling Fan Motor Relay/Locations",
+"caption": "Under-hood Fuse/Relay Box:",
+"score": 6.5
+},
+"Electrical/Horn": {
+"file": "1394.png",
+"path": "Lighting and Horns/Horn/Locations",
+"caption": "Horn Component Location Index:",
+"score": 4.5
+},
+"Interior/Driver Seat Cushion": {
+"file": "1159.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations",
+"caption": "Seat Belts Component Location Index:",
+"score": 4.5
+},
+"Interior/Driver Seat Back": {
+"file": "1159.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations",
+"caption": "Seat Belts Component Location Index:",
+"score": 4.5
+},
+"Interior/Passenger Seat Cushion": {
+"file": "1159.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations",
+"caption": "Seat Belts Component Location Index:",
+"score": 4.5
+},
+"Interior/Passenger Seat Back": {
+"file": "1159.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations",
+"caption": "Seat Belts Component Location Index:",
+"score": 4.5
+},
+"Interior/Rear Seat Cushion": {
+"file": "1159.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations",
+"caption": "Seat Belts Component Location Index:",
+"score": 4.5
+},
+"Interior/Rear Seat Back": {
+"file": "1159.png",
+"path": "Restraints and Safety Systems/Seat Belt Systems/Locations",
+"caption": "Seat Belts Component Location Index:",
+"score": 4.5
+},
+"Interior/Instrument Cluster": {
+"file": "1334.png",
+"path": "Instrument Panel, Gauges and Warning Indicators/Instrument Cluster / Carrier/Locations",
+"caption": "Gauges Component Location Index (Part 1 Of 4):",
+"score": 6.5
+},
+"Interior/Center Console": {
+"file": "1237.png",
+"path": "Body and Frame/Interior Moulding / Trim/Console/Service and Repair/Center Console Removal/Installation",
+"caption": "Center Console Removal/Installation",
+"score": 6.0
+},
+"Interior/Rearview Mirror": {
+"file": "1277.png",
+"path": "Body and Frame/Mirrors/Service and Repair/Rearview Mirror Replacement",
+"caption": "Rearview Mirror Replacement",
+"score": 6.0
+},
+"Cooling System": {
+"file": "0229.png",
+"path": "Engine, Cooling and Exhaust/Cooling System/Locations/Cooling System Components",
+"caption": "Component Location Index - Part 1:",
+"score": 5.5
+},
+"Front Left Door": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 4.5
+},
+"Front Right Door": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 4.5
+},
+"Rear Left Door": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 4.5
+},
+"Rear Right Door": {
+"file": "1209.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Doors/Front Door/Locations/2-Door",
+"caption": "Doors - Component Location Index 2-door:",
+"score": 4.5
+},
+"Transaxle": {
+"file": "0432.png",
+"path": "Transmission and Drivetrain/Automatic Transmission/Transaxle/Locations",
+"caption": "Automatic Transmission/Transaxle: Locations",
+"score": 4.5
+},
+"Trunk Lid": {
+"file": "1227.png",
+"path": "Body and Frame/Doors, Hood and Trunk/Trunk / Liftgate/Locations",
+"caption": "Entry Light Control System Component Location Index:",
+"score": 4.5
+}
+}
