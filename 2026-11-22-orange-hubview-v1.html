@@ -1852,27 +1852,28 @@ function buildCivic2004(){
     const q=new THREE.Quaternion().setFromUnitVectors(V(1,0,0),d.clone().normalize());g.applyQuaternion(q);return{geo:g,pos:A.clone().add(B).multiplyScalar(0.5)}};
   const SK=makeSedanSkin({
     FA,RA,CWY,archR:0.37,
-    X0:0.78,X1:-1.55,wsX:-0.05,fdX:-0.33,bpX:-0.39,rwX:-1.0,
-    TOPA:[[0.78,0.93],[0.55,1.05],[0.3,1.19],[0.1,1.32],[-0.05,1.385],[-0.2,1.42],[-0.45,1.44],[-0.8,1.435],[-1.0,1.405],[-1.2,1.3],[-1.4,1.15],[-1.55,1.03]],
-    BELT:[[0.78,0.93],[-0.33,0.965],[-1.25,0.99],[-1.55,1.03]],
-    cline:y=>-1.18-(1.38-y)*0.2,
+    /* traced from the 2004 Civic sedan elevation, 86.5 px per meter along the car */
+    X0:0.975,X1:-1.85,wsX:-0.1,fdX:-0.24,bpX:-0.31,rwX:-1.0,
+    TOPA:[[0.975,0.99],[0.859,1.063],[0.686,1.152],[0.512,1.251],[0.339,1.329],[0.165,1.395],[-0.008,1.417],[-0.181,1.44],[-0.7,1.44],[-0.875,1.428],[-1.048,1.417],[-1.222,1.373],[-1.395,1.307],[-1.569,1.229],[-1.742,1.152],[-1.85,1.11]],
+    BELT:[[0.975,0.99],[-0.27,1.0],[-1.12,1.04],[-1.85,1.11]],
+    cline:y=>-1.0-(1.38-y)*0.3,
     wBelt:0.8,wRoof:0.6,ghH:0.44,bulge:0.005,
-    XF:2.17,XR:-2.285,hoodF:2.02,fenderX:0.76,fdX2:-0.36,rdX:-1.25,deckR:-2.2,
+    XF:2.154,XR:-2.355,hoodF:1.95,fenderX:0.95,fdX2:-0.275,rdX:-1.12,deckR:-2.28,
     bumpFX:1.7,bumpFTop:0.56,bumpRX:-1.7,bumpRTop:0.66,rockerY:0.32,
-    TOPL:[[2.17,0.52],[2.14,0.62],[2.08,0.7],[2.0,0.75],[1.7,0.8],[1.3,0.86],[0.95,0.91],[0.78,0.93],[-1.55,1.03],[-1.95,1.04],[-2.18,1.03],[-2.25,0.97],[-2.285,0.84]],
-    WT:[[2.17,0.7],[2.12,0.78],[2.05,0.83],[1.8,0.85],[1.0,0.855],[-1.5,0.857],[-2.0,0.845],[-2.2,0.82],[-2.285,0.75]],
-    BOT:[[2.17,0.28],[2.05,0.22],[1.8,0.2],[-1.9,0.21],[-2.2,0.27],[-2.285,0.32]]
+    TOPL:[[2.154,0.5],[2.12,0.6],[2.073,0.66],[1.95,0.78],[1.726,0.853],[1.553,0.897],[1.206,0.952],[0.975,0.99],[-1.85,1.11],[-2.09,1.074],[-2.263,1.052],[-2.32,1.0],[-2.355,0.86]],
+    WT:[[2.154,0.7],[2.11,0.78],[2.04,0.83],[1.8,0.85],[1.0,0.855],[-1.5,0.857],[-2.05,0.845],[-2.27,0.82],[-2.355,0.75]],
+    BOT:[[2.154,0.28],[2.04,0.22],[1.8,0.2],[-1.95,0.21],[-2.27,0.27],[-2.355,0.32]]
   });
   const GH=SK.GH,LB=SK.LB,GB=n=>[n+'|1',n+'|-1'];
 
   asm('Body Shell','Welded steel unibody.',[0,0,0],P=>{
     P('Floor Pan','Stamped floor with the center tunnel.',plan([[0.76,-0.8],[0.76,0.8],[-1.15,0.8],[-1.15,-0.8]],0.3,0.03));
     P('Trunk Floor','Trunk pan with the spare tire well.',plan([[-1.6,-0.7],[-1.6,0.7],[-2.2,0.7],[-2.2,-0.7]],0.45,0.03));
-    P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.5,1.45),[0.82,0.66,0]);
-    P('Cowl Panel','Plenum under the windshield.',box(0.18,0.03,1.45),[0.84,0.92,0]);
+    P('Firewall','Bulkhead between the engine bay and the cabin.',box(0.035,0.5,1.45),[0.92,0.66,0]);
+    P('Cowl Panel','Plenum under the windshield.',box(0.18,0.03,1.45),[0.98,0.98,0]);
     P('Radiator Support','Front bulkhead around the radiator.',box(0.05,0.42,1.4),[1.95,0.56,0]);
     P('Roof Panel','Single stamped roof skin.',GH(GB('Roof Panel')));
-    P('Rear Package Tray','Shelf under the back glass.',box(0.36,0.03,1.5),[-1.38,1.0,0]);
+    P('Rear Package Tray','Shelf under the back glass.',box(0.36,0.03,1.5),[-1.66,1.08,0]);
     P('Rear Body Panel','Panel below the trunk opening.',LB(['Rear Body Panel']));
     LR.forEach(([s,sd])=>{
       P(sd+' Rocker Panel','Sill under the doors.',LB(['Rocker Panel|'+s]));
@@ -1892,27 +1893,27 @@ function buildCivic2004(){
   });
   asm('Hood','Front hinged steel hood.',[0.5,2.0,0],P=>{
     P('Hood Panel','Steel hood skin with inner frame.',LB(['Hood Panel']),[0,0.2,0]);
-    LR.forEach(([s,sd])=>P(sd+' Hood Hinge','Hinge at the cowl.',box(0.11,0.05,0.03),[0.8,0.92,s*0.72],[-0.2,0,s*0.15]));
+    LR.forEach(([s,sd])=>P(sd+' Hood Hinge','Hinge at the cowl.',box(0.11,0.05,0.03),[0.96,0.98,s*0.72],[-0.2,0,s*0.15]));
     P('Hood Support Rod','Prop rod.',rod([1.85,0.74,0.5],[1.5,0.84,0.55],0.005),[0,0.1,0.2]);
     P('Hood Latch','Latch on the radiator support.',box(0.07,0.05,0.09),[1.98,0.74,0],[0.25,-0.1,0]);
   });
   asm('Trunk Lid','Rear deck lid on torsion bars.',[-0.5,1.5,0],P=>{
     P('Trunk Lid Panel','Steel deck lid.',LB(['Trunk Lid Panel']),[0,0.2,0]);
-    LR.forEach(([s,sd])=>P(sd+' Trunk Hinge','Gooseneck hinge.',box(0.2,0.04,0.03),[-1.68,1.0,s*0.5],[0.2,0,s*0.15]));
-    P('Trunk Latch','Latch with the release cable.',box(0.06,0.05,0.08),[-2.2,0.96,0],[-0.2,-0.2,0]);
+    LR.forEach(([s,sd])=>P(sd+' Trunk Hinge','Gooseneck hinge.',box(0.2,0.04,0.03),[-1.95,1.08,s*0.5],[0.2,0,s*0.15]));
+    P('Trunk Latch','Latch with the release cable.',box(0.06,0.05,0.08),[-2.3,1.0,0],[-0.2,-0.2,0]);
   });
   function door(front,s,sd){
-    const x0=front?0.76:-0.39,x1=front?-0.33:-1.25,xc=(x0+x1)/2;
-    const skin=front?poly([[x0,0.93],[x1,0.965],[x1,0.28],[x0,0.28]]):poly([[x0,0.93],[x1,0.99],[x1,0.69],[-1.12,0.62],[-0.98,0.45],[-0.94,0.28],[x0,0.28]]);
+    const x0=front?0.95:-0.31,x1=front?-0.24:-1.12,xc=(x0+x1)/2;
+    const skin=front?poly([[x0,0.99],[x1,1.0],[x1,0.28],[x0,0.28]]):poly([[x0,1.0],[x1,1.04],[x1,0.64],[-1.02,0.58],[-0.96,0.45],[-0.94,0.28],[x0,0.28]]);
     asm((front?'Front ':'Rear ')+sd+' Door',(front?'Front':'Rear')+' door, hinged at its front edge.',[0,0.1,s*1.1],P=>{
       P('Outer Skin','Stamped steel door skin.',LB([(front?'Front Door|':'Rear Door|')+s]),[0,0,s*0.3]);
       P('Inner Panel','Inner door structure with the side impact beam.',side(skin,s*0.8),[0,0,0]);
       P('Door Trim Panel','Molded trim panel.',side(skin,s*0.76,0.02),[0,0,-s*0.25]);
       P('Window Glass','Tempered side glass.',GH([(front?'Front Glass|':'Rear Glass|')+s]),[0,0.5,0]);
       P('Window Sash','Door frame around the glass.',GH([(front?'Front Sash|':'Rear Sash|')+s]),[0,0.8,0]);
-      if(front)mirror(P,[0.64,0.97,s*0.82],[0.6,1.02,s*0.89],0.08,0.11,0.14,0.022,'Mirror housing.');
+      if(front)mirror(P,[0.84,1.02,s*0.82],[0.8,1.07,s*0.89],0.08,0.11,0.14,0.022,'Mirror housing.');
       P('Window Regulator','Window regulator and motor.',box(0.36,0.28,0.03),[xc,0.66,s*0.82],[0,0.15,s*0.15]);
-      P('Outside Handle','Pull handle.',box(0.14,0.03,0.03),[front?-0.14:-1.05,0.86,s*(HW+0.02)],[0,0.1,s*0.5]);
+      P('Outside Handle','Pull handle.',box(0.14,0.03,0.03),[front?-0.08:-0.95,0.88,s*(HW+0.02)],[0,0.1,s*0.5]);
       P('Door Latch','Latch with lock actuator.',box(0.03,0.11,0.06),[x1+0.03,0.8,s*0.82],[-0.3,0,0]);
       P('Upper Hinge','Bolted door hinge.',box(0.05,0.06,0.04),[x0,0.8,s*0.83],[0.3,0.05,0]);
       P('Lower Hinge','Bolted door hinge.',box(0.05,0.06,0.04),[x0,0.44,s*0.83],[0.3,-0.05,0]);
@@ -2036,19 +2037,19 @@ function buildCivic2004(){
     P('Catalytic Converter','Underfloor converter.',cyl(0.055,0.055,0.3,'x'),[0.42,0.18,-0.05]);
     P('Center Pipe','Pipe under the cabin.',rod([0.27,0.18,-0.05],[-0.8,0.18,-0.05],0.022));
     P('Rear Pipe','Pipe past the rear suspension.',rod([-0.8,0.18,-0.05],[-1.7,0.24,-0.25],0.022));
-    P('Muffler','Rear muffler.',box(0.4,0.13,0.3),[-1.9,0.24,-0.35]);
-    P('Exhaust Tip','Tail pipe.',cyl(0.03,0.03,0.1,'x'),[-2.15,0.27,-0.42]);
+    P('Muffler','Rear muffler.',box(0.4,0.13,0.3),[-2.0,0.24,-0.35]);
+    P('Exhaust Tip','Tail pipe.',cyl(0.03,0.03,0.1,'x'),[-2.24,0.27,-0.42]);
   });
   asm('Electrical','Battery, fuse boxes, lamps and wipers.',[0.8,1.2,1.0],P=>{
     P('Battery','12 volt battery in the left front of the engine bay.',box(0.22,0.18,0.16),[1.68,0.72,0.55]);
     P('Under Hood Fuse Box','Fuse and relay box.',box(0.14,0.09,0.18),[1.45,0.74,0.62]);
     P('Engine Control Module','PCM under the dash.',box(0.04,0.15,0.2),[0.7,0.6,-0.1]);
-    P('Wiper Motor','Drives the wiper linkage.',cyl(0.035,0.035,0.08,'x'),[0.86,0.86,0.42]);
+    P('Wiper Motor','Drives the wiper linkage.',cyl(0.035,0.035,0.08,'x'),[0.98,0.92,0.42]);
     P('Horn','Electric horn.',cyl(0.035,0.035,0.03,'x'),[1.98,0.45,0.4]);
     LR.forEach(([s,sd])=>{
-      P(sd+' Wiper Arm','Wiper arm and blade.',rod([0.84,0.94,s*0.33],[0.64,1.0,s*0.33-0.4],0.006));
+      P(sd+' Wiper Arm','Wiper arm and blade.',rod([0.98,1.0,s*0.33],[0.78,1.06,s*0.33-0.4],0.006));
       P(sd+' Headlight','Composite headlight assembly.',box(0.26,0.13,0.38),[1.98,0.7,s*0.58]);
-      P(sd+' Taillight','Combination tail, stop and turn lamp.',box(0.18,0.17,0.38),[-2.15,0.88,s*0.6]);
+      P(sd+' Taillight','Combination tail, stop and turn lamp.',box(0.2,0.17,0.38),[-2.24,0.9,s*0.6]);
     });
   });
   asm('Interior','Seats, dash, console and trim.',[-0.2,2.4,0],P=>{
@@ -2082,15 +2083,19 @@ function buildCivic2004(){
   });
   asm('Rear Bumper','Fascia over the bumper beam.',[-1.3,-0.1,0],P=>{
     P('Rear Bumper Cover','Painted plastic fascia.',LB(['Rear Bumper Cover']),[-0.4,0,0]);
-    P('Rear Bumper Beam','Steel reinforcement beam.',box(0.07,0.1,1.35),[-2.12,0.46,0],[-0.15,0,0]);
-    P('License Plate Lamp','Plate lamp.',box(0.03,0.03,0.1),[-2.22,0.8,0],[-0.5,0,0]);
+    P('Rear Bumper Beam','Steel reinforcement beam.',box(0.07,0.1,1.35),[-2.22,0.46,0],[-0.15,0,0]);
+    P('License Plate Lamp','Plate lamp.',box(0.03,0.03,0.1),[-2.33,0.8,0],[-0.5,0,0]);
   });
+  /* blueprint overlays cut from the 2004 Civic sedan drawing, CC BY 4.0, getoutlines.com */
+  bp('ref/cvc-side.png',391/86.5,1.44,m=>m.position.set(-0.106,0.72,-1.6));
+  bp('ref/cvc-front.png',173/85.7,1.44,m=>{m.rotation.y=PI/2;m.position.set(3.1,0.72,0)});
+  bp('ref/cvc-rear.png',172/85.7,1.42,m=>{m.rotation.y=-PI/2;m.position.set(-3.1,0.71,0)});
 }
 
 /* BUILD */
 let total=0;
 const CHARM={accord:'https://charm.li/Honda/1982/Accord%20L4-1751cc%201800%20EK1/Repair%20and%20Diagnosis/',prius:'https://charm.li/Toyota/2007/Prius%20L4-1.5L%20%281NZ-FXE%29%20Hybrid/Repair%20and%20Diagnosis/',crownvic:'https://charm.li/Ford/2006/Crown%20Victoria%20V8-4.6L%20VIN%20W/Repair%20and%20Diagnosis/',accord2011:'https://charm.li/Honda/2011/Accord%20L4-2.4L/Repair%20and%20Diagnosis/',accord2011v6:'https://charm.li/Honda/2011/Accord%20V6-3.5L/Repair%20and%20Diagnosis/',civic2004:'https://charm.li/Honda/2004/Civic%20L4-1.7L%20SOHC/Repair%20and%20Diagnosis/'};
-const CARS={accord:{id:'accord',make:'Honda',search:'1982 Honda Accord',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',search:'2007 Toyota Prius',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'},crownvic:{id:'crownvic',make:'Ford',search:'2006 Ford Crown Victoria Police Interceptor',name:'2006 CROWN VIC P71',front:2.555,build:()=>buildCrownVic('p71'),btn:'Prius'},crownvic_lx:{id:'crownvic_lx',data:'crownvic',make:'Ford',search:'2006 Ford Crown Victoria',name:'2006 CROWN VIC LX',front:2.555,build:()=>buildCrownVic('lx'),btn:'Prius'},accord2011:{id:'accord2011',make:'Honda',search:'2011 Honda Accord 2.4L',name:'2011 ACCORD 2.4',front:2.37,build:()=>buildAccord2011('l4'),btn:'Prius'},accord2011v6:{id:'accord2011v6',make:'Honda',search:'2011 Honda Accord V6',name:'2011 ACCORD V6',front:2.37,build:()=>buildAccord2011('v6'),btn:'Prius'},civic2004:{id:'civic2004',make:'Honda',search:'2004 Honda Civic 1.7L',name:'2004 CIVIC',front:2.17,build:buildCivic2004,btn:'Prius'}};
+const CARS={accord:{id:'accord',make:'Honda',search:'1982 Honda Accord',name:'1982 ACCORD',front:2.205,build:buildAccord,btn:'Prius'},prius:{id:'prius',make:'Toyota',search:'2007 Toyota Prius',name:'2007 PRIUS',front:2.228,build:buildPrius,btn:'Accord'},crownvic:{id:'crownvic',make:'Ford',search:'2006 Ford Crown Victoria Police Interceptor',name:'2006 CROWN VIC P71',front:2.555,build:()=>buildCrownVic('p71'),btn:'Prius'},crownvic_lx:{id:'crownvic_lx',data:'crownvic',make:'Ford',search:'2006 Ford Crown Victoria',name:'2006 CROWN VIC LX',front:2.555,build:()=>buildCrownVic('lx'),btn:'Prius'},accord2011:{id:'accord2011',make:'Honda',search:'2011 Honda Accord 2.4L',name:'2011 ACCORD 2.4',front:2.37,build:()=>buildAccord2011('l4'),btn:'Prius'},accord2011v6:{id:'accord2011v6',make:'Honda',search:'2011 Honda Accord V6',name:'2011 ACCORD V6',front:2.37,build:()=>buildAccord2011('v6'),btn:'Prius'},civic2004:{id:'civic2004',make:'Honda',search:'2004 Honda Civic 1.7L',name:'2004 CIVIC',front:2.154,build:buildCivic2004,btn:'Prius'}};
 let CAR=null;
 function buildAll(){ASM.forEach((a,ai)=>{
   const c=V(0,0,0);a.parts.forEach(p=>c.add(p.pos));c.divideScalar(a.parts.length);a.center=c;
