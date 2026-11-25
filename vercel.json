@@ -1,9 +1,29 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/2026-11-22-orange-hubview-v1.html" }
+    {
+      "source": "/",
+      "destination": "/2026-11-22-orange-hubview-v1.html"
+    }
   ],
   "headers": [
-    { "source": "/", "headers": [{ "key": "Cache-Control", "value": "no-cache, must-revalidate" }] },
-    { "source": "/2026-11-22-orange-hubview-v1.html", "headers": [{ "key": "Cache-Control", "value": "no-cache, must-revalidate" }] }
-  ]
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/2026-11-22-orange-hubview-v1.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)ref' ':(exclude)tools'"
 }
