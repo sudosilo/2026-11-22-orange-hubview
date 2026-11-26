@@ -55,12 +55,29 @@ button.on{background:#3d3d3d;color:#fff}
 #paint button.multi{width:auto;padding:0 10px;background:linear-gradient(90deg,#8db3d6,#e9a074,#9cc7a4,#f0cd6e,#b8a3d1)}
 #paint button.on{outline:3px solid #1e6fd9;outline-offset:1px}
 #paint span{font-size:11px;letter-spacing:.5px;min-width:90px}
+#scan{position:fixed;top:0;left:0;bottom:0;width:min(380px,92vw);z-index:44;background:#fff;border-right:2px solid #3d3d3d;border-left:6px solid #1e6fd9;display:none;flex-direction:column;box-sizing:border-box}
+#scan.open{display:flex}
+#scan .top{display:flex;gap:8px;padding:10px;border-bottom:1px solid #3d3d3d;flex-wrap:wrap}
+#scan .body{flex:1;overflow:auto;padding:12px 14px;font-size:13px;line-height:1.45}
+#scan img{width:100%;max-height:30vh;object-fit:contain;border:1px solid #3d3d3d;background:#f3f1ec}
+#scan h5{margin:14px 0 4px;font-size:11px;letter-spacing:1px;color:#1e6fd9;border-bottom:2px solid #1e6fd9;padding-bottom:3px;font-weight:normal;text-transform:uppercase}
+#scan .it{padding:7px 0;border-bottom:1px solid #eee4d2}
+#scan .it b{font-weight:normal;text-transform:uppercase;letter-spacing:.5px}
+#scan .it small{display:block;color:#6a6a6a;font:12px/1.4 Courier New,monospace}
+#scan .it .q{float:right;color:#1e6fd9;font:12px Courier New,monospace}
+#scan .st{color:#1e6fd9;font:13px Courier New,monospace;margin:10px 0}
+#scan .act button{width:100%;margin:0 0 6px;text-align:left;border-left:6px solid #1e6fd9}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
 <button id="hb" aria-label="Menu">&#8801;</button>
 <div id="menu">
+<h4>SCAN A PHOTO</h4>
+<button id="mScan" class="blue">Take or pick a photo</button>
+<input id="mPhoto" type="file" accept="image/*" style="display:none">
+<div class="note" id="mScanNote">Snap a car or anything else. You get a parts list with sizes and threads, and an exploded view you can take apart.</div>
+<button id="mLastScan" style="display:none">Open last scan</button>
 <h4>SAVE</h4>
 <button id="mSave" class="blue">Save card as image</button>
 <div class="note" id="mSaveNote">Saves the current view with the info card and the site address on it.</div>
@@ -80,6 +97,7 @@ button.on{background:#3d3d3d;color:#fff}
 <div id="bl"></div>
 </div>
 <div id="list"></div>
+<div id="scan"><div class="top"><button id="scClose">Close</button><button id="scAgain" class="blue">New photo</button></div><div class="body" id="scBody"></div></div>
 <div id="find"><input id="findq" type="search" placeholder="FIND A PART" autocomplete="off"><div id="findres"></div></div>
 <div id="bar">
 <button id="bCar" aria-label="Choose car">&#8801; <span id="bCarName">CAR</span></button>
@@ -2158,7 +2176,8 @@ function buySheet(){
   const nm=s.name.toLowerCase(),shops=[];
   if(/glass|windshield|window/.test(nm))shops.push(['Safelite',CAR.id==='prius'?'https://www.safelite.com/vehicle-glass-repair/toyota-prius-windshields':'https://www.safelite.com/']);
   if(/tire|wheel/.test(nm))shops.push(['Discount Tire',CAR.id==='prius'?'https://www.discounttire.com/fitmentresult/tires/size/185-65-15':'https://www.discounttire.com/fitmentresult/tires/size/165-80-13']);
-  if(shops.length)h+='<div style="color:#8a8a8a;margin:10px 0 4px">Service shops</div><div style="display:flex;gap:8px;flex-wrap:wrap">'+shops.map(x=>'<a target="_blank" rel="noopener" href="'+x[1]+'"><button>'+esc(x[0])+'</button></a>').join('')+'</div>';
+  if(CAR.hardware)shops.push(['Home Depot','https://www.homedepot.com/s/'+enc(s.num||s.name)],['Lowe\'s','https://www.lowes.com/search?searchTerm='+enc(s.num||s.name)],['McMaster','https://www.mcmaster.com/'+enc(s.num||s.name)]);
+  if(shops.length)h+='<div style="color:#8a8a8a;margin:10px 0 4px">'+(CAR.hardware?'Hardware stores':'Service shops')+'</div><div style="display:flex;gap:8px;flex-wrap:wrap">'+shops.map(x=>'<a target="_blank" rel="noopener" href="'+x[1]+'"><button>'+esc(x[0])+'</button></a>').join('')+'</div>';
   h+='<div style="margin-top:12px"><button id="buyclose">Close</button></div>';
   ov.innerHTML=h;document.body.appendChild(ov);document.getElementById('buyclose').onclick=()=>ov.remove();
 }
@@ -2468,7 +2487,7 @@ function loadCar(id){
   total=0;focus=null;selected=null;extra=false;carAmt=carTarget=0;typeKey='';
   CAR=CARS[id];CAR.build();buildAll();if(typeof applyPaint==='function')applyPaint();
   const did=CAR.data||id;
-  PN={};fetch('ref/parts/'+did+'.json').then(r=>r.ok?r.json():{}).then(j=>{PN=j;typeKey='';refresh()}).catch(()=>{});
+  PN=CAR.pn||{};if(!CAR.pn)fetch('ref/parts/'+did+'.json').then(r=>r.ok?r.json():{}).then(j=>{PN=j;typeKey='';refresh()}).catch(()=>{});
   SPECS=[];TREE=[];fetch('ref/archive/'+did+'/specs.json').then(r=>r.ok?r.json():[]).then(j=>{SPECS=j}).catch(()=>{});
   fetch('ref/archive/'+did+'/tree.json').then(r=>r.ok?r.json():[]).then(j=>{TREE=j}).catch(()=>{});
   MANUAL={};const gen=carGen;fetch('ref/manual/map-'+did+'.json').then(r=>r.ok?r.json():{}).then(j=>{if(gen===carGen)MANUAL=j}).catch(()=>{});
@@ -2563,6 +2582,106 @@ function drawCars(){
 }
 document.getElementById('bCar').onclick=e=>{e.stopPropagation();const box=document.getElementById('cars');drawCars();box.style.bottom=(document.getElementById('bar').offsetHeight+6)+'px';box.classList.toggle('open');document.getElementById('bCar').classList.toggle('on',box.classList.contains('open'))};
 ['pointerdown','touchstart'].forEach(ev=>document.getElementById('cars').addEventListener(ev,e=>e.stopPropagation()));
+
+/* PHOTO SCAN: one photo goes to the shared server, a parts list comes back and becomes its own exploded model */
+const SHARED='https://shared-server-azure.vercel.app/api/shared-server-v1-claude';
+const SHAPE_HINT={fastener:1,rod:1,tube:1,cylinder:1};
+function scanGeo(it,k){
+  const d=it.size_mm.map(v=>Math.max(v*k/1000,0.008));
+  let [L,H,W]=d;
+  if(it.shape==='sheet'){const m=Math.min(L,H,W);if(m===L)L=Math.max(L,0.006);else if(m===H)H=Math.max(H,0.006);else W=Math.max(W,0.006)}
+  if(it.shape==='sphere'){const g=sph(1);g.scale(L/2,H/2,W/2);return g}
+  if(SHAPE_HINT[it.shape]){
+    const ax=L>=H&&L>=W?'x':H>=W?'y':'z',len=ax==='x'?L:ax==='y'?H:W,r=(L+H+W-len)/4;
+    if(it.shape==='tube')return ring(r*0.75,r,len,ax,24);
+    if(it.shape==='fastener'){const g=cyl(r,r,len,ax,10);return g}
+    return cyl(r,r,len,ax,it.shape==='rod'?12:24);
+  }
+  return box(L,H,W);
+}
+function scanCar(data){
+  const items=[];data.groups.forEach(g=>g.items.forEach(it=>items.push(it)));
+  const ext=[0,1,2].map(i=>Math.max(data.size_mm[i]||0,...items.map(it=>Math.abs(it.at_mm[i])*2+(it.size_mm[i]||0))));
+  const k=Math.min(4200/Math.max(ext[0],ext[2],1),1800/Math.max(ext[1],1)),mid=Math.max(...items.map(it=>(it.size_mm[1]||0)/2),1);
+  const pn={};
+  const build=()=>{
+    const n=data.groups.length;
+    data.groups.forEach((g,gi)=>{
+      const c=[0,0,0];g.items.forEach(it=>{c[0]+=it.at_mm[0];c[1]+=it.at_mm[1];c[2]+=it.at_mm[2]});c.forEach((v,i)=>c[i]=v/g.items.length*k/1000);
+      let dir=V(c[0],0,c[2]);
+      if(dir.length()<0.15){const a=gi/n*2*PI;dir=V(Math.cos(a),0,Math.sin(a))}
+      dir.normalize().multiplyScalar(0.7);dir.y=0.3+gi*0.25;
+      asm(g.name,g.items.length+' line items. '+g.items.map(it=>it.name).join(', ')+'.',[dir.x,dir.y,dir.z],P=>{
+        g.items.forEach(it=>{
+          const y=it.at_mm[1]||((it.size_mm[1]||mid*2)/2);
+          const nm=it.name;
+          const lines=[it.spec,it.thread?'Thread '+it.thread:'',it.torque?'Torque '+it.torque:'',it.material,'Qty '+it.qty+(it.unit?' '+it.unit:''),it.purpose].filter(Boolean);
+          P(nm,lines.join('. ')+'.',scanGeo(it,k),[it.at_mm[0]*k/1000,y*k/1000,it.at_mm[2]*k/1000]);
+          const rows=[];if(it.spec)rows.push(['spec',it.spec]);if(it.thread)rows.push(['thread',it.thread]);rows.push(['qty',it.qty+(it.unit?' '+it.unit:'')]);
+          pn[g.name+'/'+nm]=rows;
+        });
+      });
+    });
+  };
+  const isCar=data.kind==='car';
+  return {id:'scan',make:'Scan',search:isCar?(data.vehicle||data.name):'',name:data.name.toUpperCase().slice(0,18),front:ext[0]*k/2000,build,pn,hardware:!isCar,scan:data};
+}
+function scanText(data){
+  let h='<div style="font-weight:bold;font-size:17px;text-transform:uppercase">'+esc(data.name)+'</div>';
+  if(data.vehicle)h+='<div class="st">'+esc(data.vehicle)+'</div>';
+  h+='<div>'+esc(data.description)+'</div><div class="st">CONFIDENCE '+esc(data.confidence.toUpperCase())+'</div>';
+  if(data.notes)h+='<div style="color:#6a6a6a">'+esc(data.notes)+'</div>';
+  h+='<div class="act" style="margin-top:12px"><button id="scBuild">Explode it in 3D</button>';
+  if(data.car_id&&CARS[data.car_id])h+='<button id="scOpenCar">Open the '+esc(CARS[data.car_id].name)+' model</button>';
+  h+='<button id="scCopy">Copy parts list</button></div>';
+  data.groups.forEach(g=>{
+    h+='<h5>'+esc(g.name)+'</h5>';
+    g.items.forEach(it=>{h+='<div class="it"><span class="q">'+esc(it.qty)+(it.unit?' '+esc(it.unit):'')+'</span><b>'+esc(it.name)+'</b><small>'+[it.spec,it.thread&&('THREAD '+it.thread),it.torque&&('TORQUE '+it.torque),it.material].filter(Boolean).map(esc).join('<br>')+'</small></div>'});
+  });
+  return h;
+}
+function scanPlain(data){
+  const L=[data.name,data.vehicle,data.description,''];
+  data.groups.forEach(g=>{L.push(g.name.toUpperCase());g.items.forEach(it=>L.push(it.qty+(it.unit?' '+it.unit:'')+'  '+it.name+'  '+[it.spec,it.thread&&('thread '+it.thread),it.torque&&('torque '+it.torque)].filter(Boolean).join('  ')));L.push('')});
+  return L.join('\n');
+}
+function openScan(){menu.classList.remove('open');hb.classList.remove('on');$('scan').classList.add('open')}
+function showScan(data,img){
+  const b=$('scBody');b.innerHTML=(img?'<img src="'+img+'">':'')+scanText(data);openScan();
+  $('scBuild').onclick=()=>{CARS.scan=scanCar(data);const lu=LINEUP.find(x=>x[0]==='Scanned');if(lu)lu[1]=[['scan',data.name]];else LINEUP.push(['Scanned',[['scan',data.name]]]);$('scan').classList.remove('open');loadCar('scan');carTarget=1};
+  if($('scOpenCar'))$('scOpenCar').onclick=()=>{$('scan').classList.remove('open');loadCar(data.car_id);carTarget=1;
+    const words=data.areas.join(' ').toLowerCase().split(/\W+/).filter(w=>w.length>3);
+    let best=null,bs=0;ASM.forEach(a=>{const t=a.name.toLowerCase();const sc=words.filter(w=>t.includes(w)).length;if(sc>bs){bs=sc;best=a}});
+    if(best){best.target=1;open(best)}};
+  $('scCopy').onclick=()=>{const t=scanPlain(data);(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$('scCopy').textContent='Copied'}).catch(()=>{$('scCopy').textContent='Copy failed'})};
+}
+function shrink(file){return new Promise((ok,bad)=>{const u=URL.createObjectURL(file),im=new Image();
+  im.onload=()=>{const m=1280,sc=Math.min(1,m/Math.max(im.width,im.height)),cv=document.createElement('canvas');cv.width=Math.round(im.width*sc);cv.height=Math.round(im.height*sc);
+    cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);URL.revokeObjectURL(u);ok(cv.toDataURL('image/jpeg',0.82))};
+  im.onerror=()=>bad(new Error('That file is not a photo the browser can read.'));im.src=u})}
+async function runScan(file){
+  const b=$('scBody');openScan();
+  let img;try{img=await shrink(file)}catch(e){b.innerHTML='<div class="st">'+esc(e.message)+'</div>';return}
+  b.innerHTML='<img src="'+img+'"><div class="st" id="scSt">READING THE PHOTO</div>';
+  const steps=['READING THE PHOTO','NAMING THE PARTS','COUNTING FASTENERS','SIZING THREADS','LAYING OUT THE EXPLODED VIEW'];let si=0;
+  const tick=setInterval(()=>{si=(si+1)%steps.length;const st=$('scSt');if(st)st.textContent=steps[si]},4000);
+  try{
+    const cars=Object.values(CARS).filter(c=>c.id!=='scan').map(c=>({id:c.id,name:c.search||c.name}));
+    const r=await fetch(SHARED,{method:'POST',headers:{'content-type':'text/plain'},body:JSON.stringify({app:'hubview-scan',text:'scan',type:'image/jpeg',image:img.split(',')[1],cars})});
+    const data=await r.json().catch(()=>({error:'bad reply'}));
+    if(!r.ok||data.error||!data.groups||!data.groups.length)throw new Error(r.status===429?'Too many scans in a minute. Wait a moment and send it again.':'The scan came back empty. Send the photo again.');
+    store.set('scan',data);$('mLastScan').style.display='';
+    showScan(data,img);
+  }catch(e){b.innerHTML='<img src="'+img+'"><div class="st">'+esc(e.message||'Scan failed. Send the photo again.')+'</div><div class="act"><button id="scRetry">Send it again</button></div>';$('scRetry').onclick=()=>runScan(file)}
+  finally{clearInterval(tick)}
+}
+$('mScan').onclick=()=>$('mPhoto').click();
+$('scAgain').onclick=()=>$('mPhoto').click();
+$('mPhoto').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)runScan(f)};
+$('scClose').onclick=()=>$('scan').classList.remove('open');
+$('mLastScan').onclick=()=>{const d=store.get('scan',null);if(d)showScan(d,'')};
+['pointerdown','touchstart','wheel'].forEach(ev=>$('scan').addEventListener(ev,e=>e.stopPropagation()));
+(function(){const d=store.get('scan',null);if(d&&d.groups){CARS.scan=scanCar(d);$('mLastScan').style.display='';LINEUP.push(['Scanned',[['scan',d.name]]])}})();
 loadCar(CARS[location.hash.slice(1)]?location.hash.slice(1):'prius');
 
 const goal=V(0,0,0);
