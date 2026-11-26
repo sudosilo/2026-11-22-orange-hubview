@@ -25,5 +25,5 @@
       ]
     }
   ],
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)ref' ':(exclude)tools'"
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)ref' ':(exclude)tools' ':(exclude)2026-11-22-orange-hubview-backend'"
 }
