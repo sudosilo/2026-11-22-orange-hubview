@@ -6,6 +6,6 @@ You pick a car and spread its assemblies apart in an exploded view, or use Extra
 
 Live at 2026-11-22-orange-hubview.vercel.app
 
-Latest change. 2026-11-25, v2026.11.25. Added Scan a photo to the menu. Take or pick a photo of a car or anything else and Hub View sends it to the shared server, which returns a parts list with specs, threads, torque and counts. Explode it in 3D builds the object from its parts so it spreads apart like the cars, with every part tappable and searchable, and hardware store links on the buy sheet. A photo of a car Hub View already has can open that car's model at the area in the photo. The last scan is kept and shows under Scanned in the car picker.
+Latest change. 2026-11-25, v2026.11.25b. Scan a photo now pins down the exact model first. It reads badges and labels, searches the web for the spec sheet and service manual, and asks for a photo of the label when the model is not readable. The parts list carries part numbers and sizes from those sources, with links to them. Parts are drawn from a shape library of motherboards, power supplies, drives, fans, memory, graphics cards, coolers, screws, bolts, nuts, washers and standoffs, from a downloaded model when the scan finds one, or from exact spec sizes, and each part is tagged with where its shape came from. Every copy of a fastener is placed. Scans are saved by exact model, so the same model opens instantly next time, and all saved scans show under Scanned in the car picker.
 
 Full history is in CHANGELOG.md.
